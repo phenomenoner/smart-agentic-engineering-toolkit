@@ -24,6 +24,18 @@ from typing import Any
 
 RECEIPT_NAME = ".smart-agentic-engineering-toolkit-install.json"
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+IGNORED_TREE_PARTS = {
+    ".git",
+    ".venv",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".codegraph",
+    "__pycache__",
+    "build",
+    "dist",
+}
+IGNORED_TREE_FILE_NAMES = {".coverage", ".DS_Store", "Thumbs.db"}
+IGNORED_TREE_FILE_SUFFIXES = {".pyc", ".pyo"}
 FaultHook = Callable[[str, str | None, "Installer"], None]
 
 
@@ -78,6 +90,26 @@ def _is_link_or_reparse(path: Path, entry_stat: os.stat_result | None = None) ->
         return True
     reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
     return bool(getattr(details, "st_file_attributes", 0) & reparse_flag)
+
+
+def _is_ignored_tree_member(relative: Path) -> bool:
+    return (
+        any(part in IGNORED_TREE_PARTS or part.endswith(".egg-info") for part in relative.parts)
+        or relative.name in IGNORED_TREE_FILE_NAMES
+        or relative.suffix.lower() in IGNORED_TREE_FILE_SUFFIXES
+    )
+
+
+def _copytree_ignore(source: Path) -> Callable[[str, list[str]], set[str]]:
+    def ignored(directory: str, names: list[str]) -> set[str]:
+        relative_directory = Path(directory).relative_to(source)
+        return {
+            name
+            for name in names
+            if _is_ignored_tree_member(relative_directory / name)
+        }
+
+    return ignored
 
 
 def _rename_noreplace(source: Path, destination: Path) -> None:
@@ -171,6 +203,8 @@ def tree_files(path: Path) -> list[dict[str, Any]]:
             ordered = sorted(entries, key=lambda entry: entry.name)
         for entry in ordered:
             item = Path(entry.path)
+            if _is_ignored_tree_member(item.relative_to(path)):
+                continue
             details = entry.stat(follow_symlinks=False)
             if entry.is_symlink() or _is_link_or_reparse(item, details):
                 raise ValueError(f"symbolic links or reparse points are not installable: {item}")
@@ -435,7 +469,12 @@ class Installer:
             for item in changed:
                 source = self.source_root / "skills" / item.name
                 staged = staging_root / item.name
-                shutil.copytree(source, staged, symlinks=True)
+                shutil.copytree(
+                    source,
+                    staged,
+                    symlinks=True,
+                    ignore=_copytree_ignore(source),
+                )
                 if tree_digest(staged) != item.source_tree_sha256:
                     raise RuntimeError(f"staged bytes drifted for {item.name}")
             self._fault("after_stage", None)

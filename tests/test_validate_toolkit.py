@@ -150,6 +150,8 @@ def test_generated_python_cache_is_ignored(tmp_path: Path) -> None:
     cache_file = root / "scripts" / "__pycache__" / "generated.pyc"
     cache_file.parent.mkdir(parents=True, exist_ok=True)
     cache_file.write_bytes(b"generated")
+    root_bytecode = root / "generated.pyc"
+    root_bytecode.write_bytes(b"generated")
 
     errors = validate_toolkit(root)
     assert not any(
@@ -157,6 +159,9 @@ def test_generated_python_cache_is_ignored(tmp_path: Path) -> None:
         and error["path"].endswith("generated.pyc")
         for error in errors
     )
+    locked_paths = {row["path"] for row in build_public_lock(root)["files"]}
+    assert "scripts/__pycache__/generated.pyc" not in locked_paths
+    assert "generated.pyc" not in locked_paths
 
 
 def test_editable_install_metadata_is_ignored(tmp_path: Path) -> None:

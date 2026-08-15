@@ -11,6 +11,7 @@ from scripts.install_toolkit import (
     Installer,
     _exclusive_install_lock,
     tree_digest,
+    tree_files,
 )
 
 
@@ -52,6 +53,48 @@ def test_clean_install_then_exact_plan(tmp_path: Path) -> None:
     assert receipt["skills"]["alpha-skill"]["installedTreeSha256"] == tree_digest(
         target / "alpha-skill"
     )
+    assert plan_map(installer) == {"alpha-skill": "EXACT"}
+
+
+def test_generated_cache_members_are_not_installed_or_receipted(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "installed"
+    write_source(source, {"alpha-skill": "v1"})
+    skill = source / "skills" / "alpha-skill"
+    generated = {
+        "__pycache__/helper.cpython-311.pyc": b"bytecode",
+        ".pytest_cache/v/cache/nodeids": b"[]",
+        ".ruff_cache/0.1.0/cache": b"lint cache",
+        "build/generated.txt": b"build output",
+        "dist/archive.whl": b"wheel output",
+        "helper.egg-info/PKG-INFO": b"metadata",
+    }
+    for relative, body in generated.items():
+        path = skill / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(body)
+
+    receipt = Installer(source, target).install("core")
+
+    installed = target / "alpha-skill"
+    assert [row["path"] for row in tree_files(installed)] == ["SKILL.md"]
+    assert [row["path"] for row in receipt["skills"]["alpha-skill"]["files"]] == [
+        "SKILL.md"
+    ]
+    for relative in generated:
+        assert not (installed / relative).exists()
+
+
+def test_generated_target_cache_does_not_make_managed_skill_diverged(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "installed"
+    write_source(source, {"alpha-skill": "v1"})
+    installer = Installer(source, target)
+    installer.install("core")
+    generated = target / "alpha-skill" / "__pycache__" / "helper.cpython-311.pyc"
+    generated.parent.mkdir(parents=True)
+    generated.write_bytes(b"runtime bytecode")
+
     assert plan_map(installer) == {"alpha-skill": "EXACT"}
 
 

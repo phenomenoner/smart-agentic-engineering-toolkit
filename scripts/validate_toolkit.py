@@ -40,6 +40,8 @@ IGNORED_PARTS = {
     "build",
     "dist",
 }
+IGNORED_FILE_NAMES = {".coverage", ".DS_Store", "Thumbs.db"}
+IGNORED_FILE_SUFFIXES = {".pyc", ".pyo"}
 HYGIENE_PATTERNS = (
     re.compile(r"(?i)\b[A-Z]:[\\/]Users[\\/][^\\/\s]+[\\/]"),
     re.compile(r"(?i)\bD:[\\/]Warehouse[\\/]"),
@@ -146,7 +148,11 @@ def _is_within(path: Path, parent: Path) -> bool:
 
 
 def _is_ignored_relative(path: Path) -> bool:
-    return any(part in IGNORED_PARTS or part.endswith(".egg-info") for part in path.parts)
+    return (
+        any(part in IGNORED_PARTS or part.endswith(".egg-info") for part in path.parts)
+        or path.name in IGNORED_FILE_NAMES
+        or path.suffix.lower() in IGNORED_FILE_SUFFIXES
+    )
 
 
 def _validate_skill(
