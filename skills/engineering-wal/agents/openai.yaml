@@ -1,0 +1,7 @@
+interface:
+  display_name: "Engineering WAL"
+  short_description: "Maintain a durable task resume map when needed"
+  default_prompt: "Use $engineering-wal to create or update the smallest durable map needed to resume this engineering task safely."
+
+policy:
+  allow_implicit_invocation: false

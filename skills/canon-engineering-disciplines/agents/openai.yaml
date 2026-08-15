@@ -1,0 +1,7 @@
+interface:
+  display_name: "Canon Engineering Disciplines"
+  short_description: "Route assurance work to the right disciplines"
+  default_prompt: "Use $canon-engineering-disciplines to select the smallest fitting set of engineering disciplines for this system assurance problem."
+
+policy:
+  allow_implicit_invocation: false

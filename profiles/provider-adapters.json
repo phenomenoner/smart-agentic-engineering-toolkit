@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "provider-adapters",
+  "class": "optional",
+  "status": "owned",
+  "default": false,
+  "description": "Explicit provider adapters; provider invocation is never selected autonomously and never becomes final release authority.",
+  "skills": [
+    "claude-independent-review"
+  ],
+  "policy": {
+    "allow_implicit_invocation": false,
+    "host_specific": true
+  }
+}

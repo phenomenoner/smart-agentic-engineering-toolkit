@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+.debug/
+.codegraph/
+dist/
+build/
+*.egg-info/
+*.log
+install-receipt*.json
+.DS_Store
+Thumbs.db

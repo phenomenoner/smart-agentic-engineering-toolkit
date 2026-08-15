@@ -1,0 +1,20 @@
+{
+  "name": "smart-agentic-engineering-toolkit",
+  "interface": {
+    "displayName": "Smart Agentic Engineering Toolkit"
+  },
+  "plugins": [
+    {
+      "name": "smart-agentic-engineering-toolkit",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/phenomenoner/smart-agentic-engineering-toolkit/schemas/improvement-proposal.schema.json",
+  "title": "Toolkit improvement proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "canonicalRepository",
+    "baseCommit",
+    "skill",
+    "host",
+    "reproducer",
+    "expected",
+    "observed",
+    "materiality",
+    "patch",
+    "eval",
+    "provenance",
+    "authorization"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "canonicalRepository": {"type": "string", "minLength": 1},
+    "baseCommit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "toolkitVersion", "sha256"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "toolkitVersion": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "host": {"type": "object"},
+    "reproducer": {"type": "string", "minLength": 1},
+    "expected": {"type": "string", "minLength": 1},
+    "observed": {"type": "string", "minLength": 1},
+    "materiality": {"type": "string", "minLength": 1},
+    "relatedSkills": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "patch": {"type": "string", "minLength": 1},
+    "eval": {"type": "object"},
+    "compatibility": {"type": "object"},
+    "migration": {"type": "object"},
+    "provenance": {"type": "object"},
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["githubWritesAuthorized", "remoteAction"],
+      "properties": {
+        "githubWritesAuthorized": {"type": "boolean"},
+        "remoteAction": {"enum": ["NOT_PERFORMED", "DRAFT_PR_OPENED"]},
+        "remoteUrl": {"type": ["string", "null"]}
+      }
+    }
+  }
+}

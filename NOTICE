@@ -1,0 +1,16 @@
+Smart Agentic Engineering Toolkit
+Copyright (c) 2026 phenomenoner
+
+This distribution contains project-authored work and selected project-authored skills migrated from
+phenomenoner/Chatgpt-Codex-App-Plus under the MIT License. Exact source and modification records are
+maintained in manifest/provenance.json.
+
+Design research consulted the following projects without making their workflow mandatory:
+
+- OpenAI skill documentation and the Agent Skills open specification.
+- addyosmani/agent-skills, MIT License, pinned in docs/influences-and-provenance.md.
+- obra/superpowers, MIT License, pinned in docs/influences-and-provenance.md. It is comparative
+  material only and remains retired as an active workflow authority.
+
+No distinctive external source text, template, fixture, or script is intentionally copied unless a
+file-level provenance entry and applicable license notice identify it.

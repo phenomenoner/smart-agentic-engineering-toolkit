@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --editable ".[dev]"
+      - name: Lint
+        run: python -m ruff check .
+      - name: Test
+        run: python -m pytest -q
+      - name: Test bundled review gate
+        run: python -m pytest -q skills/batch-complete-independent-review/tests/test_review_gate.py
+      - name: Validate incident template
+        shell: python
+        run: |
+          import sys
+          sys.path.insert(0, "skills/incident-to-regression/scripts")
+          import validate_incident_record as validator
+          errors = validator.validate(validator.template())
+          print({"valid": not errors, "errors": errors})
+          raise SystemExit(bool(errors))
+      - name: Check PowerShell adapter syntax
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $scripts = @(
+            'scripts/install.ps1',
+            'skills/long-run-supervisor/scripts/long-run-supervisor.ps1',
+            'skills/long-run-supervisor/scripts/run-supervised-blocking.ps1',
+            'skills/codex-cli-luna-worker/scripts/invoke_luna_worker.ps1',
+            'skills/claude-independent-review/scripts/invoke-claude-readonly-review.ps1'
+          )
+          foreach ($script in $scripts) {
+            [void][scriptblock]::Create((Get-Content -Raw -LiteralPath $script))
+          }
+      - name: Test long-run supervisor contracts
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $tests = @(
+            'atomic-write-regression.ps1',
+            'command-file-byte-identity-smoke.ps1',
+            'fan-in-smoke.ps1',
+            'smoke.ps1',
+            'wake-only-transport-contract.ps1'
+          )
+          foreach ($test in $tests) {
+            & pwsh -NoLogo -NoProfile -File (Join-Path 'skills/long-run-supervisor/tests' $test)
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Drill standalone installer on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP 'saet-skills'
+          .\scripts\install.ps1 -TargetRoot $target -Profile core
+          .\scripts\install.ps1 -TargetRoot $target -Profile core -Apply
+          .\scripts\install.ps1 -TargetRoot $target -Profile core
+      - name: Drill standalone installer on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          target="$RUNNER_TEMP/saet-skills"
+          sh scripts/install.sh "$target" core
+          sh scripts/install.sh "$target" core --apply
+          sh scripts/install.sh "$target" core
+      - name: Validate release lock and public surface
+        run: python scripts/validate_toolkit.py --release

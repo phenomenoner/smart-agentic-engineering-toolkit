@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "ownership": "toolkit-owned",
+  "skills": [
+    {
+      "name": "engineering-specification",
+      "class": "core",
+      "classLabel": "core / specify",
+      "phase": "specify",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored",
+      "source": {
+        "mode": "new-authored"
+      }
+    },
+    {
+      "name": "engineering-debugging",
+      "class": "core",
+      "classLabel": "core / diagnose",
+      "phase": "diagnose",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored",
+      "source": {
+        "mode": "new-authored"
+      }
+    },
+    {
+      "name": "engineering-implementation",
+      "class": "core",
+      "classLabel": "core / implement",
+      "phase": "implement",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "standard"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored",
+      "source": {
+        "mode": "new-authored"
+      }
+    },
+    {
+      "name": "engineering-wal",
+      "class": "core",
+      "classLabel": "core / continuity",
+      "phase": "continuity",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": false,
+        "implicit_scope": "explicit-only"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored",
+      "source": {
+        "mode": "new-authored"
+      }
+    },
+    {
+      "name": "batch-complete-independent-review",
+      "class": "core",
+      "classLabel": "core / review",
+      "phase": "review",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-public-clean",
+      "source": {
+        "mode": "existing-public-clean",
+        "sha256": "83c4cae4b2708f2880c18ca1df4202c7d28164e87c92d7b9b88dbedd98ea95cc"
+      },
+      "sourceSha256": "83c4cae4b2708f2880c18ca1df4202c7d28164e87c92d7b9b88dbedd98ea95cc"
+    },
+    {
+      "name": "completeness-and-test-synthesis",
+      "class": "core",
+      "classLabel": "core / evidence",
+      "phase": "evidence",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-public-clean",
+      "source": {
+        "mode": "existing-public-clean",
+        "sha256": "e7149166dc4944bfb0c1076aa92d7af1df126e902d453087a30007261ec18641"
+      },
+      "sourceSha256": "e7149166dc4944bfb0c1076aa92d7af1df126e902d453087a30007261ec18641"
+    },
+    {
+      "name": "incident-to-regression",
+      "class": "core",
+      "classLabel": "core / drill",
+      "phase": "drill",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "reconcile-local-support-files",
+      "source": {
+        "mode": "reconcile-local-support-files",
+        "sha256": "51d4e744e4ca541467737408f6788e5cb692c64494e32ba184be81160e460039"
+      },
+      "sourceSha256": "51d4e744e4ca541467737408f6788e5cb692c64494e32ba184be81160e460039"
+    },
+    {
+      "name": "specify-temporal-ownership",
+      "class": "core",
+      "classLabel": "core / temporal-assurance",
+      "phase": "temporal-assurance",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored-and-forward-evaluated",
+      "source": {
+        "mode": "new-authored-and-forward-evaluated",
+        "sha256": "695ac2ad5ecd900f006a330bb44e598fe879ed079445c152c32b4b36409cf2e9"
+      },
+      "sourceSha256": "695ac2ad5ecd900f006a330bb44e598fe879ed079445c152c32b4b36409cf2e9"
+    },
+    {
+      "name": "evolve-engineering-toolkit",
+      "class": "core",
+      "classLabel": "core / maintenance",
+      "phase": "maintenance",
+      "profile": "core",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "new-authored",
+      "source": {
+        "mode": "new-authored"
+      }
+    },
+    {
+      "name": "canon-engineering-disciplines",
+      "class": "optional",
+      "classLabel": "optional / assurance",
+      "phase": "assurance",
+      "profile": "assurance",
+      "policy": {
+        "allow_implicit_invocation": false,
+        "implicit_scope": "explicit-only"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-local-authored",
+      "source": {
+        "mode": "existing-local-authored",
+        "sha256": "b74f36fda82aa6c7b4e97598dbbf206316893526c4360df613d5a29147a59f60"
+      },
+      "sourceSha256": "b74f36fda82aa6c7b4e97598dbbf206316893526c4360df613d5a29147a59f60"
+    },
+    {
+      "name": "codegraph-first-navigation",
+      "class": "optional",
+      "classLabel": "optional / navigation",
+      "phase": "navigation",
+      "profile": "navigation",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-local-authored",
+      "source": {
+        "mode": "existing-local-authored",
+        "sha256": "1fe2eb067faee174ffb41ffcda75e1e1a02f7796c4ff0d64ed17bf56f86726ae"
+      },
+      "sourceSha256": "1fe2eb067faee174ffb41ffcda75e1e1a02f7796c4ff0d64ed17bf56f86726ae"
+    },
+    {
+      "name": "programmatic-tool-composition",
+      "class": "optional",
+      "classLabel": "optional / codex-optimization",
+      "phase": "codex-optimization",
+      "profile": "codex-optimization",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-local-authored",
+      "source": {
+        "mode": "existing-local-authored",
+        "sha256": "2d87ba869dfaaf7c1fad3ae97fb0d0fd8e5cd3fa219ecf5b959685f7a30ef937"
+      },
+      "sourceSha256": "2d87ba869dfaaf7c1fad3ae97fb0d0fd8e5cd3fa219ecf5b959685f7a30ef937"
+    },
+    {
+      "name": "long-run-supervisor",
+      "class": "optional",
+      "classLabel": "optional / windows-execution",
+      "phase": "windows-execution",
+      "profile": "windows",
+      "policy": {
+        "allow_implicit_invocation": true,
+        "implicit_scope": "narrow"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "source-only-local-allowlist",
+      "source": {
+        "mode": "source-only-local-allowlist",
+        "sha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d"
+      },
+      "sourceSha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d"
+    },
+    {
+      "name": "codex-cli-luna-worker",
+      "class": "optional",
+      "classLabel": "optional / codex-model-adapter",
+      "phase": "codex-model-adapter",
+      "profile": "codex-adapters",
+      "policy": {
+        "allow_implicit_invocation": false,
+        "implicit_scope": "explicit-only"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "reconcile-local-adapter",
+      "source": {
+        "mode": "reconcile-local-adapter",
+        "sha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e"
+      },
+      "sourceSha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e"
+    },
+    {
+      "name": "codex-app-mcp-update",
+      "class": "optional",
+      "classLabel": "optional / codex-maintenance",
+      "phase": "codex-maintenance",
+      "profile": "codex-adapters",
+      "policy": {
+        "allow_implicit_invocation": false,
+        "implicit_scope": "explicit-only"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "existing-local-authored",
+      "source": {
+        "mode": "existing-local-authored",
+        "sha256": "929434c00904457d90d14fc5e0f71b25da559cec7bd89e249920197330a83ef4"
+      },
+      "sourceSha256": "929434c00904457d90d14fc5e0f71b25da559cec7bd89e249920197330a83ef4"
+    },
+    {
+      "name": "claude-independent-review",
+      "class": "optional",
+      "classLabel": "optional / provider-adapter",
+      "phase": "provider-adapter",
+      "profile": "provider-adapters",
+      "policy": {
+        "allow_implicit_invocation": false,
+        "implicit_scope": "explicit-only"
+      },
+      "status": "owned",
+      "lifecycle": "installable",
+      "sourceMode": "reconcile-local-adapter-and-scrub-machine-default",
+      "source": {
+        "mode": "reconcile-local-adapter-and-scrub-machine-default",
+        "sha256": "caa846de53d49d0edd70210a63b7da2d819a373e951c2491f2be8f9c6388c6ea"
+      },
+      "sourceSha256": "caa846de53d49d0edd70210a63b7da2d819a373e951c2491f2be8f9c6388c6ea"
+    }
+  ]
+}

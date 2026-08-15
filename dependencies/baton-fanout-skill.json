@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "baton-fanout-skill",
+  "status": "pinned-external",
+  "disposition": "pinned-external-dependency",
+  "owner": "phenomenoner/baton-fanout-skill",
+  "pin": {
+    "type": "branch-pointer",
+    "repository": "https://github.com/phenomenoner/baton-fanout-skill",
+    "ref": "codex/add-model-effort-routing",
+    "resolvedCommit": "69b805df9df2252119b7a87886097f8cafd5e11a",
+    "observedAt": "2026-08-15"
+  },
+  "ownership": {
+    "canonical": "external",
+    "editableInToolkit": false,
+    "allowedToolkitChanges": [
+      "pin",
+      "integration-metadata",
+      "conflict-handling",
+      "retirement-state"
+    ]
+  },
+  "boundary": {
+    "canonicalSource": "Existing phenomenoner/baton-fanout-skill Codex branch",
+    "noDualWritableSources": true,
+    "directWorkFallbackWhenUnavailable": true,
+    "ownershipTransfer": "Requires one atomic governance cutover before Baton can become toolkit-owned."
+  }
+}

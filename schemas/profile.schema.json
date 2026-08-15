@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/phenomenoner/smart-agentic-engineering-toolkit/schemas/profile.schema.json",
+  "title": "Toolkit skill profile",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "toolkitVersion", "name", "skills"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "toolkitVersion": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"}
+    }
+  }
+}

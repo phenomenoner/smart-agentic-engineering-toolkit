@@ -1,0 +1,7 @@
+interface:
+  display_name: "Long-Run Supervisor"
+  short_description: "Supervise long PowerShell jobs without model polling"
+  default_prompt: "Use $long-run-supervisor once; keep process Start plus Wait in one calibrated blocking call when same-turn continuation is required, use native wait_agent directly for already-dispatched subagents only after useful work is exhausted, and never promise post-final wake."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "CodeGraph-First Navigation"
+  short_description: "Navigate indexed codebases with bounded graph queries"
+  default_prompt: "Use $codegraph-first-navigation to trace this repository with CodeGraph and confirm the result in source and tests."
+policy:
+  allow_implicit_invocation: true

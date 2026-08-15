@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/phenomenoner/smart-agentic-engineering-toolkit/schemas/eval-result.schema.json",
+  "title": "Toolkit behavior evaluation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "toolkitVersion",
+    "candidate",
+    "environment",
+    "caseCorpusSha256",
+    "results",
+    "summary"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "toolkitVersion": {"type": "string", "minLength": 1},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "tree", "pluginVersion", "catalogSha256"],
+      "properties": {
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "tree": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "pluginVersion": {"type": "string", "minLength": 1},
+        "catalogSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["host", "hostVersion", "taskIsolation", "reviewer"],
+      "properties": {
+        "host": {"type": "string", "minLength": 1},
+        "hostVersion": {"type": "string", "minLength": 1},
+        "taskIsolation": {"type": "string", "minLength": 1},
+        "reviewer": {"type": "object"}
+      }
+    },
+    "caseCorpusSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "selected",
+          "notSelected",
+          "observable",
+          "prohibitedEffectsObserved",
+          "evidence"
+        ],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["PASS", "FAIL", "NOT_RUN"]},
+          "selected": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "notSelected": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "observable": {"type": "string", "minLength": 1},
+          "prohibitedEffectsObserved": {"type": "boolean"},
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "pointer", "sha256"],
+            "properties": {
+              "kind": {"enum": ["REDACTED_TRANSCRIPT", "RECEIPT", "NONE"]},
+              "pointer": {"type": ["string", "null"]},
+              "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pass", "fail", "notRun", "verdict"],
+      "properties": {
+        "pass": {"type": "integer", "minimum": 0},
+        "fail": {"type": "integer", "minimum": 0},
+        "notRun": {"type": "integer", "minimum": 0},
+        "verdict": {"enum": ["PASS", "INCOMPLETE", "FAIL"]}
+      }
+    }
+  }
+}

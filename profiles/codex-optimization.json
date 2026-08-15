@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "codex-optimization",
+  "class": "optional",
+  "status": "owned",
+  "default": false,
+  "description": "Codex-specific bounded composition of independent read-only or pure tool operations.",
+  "skills": [
+    "programmatic-tool-composition"
+  ],
+  "policy": {
+    "allow_implicit_invocation": true,
+    "host_specific": true
+  }
+}

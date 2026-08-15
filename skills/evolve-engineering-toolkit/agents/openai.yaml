@@ -1,0 +1,7 @@
+interface:
+  display_name: "Evolve Engineering Toolkit"
+  short_description: "Turn skill learnings into reviewable upstream PRs"
+  default_prompt: "Use $evolve-engineering-toolkit to turn this material skill learning into a canonical, test-backed, PR-ready change without silently editing an installed copy."
+
+policy:
+  allow_implicit_invocation: true

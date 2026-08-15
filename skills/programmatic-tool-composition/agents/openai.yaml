@@ -1,0 +1,6 @@
+interface:
+  display_name: "Programmatic Tool Composition"
+  short_description: "Compose bounded read-heavy tool workflows"
+  default_prompt: "Use $programmatic-tool-composition to batch and reduce these read-only tool calls safely."
+policy:
+  allow_implicit_invocation: true

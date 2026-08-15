@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "adaptive-agent-runtime",
+  "status": "pinned-future-lab",
+  "disposition": "pinned-future-lab-integration",
+  "owner": "phenomenoner/adaptive-agent-harness",
+  "pin": {
+    "type": "future-lab-pointer",
+    "repository": "https://github.com/phenomenoner/adaptive-agent-harness",
+    "ref": "main",
+    "resolvedCommit": "79ecf860f2164b82697eecad7a792e616e077ed1",
+    "observedAt": "2026-08-15"
+  },
+  "ownership": {
+    "canonical": "external",
+    "editableInToolkit": false
+  },
+  "boundary": {
+    "callableCapabilityRequired": true,
+    "freshHostEvidenceRequired": true,
+    "placeholderNotShipped": true,
+    "role": "AAR computes and proposes; the host authorizes, performs effects, and delivers.",
+    "noRuntimeClaimFromConfigCatalogOrHealth": true
+  }
+}

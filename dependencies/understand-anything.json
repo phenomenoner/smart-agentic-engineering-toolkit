@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "understand-anything",
+  "status": "pinned-external",
+  "disposition": "pinned-external-non-default",
+  "owner": "Egonex-AI/Understand-Anything",
+  "pin": {
+    "type": "upstream-pointer",
+    "repository": "https://github.com/Egonex-AI/Understand-Anything",
+    "ref": "main",
+    "resolvedCommit": "32944829e7a63a9fa9c55d811d7f98a9530c6a6a",
+    "observedAt": "2026-08-15"
+  },
+  "ownership": {
+    "canonical": "external",
+    "editableInToolkit": false
+  },
+  "boundary": {
+    "optional": true,
+    "default": false,
+    "role": "Persistent graph, dashboard, and onboarding.",
+    "localPinDriftIsInformational": true,
+    "automaticUpdate": false,
+    "codegraphBoundary": "Use CodeGraph for bounded current-repository navigation; Understand Anything remains upstream-owned."
+  }
+}

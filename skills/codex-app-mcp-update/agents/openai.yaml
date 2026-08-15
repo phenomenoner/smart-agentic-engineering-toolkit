@@ -1,0 +1,6 @@
+interface:
+  display_name: "Codex App MCP Update"
+  short_description: "Safely update local MCP plugins and tool environments"
+  default_prompt: "Use $codex-app-mcp-update to upgrade this local Codex MCP plugin and verify it in a fresh task."
+policy:
+  allow_implicit_invocation: false

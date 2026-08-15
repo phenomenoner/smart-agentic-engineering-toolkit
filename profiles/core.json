@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "core",
+  "class": "core",
+  "status": "owned",
+  "default": true,
+  "description": "Host-neutral engineering lifecycle skills for specification, diagnosis, implementation, continuity, review, evidence, incident drills, temporal assurance, and toolkit maintenance.",
+  "skills": [
+    "engineering-specification",
+    "engineering-debugging",
+    "engineering-implementation",
+    "engineering-wal",
+    "batch-complete-independent-review",
+    "completeness-and-test-synthesis",
+    "incident-to-regression",
+    "specify-temporal-ownership",
+    "evolve-engineering-toolkit"
+  ],
+  "policy": {
+    "allow_implicit_invocation": true,
+    "host_specific": false
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "repositoryLicense": "MIT",
+  "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
+  "canonicalState": "becomes writable canonical source for toolkit-owned skills at the verified 0.1.0 tag",
+  "skills": [
+    {
+      "name": "engineering-specification",
+      "origin": "project-authored for this toolkit",
+      "license": "MIT",
+      "modifications": "initial implementation from the frozen public product contract"
+    },
+    {
+      "name": "engineering-debugging",
+      "origin": "project-authored for this toolkit",
+      "license": "MIT",
+      "modifications": "initial implementation from the frozen public product contract"
+    },
+    {
+      "name": "engineering-implementation",
+      "origin": "project-authored for this toolkit",
+      "license": "MIT",
+      "modifications": "initial implementation from the frozen public product contract"
+    },
+    {
+      "name": "engineering-wal",
+      "origin": "project-authored for this toolkit",
+      "license": "MIT",
+      "modifications": "initial implementation from the frozen public product contract"
+    },
+    {
+      "name": "evolve-engineering-toolkit",
+      "origin": "project-authored for this toolkit",
+      "license": "MIT",
+      "modifications": "initial implementation of the contribution and retirement protocol"
+    },
+    {
+      "name": "batch-complete-independent-review",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "83c4cae4b2708f2880c18ca1df4202c7d28164e87c92d7b9b88dbedd98ea95cc",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, and behavior eval integration"
+    },
+    {
+      "name": "completeness-and-test-synthesis",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "e7149166dc4944bfb0c1076aa92d7af1df126e902d453087a30007261ec18641",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, explicit invocation policy, and behavior eval integration"
+    },
+    {
+      "name": "incident-to-regression",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus plus a newer project-authored support-file revision",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "51d4e744e4ca541467737408f6788e5cb692c64494e32ba184be81160e460039",
+      "license": "MIT",
+      "modifications": "reconciled pitfall reference, toolkit metadata, contribution protocol, and behavior eval integration"
+    },
+    {
+      "name": "specify-temporal-ownership",
+      "origin": "project-authored from lifecycle incident research and primary concurrency sources",
+      "sourceSkillSha256": "695ac2ad5ecd900f006a330bb44e598fe879ed079445c152c32b4b36409cf2e9",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution sentinel, and six-case blind forward evaluation integration"
+    },
+    {
+      "name": "canon-engineering-disciplines",
+      "origin": "project-authored advisory skill",
+      "sourceSkillSha256": "b74f36fda82aa6c7b4e97598dbbf206316893526c4360df613d5a29147a59f60",
+      "license": "MIT",
+      "modifications": "public provenance review, toolkit metadata, explicit-only policy, and contribution protocol"
+    },
+    {
+      "name": "codegraph-first-navigation",
+      "origin": "project-authored Codex navigation skill",
+      "sourceSkillSha256": "1fe2eb067faee174ffb41ffcda75e1e1a02f7796c4ff0d64ed17bf56f86726ae",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, and public integration boundary"
+    },
+    {
+      "name": "programmatic-tool-composition",
+      "origin": "project-authored Codex optimization skill",
+      "sourceSkillSha256": "2d87ba869dfaaf7c1fad3ae97fb0d0fd8e5cd3fa219ecf5b959685f7a30ef937",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, and public integration boundary"
+    },
+    {
+      "name": "long-run-supervisor",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus plus newer project-authored source and tests",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d",
+      "license": "MIT",
+      "modifications": "source-only reconciliation, runtime-state exclusion, toolkit metadata, contribution protocol, public path normalization, and a stale heading assertion updated to the current deferred-delivery contract"
+    },
+    {
+      "name": "codex-cli-luna-worker",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus plus newer project-authored routing guidance",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, explicit-only policy, and public example paths"
+    },
+    {
+      "name": "claude-independent-review",
+      "origin": "phenomenoner/Chatgpt-Codex-App-Plus plus newer project-authored read-only wrapper",
+      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
+      "sourceSkillSha256": "caa846de53d49d0edd70210a63b7da2d819a373e951c2491f2be8f9c6388c6ea",
+      "license": "MIT",
+      "modifications": "wrapper reconciliation, machine-default removal, toolkit metadata, contribution protocol, and explicit-user-only policy"
+    },
+    {
+      "name": "codex-app-mcp-update",
+      "origin": "project-authored Codex Desktop maintenance skill",
+      "sourceSkillSha256": "929434c00904457d90d14fc5e0f71b25da559cec7bd89e249920197330a83ef4",
+      "license": "MIT",
+      "modifications": "toolkit metadata, contribution protocol, explicit-only policy, and public integration boundary"
+    }
+  ],
+  "comparativeSources": [
+    {
+      "repository": "addyosmani/agent-skills",
+      "commit": "df1edb2e05487d0aa6d93c747141e0aed1187f25",
+      "license": "MIT",
+      "use": "comparative lifecycle taxonomy and evaluation structure; no intentional source copy"
+    },
+    {
+      "repository": "obra/superpowers",
+      "commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+      "license": "MIT",
+      "use": "comparative composability and evaluation input only; mandatory workflow remains retired"
+    }
+  ]
+}

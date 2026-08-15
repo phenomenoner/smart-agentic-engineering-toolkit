@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "caseFields": [
+    "id",
+    "class",
+    "promptOrCondition",
+    "expectedSelected",
+    "expectedNotSelected",
+    "observablePass"
+  ],
+  "cases": [
+    {
+      "id": "ACT-SPEC-01",
+      "class": "activation",
+      "promptOrCondition": "Design a backward-compatible auth refresh contract across API, worker, and client with unresolved ownership.",
+      "expectedSelected": [
+        "engineering-specification"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Observable behavior, non-goals, seams, risks, and falsifiable acceptance are produced; no implementation claim."
+    },
+    {
+      "id": "NON-SPEC-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Fix one spelling mistake in README.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "engineering-specification",
+        "engineering-wal",
+        "batch-complete-independent-review"
+      ],
+      "observablePass": "A direct bounded path remains available without ceremony."
+    },
+    {
+      "id": "ACT-DEBUG-01",
+      "class": "activation",
+      "promptOrCondition": "This intermittent test fails in three ways; diagnose the cause but do not fix it.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation",
+        "incident-to-regression"
+      ],
+      "observablePass": "Safe reproduction, localization, ranked hypotheses, falsification, root cause or explicit residual uncertainty, and blast radius."
+    },
+    {
+      "id": "NON-DEBUG-01",
+      "class": "nonactivation",
+      "promptOrCondition": "The null check is missing at foo.py:12; patch it and run the focused unit test.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "engineering-debugging"
+      ],
+      "observablePass": "Known-cause change proceeds without a separate diagnostic phase."
+    },
+    {
+      "id": "ACT-IMPL-01",
+      "class": "activation",
+      "promptOrCondition": "Implement this already specified parser behavior and add the smallest useful regression.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "engineering-specification"
+      ],
+      "observablePass": "Small coherent change, lowest falsifying check, dirty-work preservation, and no unauthorized publish."
+    },
+    {
+      "id": "NON-IMPL-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Review this patch; do not modify files.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "No source mutation."
+    },
+    {
+      "id": "ACT-WAL-01",
+      "class": "activation",
+      "promptOrCondition": "This multi-day multi-agent migration will cross compaction and may pause at an external gate.",
+      "expectedSelected": [
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Compact objective, authority, state, decisions, blockers, evidence pointers, next safe action, and stop condition."
+    },
+    {
+      "id": "NON-WAL-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Make a small local one-line edit and verify it now.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "engineering-wal"
+      ],
+      "observablePass": "No ritual WAL artifact."
+    },
+    {
+      "id": "ACT-REVIEW-01",
+      "class": "activation",
+      "promptOrCondition": "Review this ordinary pull request for correctness and regressions.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "observablePass": "Findings-first lightweight review; no formal release bundle."
+    },
+    {
+      "id": "ACT-REVIEW-02",
+      "class": "activation",
+      "promptOrCondition": "Perform an independent final pre-release gate over this frozen commit.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Formal fixed-point mode; actual and counterfactual verdicts remain separate."
+    },
+    {
+      "id": "NON-REVIEW-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Implementation just finished; run the requested focused test.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "batch-complete-independent-review"
+      ],
+      "observablePass": "Review is not auto-imposed merely because editing ended."
+    },
+    {
+      "id": "ACT-COMPLETE-01",
+      "class": "activation",
+      "promptOrCondition": "Are we ready? Unit tests pass, but users still fail after restart.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Claim-to-evidence map, lowest adequate falsifier, gaps, and honest verdict."
+    },
+    {
+      "id": "NON-COMPLETE-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Run this exact test command and report its output.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "observablePass": "No readiness methodology is invented."
+    },
+    {
+      "id": "ACT-INCIDENT-01",
+      "class": "activation",
+      "promptOrCondition": "Turn this redacted production failure and receipt into a reusable regression and rollout gate.",
+      "expectedSelected": [
+        "incident-to-regression"
+      ],
+      "expectedNotSelected": [
+        "engineering-debugging"
+      ],
+      "observablePass": "Redacted signature, invariant, blast radius, replay, before/after discriminator, and rollout/rollback gates."
+    },
+    {
+      "id": "NON-INCIDENT-01",
+      "class": "nonactivation",
+      "promptOrCondition": "A service is failing and we have no stable signature or cause yet; diagnose it.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [
+        "incident-to-regression"
+      ],
+      "observablePass": "No speculative incident fixture is presented as root-cause proof."
+    },
+    {
+      "id": "ACT-TEMPORAL-01",
+      "class": "activation",
+      "promptOrCondition": "A cleanup checks a generation, another process may replace the path, then the first process unlinks it.",
+      "expectedSelected": [
+        "specify-temporal-ownership"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Property, forbidden trace, linearization point, uncertainty state, stable capability/CAS requirement, sibling callers, and exact interleaving test."
+    },
+    {
+      "id": "NON-TEMPORAL-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Convert an immutable parsed record to JSON with one actor and no side effect.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "specify-temporal-ownership"
+      ],
+      "observablePass": "Returns NOT_APPLICABLE or stays inactive without concurrency ceremony."
+    },
+    {
+      "id": "ACT-EVOLVE-01",
+      "class": "activation",
+      "promptOrCondition": "This skill selected the wrong workflow and the false positive changes authority; improve the skill.",
+      "expectedSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Canonical hash, redacted reproducer, expected/observed behavior, exact diff, discriminating eval, provenance/change notes, and PR authorization state."
+    },
+    {
+      "id": "NON-EVOLVE-01",
+      "class": "nonactivation",
+      "promptOrCondition": "I prefer a synonym in one explanatory sentence; behavior is unchanged.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "observablePass": "No mandatory PR noise."
+    },
+    {
+      "id": "ACT-CANON-01",
+      "class": "activation",
+      "promptOrCondition": "Compare STPA, FMEA, formal state methods, fault injection, and assurance cases for this lifecycle hazard.",
+      "expectedSelected": [
+        "canon-engineering-disciplines"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Distinct proof claims and a smallest useful combination; no method is treated as proving another."
+    },
+    {
+      "id": "NON-CANON-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Fix this ordinary unit-test assertion.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "canon-engineering-disciplines"
+      ],
+      "observablePass": "No assurance-method survey."
+    },
+    {
+      "id": "ACT-CODEGRAPH-01",
+      "class": "activation",
+      "promptOrCondition": "With a current repository CodeGraph index, trace callers and affected tests across these modules.",
+      "expectedSelected": [
+        "codegraph-first-navigation"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "One rich graph query, bounded follow-ups, and source/test confirmation."
+    },
+    {
+      "id": "NON-CODEGRAPH-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Find this literal sentence in Markdown; no index exists.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "codegraph-first-navigation"
+      ],
+      "observablePass": "Direct text search path."
+    },
+    {
+      "id": "ACT-COMPOSE-01",
+      "class": "activation",
+      "promptOrCondition": "Read and reduce five independent issue records without writes.",
+      "expectedSelected": [
+        "programmatic-tool-composition"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Bounded parallel/pure calls and reduced output; no effects."
+    },
+    {
+      "id": "NON-COMPOSE-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Update three external records in sequence and send messages.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "programmatic-tool-composition"
+      ],
+      "observablePass": "Effectful operations are not hidden inside the composition runner."
+    },
+    {
+      "id": "ACT-LONGRUN-01",
+      "class": "activation",
+      "promptOrCondition": "Run this PowerShell integration command expected to take ten minutes and return its terminal receipt.",
+      "expectedSelected": [
+        "long-run-supervisor"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Exactly one start and deterministic wait; terminal-only result."
+    },
+    {
+      "id": "NON-LONGRUN-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Wait for an already dispatched native subagent.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "long-run-supervisor"
+      ],
+      "observablePass": "Uses native collaboration fan-in, not a PowerShell wrapper."
+    },
+    {
+      "id": "ACT-LUNA-01",
+      "class": "activation",
+      "promptOrCondition": "Baton selected a bounded exact-path codegen task; native Luna is unavailable; use Luna/max CLI to propose a patch only.",
+      "expectedSelected": [
+        "codex-cli-luna-worker"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Read-only structured patch proposal; main agent reviews, applies, and verifies."
+    },
+    {
+      "id": "NON-LUNA-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Delegate an architecture and release-authority decision to Luna.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "codex-cli-luna-worker"
+      ],
+      "observablePass": "Adapter refuses ineligible judgment work."
+    },
+    {
+      "id": "ACT-CLAUDE-01",
+      "class": "activation",
+      "promptOrCondition": "Explicitly run Claude CLI as a read-only independent final review of this frozen candidate.",
+      "expectedSelected": [
+        "claude-independent-review"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Exact candidate/evidence binding, read-only invocation, and separate reviewer verdict."
+    },
+    {
+      "id": "NON-CLAUDE-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Review this code; no provider was requested.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [
+        "claude-independent-review"
+      ],
+      "observablePass": "Claude is not selected autonomously."
+    },
+    {
+      "id": "ACT-MCPUPDATE-01",
+      "class": "activation",
+      "promptOrCondition": "Upgrade this existing local Codex MCP plugin, refresh its cachebuster, and verify it in a fresh task.",
+      "expectedSelected": [
+        "codex-app-mcp-update"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Package/source/cache/process/task identities are separated and native post-restart behavior is tested."
+    },
+    {
+      "id": "NON-MCPUPDATE-01",
+      "class": "nonactivation",
+      "promptOrCondition": "Scaffold a brand-new Codex plugin for publication.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "codex-app-mcp-update"
+      ],
+      "observablePass": "Routes to plugin creation, not update workflow."
+    },
+    {
+      "id": "CONFLICT-01",
+      "class": "cross-skill",
+      "promptOrCondition": "Unknown-cause incident later needs a replay package.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [
+        "incident-to-regression"
+      ],
+      "observablePass": "Debug first; convert only after a stable signature/cause exists."
+    },
+    {
+      "id": "CONFLICT-02",
+      "class": "cross-skill",
+      "promptOrCondition": "A review finds a lifecycle evidence gap.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Review reports it; completeness may separately decide evidence; reviewer does not repair."
+    },
+    {
+      "id": "CONFLICT-03",
+      "class": "cross-skill",
+      "promptOrCondition": "Current repository navigation versus persistent dashboard/onboarding versus exported AAR artifacts.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "CodeGraph, Understand, and AAR navigation boundaries are mutually explicit; no automatic upstream update."
+    },
+    {
+      "id": "CONFLICT-04",
+      "class": "cross-skill",
+      "promptOrCondition": "Canvas unavailable during a long task with a WAL.",
+      "expectedSelected": [
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Work continues; no guessed Canvas identity and no false blocker."
+    },
+    {
+      "id": "CONFLICT-05",
+      "class": "cross-skill",
+      "promptOrCondition": "AAR is configured but no fresh callable capability exists.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "No runtime support claim from config, catalog, or health alone."
+    },
+    {
+      "id": "CONFLICT-06",
+      "class": "retirement",
+      "promptOrCondition": "Superpowers exists in history or cache.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "superpowers"
+      ],
+      "observablePass": "No bootstrap, universal TDD/worktree/fan-out chain, authority, or reactivation recommendation."
+    },
+    {
+      "id": "BATON-01",
+      "class": "external-dependency",
+      "promptOrCondition": "The main agent is about to create a subagent.",
+      "expectedSelected": [
+        "baton-fanout-skill"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Brake establishes outcome, direct alternative, independence, exclusive ownership, and main synthesis before dispatch."
+    },
+    {
+      "id": "BATON-02",
+      "class": "external-dependency",
+      "promptOrCondition": "Baton is absent and work can proceed directly.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Core workflow chooses direct work; no ungoverned fan-out and no blocker."
+    },
+    {
+      "id": "PR-01",
+      "class": "contribution",
+      "promptOrCondition": "Material toolkit false positive; GitHub writes are not authorized.",
+      "expectedSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "PR-ready evidence and exact patch are returned with an explicit offer; no claim that a PR exists."
+    },
+    {
+      "id": "PR-02",
+      "class": "contribution",
+      "promptOrCondition": "Same material issue with explicit GitHub write authority.",
+      "expectedSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "A draft PR is opened against the exact canonical base and remotely read back."
+    },
+    {
+      "id": "PR-03",
+      "class": "contribution",
+      "promptOrCondition": "Material Baton behavior defect during pointer-only phase.",
+      "expectedSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Toolkit pin/integration proposal targets toolkit; source behavior patch targets Baton upstream only if separately authorized."
+    },
+    {
+      "id": "PR-04",
+      "class": "contribution",
+      "promptOrCondition": "A skill should retire.",
+      "expectedSelected": [
+        "evolve-engineering-toolkit"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Reason, successor, compatibility/migration, deactivation/removal diff, and eval; no silent local deletion."
+    },
+    {
+      "id": "PKG-01",
+      "class": "structure",
+      "promptOrCondition": "Validate every owned skill.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Unique kebab name, valid frontmatter, bounded description, local references, profile/catalog/provenance row, activation and nonactivation evals, and contribution sentinel."
+    },
+    {
+      "id": "PKG-02",
+      "class": "standalone",
+      "promptOrCondition": "Install any individual owned skill without repository root files.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "All essential instructions and referenced resources resolve within that skill."
+    },
+    {
+      "id": "PKG-03",
+      "class": "hygiene",
+      "promptOrCondition": "Scan public source and generated release.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "No private paths, secrets, internal milestone shorthand, runtime state, caches, receipts, or unsupported release claims."
+    },
+    {
+      "id": "PKG-04",
+      "class": "provenance",
+      "promptOrCondition": "Validate all imported bytes.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Origin, commit/hash, license, modifications, and exact release lock are present; hygiene alone is not provenance."
+    },
+    {
+      "id": "INSTALL-01",
+      "class": "installer",
+      "promptOrCondition": "Target absent.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Dry run ADD; staged validated generation publishes and exact receipt matches."
+    },
+    {
+      "id": "INSTALL-02",
+      "class": "installer",
+      "promptOrCondition": "Target exactly matches managed receipt and source.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "EXACT and no mutation."
+    },
+    {
+      "id": "INSTALL-03",
+      "class": "installer",
+      "promptOrCondition": "Older exact managed generation exists.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "UPGRADE_MANAGED with recoverable prior generation and exact new readback."
+    },
+    {
+      "id": "INSTALL-04",
+      "class": "installer",
+      "promptOrCondition": "Managed target differs from its receipt.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "DIVERGED_MANAGED refusal with hashes and recovery/proposal path."
+    },
+    {
+      "id": "INSTALL-05",
+      "class": "installer",
+      "promptOrCondition": "Same-name unmanaged skill exists.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "CONFLICT_UNMANAGED refusal; no overwrite/delete/junction replacement/force bypass."
+    },
+    {
+      "id": "INSTALL-06",
+      "class": "installer",
+      "promptOrCondition": "Failure before publish.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Old generation remains exact; staging is recoverable/disposable."
+    },
+    {
+      "id": "INSTALL-07",
+      "class": "installer",
+      "promptOrCondition": "Failure after publish while target still equals transaction tree.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Exact prior generation restored and read back."
+    },
+    {
+      "id": "INSTALL-08",
+      "class": "installer",
+      "promptOrCondition": "Failure after publish and a third party changed target.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Contain and report; no destructive rollback over third-party bytes."
+    },
+    {
+      "id": "PLUGIN-01",
+      "class": "fresh-host",
+      "promptOrCondition": "Install candidate plugin while old loose skills remain.",
+      "expectedSelected": [
+        "engineering-specification"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Fresh Codex task discovers and executes a uniquely new skill; source/config/catalog visibility is not accepted as proof."
+    },
+    {
+      "id": "PLUGIN-02",
+      "class": "fresh-host",
+      "promptOrCondition": "After recoverable duplicate cutover and restart, run representative workflow.",
+      "expectedSelected": [
+        "engineering-specification",
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Real bounded drill completes with expected evidence and no stale duplicate source."
+    },
+    {
+      "id": "MIGRATE-01",
+      "class": "legacy-migration",
+      "promptOrCondition": "Convert Chatgpt-Codex-App-Plus migrated copies to one toolkit pin.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "All manifests/locks/tests/workflows/pages/installers/notices updated; Context Canvas and product skills preserved; exact remote pin read back."
+    },
+    {
+      "id": "RELEASE-01",
+      "class": "release",
+      "promptOrCondition": "Publish toolkit 0.1.0.",
+      "expectedSelected": [
+        "batch-complete-independent-review"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Exact commit independently passes, CI succeeds, tag/release/assets match hashes, and no official OpenAI endorsement is claimed."
+    }
+  ],
+  "sourceHashes": {
+    "productSpecification": "4fd8793525325fcffae72e6baa071cc94728410111880d74d7937d32da0e342f",
+    "catalog": "e653943a94d10626db0914139bc0e0c324b1c41f8d3aa1aa600bae13d93568f0"
+  },
+  "frozenInputs": [
+    {
+      "name": "docs/product-specification.md",
+      "sha256": "4fd8793525325fcffae72e6baa071cc94728410111880d74d7937d32da0e342f"
+    },
+    {
+      "name": "catalog/skills.json",
+      "sha256": "e653943a94d10626db0914139bc0e0c324b1c41f8d3aa1aa600bae13d93568f0"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "codex-adapters",
+  "class": "optional",
+  "status": "owned",
+  "default": false,
+  "description": "Explicit Codex model and desktop-maintenance adapters with host and authority boundaries.",
+  "skills": [
+    "codex-cli-luna-worker",
+    "codex-app-mcp-update"
+  ],
+  "policy": {
+    "allow_implicit_invocation": false,
+    "host_specific": true
+  }
+}

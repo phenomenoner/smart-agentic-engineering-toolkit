@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "windows",
+  "class": "optional",
+  "status": "owned",
+  "default": false,
+  "description": "Windows PowerShell supervision for commands expected to exceed five minutes, with deterministic terminal waits.",
+  "skills": [
+    "long-run-supervisor"
+  ],
+  "policy": {
+    "allow_implicit_invocation": true,
+    "host_specific": true
+  }
+}

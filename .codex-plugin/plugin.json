@@ -1,0 +1,21 @@
+{
+  "name": "smart-agentic-engineering-toolkit",
+  "version": "0.1.0",
+  "description": "Focused, evidence-driven engineering skills for specification, implementation, review, regression learning, orchestration, and Codex adapters.",
+  "author": {
+    "name": "phenomenoner"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Smart Agentic Engineering Toolkit",
+    "shortDescription": "Focused engineering workflows with evidence-bound stops",
+    "longDescription": "A curated collection of independently triggered skills for specifying material changes, diagnosing failures, implementing bounded repairs, reviewing at proportional rigor, converting incidents into regressions, and using optional Codex engineering adapters. It avoids universal workflow ceremony and keeps authority, evidence, and external effects explicit.",
+    "developerName": "phenomenoner",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": "Select the smallest focused Smart Agentic Engineering Toolkit skill that matches the requested engineering outcome; do not impose the entire lifecycle."
+  }
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Engineering Debugging"
+  short_description: "Diagnose failures before authorized repair"
+  default_prompt: "Use $engineering-debugging to reproduce, reduce, and falsify hypotheses for this failure without crossing the requested repair boundary."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "context-canvas-checkpoint",
+  "status": "pinned-external",
+  "disposition": "pinned-external-plugin-integration",
+  "owner": "phenomenoner/Chatgpt-Codex-App-Plus",
+  "pin": {
+    "type": "plugin-pointer",
+    "repository": "https://github.com/phenomenoner/Chatgpt-Codex-App-Plus",
+    "ref": "main",
+    "resolvedCommit": "8b99690472498d539fb8dc4e82dfc57837cdd451",
+    "observedAt": "2026-08-15"
+  },
+  "ownership": {
+    "canonical": "external",
+    "editableInToolkit": false
+  },
+  "boundary": {
+    "optional": true,
+    "trustedHookIdentityRequired": true,
+    "authority": false,
+    "proof": false,
+    "prerequisite": false,
+    "role": "Semantic map and snapshot index only; WAL remains the minimum authoritative continuity map."
+  }
+}

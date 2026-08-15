@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "name": "navigation",
+  "class": "optional",
+  "status": "owned",
+  "default": false,
+  "description": "Bounded current-repository structural navigation through an available CodeGraph index or callable surface.",
+  "skills": [
+    "codegraph-first-navigation"
+  ],
+  "policy": {
+    "allow_implicit_invocation": true,
+    "host_specific": false
+  }
+}
