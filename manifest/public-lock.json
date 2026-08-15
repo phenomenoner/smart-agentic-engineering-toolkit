@@ -6,13 +6,13 @@
   "files": [
     {
       "path": ".agents/plugins/marketplace.json",
-      "length": 436,
-      "sha256": "cf17940dc4dd22e78f652c3df998203f728f55a13cb85f9e273da8ec91d57c59"
+      "length": 420,
+      "sha256": "56d66b08acd5f829530c66225167c4fd5428f1f60791c8112b32f8dbf8de43c8"
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "length": 1162,
-      "sha256": "cb85854361bbc244282905b5e3076319961b15e5938b5331024b4f9c6e748e57"
+      "length": 1155,
+      "sha256": "4570089471dc1dec722e4bead9dea97acbcd36948ddb106171da9c6d4a9bd24e"
     },
     {
       "path": ".gitattributes",
@@ -26,8 +26,8 @@
     },
     {
       "path": ".gitignore",
-      "length": 176,
-      "sha256": "cc0461545904d92e770cdf1da70310e8bc6da7d8aec280669c0c51e865a6b71a"
+      "length": 213,
+      "sha256": "a2195362fe40e8205ca8020d83e3e06bf2539fcffb8c86846cbe63f5af901dd1"
     },
     {
       "path": "AGENTS.md",
