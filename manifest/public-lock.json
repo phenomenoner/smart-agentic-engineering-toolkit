@@ -236,8 +236,8 @@
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 33767,
-      "sha256": "0ef5ffb3d1ca9ee3d12116c6a57220e55ab7f04f0c9eec368154cee7849d7be2"
+      "length": 33717,
+      "sha256": "0dbae591e521ebfcb8dc04a264e58d1c5dc00a55db55aaa80e7bc2f157db5a6c"
     },
     {
       "path": "SECURITY.md",

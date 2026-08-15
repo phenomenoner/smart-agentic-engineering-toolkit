@@ -607,13 +607,13 @@ def _validate_repository_links(root: Path, errors: list[dict[str, str]]) -> None
 
 
 def _release_files(root: Path) -> list[Path]:
-    try:
+    if (root / ".git").exists():
         top_level = Path(_git_read(root, "rev-parse", "--show-toplevel")).resolve()
         if top_level != root.resolve():
             raise ValueError("release root is not the Git worktree root")
         tracked = _git_read(root, "ls-files", "--cached", "-z").split("\0")
         candidates = [root / relative for relative in tracked if relative]
-    except (FileNotFoundError, OSError, subprocess.CalledProcessError, ValueError):
+    else:
         candidates = list(root.rglob("*"))
 
     return [
