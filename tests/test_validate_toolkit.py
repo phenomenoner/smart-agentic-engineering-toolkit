@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
 from pathlib import Path
 
 from scripts.validate_toolkit import build_public_lock, validate_toolkit
@@ -40,9 +41,7 @@ def test_missing_contribution_sentinel_is_rejected(tmp_path: Path) -> None:
     root = clone_repo(tmp_path)
     path = root / "skills" / "engineering-wal" / "SKILL.md"
     path.write_text(
-        path.read_text(encoding="utf-8").replace(
-            "<!-- TOOLKIT-CONTRIBUTION-PROTOCOL:v1 -->", ""
-        ),
+        path.read_text(encoding="utf-8").replace("<!-- TOOLKIT-CONTRIBUTION-PROTOCOL:v1 -->", ""),
         encoding="utf-8",
     )
 
@@ -66,9 +65,7 @@ def test_catalog_skill_set_must_match_directories(tmp_path: Path) -> None:
     root = clone_repo(tmp_path)
     catalog_path = root / "catalog" / "skills.json"
     catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
-    catalog["skills"] = [
-        row for row in catalog["skills"] if row["name"] != "engineering-wal"
-    ]
+    catalog["skills"] = [row for row in catalog["skills"] if row["name"] != "engineering-wal"]
     catalog_path.write_text(json.dumps(catalog, indent=2) + "\n", encoding="utf-8")
 
     assert "CATALOG_SKILL_SET" in codes(validate_toolkit(root))
@@ -155,8 +152,7 @@ def test_generated_python_cache_is_ignored(tmp_path: Path) -> None:
 
     errors = validate_toolkit(root)
     assert not any(
-        error["code"] == "TOOLKIT_DENIED_PATH"
-        and error["path"].endswith("generated.pyc")
+        error["code"] == "TOOLKIT_DENIED_PATH" and error["path"].endswith("generated.pyc")
         for error in errors
     )
     locked_paths = {row["path"] for row in build_public_lock(root)["files"]}
@@ -173,9 +169,21 @@ def test_editable_install_metadata_is_ignored(tmp_path: Path) -> None:
     errors = validate_toolkit(root)
     assert "TOOLKIT_TOP_LEVEL" not in codes(errors)
     assert all(
-        not row["path"].startswith("example.egg-info/")
-        for row in build_public_lock(root)["files"]
+        not row["path"].startswith("example.egg-info/") for row in build_public_lock(root)["files"]
     )
+
+
+def test_public_lock_excludes_untracked_worktree_files(tmp_path: Path) -> None:
+    root = clone_repo(tmp_path)
+    subprocess.run(["git", "init", "-q", str(root)], check=True)
+    subprocess.run(["git", "-C", str(root), "add", "."], check=True)
+    local_test = root / "tests" / "test_local_only.py"
+    local_test.write_text("def test_local_only():\n    assert True\n", encoding="utf-8")
+
+    locked_paths = {row["path"] for row in build_public_lock(root)["files"]}
+
+    assert "README.md" in locked_paths
+    assert "tests/test_local_only.py" not in locked_paths
 
 
 def test_install_receipt_schema_is_not_a_runtime_receipt(tmp_path: Path) -> None:

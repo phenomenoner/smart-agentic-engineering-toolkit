@@ -12,10 +12,7 @@
     "longDescription": "A curated collection of independently triggered skills for specifying material changes, diagnosing failures, implementing bounded repairs, reviewing at proportional rigor, converting incidents into regressions, and using optional Codex engineering adapters. It avoids universal workflow ceremony and keeps authority, evidence, and external effects explicit.",
     "developerName": "phenomenoner",
     "category": "Developer Tools",
-    "capabilities": [
-      "Read",
-      "Write"
-    ],
+    "capabilities": ["Read", "Write"],
     "defaultPrompt": "Select the smallest focused Smart Agentic Engineering Toolkit skill that matches the requested engineering outcome; do not impose the entire lifecycle."
   }
 }

@@ -6,13 +6,13 @@
   "files": [
     {
       "path": ".agents/plugins/marketplace.json",
-      "length": 436,
-      "sha256": "cf17940dc4dd22e78f652c3df998203f728f55a13cb85f9e273da8ec91d57c59"
+      "length": 396,
+      "sha256": "77fa4cbfa68ae979ba87af8a251939efda2ae3c21162efe2f226cd35b8694c6f"
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "length": 1162,
-      "sha256": "cb85854361bbc244282905b5e3076319961b15e5938b5331024b4f9c6e748e57"
+      "length": 1137,
+      "sha256": "0a0c981dfc7e0258c6382d8dd183df3d7268f052b3fbdd6e7d291657d1e44f4a"
     },
     {
       "path": ".gitattributes",
@@ -236,8 +236,8 @@
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 33286,
-      "sha256": "ca67a7113abbb5da73ebd73c7e5bd9aa3eb2e3edffd05d71427cd6cc0bff3681"
+      "length": 33767,
+      "sha256": "0ef5ffb3d1ca9ee3d12116c6a57220e55ab7f04f0c9eec368154cee7849d7be2"
     },
     {
       "path": "SECURITY.md",
@@ -586,13 +586,13 @@
     },
     {
       "path": "tests/test_source_gate_blockers.py",
-      "length": 22124,
-      "sha256": "e1de2a094c38db8d9ae3a3b3ef188fd91b0fed3766b2e663870122fa8eedc1bc"
+      "length": 22228,
+      "sha256": "b08d6103dc35cf9d973573fcc38ab49915189011ae0b4b1143f3a6cbf8f34b79"
     },
     {
       "path": "tests/test_validate_toolkit.py",
-      "length": 6938,
-      "sha256": "05dd43cacaea9d4f7149e4a8ff9661ebc244074b5fcddfe698229ee178fe882b"
+      "length": 7472,
+      "sha256": "eac13b74feba6638a8e9b81ec4874ed62a9a10c291a65925a00810063c96bede"
     },
     {
       "path": "workflows/specify-implement-review-drill.md",

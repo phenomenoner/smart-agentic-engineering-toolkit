@@ -147,13 +147,13 @@ def initialized_candidate_copy(tmp_path: Path) -> Path:
     return isolated
 
 
-def behavior_error_codes(result: dict[str, Any]) -> set[str]:
+def behavior_error_codes(result: dict[str, Any], root: Path = ROOT) -> set[str]:
     validator = getattr(validate_toolkit, "validate_behavior_result", None)
     assert callable(validator), (
         "EVAL_RESULT_SEMANTIC_VALIDATOR_MISSING: add "
         "validate_behavior_result(root, result) to scripts.validate_toolkit"
     )
-    errors = validator(ROOT, result)
+    errors = validator(root, result)
     assert isinstance(errors, list)
     return {str(error.get("code")) if isinstance(error, dict) else str(error) for error in errors}
 
@@ -283,8 +283,10 @@ def test_candidate_identity_fails_closed_when_readback_changes(
     assert "EVAL_RESULT_CANDIDATE_UNVERIFIABLE" in {error["code"] for error in errors}
 
 
-def test_f001_complete_consistent_behavior_result_is_accepted() -> None:
-    assert behavior_error_codes(canonical_behavior_result()) == set()
+def test_f001_complete_consistent_behavior_result_is_accepted(tmp_path: Path) -> None:
+    isolated = initialized_candidate_copy(tmp_path)
+
+    assert behavior_error_codes(canonical_behavior_result(isolated), isolated) == set()
 
 
 @pytest.mark.parametrize(
