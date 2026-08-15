@@ -13,5 +13,6 @@ build/
 *.egg-info/
 *.log
 install-receipt*.json
+!schemas/install-receipt.schema.json
 .DS_Store
 Thumbs.db

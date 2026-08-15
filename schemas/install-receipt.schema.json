@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/phenomenoner/smart-agentic-engineering-toolkit/schemas/install-receipt.schema.json",
+  "title": "Standalone toolkit install receipt",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "toolkitVersion", "targetRoot", "profile", "skills", "transaction"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "toolkitVersion": {"type": "string", "minLength": 1},
+    "sourceCommit": {"type": ["string", "null"]},
+    "sourceRoot": {"type": "string", "minLength": 1},
+    "targetRoot": {"type": "string", "minLength": 1},
+    "profile": {"type": "string", "minLength": 1},
+    "skills": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["profile", "sourceTreeSha256", "installedTreeSha256", "files"],
+        "properties": {
+          "profile": {"type": "string"},
+          "sourceTreeSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "installedTreeSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "files": {"type": "array"}
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "required": ["id", "completedAt", "backupDirectory", "previousReceipt", "changed"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "completedAt": {"type": "string", "minLength": 1},
+        "backupDirectory": {"type": "string", "minLength": 1},
+        "previousReceipt": {"type": ["string", "null"]},
+        "changed": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}
