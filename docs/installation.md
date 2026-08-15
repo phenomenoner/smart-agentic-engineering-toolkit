@@ -2,8 +2,9 @@
 
 ## Codex plugin
 
-Clone a tagged release, then register that checkout as a non-default local marketplace and install
-the plugin it exposes:
+Check out the exact commit that passed the source/release gate and remote CI, then register that
+checkout as a non-default local marketplace and install the plugin it exposes. After a release is
+published, its tag must resolve to those same bytes and may be used instead:
 
 ```powershell
 codex plugin marketplace add <repository-root>
@@ -14,10 +15,10 @@ Confirm the configured source with `codex plugin list`, fully restart Codex Desk
 task for behavior verification. Do not treat the configuration row, plugin catalog, or an old task
 as proof that the new skills were loaded.
 
-For an update, move the local checkout to the intended tagged release, confirm that no local edits
-would be overwritten, reinstall the plugin, restart the app, and verify from a new task. Release
-plugin versions change when bytes change; local development builds should replace a single
-`+codex.<cachebuster>` suffix rather than stacking suffixes.
+For an update, move the local checkout to the intended exact gated commit or its corresponding tag,
+confirm that no local edits would be overwritten, reinstall the plugin, restart the app, and verify
+from a new task. Release plugin versions change when bytes change; local development builds should
+replace a single `+codex.<cachebuster>` suffix rather than stacking suffixes.
 
 ## Standalone Agent Skills projection
 
