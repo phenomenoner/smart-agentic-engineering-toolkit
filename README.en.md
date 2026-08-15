@@ -49,9 +49,10 @@ triggers, non-triggers, implicit-invocation policy, and canonical ownership.
 ## Codex plugin installation
 
 The repository root is the plugin source. Releases provide a Git tag, GitHub release, and a
-per-path hash lock. Register a tagged checkout as a local marketplace, install the plugin, fully
-restart Codex Desktop, and prove behavior in a **new task**. Configuration, catalog visibility, or
-health alone is not behavior proof. Exact plugin and standalone profile commands are in
+per-path hash lock. Register a checkout pinned to the exact gated commit (or its release tag once
+published) as a local marketplace, install the plugin, fully restart Codex Desktop, and prove
+behavior in a **new task**. Configuration, catalog visibility, or health alone is not behavior
+proof. Exact plugin and standalone profile commands are in
 [`docs/installation.md`](docs/installation.md).
 
 If loose skills with the same names already exist, first keep them in place and prove the plugin by
@@ -80,9 +81,10 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-The first public 0.1.0 release targets repository, plugin-package, isolated-install, fresh-task drill,
-and GitHub-byte verification. It does not claim OpenAI endorsement, Plugin Directory approval, or
-deployment/availability of AAR, Canvas, or an external model provider.
+The public 0.1.0 release claim is limited to repository, plugin-package, isolated-install,
+fresh-task-drill, and GitHub-byte verification in the listed environments. It does not claim OpenAI
+endorsement, Plugin Directory approval, or deployment/availability of AAR, Canvas, or an external
+model provider.
 
 License: MIT. See [`NOTICE`](NOTICE) and
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md) for external influences and

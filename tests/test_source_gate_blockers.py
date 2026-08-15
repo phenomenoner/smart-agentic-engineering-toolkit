@@ -434,7 +434,7 @@ def test_f004_public_lifecycle_status_is_consistent_and_self_explaining() -> Non
     cases = load_json(ROOT / "evals" / "cases" / "acceptance.json")
     manifest = load_json(ROOT / "manifest" / "toolkit.json")
 
-    assert {catalog["status"], cases["status"], manifest["status"]} == {"release-candidate"}
+    assert {catalog["status"], cases["status"], manifest["status"]} == {"released"}
 
 
 def test_f004_repository_is_current_source_while_tags_identify_releases() -> None:

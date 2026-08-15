@@ -2,7 +2,7 @@
 
 All notable changes are documented here. Versions follow Semantic Versioning.
 
-## [Unreleased]
+## [0.1.0] - 2026-08-16
 
 - Build the first public plugin with focused specification, diagnosis, implementation, continuity,
   review, completeness, incident, temporal-ownership, navigation, orchestration, and adapter skills.

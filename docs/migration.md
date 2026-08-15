@@ -16,11 +16,13 @@ edit Codex plugin caches and a generic force switch cannot bypass divergence che
 
 ## From Chatgpt-Codex-App-Plus
 
-Migration occurs only after a toolkit tag and local fresh-task proof. In an isolated clean branch,
-replace migrated general-engineering source directories with one pinned toolkit entry. Update all
-manifests, locks, installers, workflows, tests, pages, README and notice references together. Keep
-Context Canvas and product-specific skills in their canonical homes. Public synchronization remains
-allow-listed and cannot advance the toolkit pin automatically.
+Migration occurs only after the exact canonical remote commit passes its source/release gate and CI,
+and local fresh-task behavior is proved from that commit. In an isolated clean branch, replace
+migrated general-engineering source directories with one entry pinned to the exact commit. A later
+tag or GitHub Release must resolve to those same bytes; neither substitutes for the fresh-task proof.
+Update all manifests, locks, installers, workflows, tests, pages, README and notice references
+together. Keep Context Canvas and product-specific skills in their canonical homes. Public
+synchronization remains allow-listed and cannot advance the toolkit pin automatically.
 
 ## Recovery
 

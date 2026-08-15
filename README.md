@@ -44,9 +44,9 @@ there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mec
 ## Codex plugin 安裝
 
 本 repo 根目錄就是 plugin source。發布版本會提供 GitHub tag/release 與逐檔 hash lock。
-把 tagged checkout 註冊成 local marketplace、安裝 plugin、完整重啟 Codex Desktop，並在
-**新的 task** 裡做 native behavior 驗證。設定檔、catalog 可見或 MCP health 不等於
-skill/tool 真正可用；完整 plugin 與 standalone profile 指令見
+把已通過 gate 的精確 commit checkout（發布後也可使用對應 tag）註冊成 local marketplace、
+安裝 plugin、完整重啟 Codex Desktop，並在 **新的 task** 裡做 native behavior 驗證。設定檔、
+catalog 可見或 MCP health 不等於 skill/tool 真正可用；完整 plugin 與 standalone profile 指令見
 [`docs/installation.md`](docs/installation.md)。
 
 若環境已有同名 loose skills，先保留它們，利用本 toolkit 的新 skill 驗證 plugin 已被新
@@ -76,8 +76,8 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.1.0 是第一個公開版本目標。Release 只表示 repository、plugin package、isolated install、
-fresh-task drill 與公開 GitHub bytes 已在列出的環境驗證；不表示 OpenAI 官方推薦、Plugin
+0.1.0 是第一個公開版本。其 release 主張只涵蓋 repository、plugin package、isolated install、
+fresh-task drill 與公開 GitHub bytes 在列出環境中的驗證；不表示 OpenAI 官方推薦、Plugin
 Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與

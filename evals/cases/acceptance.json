@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "toolkitVersion": "0.1.0",
-  "status": "release-candidate",
+  "status": "released",
   "caseFields": [
     "id",
     "class",
@@ -647,7 +647,7 @@
   ],
   "sourceHashes": {
     "productSpecification": "cf73740f05861d7b543f6567e1cbb38d2b6c9d4ab3d9111bea1e85e99236b6d0",
-    "catalog": "c09c7eb0fd915d3611fed4063ae32e239c8b8f7964ca95b73e653d2824c58728"
+    "catalog": "93aacdd3425de44671eecbc89fc43f878f8eb413f2cd10da7f6e25a988ecbe79"
   },
   "frozenInputs": [
     {
@@ -656,7 +656,7 @@
     },
     {
       "name": "catalog/skills.json",
-      "sha256": "c09c7eb0fd915d3611fed4063ae32e239c8b8f7964ca95b73e653d2824c58728"
+      "sha256": "93aacdd3425de44671eecbc89fc43f878f8eb413f2cd10da7f6e25a988ecbe79"
     }
   ]
 }
