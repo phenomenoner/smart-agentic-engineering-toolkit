@@ -77,6 +77,8 @@ outcome/minimum invariant, why deletion, a manual action, embedding/ephemeral st
 platform primitive, or an existing canonical skill cannot own it, and an auditable complexity
 budget for added state, authority, recovery, and failure states. Prefer updating the existing owner;
 do not create a new catalog/profile surface merely to host the safeguard.
+Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+this maintenance skill packages a proven improvement rather than duplicating that procedure.
 
 Classify version impact:
 

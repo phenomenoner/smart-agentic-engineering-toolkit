@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 
+import pytest
 from jsonschema import Draft202012Validator
 
 from scripts.install_toolkit import Installer, validate_install_receipt
@@ -60,6 +61,56 @@ def test_install_receipt_schema_accepts_exact_tree_evidence() -> None:
 
     validator("install-receipt.schema.json").validate(receipt)
     assert validate_install_receipt(receipt) == []
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("sha256", "not-a-sha256"),
+        ("length", -1),
+        ("length", True),
+    ],
+)
+def test_install_receipt_semantics_reject_malformed_file_evidence(
+    field: str, value: object
+) -> None:
+    body = b"skill bytes"
+    files: list[dict[str, object]] = [
+        {
+            "path": "SKILL.md",
+            "length": len(body),
+            "sha256": hashlib.sha256(body).hexdigest(),
+        }
+    ]
+    digest = hashlib.sha256(
+        json.dumps(files, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    receipt = {
+        "schemaVersion": 1,
+        "toolkitVersion": "0.1.0",
+        "sourceCommit": None,
+        "sourceRoot": "source",
+        "targetRoot": "target",
+        "profile": "core",
+        "skills": {
+            "engineering-specification": {
+                "profile": "core",
+                "sourceTreeSha256": digest,
+                "installedTreeSha256": digest,
+                "files": files,
+            }
+        },
+        "transaction": {
+            "id": "transaction",
+            "completedAt": "2026-08-15T00:00:00+00:00",
+            "backupDirectory": "backup",
+            "previousReceipt": None,
+            "changed": ["engineering-specification"],
+        },
+    }
+    receipt["skills"]["engineering-specification"]["files"][0][field] = value
+
+    assert "INSTALL_RECEIPT_SHAPE" in {error["code"] for error in validate_install_receipt(receipt)}
 
 
 def test_real_installer_receipt_matches_public_schema(tmp_path: Path) -> None:

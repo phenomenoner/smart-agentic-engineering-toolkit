@@ -82,6 +82,8 @@ Perform these steps in order:
    count added complexity, authority, recovery, and failure-state obligations.
    A pure replay of an observed failure with no proposed mechanism bypasses this
    guard.
+   Route unresolved detailed mechanism design to `engineering-specification`,
+   the canonical owner; the incident package retains evidence and repair properties.
 5. **Choose verification altitude.**
    - `T0`: static inspection, formatting, or schema validation.
    - `T1`: isolated unit or pure-function test.

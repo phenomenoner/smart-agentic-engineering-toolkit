@@ -932,6 +932,7 @@ class Installer:
         )
         published: list[dict[str, Any]] = []
         staged_generations: dict[str, tuple[str, list[dict[str, Any]]]] = {}
+        post_commit_receipt_contained = False
 
         try:
             staging_root.mkdir(parents=True, exist_ok=False)
@@ -1116,6 +1117,7 @@ class Installer:
                     previous_path=previous_receipt,
                 )
                 if receipt_containment:
+                    post_commit_receipt_contained = True
                     raise InstallContainmentError(
                         post_commit_cause,
                         receipt_containment,
@@ -1123,6 +1125,8 @@ class Installer:
                 raise
             return receipt
         except BaseException as cause:
+            if post_commit_receipt_contained:
+                raise
             containment: list[str] = []
             for row in reversed(published):
                 name = row["name"]

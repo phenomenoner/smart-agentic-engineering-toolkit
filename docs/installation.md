@@ -41,8 +41,10 @@ holds one OS-backed lock per target root, uses atomic no-replace renames, and co
 only when its exact prior bytes still match. Before returning success it re-reads the exact receipt
 bytes and every changed target digest while holding that lock. On mismatch it restores/removes only
 the receipt generation it just published by exact-byte compare-and-swap; foreign receipt or target
-bytes are retained and reported. It retains prior managed generations and receipts and refuses
-unmanaged, linked/reparse, semantically invalid, or locally diverged same-name targets. If ownership
+bytes are retained and reported. Once a foreign current receipt is identified, target compensation
+also stops so the installer cannot roll back bytes beneath another receipt owner. It retains prior
+managed generations and receipts and refuses unmanaged, linked/reparse, semantically invalid, or
+locally diverged same-name targets. If ownership
 changes during rollback, it moves first, identifies the tree actually moved, and contains the
 failure without overwriting foreign bytes. There is no force-overwrite mode. A platform without a
 supported atomic no-replace rename fails closed before publish. The lock coordinates conforming

@@ -53,6 +53,8 @@ preference is not material.
    direct experiment and existing engineering skills with the proposed method, and account for
    added complexity, authority, recovery, and failure-state cost. This is a bounded selection
    brake, not a universal specification gate.
+   Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+   discipline synthesis does not duplicate its procedure.
 4. Read [method-router.md](references/method-router.md) and select the smallest two to four disciplines that address materially different questions. Select one method when one is enough.
 5. Record why each method is selected and why plausible alternatives are rejected or deferred.
 6. Read [method-boundaries.md](references/method-boundaries.md). Separate every claim by verification altitude and evidence type; list assumptions, defeaters, freshness conditions, independence, and explicit non-claims.

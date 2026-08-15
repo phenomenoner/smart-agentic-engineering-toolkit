@@ -15,6 +15,8 @@ For a material mechanism choice, specification asks `Do we really need this to m
 and `Is there a simpler and more direct way?` before contract or RED freeze. It distinguishes the
 observable outcome/minimum invariant from a mechanism proxy and considers deletion, manual action,
 embedding or ephemeral state, an existing platform primitive, and only then a new mechanism.
+`engineering-specification` is the detailed canonical owner; every other loop keeps only a short,
+conditional guard and routes unresolved design back to it.
 
 ## Behavioral invariants
 

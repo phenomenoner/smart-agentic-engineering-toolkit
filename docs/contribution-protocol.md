@@ -16,7 +16,7 @@ A complete proposal records:
   outcome/minimum invariant; answers to `Do we really need this to make things happen?` and `Is
   there a simpler and more direct way?`; deletion, manual, embedding/ephemeral, platform-primitive,
   and retained-mechanism alternatives; and an auditable complexity/authority/recovery/failure-state
-  budget;
+  budget; route unresolved detailed design to the canonical `engineering-specification` owner;
 - exact unified diff;
 - smallest before/after eval;
 - license, provenance, compatibility, version, changelog, and migration impact;

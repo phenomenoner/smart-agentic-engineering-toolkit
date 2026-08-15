@@ -72,7 +72,8 @@ Create a small, review-only bundle under the repository's approved scratch/evide
 - for a material added mechanism, the frozen answers to `Do we really need this to make things
   happen?` and `Is there a simpler and more direct way?`, the observable invariant, alternatives,
   and complexity/authority/recovery/failure-state cost; the reviewer may challenge this decision
-  but cannot become its implementation or authorization owner;
+  but cannot become its implementation or authorization owner; route redesign to
+  `engineering-specification`, the detailed canonical owner;
 - artifact-role and claim labels: source/input, immutable executed instance,
   immutable deployment instance, or derived mutable path; and whether the gate
   claims instance identity, build-recipe identity, reproducible rebuild, or

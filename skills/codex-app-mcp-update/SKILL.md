@@ -78,6 +78,8 @@ A new plugin installation does not hot-update an already-open task.
   managed install, restart, or new-task primitive when it meets the invariant; count package,
   process, cache, rollback, authority, recovery, and failure-state cost before retaining a new
   mechanism. This does not authorize the cutover.
+- Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+  this adapter retains only the host-bound challenge and cutover constraints.
 - If no process owns the tool environment, install normally.
 - On Windows, do not run `uv tool install --force` against a live MCP tool environment. The failure
   can be non-atomic: package or dependency metadata may be removed before a locked executable or

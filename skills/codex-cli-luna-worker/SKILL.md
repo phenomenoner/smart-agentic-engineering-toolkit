@@ -43,6 +43,8 @@ preference is not material.
    main-agent closure owner. Ask `Do we really need this to make things happen?` and `Is there a
    simpler and more direct way?`; record why direct work or an existing platform route is
    insufficient and count the added coordination, authority, recovery, and failure-state cost.
+   Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+   this worker bridge cannot own that decision.
 3. Confirm the contract is stable and the work is bounded code generation. Keep architecture, authorization, security, release, review, and live-operation decisions with the main agent.
 4. Capture the repository status and hashes of the target surface. Preserve existing dirty work.
 5. Put no credentials, connection profiles, private receipts, or secrets in the worker prompt.

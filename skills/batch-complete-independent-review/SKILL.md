@@ -47,6 +47,8 @@ manual, embedded/ephemeral, and existing-platform alternatives; compare complexi
 recovery, and failure-state cost against the frozen necessity decision. This is a conditional
 challenge, not a redesign mandate. For a formal gate, carry it as one atomic design-necessity matrix
 row only when material; do not add a schema field or formal bundle to an ordinary review.
+When the frozen decision needs redesign, route it back to `engineering-specification`, the detailed
+canonical owner; review only challenges the decision and its evidence.
 
 ## Preserve the surrounding rules
 

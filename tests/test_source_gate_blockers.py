@@ -122,6 +122,31 @@ def canonical_behavior_result(root: Path = ROOT) -> dict[str, Any]:
     }
 
 
+def initialized_candidate_copy(tmp_path: Path) -> Path:
+    isolated = tmp_path / "candidate"
+    for relative in (".codex-plugin", "catalog", "evals", "manifest"):
+        shutil.copytree(ROOT / relative, isolated / relative)
+    shutil.copy2(ROOT / ".gitignore", isolated / ".gitignore")
+    subprocess.run(["git", "init", "-q", str(isolated)], check=True)
+    subprocess.run(["git", "-C", str(isolated), "add", "."], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(isolated),
+            "-c",
+            "user.name=Toolkit Test",
+            "-c",
+            "user.email=toolkit-test@example.invalid",
+            "commit",
+            "-qm",
+            "candidate",
+        ],
+        check=True,
+    )
+    return isolated
+
+
 def behavior_error_codes(result: dict[str, Any]) -> set[str]:
     validator = getattr(validate_toolkit, "validate_behavior_result", None)
     assert callable(validator), (
@@ -160,31 +185,98 @@ def proposal() -> dict[str, Any]:
 
 
 def test_behavior_result_rejects_a_tracked_dirty_candidate(tmp_path: Path) -> None:
-    isolated = tmp_path / "candidate"
-    for relative in (".codex-plugin", "catalog", "evals", "manifest"):
-        source = ROOT / relative
-        destination = isolated / relative
-        shutil.copytree(source, destination)
-    subprocess.run(["git", "init", "-q", str(isolated)], check=True)
-    subprocess.run(["git", "-C", str(isolated), "add", "."], check=True)
-    subprocess.run(
-        [
-            "git",
-            "-C",
-            str(isolated),
-            "-c",
-            "user.name=Toolkit Test",
-            "-c",
-            "user.email=toolkit-test@example.invalid",
-            "commit",
-            "-qm",
-            "candidate",
-        ],
-        check=True,
-    )
+    isolated = initialized_candidate_copy(tmp_path)
     result = canonical_behavior_result(isolated)
     catalog_path = isolated / "catalog" / "skills.json"
     catalog_path.write_bytes(catalog_path.read_bytes() + b"\n")
+
+    errors = validate_toolkit.validate_behavior_result(isolated, result)
+
+    assert "EVAL_RESULT_CANDIDATE_UNVERIFIABLE" in {error["code"] for error in errors}
+
+
+def test_behavior_result_rejects_an_untracked_public_candidate(tmp_path: Path) -> None:
+    isolated = initialized_candidate_copy(tmp_path)
+    result = canonical_behavior_result(isolated)
+    skill = isolated / "skills" / "untracked-public-skill"
+    skill.mkdir(parents=True)
+    (skill / "SKILL.md").write_text(
+        "---\nname: untracked-public-skill\ndescription: Untracked public source.\n---\n",
+        encoding="utf-8",
+    )
+
+    errors = validate_toolkit.validate_behavior_result(isolated, result)
+
+    assert "EVAL_RESULT_CANDIDATE_UNVERIFIABLE" in {error["code"] for error in errors}
+
+
+def test_behavior_result_allows_gitignored_local_cache(tmp_path: Path) -> None:
+    isolated = initialized_candidate_copy(tmp_path)
+    result = canonical_behavior_result(isolated)
+    cache = isolated / ".pytest_cache" / "v" / "cache" / "nodeids"
+    cache.parent.mkdir(parents=True)
+    cache.write_text("[]", encoding="utf-8")
+
+    assert validate_toolkit.validate_behavior_result(isolated, result) == []
+
+
+@pytest.mark.parametrize(
+    ("changed_read", "relative"),
+    [
+        ("commit", None),
+        ("tree", None),
+        ("status", None),
+        ("catalog", "catalog/skills.json"),
+        ("toolkit", "manifest/toolkit.json"),
+        ("plugin", ".codex-plugin/plugin.json"),
+    ],
+)
+def test_candidate_identity_fails_closed_when_readback_changes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    changed_read: str,
+    relative: str | None,
+) -> None:
+    isolated = initialized_candidate_copy(tmp_path)
+    result = canonical_behavior_result(isolated)
+
+    if relative is None:
+        original_git_read = validate_toolkit._git_read
+        call_count = 0
+
+        def unstable_git_read(root: Path, *arguments: str) -> str:
+            nonlocal call_count
+            value = original_git_read(root, *arguments)
+            matches = (
+                changed_read == "commit"
+                and arguments == ("rev-parse", "--verify", "HEAD")
+                or changed_read == "tree"
+                and arguments == ("rev-parse", "--verify", "HEAD^{tree}")
+                or changed_read == "status"
+                and arguments[:2] == ("status", "--porcelain=v1")
+            )
+            if matches:
+                call_count += 1
+                if call_count == 2:
+                    return "0" * 40 if changed_read != "status" else "?? skills/late/SKILL.md"
+            return value
+
+        monkeypatch.setattr(validate_toolkit, "_git_read", unstable_git_read)
+    else:
+        target = (isolated / relative).resolve()
+        original_read_bytes = Path.read_bytes
+        call_count = 0
+
+        def unstable_read_bytes(path: Path) -> bytes:
+            nonlocal call_count
+            data = original_read_bytes(path)
+            if path.resolve() == target:
+                call_count += 1
+                if call_count == 2:
+                    return data + b" "
+            return data
+
+        monkeypatch.setattr(Path, "read_bytes", unstable_read_bytes)
 
     errors = validate_toolkit.validate_behavior_result(isolated, result)
 
@@ -465,6 +557,40 @@ def test_first_principles_gate_has_one_owner_and_all_loop_guards() -> None:
         text = re.sub(r"\s+", " ", (ROOT / relative).read_text(encoding="utf-8"))
         assert "Do we really need this to make things happen?" in text, relative
         assert "Is there a simpler and more direct way?" in text, relative
+        assert "engineering-specification" in text, relative
+
+
+def test_public_paths_do_not_encode_private_wave_round_or_phase_shorthand() -> None:
+    public_paths = [row["path"] for row in validate_toolkit.build_public_lock(ROOT)["files"]]
+    private_stage = re.compile(r"(?:^|[/_.-])(?:wave|round|phase)[-_]?\d+", re.IGNORECASE)
+
+    assert [path for path in public_paths if private_stage.search(path)] == []
+
+
+def test_release_status_and_changelog_heading_are_consistent() -> None:
+    statuses = {
+        load_json(ROOT / "manifest" / "toolkit.json")["status"],
+        load_json(ROOT / "catalog" / "skills.json")["status"],
+        load_json(ROOT / "evals" / "cases" / "acceptance.json")["status"],
+    }
+    assert len(statuses) == 1
+    status = statuses.pop()
+    changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    version = load_json(ROOT / "manifest" / "toolkit.json")["toolkitVersion"]
+
+    if status == "release-candidate":
+        assert "## [Unreleased]" in changelog
+        assert (
+            re.search(
+                rf"^## \[{re.escape(version)}\] - \d{{4}}-\d{{2}}-\d{{2}}$", changelog, re.MULTILINE
+            )
+            is None
+        )
+    else:
+        assert status == "released"
+        assert re.search(
+            rf"^## \[{re.escape(version)}\] - \d{{4}}-\d{{2}}-\d{{2}}$", changelog, re.MULTILINE
+        )
 
 
 def test_mechanism_gate_remains_conditional_not_global() -> None:

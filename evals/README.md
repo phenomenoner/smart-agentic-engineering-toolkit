@@ -8,6 +8,8 @@ The mechanism-necessity cases observe whether output asks `Do we really need thi
 happen?` and `Is there a simpler and more direct way?`, separates outcome from proxy, compares
 simpler alternatives, and preserves the direct path. They cannot prove a model's private reasoning;
 fresh-task behavior evidence and independent source review remain separate claims.
+`engineering-specification` is the detailed canonical owner; the eval corpus observes selection and
+output behavior without copying the design procedure into every case.
 
 For a release evaluation:
 
@@ -20,10 +22,11 @@ For a release evaluation:
 5. Run authority-bearing cases such as `PR-02` only when the evaluation task separately authorizes
    that effect. Otherwise record `NOT_RUN`; never simulate the write and call it a pass.
 6. Validate local shape against `schemas/eval-result.schema.json`, then run
-   `scripts.validate_toolkit.validate_behavior_result(root, result)` for exact tracked-clean Git
-   candidate identity, corpus membership, expected selections, PASS evidence, prohibited-effect,
-   and summary closure. Non-Git archive evaluation is unsupported by schema version 1 and fails
-   closed. Keep raw private transcripts out of the public repository; publish a redacted,
+   `scripts.validate_toolkit.validate_behavior_result(root, result)` for exact Git-clean candidate
+   identity, including rejection of non-ignored untracked public bytes, corpus membership, expected
+   selections, PASS evidence, prohibited-effect, and summary closure. Non-Git archive evaluation is
+   unsupported by schema version 1 and fails closed. Keep raw private transcripts out of the public
+   repository; publish a redacted,
    hash-bound result when appropriate.
 
 The main agent owns synthesis. A model reporting that it used a skill is useful execution evidence,

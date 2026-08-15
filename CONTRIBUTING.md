@@ -17,7 +17,8 @@ an installed skill directory or plugin cache and then treat that copy as source.
    direct way?` Record the outcome/minimum invariant; deletion, manual, embedding/ephemeral, and
    existing-platform alternatives; why the existing canonical owner is insufficient; and an
    auditable complexity, authority, recovery, and failure-state budget. Prefer updating an existing
-   owner; a new catalog/profile row needs evidence that it cannot express the behavior.
+   owner; `engineering-specification` owns the detailed decision, and a new catalog/profile row
+   needs evidence that it cannot express the behavior.
 5. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
    behavior and passes the proposed behavior.
 6. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog

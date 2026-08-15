@@ -16,6 +16,8 @@
 - Observable outcome/minimum invariant:
 - Direct experiment or existing skill/discipline considered:
 - Selected mechanism/method and complexity, authority, recovery, and failure-state cost:
+- Detailed mechanism owner: `engineering-specification`; this synthesis retains only the bounded
+  method-selection challenge:
 
 ## Control and seam map
 

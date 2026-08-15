@@ -11,6 +11,8 @@ explicit `N/A` rationale.
 - Alternatives considered: deletion / manual / embedding or ephemeral state / existing platform
   primitive / retained new mechanism:
 - Selected mechanism and falsifiable reason:
+- Detailed owner: `engineering-specification` (this template carries its decision; it does not own
+  the full mechanism-design procedure):
 - Added durable states/transitions, authority owners, recovery obligations, and failure states:
 - Residual failure and non-claims:
 

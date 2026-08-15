@@ -41,13 +41,13 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 1385,
-      "sha256": "64d29eb2de47ed80bb98518da5eae79ce067fbb3de03a3055a18a83ea4f30463"
+      "length": 1757,
+      "sha256": "9126cd52f7e458a711fb1a1a8be71eb1e4400abddef04b9f2aa188c15d241f96"
     },
     {
       "path": "CONTRIBUTING.md",
-      "length": 3075,
-      "sha256": "c2ba3c045c7d910691d8e23b2579b136a0ae25cf6dcbc19838701b040c695900"
+      "length": 3138,
+      "sha256": "daafb8613ae85c98b29dcc50435d0ecfad6c50c40cf3660da72a92ed5b16db27"
     },
     {
       "path": "dependencies/adaptive-agent-runtime.json",
@@ -76,8 +76,8 @@
     },
     {
       "path": "docs/contribution-protocol.md",
-      "length": 1825,
-      "sha256": "7593ef7ea41663e06683e98960da35178f8689e84b263c1090dae35a312de9f1"
+      "length": 1910,
+      "sha256": "549103dbf05e304f620063fd9032e98bc533b52b63d7ce062b84c3651c06f7e6"
     },
     {
       "path": "docs/influences-and-provenance.md",
@@ -86,8 +86,8 @@
     },
     {
       "path": "docs/installation.md",
-      "length": 3380,
-      "sha256": "2414076fc43fb30471067940e532946fb75c53b7c995fa963a524db36145efa1"
+      "length": 3528,
+      "sha256": "47250c61cdd433829ef6f9365034fd5d25c986e7468c6534730cd3190f67ee1e"
     },
     {
       "path": "docs/integrations.md",
@@ -101,8 +101,8 @@
     },
     {
       "path": "docs/product-specification.md",
-      "length": 3717,
-      "sha256": "9dae86a6b800ee59baae6c29f53349d0939102cdb285389168e770c9f3bedb75"
+      "length": 3874,
+      "sha256": "cf73740f05861d7b543f6567e1cbb38d2b6c9d4ab3d9111bea1e85e99236b6d0"
     },
     {
       "path": "docs/taxonomy.md",
@@ -112,12 +112,12 @@
     {
       "path": "evals/cases/acceptance.json",
       "length": 25159,
-      "sha256": "61022cd8ea8409e8042fd7bf286ca79fcaffebbaa15e853fa809db39e8220515"
+      "sha256": "ae4f9c61acc6c7914b1419c82d12540d11ec8993a4e637a5dee8e00c62619b14"
     },
     {
       "path": "evals/README.md",
-      "length": 1974,
-      "sha256": "dabe7e5c0ab58c8344d10bee0cf3b4e6a4a4f04548aeb6df8ae3033b1cd5502c"
+      "length": 2198,
+      "sha256": "ead2d05fc5e6c9d9116e914c3717b8603040cef3bb77cb4a3b55449c5533910b"
     },
     {
       "path": "LICENSE",
@@ -231,13 +231,13 @@
     },
     {
       "path": "scripts/install_toolkit.py",
-      "length": 46525,
-      "sha256": "0c40220b226e747c74b4ccfa856777dc8e7cd25580f9a2a57ac7592bfeb61940"
+      "length": 46696,
+      "sha256": "934a78db1b96ac2ff6fca4da319aac9cd4860e8906cef7a52da6981914c00d3e"
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 33295,
-      "sha256": "934569247cf5f993d7c7f2feb8ff85c7fe0b0eba7a16e7137f60ffe853989b0d"
+      "length": 33286,
+      "sha256": "ca67a7113abbb5da73ebd73c7e5bd9aa3eb2e3edffd05d71427cd6cc0bff3681"
     },
     {
       "path": "SECURITY.md",
@@ -261,8 +261,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/references/protocol.md",
-      "length": 11937,
-      "sha256": "a2fc52decd88fb90b5a3896f39f2d1bec9c0078042fa987b8e1b3e3709c75b90"
+      "length": 12152,
+      "sha256": "df491e2d4322cc8ab6d2e3c1be6c36798a7b73f14a398e8fcaa2881c4ce57b1c"
     },
     {
       "path": "skills/batch-complete-independent-review/references/review-report.schema.json",
@@ -286,8 +286,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 16630,
-      "sha256": "ec04693fd51b97eef3457ba153b6e994132b221dbc4feb4961c4aa3fc915bed3"
+      "length": 16801,
+      "sha256": "6ad01cf16ed89590f193f2853f32d7f624109c9798f8e4c9a02f89d2e279ec51"
     },
     {
       "path": "skills/batch-complete-independent-review/tests/test_review_gate.py",
@@ -316,8 +316,8 @@
     },
     {
       "path": "skills/canon-engineering-disciplines/SKILL.md",
-      "length": 7757,
-      "sha256": "d54af187f99223cf0e0429b726877d0c1b7492407cf305b25651031cbac5e5dd"
+      "length": 7914,
+      "sha256": "a9f053beed2f2085a8c4e4f07bed22c52500afca7477b6506e9ecf63c36c8f67"
     },
     {
       "path": "skills/canon-engineering-disciplines/templates/claim-evidence-defeater.md",
@@ -326,8 +326,8 @@
     },
     {
       "path": "skills/canon-engineering-disciplines/templates/discipline-synthesis.md",
-      "length": 1221,
-      "sha256": "bcbbf41d620872fdfdf1962eaf5b69b0d7e19d8c6457f0257a492cadaf148e00"
+      "length": 1348,
+      "sha256": "10a8eebcdc917272432ba22ace04aedc12ebe4d8583edb60666aef59084c4941"
     },
     {
       "path": "skills/claude-independent-review/agents/openai.yaml",
@@ -341,8 +341,8 @@
     },
     {
       "path": "skills/claude-independent-review/SKILL.md",
-      "length": 9187,
-      "sha256": "0e2e58b7915711906be79fb67bf073af8b2a6a9e3894c45c45b5638a82e58d08"
+      "length": 9266,
+      "sha256": "b6b1b4fde6caf6f85820203845a09a90687f92e93aa532b8ac4282c9c73b1b6a"
     },
     {
       "path": "skills/codegraph-first-navigation/agents/openai.yaml",
@@ -366,8 +366,8 @@
     },
     {
       "path": "skills/codex-app-mcp-update/SKILL.md",
-      "length": 11053,
-      "sha256": "8a1e03a167c9101e2f07db14641cad814ba601cddbca7ae987bf879ea66a2026"
+      "length": 11229,
+      "sha256": "84cec03d60ceeef39494d3413eed8e9cfc1da2a7b5b9fd14575999140cc32272"
     },
     {
       "path": "skills/codex-cli-luna-worker/agents/openai.yaml",
@@ -386,8 +386,8 @@
     },
     {
       "path": "skills/codex-cli-luna-worker/SKILL.md",
-      "length": 10141,
-      "sha256": "6f6bce2bd72ff9c10e36c270acca6166ffab6c45f958aab314822a9769717a7c"
+      "length": 10288,
+      "sha256": "d73be0c6078b1718d4f0849b2e6f43ea986872da8b87144a376f17865f522356"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
@@ -406,8 +406,8 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
-      "length": 9037,
-      "sha256": "4bd598aabc9326d2a170af08be7816b4082af11d3e4954591dd6b8a87140d883"
+      "length": 9222,
+      "sha256": "df050f966ffa036153d44d9171e76bf0d3603561908ce5c3a2bebdf33225412f"
     },
     {
       "path": "skills/engineering-debugging/agents/openai.yaml",
@@ -446,8 +446,8 @@
     },
     {
       "path": "skills/engineering-wal/SKILL.md",
-      "length": 5455,
-      "sha256": "fe8e790ff561317a1ce159378a1f50fb527fb59b8a51b41951c4e7a480325f49"
+      "length": 5586,
+      "sha256": "729b7763a2c93eb45051a8a50663f2b16412c8346c43ae1da63063ab79b956b2"
     },
     {
       "path": "skills/evolve-engineering-toolkit/agents/openai.yaml",
@@ -456,8 +456,8 @@
     },
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
-      "length": 5426,
-      "sha256": "b03eddd30c3a7818cac77497121f0619e5e42d6052ba4cca5faefb09ad97552d"
+      "length": 5615,
+      "sha256": "ced5ba73c19b5b71fefcb8587a82980821eafee7d6f85c38581cdcc7201c268e"
     },
     {
       "path": "skills/incident-to-regression/agents/openai.yaml",
@@ -476,8 +476,8 @@
     },
     {
       "path": "skills/incident-to-regression/SKILL.md",
-      "length": 8504,
-      "sha256": "a41b244a6c18e548c94981532edc3e7546c69feb0a1bcc07fed2a9d3cfbca44f"
+      "length": 8667,
+      "sha256": "92338efe7f3cbc3fccd8ca1aa5d1ef1e97576a452671f1d78eab6ead55c71b4d"
     },
     {
       "path": "skills/long-run-supervisor/agents/openai.yaml",
@@ -496,8 +496,8 @@
     },
     {
       "path": "skills/long-run-supervisor/SKILL.md",
-      "length": 25343,
-      "sha256": "21be5ca17a6bdd1381de208bdf6e3c514e5afa1dc71dc6dfb61e2ebe05e72dbd"
+      "length": 25522,
+      "sha256": "97949e672b54ab6edd0ce31e5ef5b3bb62115e8521b144cca9470f3f880b255e"
     },
     {
       "path": "skills/long-run-supervisor/tests/atomic-write-regression.ps1",
@@ -546,8 +546,8 @@
     },
     {
       "path": "skills/specify-temporal-ownership/references/contract-template.md",
-      "length": 5361,
-      "sha256": "2fadada5e3f1c987bf6f328ebe5f5467680057f5cc02c2816295dc450cc0ca34"
+      "length": 5500,
+      "sha256": "ebbc323ba2e77732c411c0036536c0232ff6de04c95e1157df86fb66ea51a53d"
     },
     {
       "path": "skills/specify-temporal-ownership/references/counterexample-patterns.md",
@@ -565,29 +565,29 @@
       "sha256": "c8d8aeb8f288484d04dee03195811bdb7a23fab5558f93b88f46cc1afebd08d4"
     },
     {
+      "path": "tests/test_candidate_receipt_contracts.py",
+      "length": 18214,
+      "sha256": "3b948e9280578d78088ed24f60d11fbe624ed8c38604b292c8b5a87243b3fa55"
+    },
+    {
       "path": "tests/test_install_toolkit.py",
-      "length": 16193,
-      "sha256": "80a92891b796ce491150d350f6c83709b03a9304c820ec57087308ead19735ae"
+      "length": 17344,
+      "sha256": "266c8f9636bb0745b07f1bbf4b2f1ef6f6e46ef8596f388daf1e3dd315445cc9"
     },
     {
       "path": "tests/test_schemas.py",
-      "length": 4972,
-      "sha256": "7d9f3139f9cb2a0803981024111695f50a6f33db74a06db399d2fa24e8a036b2"
+      "length": 6476,
+      "sha256": "b78bc3362cb575e55e22f479e0cc5acb711cd723e7683d4b70651f45b46465ce"
     },
     {
       "path": "tests/test_source_gate_blockers.py",
-      "length": 17450,
-      "sha256": "49ac0a6459899372825f4d35f83265a8db1f40880912be6a26ad427133858bcc"
+      "length": 22124,
+      "sha256": "e1de2a094c38db8d9ae3a3b3ef188fd91b0fed3766b2e663870122fa8eedc1bc"
     },
     {
       "path": "tests/test_validate_toolkit.py",
       "length": 6938,
       "sha256": "05dd43cacaea9d4f7149e4a8ff9661ebc244074b5fcddfe698229ee178fe882b"
-    },
-    {
-      "path": "tests/test_wave2_source_gate.py",
-      "length": 18214,
-      "sha256": "3b948e9280578d78088ed24f60d11fbe624ed8c38604b292c8b5a87243b3fa55"
     },
     {
       "path": "workflows/specify-implement-review-drill.md",

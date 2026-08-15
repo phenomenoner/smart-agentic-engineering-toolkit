@@ -84,7 +84,7 @@ def _git_read(root: Path, *arguments: str) -> str:
 
 
 def _candidate_identity(root: Path) -> tuple[dict[str, str | None], bool]:
-    """Read a bounded, self-consistent identity for one tracked Git candidate."""
+    """Read a bounded, self-consistent identity for one clean Git candidate."""
 
     root = root.resolve()
     identity: dict[str, str | None] = {
@@ -98,7 +98,7 @@ def _candidate_identity(root: Path) -> tuple[dict[str, str | None], bool]:
         top_level = Path(_git_read(root, "rev-parse", "--show-toplevel")).resolve()
         first_commit = _git_read(root, "rev-parse", "--verify", "HEAD").lower()
         first_tree = _git_read(root, "rev-parse", "--verify", "HEAD^{tree}").lower()
-        first_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=no")
+        first_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=all")
 
         catalog_path = root / "catalog" / "skills.json"
         toolkit_path = root / "manifest" / "toolkit.json"
@@ -112,7 +112,7 @@ def _candidate_identity(root: Path) -> tuple[dict[str, str | None], bool]:
         second_plugin = plugin_path.read_bytes()
         second_commit = _git_read(root, "rev-parse", "--verify", "HEAD").lower()
         second_tree = _git_read(root, "rev-parse", "--verify", "HEAD^{tree}").lower()
-        second_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=no")
+        second_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=all")
 
         toolkit = json.loads(first_toolkit.decode("utf-8"))
         plugin = json.loads(first_plugin.decode("utf-8"))
@@ -204,7 +204,7 @@ def validate_behavior_result(root: Path, result: object) -> list[dict[str, str]]
             errors,
             "EVAL_RESULT_CANDIDATE_UNVERIFIABLE",
             Path("candidate"),
-            "root does not identify one stable, tracked-clean Git candidate",
+            "root does not identify one stable Git-clean candidate",
         )
     if isinstance(candidate, dict):
         comparisons = (

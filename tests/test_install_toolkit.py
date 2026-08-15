@@ -56,6 +56,32 @@ def test_clean_install_then_exact_plan(tmp_path: Path) -> None:
     assert plan_map(installer) == {"alpha-skill": "EXACT"}
 
 
+@pytest.mark.parametrize("upgrade", [False, True], ids=["add", "upgrade"])
+def test_foreign_post_commit_receipt_fences_target_compensation(
+    tmp_path: Path, upgrade: bool
+) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "installed"
+    write_source(source, {"alpha-skill": "v1"})
+    if upgrade:
+        Installer(source, target).install("core")
+        write_source(source, {"alpha-skill": "v2"}, version="0.1.1")
+    receipt_path = target / ".smart-agentic-engineering-toolkit-install.json"
+    foreign_receipt = b'{"foreign":true}\n'
+    published_skill: list[bytes] = []
+
+    def replace_receipt_only(phase: str, _name: str | None, _installer: Installer) -> None:
+        if phase == "after_receipt_commit":
+            published_skill.append((target / "alpha-skill" / "SKILL.md").read_bytes())
+            receipt_path.write_bytes(foreign_receipt)
+
+    with pytest.raises(InstallContainmentError):
+        Installer(source, target, fault_hook=replace_receipt_only).install("core")
+
+    assert receipt_path.read_bytes() == foreign_receipt
+    assert (target / "alpha-skill" / "SKILL.md").read_bytes() == published_skill[0]
+
+
 def test_semantically_invalid_existing_receipt_is_rejected_before_planning(
     tmp_path: Path,
 ) -> None:

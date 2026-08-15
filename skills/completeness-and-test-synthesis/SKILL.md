@@ -34,6 +34,8 @@ separate evidence outcome from mechanism proxy, and prefer the smallest direct f
 lifecycle/recovery machinery only when the claim requires it, after comparing deletion, manual,
 embedded/ephemeral, and existing-platform options and their complexity, authority, recovery, and
 failure-state cost. This skill judges evidence adequacy; it does not approve a production design.
+Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+this evidence skill keeps only the bounded challenge and verification-altitude decision.
 
 ## Choose the lowest falsifying altitude
 

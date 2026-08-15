@@ -176,6 +176,8 @@ this to make things happen?` and `Is there a simpler and more direct way?` Name 
 event/receipt, compare a normal turn or direct blocking call, and count added durable state,
 authority, wake, recovery, and failure-state obligations. Use this short strategy guard only when a
 new orchestration mechanism is proposed; preserve the no-polling and no-post-final-wake boundaries.
+Route unresolved detailed mechanism design to `engineering-specification`, the canonical owner;
+this supervisor owns only execution and observation of an already-chosen strategy.
 
 Use a mother watcher only when the main agent has no useful independent work. Do not arm it while analysis, repairs, review preparation, or other progress can continue. Bind already-started tasks into one immutable generation:
 

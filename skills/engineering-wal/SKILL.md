@@ -89,6 +89,8 @@ this to make things happen?` and `Is there a simpler and more direct way?`, plus
 deletion, manual, embedding/ephemeral, platform-primitive, or retained-mechanism outcome and its
 complexity, authority, recovery, and failure-state cost. Point to the canonical specification; the
 WAL is not a second design gate and remains optional for short work.
+The detailed canonical owner is `engineering-specification`; this continuity surface only records
+its decision and later evidence.
 
 ## Update boundaries
 

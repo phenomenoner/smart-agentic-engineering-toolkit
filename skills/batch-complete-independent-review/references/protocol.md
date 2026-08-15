@@ -46,6 +46,9 @@ When the frozen candidate materially adds a mechanism, carry one conditional inv
 asks `Do we really need this to make things happen?` and `Is there a simpler and more direct way?`
 and challenges its complexity, authority, recovery, and failure-state cost against simpler
 alternatives. Use the existing contract/invariant cell shape; do not add a mandatory schema field.
+If the challenge requires redesign, route it to `engineering-specification`, the detailed canonical
+owner; the reviewer records the violated invariant and repair properties rather than copying the
+design procedure.
 
 - contract or invariant;
 - public/operator entrypoint and internal caller;
