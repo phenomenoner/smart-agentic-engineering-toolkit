@@ -231,13 +231,13 @@
     },
     {
       "path": "scripts/install_toolkit.py",
-      "length": 24930,
-      "sha256": "7b02199d98a11d9661332a65b8aeda87b009a6bf3444546d91f7b6bf47767ed8"
+      "length": 26069,
+      "sha256": "5ce7556d57117c79a0d01eb07ad28e2b279fe2720e224624364a546418d8ee28"
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 21817,
-      "sha256": "ef01a2dce0f1c870a2af322e7dc45368cf3f1e971490873bab55ab41881ef1d0"
+      "length": 22034,
+      "sha256": "3e4d293d9e4c3430ee76bb165c6135c6fc034dfe2b25f6c76fdffd085344c322"
     },
     {
       "path": "SECURITY.md",
@@ -566,8 +566,8 @@
     },
     {
       "path": "tests/test_install_toolkit.py",
-      "length": 13914,
-      "sha256": "89548ac2f775092d6074e8a1f5cc5599d8a1b7e7a48e891c2aa46476a701b3ca"
+      "length": 15546,
+      "sha256": "1567976f55dd8558b010eebb69df2903f280ed0b987b08b5c56bc1b603b33fb6"
     },
     {
       "path": "tests/test_schemas.py",
@@ -576,8 +576,8 @@
     },
     {
       "path": "tests/test_validate_toolkit.py",
-      "length": 6660,
-      "sha256": "c7d8505e78b6409d910efeb1b4ea95e0cff0bfa19f79cbe153da377363b40b27"
+      "length": 6938,
+      "sha256": "05dd43cacaea9d4f7149e4a8ff9661ebc244074b5fcddfe698229ee178fe882b"
     },
     {
       "path": "workflows/specify-implement-review-drill.md",
