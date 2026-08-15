@@ -111,8 +111,8 @@
     },
     {
       "path": "evals/cases/acceptance.json",
-      "length": 23697,
-      "sha256": "bb0c62d2e6fb38af240872b24e487aeda48a32ca9fe14ecd5ba72ba94b11ff46"
+      "length": 23808,
+      "sha256": "6919a8d87ad1614b513a2275662e5aa565ebcc8ae73fca7c76711d6668fa028d"
     },
     {
       "path": "evals/README.md",
