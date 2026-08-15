@@ -31,7 +31,8 @@
       "expectedNotSelected": [
         "engineering-specification",
         "engineering-wal",
-        "batch-complete-independent-review"
+        "batch-complete-independent-review",
+        "long-run-supervisor"
       ],
       "observablePass": "A direct bounded path remains available without ceremony."
     },
@@ -295,14 +296,14 @@
       "observablePass": "Exactly one start and deterministic wait; terminal-only result."
     },
     {
-      "id": "NON-LONGRUN-01",
-      "class": "nonactivation",
+      "id": "ACT-LONGRUN-NATIVE-01",
+      "class": "activation",
       "promptOrCondition": "Wait for an already dispatched native subagent.",
-      "expectedSelected": [],
-      "expectedNotSelected": [
+      "expectedSelected": [
         "long-run-supervisor"
       ],
-      "observablePass": "Uses native collaboration fan-in, not a PowerShell wrapper."
+      "expectedNotSelected": [],
+      "observablePass": "Applies the work-conserving wait discipline through native collaboration fan-in and does not wrap the subagent in a PowerShell process."
     },
     {
       "id": "ACT-LUNA-01",
