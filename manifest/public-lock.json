@@ -570,6 +570,11 @@
       "sha256": "3b948e9280578d78088ed24f60d11fbe624ed8c38604b292c8b5a87243b3fa55"
     },
     {
+      "path": "tests/test_first_principles_eval_contracts.py",
+      "length": 2108,
+      "sha256": "8c61f88b027b1a6d5aad8ce9a1268e80d694620cb3486cd8b75110081226037b"
+    },
+    {
       "path": "tests/test_install_toolkit.py",
       "length": 17344,
       "sha256": "266c8f9636bb0745b07f1bbf4b2f1ef6f6e46ef8596f388daf1e3dd315445cc9"
