@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "toolkitVersion": "0.1.0",
-  "status": "FROZEN_FOR_IMPLEMENTATION",
+  "status": "release-candidate",
   "ownership": "toolkit-owned",
   "skills": [
     {

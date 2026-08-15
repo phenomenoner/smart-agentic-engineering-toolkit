@@ -29,7 +29,7 @@ default:
 .\scripts\install.ps1 -TargetRoot <skills-directory> -Profile core -Apply
 ```
 
-On Linux or macOS hosts:
+On Linux hosts:
 
 ```sh
 ./scripts/install.sh <skills-directory> core

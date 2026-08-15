@@ -14,8 +14,10 @@ For a release evaluation:
 4. Treat `NOT_RUN` as an open gap. A static description match is not a behavior pass.
 5. Run authority-bearing cases such as `PR-02` only when the evaluation task separately authorizes
    that effect. Otherwise record `NOT_RUN`; never simulate the write and call it a pass.
-6. Validate the result against `schemas/eval-result.schema.json`. Keep raw private transcripts out
-   of the public repository; publish a redacted, hash-bound result when appropriate.
+6. Validate local shape against `schemas/eval-result.schema.json`, then run
+   `scripts.validate_toolkit.validate_behavior_result(root, result)` for exact corpus membership,
+   expected selections, PASS evidence, prohibited-effect, and summary closure. Keep raw private
+   transcripts out of the public repository; publish a redacted, hash-bound result when appropriate.
 
 The main agent owns synthesis. A model reporting that it used a skill is useful execution evidence,
 not provider-signed attestation.

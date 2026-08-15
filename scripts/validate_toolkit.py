@@ -72,6 +72,193 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def validate_behavior_result(root: Path, result: object) -> list[dict[str, str]]:
+    """Validate behavior-result semantics against the frozen acceptance corpus.
+
+    ``eval-result.schema.json`` owns local JSON shape.  This function owns the
+    cross-document invariants that the schema cannot express: exact corpus
+    identity, exact case membership, expected skill selections, and the
+    conditions under which a result may be promoted to ``PASS``.
+
+    The returned records deliberately use stable error codes so callers can
+    turn a failed evaluation into a deterministic regression instead of
+    interpreting prose or a schema-only pass.
+    """
+
+    errors: list[dict[str, str]] = []
+    corpus_path = Path(root).resolve() / "evals" / "cases" / "acceptance.json"
+    try:
+        corpus = load_json(corpus_path)
+        corpus_bytes = corpus_path.read_bytes()
+    except (OSError, json.JSONDecodeError) as exc:
+        _error(
+            errors,
+            "EVAL_RESULT_CORPUS_HASH",
+            corpus_path,
+            f"cannot load the frozen acceptance corpus: {exc}",
+        )
+        return errors
+
+    if not isinstance(corpus, dict) or not isinstance(corpus.get("cases"), list):
+        _error(
+            errors,
+            "EVAL_RESULT_CASE_SET",
+            corpus_path,
+            "the frozen acceptance corpus does not contain a case list",
+        )
+        return errors
+
+    expected_hash = hashlib.sha256(corpus_bytes).hexdigest()
+    if not isinstance(result, dict):
+        _error(
+            errors,
+            "EVAL_RESULT_VERDICT",
+            Path("result"),
+            "behavior result must be an object",
+        )
+        return errors
+    if result.get("caseCorpusSha256") != expected_hash:
+        _error(
+            errors,
+            "EVAL_RESULT_CORPUS_HASH",
+            Path("caseCorpusSha256"),
+            "result is not bound to the exact frozen acceptance corpus bytes",
+        )
+
+    canonical: dict[str, dict[str, Any]] = {}
+    for case in corpus["cases"]:
+        if isinstance(case, dict) and isinstance(case.get("id"), str):
+            canonical[case["id"]] = case
+
+    rows = result.get("results")
+    if not isinstance(rows, list):
+        _error(
+            errors,
+            "EVAL_RESULT_CASE_SET",
+            Path("results"),
+            "result must contain a list of case results",
+        )
+        rows = []
+
+    seen: set[str] = set()
+    duplicate_ids: set[str] = set()
+    actual_ids: set[str] = set()
+    for index, row in enumerate(rows):
+        case_id = row.get("id") if isinstance(row, dict) else None
+        if not isinstance(case_id, str):
+            _error(
+                errors,
+                "EVAL_RESULT_CASE_SET",
+                Path(f"results[{index}].id"),
+                "each result must identify a canonical case",
+            )
+            continue
+        actual_ids.add(case_id)
+        if case_id in seen:
+            duplicate_ids.add(case_id)
+        seen.add(case_id)
+    for case_id in sorted(duplicate_ids):
+        _error(
+            errors,
+            "EVAL_RESULT_CASE_DUPLICATE",
+            Path("results"),
+            f"case {case_id!r} appears more than once",
+        )
+    expected_ids = set(canonical)
+    if actual_ids != expected_ids:
+        missing = sorted(expected_ids - actual_ids)
+        unknown = sorted(actual_ids - expected_ids)
+        _error(
+            errors,
+            "EVAL_RESULT_CASE_SET",
+            Path("results"),
+            f"case set differs from corpus; missing={missing}, unknown={unknown}",
+        )
+
+    statuses: list[str] = []
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            continue
+        case_id = row.get("id")
+        status = row.get("status")
+        if isinstance(status, str):
+            statuses.append(status)
+        case = canonical.get(case_id) if isinstance(case_id, str) else None
+        if case is None:
+            continue
+
+        selected = row.get("selected")
+        not_selected = row.get("notSelected")
+        if not isinstance(selected, list) or not isinstance(not_selected, list):
+            continue
+        expected_selected = case.get("expectedSelected", [])
+        expected_not_selected = case.get("expectedNotSelected", [])
+        if set(selected) != set(expected_selected) or set(not_selected) != set(
+            expected_not_selected
+        ):
+            _error(
+                errors,
+                "EVAL_RESULT_SELECTION",
+                Path(f"results[{index}]"),
+                f"case {case_id!r} selections do not equal the corpus expectations",
+            )
+
+        if status == "PASS":
+            if row.get("prohibitedEffectsObserved") is True:
+                _error(
+                    errors,
+                    "EVAL_RESULT_PASS_PROHIBITED_EFFECT",
+                    Path(f"results[{index}].prohibitedEffectsObserved"),
+                    "a PASS row cannot report a prohibited effect",
+                )
+            evidence = row.get("evidence")
+            valid_evidence = (
+                isinstance(evidence, dict)
+                and evidence.get("kind") in {"REDACTED_TRANSCRIPT", "RECEIPT"}
+                and isinstance(evidence.get("pointer"), str)
+                and bool(evidence["pointer"].strip())
+                and isinstance(evidence.get("sha256"), str)
+                and re.fullmatch(r"[0-9a-f]{64}", evidence["sha256"]) is not None
+            )
+            if not valid_evidence:
+                _error(
+                    errors,
+                    "EVAL_RESULT_PASS_EVIDENCE",
+                    Path(f"results[{index}].evidence"),
+                    "a PASS row needs non-NONE evidence with a pointer and 64-hex digest",
+                )
+
+    summary = result.get("summary")
+    if not isinstance(summary, dict):
+        _error(
+            errors,
+            "EVAL_RESULT_SUMMARY",
+            Path("summary"),
+            "result must contain a summary object",
+        )
+        summary = {}
+    expected_counts = {
+        "pass": statuses.count("PASS"),
+        "fail": statuses.count("FAIL"),
+        "notRun": statuses.count("NOT_RUN"),
+    }
+    if any(summary.get(key) != value for key, value in expected_counts.items()):
+        _error(
+            errors,
+            "EVAL_RESULT_SUMMARY",
+            Path("summary"),
+            f"summary counts must equal result rows: {expected_counts}",
+        )
+    if summary.get("verdict") == "PASS" and any(status != "PASS" for status in statuses):
+        _error(
+            errors,
+            "EVAL_RESULT_VERDICT",
+            Path("summary.verdict"),
+            "PASS requires every canonical case result to have status PASS",
+        )
+    return errors
+
+
 def parse_frontmatter(text: str) -> dict[str, Any]:
     """Parse the small YAML subset used by Agent Skills without a runtime dependency."""
 

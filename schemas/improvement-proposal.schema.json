@@ -47,12 +47,35 @@
     "authorization": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["githubWritesAuthorized", "remoteAction"],
+      "required": ["githubWritesAuthorized", "remoteAction", "remoteUrl"],
       "properties": {
         "githubWritesAuthorized": {"type": "boolean"},
         "remoteAction": {"enum": ["NOT_PERFORMED", "DRAFT_PR_OPENED"]},
         "remoteUrl": {"type": ["string", "null"]}
-      }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "githubWritesAuthorized": {"const": false},
+            "remoteAction": {"const": "NOT_PERFORMED"},
+            "remoteUrl": {"type": "null"}
+          }
+        },
+        {
+          "properties": {
+            "githubWritesAuthorized": {"const": true},
+            "remoteAction": {"const": "NOT_PERFORMED"},
+            "remoteUrl": {"type": "null"}
+          }
+        },
+        {
+          "properties": {
+            "githubWritesAuthorized": {"const": true},
+            "remoteAction": {"const": "DRAFT_PR_OPENED"},
+            "remoteUrl": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
     }
   }
 }

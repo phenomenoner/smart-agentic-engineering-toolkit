@@ -347,6 +347,29 @@ class Installer:
             raise ValueError(f"invalid skill name in profile: {path}")
         return document
 
+    def _profile_snapshot(self, profile: str) -> tuple[dict[str, Any], bytes]:
+        """Read and validate one immutable profile generation.
+
+        The profile bytes and parsed document travel with the install
+        transaction.  Receipt construction must not reread the live checkout
+        after staging, because a source/profile edit at that point belongs to
+        a later generation.
+        """
+
+        if NAME_RE.fullmatch(profile) is None:
+            raise ValueError(f"invalid profile name: {profile!r}")
+        path = self.source_root / "profiles" / f"{profile}.json"
+        raw = path.read_bytes()
+        document = json.loads(raw.decode("utf-8"))
+        skills = document.get("skills")
+        if document.get("name") != profile or not isinstance(skills, list) or not skills:
+            raise ValueError(f"invalid profile: {path}")
+        if len(skills) != len(set(skills)) or any(
+            not isinstance(name, str) or NAME_RE.fullmatch(name) is None for name in skills
+        ):
+            raise ValueError(f"invalid skill name in profile: {path}")
+        return document, raw
+
     def _receipt_snapshot(self) -> tuple[dict[str, Any], bytes | None]:
         if not _path_present(self.receipt_path):
             return {"schemaVersion": 1, "skills": {}}, None
@@ -361,8 +384,14 @@ class Installer:
     def _receipt(self) -> dict[str, Any]:
         return self._receipt_snapshot()[0]
 
-    def _plan_from(self, profile: str, receipt: dict[str, Any]) -> list[PlanItem]:
-        document = self._profile(profile)
+    def _plan_from(
+        self,
+        profile: str,
+        receipt: dict[str, Any],
+        *,
+        profile_document: dict[str, Any] | None = None,
+    ) -> list[PlanItem]:
+        document = self._profile(profile) if profile_document is None else profile_document
         rows: list[PlanItem] = []
         for name in document["skills"]:
             source = self.source_root / "skills" / name
@@ -427,7 +456,13 @@ class Installer:
 
     def _install_locked(self, profile: str) -> dict[str, Any]:
         receipt_before, receipt_bytes_before = self._receipt_snapshot()
-        initial_plan = self._plan_from(profile, receipt_before)
+        profile_document, profile_bytes = self._profile_snapshot(profile)
+        source_commit = _git_head(self.source_root)
+        initial_plan = self._plan_from(
+            profile,
+            receipt_before,
+            profile_document=profile_document,
+        )
         conflicts = [
             item
             for item in initial_plan
@@ -463,6 +498,7 @@ class Installer:
             / transaction_id
         )
         published: list[dict[str, Any]] = []
+        staged_generations: dict[str, tuple[str, list[dict[str, Any]]]] = {}
 
         try:
             staging_root.mkdir(parents=True, exist_ok=False)
@@ -475,14 +511,24 @@ class Installer:
                     symlinks=True,
                     ignore=_copytree_ignore(source),
                 )
-                if tree_digest(staged) != item.source_tree_sha256:
+                staged_manifest = tree_files(staged)
+                staged_hash = tree_digest(staged)
+                if staged_hash != item.source_tree_sha256:
                     raise RuntimeError(f"staged bytes drifted for {item.name}")
+                staged_generations[item.name] = (staged_hash, staged_manifest)
             self._fault("after_stage", None)
 
             live_receipt, live_receipt_bytes = self._receipt_snapshot()
             if live_receipt != receipt_before or live_receipt_bytes != receipt_bytes_before:
                 raise InstallConflict("managed receipt changed after the initial plan")
-            live_plan = self._plan_from(profile, live_receipt)
+            live_profile, live_profile_bytes = self._profile_snapshot(profile)
+            if live_profile_bytes != profile_bytes:
+                raise InstallConflict("profile changed after the initial plan")
+            live_plan = self._plan_from(
+                profile,
+                live_receipt,
+                profile_document=live_profile,
+            )
             if self._plan_identity(live_plan) != self._plan_identity(initial_plan):
                 raise InstallConflict("live targets or source changed after the initial plan")
             self._fault("before_publish", None)
@@ -535,29 +581,34 @@ class Installer:
                 self._fault("after_publish", item.name)
 
             self._fault("before_receipt", None)
-            profile_document = self._profile(profile)
             receipt = dict(receipt_before)
             skills = dict(receipt_before.get("skills", {}))
             for item in initial_plan:
-                source = self.source_root / "skills" / item.name
                 target = self.target_root / item.name
                 live_hash = tree_digest(target)
-                if live_hash != item.source_tree_sha256:
+                if item.classification == "EXACT":
+                    # Keep the previously committed row.  It already binds
+                    # the unchanged target to its receipt generation; the
+                    # live source checkout may legitimately advance after the
+                    # plan and must not be reread into this receipt.
+                    continue
+                staged_hash, staged_manifest = staged_generations[item.name]
+                if staged_hash != item.source_tree_sha256 or live_hash != staged_hash:
                     raise InstallContainmentError(
-                        RuntimeError("published target drifted before receipt"),
+                        RuntimeError("published target differs from staged generation"),
                         [f"retained current live bytes for {item.name}"],
                     )
                 skills[item.name] = {
                     "profile": profile,
-                    "sourceTreeSha256": item.source_tree_sha256,
+                    "sourceTreeSha256": staged_hash,
                     "installedTreeSha256": live_hash,
-                    "files": tree_files(source),
+                    "files": staged_manifest,
                 }
             receipt.update(
                 {
                     "schemaVersion": 1,
                     "toolkitVersion": profile_document.get("toolkitVersion"),
-                    "sourceCommit": _git_head(self.source_root),
+                    "sourceCommit": source_commit,
                     "sourceRoot": str(self.source_root),
                     "targetRoot": str(self.target_root),
                     "profile": profile,

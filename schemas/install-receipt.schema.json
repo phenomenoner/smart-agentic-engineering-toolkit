@@ -8,7 +8,7 @@
   "properties": {
     "schemaVersion": {"const": 1},
     "toolkitVersion": {"type": "string", "minLength": 1},
-    "sourceCommit": {"type": ["string", "null"]},
+    "sourceCommit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
     "sourceRoot": {"type": "string", "minLength": 1},
     "targetRoot": {"type": "string", "minLength": 1},
     "profile": {"type": "string", "minLength": 1},

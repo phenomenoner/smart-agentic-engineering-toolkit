@@ -3,7 +3,7 @@
   "toolkitVersion": "0.1.0",
   "repositoryLicense": "MIT",
   "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
-  "canonicalState": "becomes writable canonical source for toolkit-owned skills at the verified 0.1.0 tag",
+  "canonicalState": "the current repository is the canonical writable source for toolkit-owned skills; verified tags identify immutable releases and never create a second writable owner",
   "skills": [
     {
       "name": "engineering-specification",
