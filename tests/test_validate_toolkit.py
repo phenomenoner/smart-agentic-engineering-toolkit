@@ -3,8 +3,9 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
+from scripts import validate_toolkit as validate_toolkit_module
 from scripts.validate_toolkit import build_public_lock, validate_toolkit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -184,6 +185,26 @@ def test_public_lock_excludes_untracked_worktree_files(tmp_path: Path) -> None:
 
     assert "README.md" in locked_paths
     assert "tests/test_local_only.py" not in locked_paths
+
+
+def test_release_file_order_is_platform_independent() -> None:
+    relative_paths = [
+        "catalog/skills.json",
+        "CHANGELOG.md",
+        "README.md",
+        "scripts/install.ps1",
+    ]
+
+    def ordered(root: PurePosixPath | PureWindowsPath) -> list[str]:
+        candidates = [root / relative for relative in relative_paths]
+        return [
+            path.relative_to(root).as_posix()
+            for path in validate_toolkit_module._sort_release_candidates(root, candidates)
+        ]
+
+    expected = sorted(relative_paths)
+    assert ordered(PureWindowsPath("C:/toolkit")) == expected
+    assert ordered(PurePosixPath("/toolkit")) == expected
 
 
 def test_install_receipt_schema_is_not_a_runtime_receipt(tmp_path: Path) -> None:

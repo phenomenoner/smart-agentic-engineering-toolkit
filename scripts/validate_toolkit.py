@@ -606,6 +606,10 @@ def _validate_repository_links(root: Path, errors: list[dict[str, str]]) -> None
                 )
 
 
+def _sort_release_candidates(root: Path, candidates: list[Path]) -> list[Path]:
+    return sorted(candidates, key=lambda path: path.relative_to(root).as_posix())
+
+
 def _release_files(root: Path) -> list[Path]:
     if (root / ".git").exists():
         top_level = Path(_git_read(root, "rev-parse", "--show-toplevel")).resolve()
@@ -618,7 +622,7 @@ def _release_files(root: Path) -> list[Path]:
 
     return [
         path
-        for path in sorted(candidates)
+        for path in _sort_release_candidates(root, candidates)
         if path.is_file()
         and not _is_ignored_relative(path.relative_to(root))
         and path.relative_to(root).as_posix() != "manifest/public-lock.json"
