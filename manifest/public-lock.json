@@ -6,13 +6,13 @@
   "files": [
     {
       "path": ".agents/plugins/marketplace.json",
-      "length": 420,
-      "sha256": "56d66b08acd5f829530c66225167c4fd5428f1f60791c8112b32f8dbf8de43c8"
+      "length": 436,
+      "sha256": "cf17940dc4dd22e78f652c3df998203f728f55a13cb85f9e273da8ec91d57c59"
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "length": 1155,
-      "sha256": "4570089471dc1dec722e4bead9dea97acbcd36948ddb106171da9c6d4a9bd24e"
+      "length": 1162,
+      "sha256": "cb85854361bbc244282905b5e3076319961b15e5938b5331024b4f9c6e748e57"
     },
     {
       "path": ".gitattributes",
@@ -36,8 +36,8 @@
     },
     {
       "path": "catalog/skills.json",
-      "length": 9514,
-      "sha256": "e653943a94d10626db0914139bc0e0c324b1c41f8d3aa1aa600bae13d93568f0"
+      "length": 9506,
+      "sha256": "c09c7eb0fd915d3611fed4063ae32e239c8b8f7964ca95b73e653d2824c58728"
     },
     {
       "path": "CHANGELOG.md",
@@ -86,8 +86,8 @@
     },
     {
       "path": "docs/installation.md",
-      "length": 2425,
-      "sha256": "1d2d6f70865bb9b4a20ce910b5a3f8c1250a99d1f0b1efcab0668ef3418450d3"
+      "length": 2416,
+      "sha256": "7a2537223e4040ac4e8bc2f43eb52d90bebd22b1ebfd0e8ed44f7419a4c9bfcd"
     },
     {
       "path": "docs/integrations.md",
@@ -96,8 +96,8 @@
     },
     {
       "path": "docs/migration.md",
-      "length": 1698,
-      "sha256": "2230d55604e407324b3ce89f00a34b2ffb114f1727a1c165f84ce3d8cffcd917"
+      "length": 1956,
+      "sha256": "a0022d60b4aeb6e7efd3a9f3ee7766a29cc604edf15804d3956223d6ef0cb50d"
     },
     {
       "path": "docs/product-specification.md",
@@ -111,13 +111,13 @@
     },
     {
       "path": "evals/cases/acceptance.json",
-      "length": 23808,
-      "sha256": "6919a8d87ad1614b513a2275662e5aa565ebcc8ae73fca7c76711d6668fa028d"
+      "length": 23800,
+      "sha256": "38d897bedc724aeca64d9ddd382bf1d1a98bec2c833c80ce5812b3708f135a16"
     },
     {
       "path": "evals/README.md",
-      "length": 1287,
-      "sha256": "388197da11699a6234fa33e187db2dca7f0998bf95a9f7ac2bb39eb6b8246da6"
+      "length": 1474,
+      "sha256": "2e6f4f01d6abaf49cf5b0ddc90447b8a1dbd63690060d3ae4e699525665ab438"
     },
     {
       "path": "LICENSE",
@@ -126,8 +126,8 @@
     },
     {
       "path": "manifest/provenance.json",
-      "length": 6502,
-      "sha256": "2509a36d5f038731b44675ee8e0fe8cccf46c0db088fd6ab6acffd974ec15232"
+      "length": 6582,
+      "sha256": "c6f529cb8e7a130f9bb5cecb71d39d2f89c913cfdca8db8e13ecd8ab1e6a490a"
     },
     {
       "path": "manifest/toolkit.json",
@@ -201,13 +201,13 @@
     },
     {
       "path": "schemas/improvement-proposal.schema.json",
-      "length": 1976,
-      "sha256": "c1f0d01949dc4f30aa6af54360b24ce1c25367f3787e0a8ab353503c63cfc97f"
+      "length": 2671,
+      "sha256": "8fea9506f3e33cc6c0511f823eb482791ddca00cd1cc1145f73830a7a1e25642"
     },
     {
       "path": "schemas/install-receipt.schema.json",
-      "length": 1663,
-      "sha256": "ded29cd2555a3b7d509ac771dd454360eaacdede07a2d903434156cc649afba1"
+      "length": 1692,
+      "sha256": "2f50fb252b1be11b25ffaff1720194cc643f188976e8cb99ed94fd44d104b6f0"
     },
     {
       "path": "schemas/profile.schema.json",
@@ -231,13 +231,13 @@
     },
     {
       "path": "scripts/install_toolkit.py",
-      "length": 26069,
-      "sha256": "5ce7556d57117c79a0d01eb07ad28e2b279fe2720e224624364a546418d8ee28"
+      "length": 28437,
+      "sha256": "f8926357fcc5e01fe4159afbf7c2e778dd52afd6b140d34319c3fb52c7214a5f"
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 22034,
-      "sha256": "3e4d293d9e4c3430ee76bb165c6135c6fc034dfe2b25f6c76fdffd085344c322"
+      "length": 28769,
+      "sha256": "d8cd8c3477f224e44cf9cc1e0d94994fa0c92e509d495d11d25696401cddd4e3"
     },
     {
       "path": "SECURITY.md",
@@ -573,6 +573,11 @@
       "path": "tests/test_schemas.py",
       "length": 4662,
       "sha256": "ddf3695c4d835a196a912df15177db35758b9ff4e34845b7f3355b2ca3f9b97f"
+    },
+    {
+      "path": "tests/test_source_gate_blockers.py",
+      "length": 13443,
+      "sha256": "da95167adb8be5c81511b28238be9c9f3ff83371a8a1f003da7adc4d97fc874f"
     },
     {
       "path": "tests/test_validate_toolkit.py",
