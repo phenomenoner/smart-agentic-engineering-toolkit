@@ -39,6 +39,11 @@ The core remains useful with no Canvas, CodeGraph, AAR, collaboration, provider 
 supervisor. Optional integrations fail open to a direct workflow and never grant authority. Product
 operation skills stay in their product repositories.
 
+`engineering-specification` is the one procedural owner for the conditional necessity/complexity
+gate. Other lifecycle and adapter skills ask `Do we really need this to make things happen?` and `Is
+there a simpler and more direct way?` only at their own handoff boundary, then cross-reference that
+owner. This avoids a second checklist, schema, runtime protocol, or canonical source.
+
 ## Release evidence
 
 `manifest/toolkit.json` is the allow-list, `manifest/provenance.json` records origins and

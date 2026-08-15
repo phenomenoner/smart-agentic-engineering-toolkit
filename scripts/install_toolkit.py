@@ -14,12 +14,11 @@ import os
 import re
 import shutil
 import stat
-import subprocess
 import sys
 import uuid
 from collections.abc import Callable
 from contextlib import contextmanager
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 RECEIPT_NAME = ".smart-agentic-engineering-toolkit-install.json"
@@ -37,6 +36,31 @@ IGNORED_TREE_PARTS = {
 IGNORED_TREE_FILE_NAMES = {".coverage", ".DS_Store", "Thumbs.db"}
 IGNORED_TREE_FILE_SUFFIXES = {".pyc", ".pyo"}
 FaultHook = Callable[[str, str | None, "Installer"], None]
+RFC3339_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$")
+RECEIPT_ROOT_FIELDS = {
+    "schemaVersion",
+    "toolkitVersion",
+    "sourceCommit",
+    "sourceRoot",
+    "targetRoot",
+    "profile",
+    "skills",
+    "transaction",
+}
+RECEIPT_SKILL_FIELDS = {
+    "profile",
+    "sourceTreeSha256",
+    "installedTreeSha256",
+    "files",
+}
+RECEIPT_FILE_FIELDS = {"path", "length", "sha256"}
+RECEIPT_TRANSACTION_FIELDS = {
+    "id",
+    "completedAt",
+    "backupDirectory",
+    "previousReceipt",
+    "changed",
+}
 
 
 class InstallConflict(RuntimeError):
@@ -47,7 +71,9 @@ class InstallContainmentError(RuntimeError):
     """Raised when rollback cannot safely restore because live state changed."""
 
     def __init__(self, cause: BaseException, details: list[str]) -> None:
-        super().__init__(f"install failed and rollback was contained: {cause}; {'; '.join(details)}")
+        super().__init__(
+            f"install failed and rollback was contained: {cause}; {'; '.join(details)}"
+        )
         self.cause = cause
         self.details = details
 
@@ -84,6 +110,18 @@ def _path_present(path: Path) -> bool:
     return os.path.lexists(path)
 
 
+def _is_exact_regular_file(path: Path, expected_bytes: bytes) -> bool:
+    try:
+        return (
+            _path_present(path)
+            and not _is_link_or_reparse(path)
+            and path.is_file()
+            and path.read_bytes() == expected_bytes
+        )
+    except OSError:
+        return False
+
+
 def _is_link_or_reparse(path: Path, entry_stat: os.stat_result | None = None) -> bool:
     details = entry_stat if entry_stat is not None else path.lstat()
     if stat.S_ISLNK(details.st_mode):
@@ -103,11 +141,7 @@ def _is_ignored_tree_member(relative: Path) -> bool:
 def _copytree_ignore(source: Path) -> Callable[[str, list[str]], set[str]]:
     def ignored(directory: str, names: list[str]) -> set[str]:
         relative_directory = Path(directory).relative_to(source)
-        return {
-            name
-            for name in names
-            if _is_ignored_tree_member(relative_directory / name)
-        }
+        return {name for name in names if _is_ignored_tree_member(relative_directory / name)}
 
     return ignored
 
@@ -226,15 +260,347 @@ def tree_files(path: Path) -> list[dict[str, Any]]:
 
 
 def tree_digest(path: Path) -> str:
-    payload = json.dumps(tree_files(path), sort_keys=True, separators=(",", ":")).encode("utf-8")
+    payload = _manifest_bytes(tree_files(path))
     return hashlib.sha256(payload).hexdigest()
+
+
+def _manifest_bytes(files: list[dict[str, Any]]) -> bytes:
+    return json.dumps(files, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def _receipt_error(errors: list[dict[str, str]], code: str, path: str, message: str) -> None:
+    errors.append({"code": code, "path": path, "message": message})
+
+
+def _closed_fields(
+    errors: list[dict[str, str]],
+    document: dict[str, Any],
+    allowed: set[str],
+    path: str,
+) -> None:
+    unknown = sorted(set(document) - allowed)
+    if unknown:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            path,
+            f"unknown fields are not accepted: {unknown}",
+        )
+
+
+def _valid_receipt_path(value: str) -> bool:
+    if (
+        not value
+        or "\\" in value
+        or value.startswith("/")
+        or re.match(r"^[A-Za-z]:", value) is not None
+    ):
+        return False
+    parsed = PurePosixPath(value)
+    return (
+        parsed.as_posix() == value
+        and not parsed.is_absolute()
+        and all(part not in {"", ".", ".."} for part in parsed.parts)
+    )
+
+
+def validate_install_receipt(document: object) -> list[dict[str, str]]:
+    """Validate closed receipt shape and cross-field provenance semantics."""
+
+    errors: list[dict[str, str]] = []
+    if not isinstance(document, dict):
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "receipt",
+            "install receipt must be an object",
+        )
+        return errors
+
+    _closed_fields(errors, document, RECEIPT_ROOT_FIELDS, "receipt")
+    required_root = RECEIPT_ROOT_FIELDS - {"sourceCommit"}
+    missing_root = sorted(required_root - set(document))
+    if missing_root:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "receipt",
+            f"required fields are missing: {missing_root}",
+        )
+
+    if document.get("schemaVersion") != 1:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "schemaVersion",
+            "schemaVersion must equal 1",
+        )
+    for field in ("toolkitVersion", "sourceRoot", "targetRoot", "profile"):
+        value = document.get(field)
+        if not isinstance(value, str) or not value:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                field,
+                f"{field} must be a nonempty string",
+            )
+    if document.get("sourceCommit") is not None:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_AUTHORITY",
+            "sourceCommit",
+            "standalone receipts do not attest a Git commit or release tag",
+        )
+    for field in document:
+        normalized = field.lower()
+        if field not in RECEIPT_ROOT_FIELDS and any(
+            token in normalized for token in ("authority", "commit", "tag", "verified")
+        ):
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_AUTHORITY",
+                field,
+                "unmodeled authority or release provenance is not accepted",
+            )
+
+    skills = document.get("skills")
+    if not isinstance(skills, dict):
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "skills",
+            "skills must be an object",
+        )
+        skills = {}
+    elif not skills:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "skills",
+            "skills must contain at least one managed row",
+        )
+
+    for name, row in skills.items():
+        row_path = f"skills.{name}"
+        if not isinstance(name, str) or NAME_RE.fullmatch(name) is None:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                row_path,
+                "skill names must be kebab-case",
+            )
+        if not isinstance(row, dict):
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                row_path,
+                "skill receipt row must be an object",
+            )
+            continue
+        _closed_fields(errors, row, RECEIPT_SKILL_FIELDS, row_path)
+        missing = sorted(RECEIPT_SKILL_FIELDS - set(row))
+        if missing:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                row_path,
+                f"required fields are missing: {missing}",
+            )
+        profile = row.get("profile")
+        if not isinstance(profile, str) or NAME_RE.fullmatch(profile) is None:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                f"{row_path}.profile",
+                "skill profile must be kebab-case",
+            )
+
+        source_digest = row.get("sourceTreeSha256")
+        installed_digest = row.get("installedTreeSha256")
+        if source_digest != installed_digest:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_TREE_RELATION",
+                row_path,
+                "a successful skill row must have equal source and installed tree digests",
+            )
+
+        files = row.get("files")
+        if not isinstance(files, list):
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                f"{row_path}.files",
+                "files must be an array",
+            )
+            continue
+        paths: list[str] = []
+        manifest_shape_valid = True
+        for index, file_row in enumerate(files):
+            file_path = f"{row_path}.files[{index}]"
+            if not isinstance(file_row, dict):
+                manifest_shape_valid = False
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_SHAPE",
+                    file_path,
+                    "file row must be an object",
+                )
+                continue
+            _closed_fields(errors, file_row, RECEIPT_FILE_FIELDS, file_path)
+            if set(file_row) != RECEIPT_FILE_FIELDS:
+                manifest_shape_valid = False
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_SHAPE",
+                    file_path,
+                    "file row must contain exactly path, length, and sha256",
+                )
+            path_value = file_row.get("path")
+            length = file_row.get("length")
+            digest = file_row.get("sha256")
+            if not isinstance(path_value, str) or not _valid_receipt_path(path_value):
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_MANIFEST_PATH",
+                    f"{file_path}.path",
+                    "file path must be a canonical relative POSIX path",
+                )
+            else:
+                paths.append(path_value)
+            if (
+                not isinstance(length, int)
+                or isinstance(length, bool)
+                or length < 0
+                or not isinstance(digest, str)
+                or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+            ):
+                manifest_shape_valid = False
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_SHAPE",
+                    file_path,
+                    "file length and sha256 must describe exact bytes",
+                )
+
+        if len(paths) != len(set(paths)):
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_MANIFEST_DUPLICATE",
+                f"{row_path}.files",
+                "manifest paths must be unique",
+            )
+        if paths != sorted(paths, key=lambda value: tuple(value.split("/"))):
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_MANIFEST_ORDER",
+                f"{row_path}.files",
+                "manifest paths must use canonical traversal order",
+            )
+        if manifest_shape_valid:
+            canonical_digest = hashlib.sha256(_manifest_bytes(files)).hexdigest()
+            if source_digest != canonical_digest or installed_digest != canonical_digest:
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_MANIFEST_DIGEST",
+                    row_path,
+                    "declared tree digests must equal the canonical digest of files",
+                )
+
+    transaction = document.get("transaction")
+    if not isinstance(transaction, dict):
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "transaction",
+            "transaction must be an object",
+        )
+        return errors
+    _closed_fields(errors, transaction, RECEIPT_TRANSACTION_FIELDS, "transaction")
+    missing_transaction = sorted(RECEIPT_TRANSACTION_FIELDS - set(transaction))
+    if missing_transaction:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "transaction",
+            f"required fields are missing: {missing_transaction}",
+        )
+
+    for field in ("id", "backupDirectory"):
+        value = transaction.get(field)
+        if not isinstance(value, str) or not value:
+            _receipt_error(
+                errors,
+                "INSTALL_RECEIPT_SHAPE",
+                f"transaction.{field}",
+                f"transaction {field} must be a nonempty string",
+            )
+    previous_receipt = transaction.get("previousReceipt")
+    if previous_receipt is not None and not isinstance(previous_receipt, str):
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "transaction.previousReceipt",
+            "previousReceipt must be a string or null",
+        )
+
+    completed_at = transaction.get("completedAt")
+    timestamp_valid = (
+        isinstance(completed_at, str) and RFC3339_RE.fullmatch(completed_at) is not None
+    )
+    if timestamp_valid:
+        try:
+            parsed_time = dt.datetime.fromisoformat(completed_at)
+            timestamp_valid = parsed_time.tzinfo is not None and parsed_time.utcoffset() is not None
+        except ValueError:
+            timestamp_valid = False
+    if not timestamp_valid:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_COMPLETED_AT",
+            "transaction.completedAt",
+            "completedAt must be a timezone-bearing RFC 3339 timestamp",
+        )
+
+    changed = transaction.get("changed")
+    receipt_profile = document.get("profile")
+    changed_shape_valid = (
+        isinstance(changed, list)
+        and bool(changed)
+        and all(isinstance(name, str) and NAME_RE.fullmatch(name) is not None for name in changed)
+    )
+    if changed_shape_valid:
+        changed_shape_valid = len(changed) == len(set(changed))
+    if not changed_shape_valid:
+        _receipt_error(
+            errors,
+            "INSTALL_RECEIPT_SHAPE",
+            "transaction.changed",
+            "changed must be a nonempty unique array of kebab-case skill names",
+        )
+    else:
+        for name in changed:
+            row = skills.get(name)
+            if not isinstance(row, dict) or row.get("profile") != receipt_profile:
+                _receipt_error(
+                    errors,
+                    "INSTALL_RECEIPT_TRANSACTION_RELATION",
+                    "transaction.changed",
+                    "each changed skill must exist and use the receipt profile",
+                )
+                break
+    return errors
+
+
+def _json_bytes(payload: dict[str, Any]) -> bytes:
+    return (json.dumps(payload, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
 
 def _stage_json(path: Path, payload: dict[str, Any]) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.{uuid.uuid4().hex}.tmp")
-    data = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
-    with temporary.open("w", encoding="utf-8", newline="\n") as stream:
+    data = _json_bytes(payload)
+    with temporary.open("wb") as stream:
         stream.write(data)
         stream.flush()
         os.fsync(stream.fileno())
@@ -291,20 +657,6 @@ def _publish_json_cas(
     finally:
         if _path_present(temporary):
             temporary.unlink()
-
-
-def _git_head(root: Path) -> str | None:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        return None
-    value = completed.stdout.strip()
-    return value or None
 
 
 class Installer:
@@ -376,9 +728,16 @@ class Installer:
         if _is_link_or_reparse(self.receipt_path) or not self.receipt_path.is_file():
             raise InstallConflict(f"managed receipt is not a regular file: {self.receipt_path}")
         raw = self.receipt_path.read_bytes()
-        document = json.loads(raw.decode("utf-8"))
-        if document.get("schemaVersion") != 1 or not isinstance(document.get("skills"), dict):
-            raise InstallConflict(f"invalid managed receipt: {self.receipt_path}")
+        try:
+            document = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise InstallConflict(f"invalid managed receipt: {self.receipt_path}: {exc}") from exc
+        semantic_errors = validate_install_receipt(document)
+        if semantic_errors:
+            codes = sorted({error["code"] for error in semantic_errors})
+            raise InstallConflict(
+                f"invalid managed receipt: {self.receipt_path}: semantic errors={codes}"
+            )
         return document, raw
 
     def _receipt(self) -> dict[str, Any]:
@@ -450,6 +809,85 @@ class Installer:
             for item in items
         ]
 
+    def _compensate_published_receipt(
+        self,
+        *,
+        transaction_id: str,
+        published_bytes: bytes,
+        previous_bytes: bytes | None,
+        previous_path: Path,
+    ) -> list[str]:
+        """Restore/remove only the exact receipt generation published by this transaction."""
+
+        details: list[str] = []
+        if not _path_present(self.receipt_path):
+            if previous_bytes is None:
+                return details
+            if not _is_exact_regular_file(previous_path, previous_bytes):
+                return [f"prior receipt could not be identified at {previous_path}"]
+            try:
+                _rename_noreplace(previous_path, self.receipt_path)
+            except OSError as exc:
+                return [f"prior receipt retained at {previous_path}: {exc}"]
+            return details
+
+        if _is_link_or_reparse(self.receipt_path) or not self.receipt_path.is_file():
+            return [f"foreign receipt entry retained at {self.receipt_path}"]
+        try:
+            observed_bytes = self.receipt_path.read_bytes()
+        except OSError as exc:
+            return [f"current receipt could not be identified and was retained: {exc}"]
+        if observed_bytes != published_bytes:
+            return ["foreign receipt bytes replaced the published receipt and were retained"]
+
+        quarantine = self.receipt_path.with_name(
+            f".{self.receipt_path.name}.{transaction_id}.failed"
+        )
+        try:
+            _rename_noreplace(self.receipt_path, quarantine)
+        except OSError as exc:
+            return [f"published receipt could not be acquired for compensation: {exc}"]
+
+        try:
+            moved_bytes = quarantine.read_bytes()
+        except OSError as exc:
+            return [
+                f"moved receipt could not be identified and was retained at {quarantine}: {exc}"
+            ]
+        if moved_bytes != published_bytes:
+            try:
+                _rename_noreplace(quarantine, self.receipt_path)
+            except OSError as exc:
+                details.append(f"foreign receipt retained at {quarantine}: {exc}")
+            details.append("receipt generation changed during compensation")
+            return details
+
+        if previous_bytes is None:
+            if _path_present(self.receipt_path):
+                details.append("foreign receipt appeared during ADD compensation and was retained")
+            try:
+                quarantine.unlink()
+            except OSError as exc:
+                details.append(f"published ADD receipt retained at {quarantine}: {exc}")
+            return details
+
+        if not _is_exact_regular_file(previous_path, previous_bytes):
+            return [
+                f"prior receipt could not be identified; published bytes retained at {quarantine}"
+            ]
+        try:
+            _rename_noreplace(previous_path, self.receipt_path)
+        except OSError as exc:
+            return [
+                f"prior receipt retained at {previous_path}: {exc}",
+                f"published bytes retained at {quarantine}",
+            ]
+        try:
+            quarantine.unlink()
+        except OSError as exc:
+            details.append(f"compensated receipt copy retained at {quarantine}: {exc}")
+        return details
+
     def install(self, profile: str = "core") -> dict[str, Any]:
         with _exclusive_install_lock(self.lock_path):
             return self._install_locked(profile)
@@ -457,7 +895,6 @@ class Installer:
     def _install_locked(self, profile: str) -> dict[str, Any]:
         receipt_before, receipt_bytes_before = self._receipt_snapshot()
         profile_document, profile_bytes = self._profile_snapshot(profile)
-        source_commit = _git_head(self.source_root)
         initial_plan = self._plan_from(
             profile,
             receipt_before,
@@ -476,11 +913,7 @@ class Installer:
         if not changed:
             return receipt_before
 
-        transaction_id = (
-            dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
-            + "-"
-            + uuid.uuid4().hex
-        )
+        transaction_id = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex
         control_parent = self.target_root.parent
         staging_root = (
             control_parent
@@ -552,7 +985,9 @@ class Installer:
                         if _path_present(target):
                             raise InstallContainmentError(
                                 RuntimeError("target changed during ownership transfer"),
-                                [f"replacement appeared for {item.name}; prior bytes retained at {backup}"],
+                                [
+                                    f"replacement appeared for {item.name}; prior bytes retained at {backup}"
+                                ],
                             )
                         _rename_noreplace(backup, target)
                         raise InstallConflict(
@@ -608,7 +1043,7 @@ class Installer:
                 {
                     "schemaVersion": 1,
                     "toolkitVersion": profile_document.get("toolkitVersion"),
-                    "sourceCommit": source_commit,
+                    "sourceCommit": None,
                     "sourceRoot": str(self.source_root),
                     "targetRoot": str(self.target_root),
                     "profile": profile,
@@ -631,12 +1066,61 @@ class Installer:
             previous_receipt = self.receipt_path.with_name(
                 f".{self.receipt_path.name}.{transaction_id}.previous"
             )
+            semantic_errors = validate_install_receipt(receipt)
+            if semantic_errors:
+                codes = sorted({error["code"] for error in semantic_errors})
+                raise RuntimeError(f"refusing to publish invalid install receipt: {codes}")
+            published_receipt_bytes = _json_bytes(receipt)
             _publish_json_cas(
                 self.receipt_path,
                 receipt,
                 expected_bytes=receipt_bytes_before,
                 previous_path=previous_receipt,
             )
+            try:
+                self._fault("after_receipt_commit", None)
+                post_commit_failures: list[str] = []
+                if (
+                    not _path_present(self.receipt_path)
+                    or _is_link_or_reparse(self.receipt_path)
+                    or not self.receipt_path.is_file()
+                ):
+                    post_commit_failures.append("published receipt is not a regular file")
+                else:
+                    try:
+                        if self.receipt_path.read_bytes() != published_receipt_bytes:
+                            post_commit_failures.append("published receipt bytes changed")
+                    except OSError as exc:
+                        post_commit_failures.append(f"published receipt could not be read: {exc}")
+                for item in changed:
+                    target = self.target_root / item.name
+                    staged_hash, _staged_manifest = staged_generations[item.name]
+                    try:
+                        live_hash = tree_digest(target)
+                    except (OSError, ValueError) as exc:
+                        post_commit_failures.append(
+                            f"published target {item.name} could not be identified: {exc}"
+                        )
+                        continue
+                    if live_hash != staged_hash:
+                        post_commit_failures.append(
+                            f"published target {item.name} changed before success return"
+                        )
+                if post_commit_failures:
+                    raise RuntimeError("; ".join(post_commit_failures))
+            except BaseException as post_commit_cause:
+                receipt_containment = self._compensate_published_receipt(
+                    transaction_id=transaction_id,
+                    published_bytes=published_receipt_bytes,
+                    previous_bytes=receipt_bytes_before,
+                    previous_path=previous_receipt,
+                )
+                if receipt_containment:
+                    raise InstallContainmentError(
+                        post_commit_cause,
+                        receipt_containment,
+                    ) from post_commit_cause
+                raise
             return receipt
         except BaseException as cause:
             containment: list[str] = []

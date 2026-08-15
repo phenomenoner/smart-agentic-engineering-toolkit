@@ -38,6 +38,16 @@ needs an independent/final/release/migration/pre-cutover decision, or when a
 recurring sibling-blocker pattern makes fixed-point coverage materially useful.
 Do not use formal artifacts merely to make an ordinary review look rigorous.
 
+## Challenge mechanism necessity when material
+
+When either review mode sees a candidate adding a component, protocol, durable state, authority
+owner, recovery path, or evidence layer, ask `Do we really need this to make things happen?` and `Is
+there a simpler and more direct way?` Check the observable outcome and invariant against deletion,
+manual, embedded/ephemeral, and existing-platform alternatives; compare complexity, authority,
+recovery, and failure-state cost against the frozen necessity decision. This is a conditional
+challenge, not a redesign mandate. For a formal gate, carry it as one atomic design-necessity matrix
+row only when material; do not add a schema field or formal bundle to an ordinary review.
+
 ## Preserve the surrounding rules
 
 - Use the smallest reliable review shape. This skill does not mandate a

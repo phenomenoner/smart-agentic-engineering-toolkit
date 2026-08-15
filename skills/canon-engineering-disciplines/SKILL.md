@@ -48,12 +48,17 @@ preference is not material.
 
 1. Define the system boundary, unacceptable loss, decision claim, decision authority, and exact failure model.
 2. Inventory the important controllers, state transitions, trust or authority seams, feedback, delays, artifacts, and evidence consumers.
-3. Read [method-router.md](references/method-router.md) and select the smallest two to four disciplines that address materially different questions. Select one method when one is enough.
-4. Record why each method is selected and why plausible alternatives are rejected or deferred.
-5. Read [method-boundaries.md](references/method-boundaries.md). Separate every claim by verification altitude and evidence type; list assumptions, defeaters, freshness conditions, independence, and explicit non-claims.
-6. Use [discipline-synthesis.md](templates/discipline-synthesis.md) for a full assessment or [claim-evidence-defeater.md](templates/claim-evidence-defeater.md) when the task only needs an assurance matrix.
-7. Cite primary or authoritative sources. Use [primary-sources.md](references/primary-sources.md) as a starting map, then verify unstable facts or exact editions when they matter.
-8. End with the smallest next experiment, model, review, or operational gate able to falsify the leading claim. Do not prescribe every available method.
+3. Before selecting a method stack, ask `Do we really need this to make things happen?` and `Is
+   there a simpler and more direct way?` State the observable outcome/minimum invariant, compare a
+   direct experiment and existing engineering skills with the proposed method, and account for
+   added complexity, authority, recovery, and failure-state cost. This is a bounded selection
+   brake, not a universal specification gate.
+4. Read [method-router.md](references/method-router.md) and select the smallest two to four disciplines that address materially different questions. Select one method when one is enough.
+5. Record why each method is selected and why plausible alternatives are rejected or deferred.
+6. Read [method-boundaries.md](references/method-boundaries.md). Separate every claim by verification altitude and evidence type; list assumptions, defeaters, freshness conditions, independence, and explicit non-claims.
+7. Use [discipline-synthesis.md](templates/discipline-synthesis.md) for a full assessment or [claim-evidence-defeater.md](templates/claim-evidence-defeater.md) when the task only needs an assurance matrix.
+8. Cite primary or authoritative sources. Use [primary-sources.md](references/primary-sources.md) as a starting map, then verify unstable facts or exact editions when they matter.
+9. End with the smallest next experiment, model, review, or operational gate able to falsify the leading claim. Do not prescribe every available method.
 
 ## Route by question, not prestige
 

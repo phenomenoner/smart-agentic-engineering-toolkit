@@ -63,6 +63,10 @@ Look for reflection, dependency injection, plugin registries, event buses, gener
 
 ## Coexist with other skills
 
+- CodeGraph locates impact and callers after a material design's outcome-first necessity decision.
+  It cannot answer `Do we really need this to make things happen?` or `Is there a simpler and more
+  direct way?`, establish mechanism necessity, or authorize a design; keep that conditional decision
+  with `engineering-specification`.
 - Use `understand-*` when the requested output is a persistent interactive knowledge graph, dashboard, onboarding map, or domain graph. Do not build that artifact as part of this skill.
 - Use language or domain implementation skills after CodeGraph identifies the relevant source surface.
 - Use `completeness-and-test-synthesis` only when the user requests a readiness judgment or its own trigger conditions apply; graph impact alone is not completeness proof.

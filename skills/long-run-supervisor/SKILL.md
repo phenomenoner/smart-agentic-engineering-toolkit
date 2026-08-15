@@ -171,6 +171,12 @@ sibling task failed or that caller polling is appropriate.
 
 ## Optional idle-only fan-in
 
+Before creating a persistent watcher, heartbeat, Goal, or fan-in generation, ask `Do we really need
+this to make things happen?` and `Is there a simpler and more direct way?` Name the minimum terminal
+event/receipt, compare a normal turn or direct blocking call, and count added durable state,
+authority, wake, recovery, and failure-state obligations. Use this short strategy guard only when a
+new orchestration mechanism is proposed; preserve the no-polling and no-post-final-wake boundaries.
+
 Use a mother watcher only when the main agent has no useful independent work. Do not arm it while analysis, repairs, review preparation, or other progress can continue. Bind already-started tasks into one immutable generation:
 
 Treat this as a work-conserving scheduling rule:

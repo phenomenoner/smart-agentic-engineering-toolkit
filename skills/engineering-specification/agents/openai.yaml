@@ -1,6 +1,6 @@
 interface:
   display_name: "Engineering Specification"
   short_description: "Specify behavior and acceptance before implementation"
-  default_prompt: "Use $engineering-specification to define unresolved behavior and falsifiable acceptance before implementation."
+  default_prompt: "Use $engineering-specification to frame unresolved behavior, conditionally test whether a material proposed mechanism is necessary or a simpler direct/platform route works, then freeze falsifiable acceptance before implementation."
 policy:
   allow_implicit_invocation: true

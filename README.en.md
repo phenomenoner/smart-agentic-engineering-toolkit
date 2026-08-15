@@ -10,10 +10,17 @@ evidence gap or turn an incident into a drill until the claim is supported or a 
 is reached. A task may enter directly at diagnosis, implementation, review, or incident conversion.
 A small edit does not automatically need a plan, WAL, worktree, subagent, or full test suite.
 
+When a specification would introduce a material mechanism, it explicitly asks “Do we really need
+this to make things happen?” and “Is there a simpler and more direct way?” It separates the
+observable outcome/invariant from a mechanism proxy and checks deletion, manual operation,
+embedding or decision-time computation, and existing platform primitives before adding new state.
+This is a conditional brake; an already clear small contract stays on the direct path.
+
 ## What it adds
 
 - Behavioral specifications with observable acceptance, non-goals, failure semantics, and a
-  falsification plan instead of document ceremony.
+  falsification plan instead of document ceremony, including the complexity, authority, recovery,
+  and failure-state cost of a retained material mechanism.
 - Separate skills for implementation, debugging, review, readiness judgment, and incident-derived
   regression so that one task class does not silently claim another's authority.
 - Temporal ownership design for TOCTOU, ABA, PID or handle reuse, replacement cleanup, and rollback,

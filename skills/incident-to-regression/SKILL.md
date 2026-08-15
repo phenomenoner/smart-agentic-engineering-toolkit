@@ -74,7 +74,14 @@ Perform these steps in order:
    the gap; do not invent a command or call the repair verified.
 4. **Describe the repair pattern.** Explain the reusable mechanism, why it
    restores the invariant, the affected surfaces, and how to roll it back. Avoid
-   encoding a one-machine workaround as the general rule.
+   encoding a one-machine workaround as the general rule. When the pattern adds a
+   mechanism, gate, persistent fixture, or cutover protocol, first ask `Do we
+   really need this to make things happen?` and `Is there a simpler and more
+   direct way?` Separate the observed invariant from the repair proxy; compare
+   deletion, manual, embedded/ephemeral, and existing-platform alternatives, and
+   count added complexity, authority, recovery, and failure-state obligations.
+   A pure replay of an observed failure with no proposed mechanism bypasses this
+   guard.
 5. **Choose verification altitude.**
    - `T0`: static inspection, formatting, or schema validation.
    - `T1`: isolated unit or pure-function test.

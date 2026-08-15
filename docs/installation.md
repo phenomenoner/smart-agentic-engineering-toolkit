@@ -38,11 +38,22 @@ On Linux hosts:
 
 The installer records an exact managed receipt in the target directory, stages complete trees,
 holds one OS-backed lock per target root, uses atomic no-replace renames, and commits the receipt
-only when its exact prior bytes still match. It retains prior managed generations and receipts and
-refuses unmanaged, linked/reparse, or locally diverged same-name targets. If ownership changes
-during rollback, it moves first, identifies the tree actually moved, and contains the failure
-without overwriting foreign bytes. There is no force-overwrite mode. A platform without a supported
-atomic no-replace rename fails closed before publish.
+only when its exact prior bytes still match. Before returning success it re-reads the exact receipt
+bytes and every changed target digest while holding that lock. On mismatch it restores/removes only
+the receipt generation it just published by exact-byte compare-and-swap; foreign receipt or target
+bytes are retained and reported. It retains prior managed generations and receipts and refuses
+unmanaged, linked/reparse, semantically invalid, or locally diverged same-name targets. If ownership
+changes during rollback, it moves first, identifies the tree actually moved, and contains the
+failure without overwriting foreign bytes. There is no force-overwrite mode. A platform without a
+supported atomic no-replace rename fails closed before publish. The lock coordinates conforming
+installers; it does not claim that an arbitrary writer cannot mutate the target after return.
+
+The public receipt schema validates closed vocabulary and local shape. Machine acceptance also
+requires zero errors from `scripts.install_toolkit.validate_install_receipt`, which checks timestamp,
+manifest/path/digest, profile, and transaction relations. Schema success alone is shape evidence,
+not provenance acceptance. Standalone receipts deliberately set `sourceCommit` to `null`: their
+per-file and tree digests attest exact installed bytes, while Git commit/tag identity belongs to
+separately verified release provenance.
 
 Profiles are classifications, not mandatory chains. Install `core` first unless a host-specific
 adapter is actually needed; optional profiles are listed in `profiles/`.

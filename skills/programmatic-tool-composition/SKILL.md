@@ -15,6 +15,12 @@ Use the runtime's programmatic composition surface (`functions.exec` in Codex Ap
 
 ## Choose composition only when it pays
 
+Before introducing a composition wrapper, batching layer, or task-local state, ask `Do we really
+need this to make things happen?` and `Is there a simpler and more direct way?` State the direct-call
+alternative and observable output, then count added partial-failure, timeout, state, authority, and
+recovery obligations. Use direct calls when they satisfy the invariant; this short guard does not
+duplicate the canonical mechanism checklist in `engineering-specification`.
+
 Use a direct tool call when one call is enough, a later call depends on model judgment over the first result, the result is already small, or the operation has an external effect.
 
 Compose when all of the following hold:

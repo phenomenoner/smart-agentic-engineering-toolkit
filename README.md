@@ -9,10 +9,15 @@
 主張被支持或遇到明確 stop condition。任務可以直接從診斷、實作、review 或 incident
 開始；小改動不必先產生計畫、WAL、worktree、subagent 或完整測試套件。
 
+若規格正在引入實質機制，先明問「Do we really need this to make things happen?」與「Is
+there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mechanism proxy 分開，
+優先考慮刪除、人工操作、內嵌/即時計算或既有平台 primitive；只有確有需要才增加新狀態。
+這是條件式煞車，已清楚的小型 contract 仍可直接實作。
+
 ## 這套工具解決什麼
 
 - 把「先想清楚」落成可觀察行為、non-goals、失敗語意與可證偽 acceptance，而不是只寫
-  一份大計畫。
+  一份大計畫；實質機制還要先列出複雜度、authority、recovery 與 failure-state 成本。
 - 把 implementation、debugging、review、readiness judgment 與 incident regression 分開，
   避免一個 skill 偷渡另一個 skill 的權限或結論。
 - 對 TOCTOU、ABA、PID/handle reuse、replacement cleanup、rollback ownership 等時序問題，

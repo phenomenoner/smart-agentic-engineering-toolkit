@@ -56,6 +56,25 @@ def test_clean_install_then_exact_plan(tmp_path: Path) -> None:
     assert plan_map(installer) == {"alpha-skill": "EXACT"}
 
 
+def test_semantically_invalid_existing_receipt_is_rejected_before_planning(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "installed"
+    write_source(source, {"alpha-skill": "v1"})
+    installer = Installer(source, target)
+    installer.install("core")
+    before = tree_digest(target / "alpha-skill")
+    receipt = json.loads(installer.receipt_path.read_text(encoding="utf-8"))
+    receipt["skills"]["alpha-skill"]["installedTreeSha256"] = "0" * 64
+    installer.receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+
+    with pytest.raises(InstallConflict, match="semantic errors"):
+        installer.plan("core")
+
+    assert tree_digest(target / "alpha-skill") == before
+
+
 def test_generated_cache_members_are_not_installed_or_receipted(tmp_path: Path) -> None:
     source = tmp_path / "source"
     target = tmp_path / "installed"
@@ -78,9 +97,7 @@ def test_generated_cache_members_are_not_installed_or_receipted(tmp_path: Path) 
 
     installed = target / "alpha-skill"
     assert [row["path"] for row in tree_files(installed)] == ["SKILL.md"]
-    assert [row["path"] for row in receipt["skills"]["alpha-skill"]["files"]] == [
-        "SKILL.md"
-    ]
+    assert [row["path"] for row in receipt["skills"]["alpha-skill"]["files"]] == ["SKILL.md"]
     for relative in generated:
         assert not (installed / relative).exists()
 
@@ -271,8 +288,7 @@ def test_generation_changed_after_rename_is_restored_without_publish(tmp_path: P
     def drift_moved_generation(phase: str, name: str | None, installer: Installer) -> None:
         if phase == "after_backup" and name == "alpha-skill":
             backup_base = (
-                target.parent
-                / f".smart-agentic-engineering-toolkit-backups-{target.name}"
+                target.parent / f".smart-agentic-engineering-toolkit-backups-{target.name}"
             )
             transaction = next(backup_base.iterdir())
             (transaction / name / "LATE.txt").write_text("late writer", encoding="utf-8")
@@ -283,7 +299,9 @@ def test_generation_changed_after_rename_is_restored_without_publish(tmp_path: P
     assert "v1" in (target / "alpha-skill" / "SKILL.md").read_text(encoding="utf-8")
 
 
-def test_replacement_after_backup_is_preserved_and_prior_generation_retained(tmp_path: Path) -> None:
+def test_replacement_after_backup_is_preserved_and_prior_generation_retained(
+    tmp_path: Path,
+) -> None:
     source = tmp_path / "source"
     target = tmp_path / "installed"
     write_source(source, {"alpha-skill": "v1"})
@@ -297,9 +315,7 @@ def test_replacement_after_backup_is_preserved_and_prior_generation_retained(tmp
 
     with pytest.raises(InstallContainmentError, match="replacement appeared before publish"):
         Installer(source, target, fault_hook=replacement).install("core")
-    assert (target / "alpha-skill" / "REPLACEMENT.txt").read_text(
-        encoding="utf-8"
-    ) == "replacement"
+    assert (target / "alpha-skill" / "REPLACEMENT.txt").read_text(encoding="utf-8") == "replacement"
     backup_base = target.parent / f".smart-agentic-engineering-toolkit-backups-{target.name}"
     retained = list(backup_base.glob("*/alpha-skill/SKILL.md"))
     assert len(retained) == 1
@@ -314,15 +330,11 @@ def test_add_replacement_race_is_refused_without_overwrite(tmp_path: Path) -> No
     def replacement(phase: str, _name: str | None, _installer: Installer) -> None:
         if phase == "before_publish":
             (target / "alpha-skill").mkdir(parents=True)
-            (target / "alpha-skill" / "REPLACEMENT.txt").write_text(
-                "replacement", encoding="utf-8"
-            )
+            (target / "alpha-skill" / "REPLACEMENT.txt").write_text("replacement", encoding="utf-8")
 
     with pytest.raises(InstallConflict, match="replacement appeared before ADD publish"):
         Installer(source, target, fault_hook=replacement).install("core")
-    assert (target / "alpha-skill" / "REPLACEMENT.txt").read_text(
-        encoding="utf-8"
-    ) == "replacement"
+    assert (target / "alpha-skill" / "REPLACEMENT.txt").read_text(encoding="utf-8") == "replacement"
 
 
 def test_add_dangling_link_race_is_refused_without_overwrite(tmp_path: Path) -> None:

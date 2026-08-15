@@ -9,6 +9,14 @@
 - Included failures:
 - Excluded failures:
 
+## Necessity before method selection
+
+- `Do we really need this to make things happen?`:
+- `Is there a simpler and more direct way?`:
+- Observable outcome/minimum invariant:
+- Direct experiment or existing skill/discipline considered:
+- Selected mechanism/method and complexity, authority, recovery, and failure-state cost:
+
 ## Control and seam map
 
 | Controller or state owner | Control or transition | Feedback or evidence | Delay | Authority or identity seam |

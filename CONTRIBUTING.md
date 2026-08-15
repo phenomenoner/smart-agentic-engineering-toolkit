@@ -12,9 +12,15 @@ an installed skill directory or plugin cache and then treat that copy as source.
    prompts/outputs, and unrelated runtime state.
 3. State expected versus observed activation, non-activation, stop, or workflow behavior and why the
    difference is material.
-4. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
+4. Before adding a skill, protocol, component, persistent state, lifecycle, or other public
+   mechanism, ask `Do we really need this to make things happen?` and `Is there a simpler and more
+   direct way?` Record the outcome/minimum invariant; deletion, manual, embedding/ephemeral, and
+   existing-platform alternatives; why the existing canonical owner is insufficient; and an
+   auditable complexity, authority, recovery, and failure-state budget. Prefer updating an existing
+   owner; a new catalog/profile row needs evidence that it cannot express the behavior.
+5. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
    behavior and passes the proposed behavior.
-5. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
+6. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
    impact.
 
 Material changes affect activation, authority, safety, compatibility, observable workflow,

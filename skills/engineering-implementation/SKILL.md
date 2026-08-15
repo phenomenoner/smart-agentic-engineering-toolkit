@@ -50,6 +50,14 @@ If behavior, ownership, compatibility, or acceptance is materially unresolved, u
 `engineering-debugging`. Do not infer permission to publish, deploy, message, purchase, or operate a
 live service from permission to edit code.
 
+When the frozen design or the patch introduces a mechanism, state, authority owner, or recovery
+path, read its necessity decision and ask: `Do we really need this to make things happen?` and `Is
+there a simpler and more direct way?` Keep the slice and checks bound to the observable invariant,
+not to a mechanism proxy. If implementation reveals a simpler deletion, manual, embedded,
+ephemeral, or existing-platform route, return to `engineering-specification` instead of silently
+expanding or preserving the mechanism. Already explicit small work proceeds directly; this is a
+handoff/reopen guard, not a second specification checklist.
+
 ## Choose the smallest coherent slice
 
 Prefer a vertical or risk-focused slice that leaves the repository in a usable state. Keep one

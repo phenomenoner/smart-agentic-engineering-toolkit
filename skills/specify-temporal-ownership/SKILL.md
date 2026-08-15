@@ -40,6 +40,13 @@ preference is not material.
 
 ## Apply the brake
 
+Before entering the specialized temporal model, ask `Do we really need this to make things happen?`
+and `Is there a simpler and more direct way?` Carry the outcome/minimum invariant and the upstream
+necessity decision from `engineering-specification`; prefer deletion, manual action, embedding or
+ephemeral readback, and an existing platform primitive before retaining a new temporal mechanism.
+If one is retained, count its complexity, authority, recovery, and failure-state cost here without
+duplicating the general specification checklist.
+
 Use the full workflow only when all three are present:
 
 1. a mutable resource or externally visible effect;

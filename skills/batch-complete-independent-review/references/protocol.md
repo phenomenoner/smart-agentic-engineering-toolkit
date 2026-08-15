@@ -42,6 +42,11 @@ default.
 
 Build required cells from these dimensions:
 
+When the frozen candidate materially adds a mechanism, carry one conditional invariant row that
+asks `Do we really need this to make things happen?` and `Is there a simpler and more direct way?`
+and challenges its complexity, authority, recovery, and failure-state cost against simpler
+alternatives. Use the existing contract/invariant cell shape; do not add a mandatory schema field.
+
 - contract or invariant;
 - public/operator entrypoint and internal caller;
 - lifecycle, journal, or state phase;

@@ -3,6 +3,9 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
+import shutil
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -29,8 +32,7 @@ def write_source(root: Path, body: str, *, version: str) -> None:
     skill = root / "skills" / "alpha-skill"
     skill.mkdir(parents=True, exist_ok=True)
     (skill / "SKILL.md").write_text(
-        "---\nname: alpha-skill\ndescription: Test skill.\n---\n\n"
-        f"{body}\n",
+        f"---\nname: alpha-skill\ndescription: Test skill.\n---\n\n{body}\n",
         encoding="utf-8",
     )
     profiles = root / "profiles"
@@ -50,8 +52,7 @@ def write_source(root: Path, body: str, *, version: str) -> None:
 
 def rewrite_source_after_plan(root: Path, body: str, *, version: str) -> None:
     (root / "skills" / "alpha-skill" / "SKILL.md").write_text(
-        "---\nname: alpha-skill\ndescription: Test skill.\n---\n\n"
-        f"{body}\n",
+        f"---\nname: alpha-skill\ndescription: Test skill.\n---\n\n{body}\n",
         encoding="utf-8",
     )
     profile_path = root / "profiles" / "core.json"
@@ -60,9 +61,23 @@ def rewrite_source_after_plan(root: Path, body: str, *, version: str) -> None:
     profile_path.write_text(json.dumps(profile), encoding="utf-8")
 
 
-def canonical_behavior_result() -> dict[str, Any]:
-    corpus_path = ROOT / "evals" / "cases" / "acceptance.json"
+def canonical_behavior_result(root: Path = ROOT) -> dict[str, Any]:
+    corpus_path = root / "evals" / "cases" / "acceptance.json"
     corpus = load_json(corpus_path)
+    plugin = load_json(root / ".codex-plugin" / "plugin.json")
+    manifest = load_json(root / "manifest" / "toolkit.json")
+    commit = subprocess.run(
+        ["git", "-C", str(root), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    tree = subprocess.run(
+        ["git", "-C", str(root), "rev-parse", "HEAD^{tree}"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     results = [
         {
             "id": case["id"],
@@ -81,12 +96,14 @@ def canonical_behavior_result() -> dict[str, Any]:
     ]
     return {
         "schemaVersion": 1,
-        "toolkitVersion": corpus["toolkitVersion"],
+        "toolkitVersion": manifest["toolkitVersion"],
         "candidate": {
-            "commit": "b" * 40,
-            "tree": "c" * 40,
-            "pluginVersion": corpus["toolkitVersion"],
-            "catalogSha256": "d" * 64,
+            "commit": commit,
+            "tree": tree,
+            "pluginVersion": plugin["version"],
+            "catalogSha256": hashlib.sha256(
+                (root / "catalog" / "skills.json").read_bytes()
+            ).hexdigest(),
         },
         "environment": {
             "host": "Codex",
@@ -113,10 +130,7 @@ def behavior_error_codes(result: dict[str, Any]) -> set[str]:
     )
     errors = validator(ROOT, result)
     assert isinstance(errors, list)
-    return {
-        str(error.get("code")) if isinstance(error, dict) else str(error)
-        for error in errors
-    }
+    return {str(error.get("code")) if isinstance(error, dict) else str(error) for error in errors}
 
 
 def proposal() -> dict[str, Any]:
@@ -145,6 +159,38 @@ def proposal() -> dict[str, Any]:
     }
 
 
+def test_behavior_result_rejects_a_tracked_dirty_candidate(tmp_path: Path) -> None:
+    isolated = tmp_path / "candidate"
+    for relative in (".codex-plugin", "catalog", "evals", "manifest"):
+        source = ROOT / relative
+        destination = isolated / relative
+        shutil.copytree(source, destination)
+    subprocess.run(["git", "init", "-q", str(isolated)], check=True)
+    subprocess.run(["git", "-C", str(isolated), "add", "."], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(isolated),
+            "-c",
+            "user.name=Toolkit Test",
+            "-c",
+            "user.email=toolkit-test@example.invalid",
+            "commit",
+            "-qm",
+            "candidate",
+        ],
+        check=True,
+    )
+    result = canonical_behavior_result(isolated)
+    catalog_path = isolated / "catalog" / "skills.json"
+    catalog_path.write_bytes(catalog_path.read_bytes() + b"\n")
+
+    errors = validate_toolkit.validate_behavior_result(isolated, result)
+
+    assert "EVAL_RESULT_CANDIDATE_UNVERIFIABLE" in {error["code"] for error in errors}
+
+
 def test_f001_complete_consistent_behavior_result_is_accepted() -> None:
     assert behavior_error_codes(canonical_behavior_result()) == set()
 
@@ -163,9 +209,7 @@ def test_f001_complete_consistent_behavior_result_is_accepted() -> None:
         ("verdict", "EVAL_RESULT_VERDICT"),
     ],
 )
-def test_f001_behavior_result_rejects_pass_laundering(
-    mutation: str, expected_code: str
-) -> None:
+def test_f001_behavior_result_rejects_pass_laundering(mutation: str, expected_code: str) -> None:
     result = canonical_behavior_result()
     if mutation == "missing":
         result["results"].pop()
@@ -296,9 +340,7 @@ def test_f004_public_lifecycle_status_is_consistent_and_self_explaining() -> Non
     cases = load_json(ROOT / "evals" / "cases" / "acceptance.json")
     manifest = load_json(ROOT / "manifest" / "toolkit.json")
 
-    assert {catalog["status"], cases["status"], manifest["status"]} == {
-        "release-candidate"
-    }
+    assert {catalog["status"], cases["status"], manifest["status"]} == {"release-candidate"}
 
 
 def test_f004_repository_is_current_source_while_tags_identify_releases() -> None:
@@ -314,9 +356,7 @@ def test_f004_repository_is_current_source_while_tags_identify_releases() -> Non
 
 def test_f005_macos_install_claim_requires_macos_ci() -> None:
     installation = (ROOT / "docs" / "installation.md").read_text(encoding="utf-8")
-    workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(
-        encoding="utf-8"
-    )
+    workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
     advertises_macos = "On Linux or macOS hosts:" in installation
 
     assert not advertises_macos or "macos-latest" in workflow
@@ -385,3 +425,56 @@ def test_f006_recovery_docs_do_not_claim_unrecorded_release_tag_binding() -> Non
 
     assert "receipt binds release tag" not in migration
     assert "per-file" in migration and "hash" in migration
+
+
+def test_first_principles_gate_has_one_owner_and_all_loop_guards() -> None:
+    owner_path = ROOT / "skills" / "engineering-specification" / "SKILL.md"
+    owner = owner_path.read_text(encoding="utf-8")
+    gate = "Run the conditional first-principles necessity and complexity gate"
+    contract = "Write the behavioral contract"
+    assert gate in owner and contract in owner
+    assert owner.index(gate) < owner.index(contract)
+
+    guarded_paths = (
+        "skills/engineering-implementation/SKILL.md",
+        "skills/engineering-wal/SKILL.md",
+        "skills/evolve-engineering-toolkit/SKILL.md",
+        "skills/batch-complete-independent-review/SKILL.md",
+        "skills/completeness-and-test-synthesis/SKILL.md",
+        "skills/incident-to-regression/SKILL.md",
+        "skills/specify-temporal-ownership/SKILL.md",
+        "skills/canon-engineering-disciplines/SKILL.md",
+        "skills/programmatic-tool-composition/SKILL.md",
+        "skills/codex-cli-luna-worker/SKILL.md",
+        "skills/long-run-supervisor/SKILL.md",
+        "skills/codex-app-mcp-update/SKILL.md",
+        "skills/claude-independent-review/SKILL.md",
+        "skills/codegraph-first-navigation/SKILL.md",
+        "workflows/specify-implement-review-drill.md",
+        "skills/batch-complete-independent-review/references/protocol.md",
+        "skills/specify-temporal-ownership/references/contract-template.md",
+        "skills/canon-engineering-disciplines/templates/discipline-synthesis.md",
+        "docs/product-specification.md",
+        "docs/taxonomy.md",
+        "docs/architecture.md",
+        "CONTRIBUTING.md",
+        "docs/contribution-protocol.md",
+        "evals/README.md",
+    )
+    for relative in guarded_paths:
+        text = re.sub(r"\s+", " ", (ROOT / relative).read_text(encoding="utf-8"))
+        assert "Do we really need this to make things happen?" in text, relative
+        assert "Is there a simpler and more direct way?" in text, relative
+
+
+def test_mechanism_gate_remains_conditional_not_global() -> None:
+    text = re.sub(
+        r"\s+",
+        " ",
+        (ROOT / "skills" / "engineering-specification" / "SKILL.md")
+        .read_text(encoding="utf-8")
+        .lower(),
+    )
+    assert "narrow and optional" in text
+    assert "already explicit small contract bypasses this gate" in text
+    assert "direct path" in text

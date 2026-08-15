@@ -11,6 +11,11 @@ useful engineering skills. The preferred lifecycle is guidance:
 
 No task must traverse every phase. Direct, small work remains direct.
 
+For a material mechanism choice, specification asks `Do we really need this to make things happen?`
+and `Is there a simpler and more direct way?` before contract or RED freeze. It distinguishes the
+observable outcome/minimum invariant from a mechanism proxy and considers deletion, manual action,
+embedding or ephemeral state, an existing platform primitive, and only then a new mechanism.
+
 ## Behavioral invariants
 
 1. Each installable skill has a unique focused user goal, positive and negative triggers, inputs,
@@ -29,6 +34,9 @@ No task must traverse every phase. Direct, small work remains direct.
    and contain rather than overwrite when ownership changes during rollback.
 8. Public claims bind exact source/release bytes and executed evidence. OpenAI endorsement, Plugin
    Directory publication, deployment, and provider execution remain separate external claims.
+9. Material design specifications record the simplest viable necessity decision and an auditable
+   complexity, authority, recovery, and failure-state budget before acceptance is frozen. Already
+   explicit small work bypasses this conditional gate.
 
 ## Owned scope
 
@@ -43,6 +51,8 @@ The release must pass:
 - structural, frontmatter, reference, catalog/profile/provenance, public-hygiene, and release-lock
   validation;
 - one direct activation and one explicit non-activation case per skill;
+- one material mechanism case that prefers a simpler existing primitive, plus one explicit small
+  contract case that proves the direct path remains available;
 - overlap, external dependency, retirement, and unsupported-action cases;
 - contribution behavior with and without GitHub-write authority;
 - clean, exact, managed update, unmanaged conflict, local divergence, pre-publish failure,

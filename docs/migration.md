@@ -25,8 +25,9 @@ allow-listed and cannot advance the toolkit pin automatically.
 ## Recovery
 
 An install receipt binds the selected toolkit/profile generation, target path, and per-file/tree
-hashes. When the source is a Git checkout it records the exact 40-hex source commit; archive or
-other non-Git sources record `null` for that unavailable identity. A receipt does not claim a release
-tag because tags are release provenance outside the receipt record. Restore a prior managed
-generation only if the live target still equals the failed transaction's exact published tree. If
-another actor changed it, contain the failure and report the conflict without destructive rollback.
+hashes. It does not attest a Git commit or release tag, even when the source is a clean checkout;
+`sourceCommit` is `null` and Git identity remains separately verified release provenance. Treat a
+receipt as machine-acceptable only after both closed-schema validation and the public semantic
+validator succeed. Restore a prior managed generation only if the live target still equals the
+failed transaction's exact published tree. If another actor changed it, contain the failure and
+report the conflict without destructive rollback.

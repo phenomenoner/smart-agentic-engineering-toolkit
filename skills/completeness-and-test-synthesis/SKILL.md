@@ -28,6 +28,13 @@ Use repository history, incident evidence, and call sites to identify blast
 radius. Do not infer risk from file count, the word `mutation`, or a workflow
 label alone.
 
+Before adding a test artifact, replay, matrix, harness, or integration layer, ask `Do we really need
+this to make things happen?` and `Is there a simpler and more direct way?` State the invariant first,
+separate evidence outcome from mechanism proxy, and prefer the smallest direct falsifier. Add
+lifecycle/recovery machinery only when the claim requires it, after comparing deletion, manual,
+embedded/ephemeral, and existing-platform options and their complexity, authority, recovery, and
+failure-state cost. This skill judges evidence adequacy; it does not approve a production design.
+
 ## Choose the lowest falsifying altitude
 
 | Tier | What it can establish |

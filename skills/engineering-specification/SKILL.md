@@ -75,32 +75,54 @@ make its effect on the contract explicit.
    materiality. If no material behavior is unresolved, return `NOT_APPLICABLE` and leave the
    direct bounded path available.
 
-2. **Write the behavioral contract.** Specify preconditions, inputs, outputs, state transitions,
+2. **Run the conditional first-principles necessity and complexity gate.** Use this step only when
+   the proposed design introduces or changes a material mechanism, component, protocol, durable
+   state, lifecycle/recovery path, authority owner, persistent artifact, or evidence layer. Ask,
+   literally: **“Do we really need this to make things happen?”** and **“Is there a simpler and
+   more direct way?”** State the externally observable outcome and minimum invariant without
+   naming the proposed implementation, then separate that outcome from mechanism proxies such as
+   having a ledger, worker, lock, receipt, state machine, or more tests.
+
+   Compare alternatives in this order: (a) delete or decline the feature/claim, (b) make it an
+   explicit manual/operator action, (c) embed it in an existing boundary or compute ephemeral
+   state at the decision point, (d) use an existing host or platform primitive, and only then
+   (e) retain a new mechanism or persistent state. Record an auditable complexity budget covering
+   added states/transitions, authority owners, recovery/rollback/reconciliation obligations, and
+   new failure states. Reject custom durable state unless restart survival is itself an observable
+   requirement and cheaper alternatives cannot provide it; when retained, define owner, identity,
+   lifecycle, corruption behavior, recovery, migration, and deletion. Record one decision:
+   `DIRECT`, `MANUAL`, `EMBED`, `PLATFORM_PRIMITIVE`, or `RETAIN_NEW_MECHANISM`, with falsifiable
+   reasons for rejected alternatives and residual failure/non-claims. An already explicit small
+   contract bypasses this gate and keeps the direct path.
+
+3. **Write the behavioral contract.** Specify preconditions, inputs, outputs, state transitions,
    invariants, success behavior, rejection behavior, unsupported behavior, and error semantics.
    Define idempotency, retry, timeout, ordering, and partial-result rules when they affect the
-   observable contract. Use normative language for required and forbidden behavior.
+   observable contract. Freeze acceptance and RED cases only after the necessity decision, and
+   assert the observable outcome/invariant rather than an implementation proxy. Use normative
+   language for required and forbidden behavior.
 
-3. **Map ownership and seams.** For each component or actor, name what it computes, proposes,
+4. **Map ownership and seams.** For each component or actor, name what it computes, proposes,
    authorizes, effects, stores, or delivers. Keep host or user authorization distinct from a
    helper's computation. For a check followed by a mutation, specify the identity, generation,
    lease, fence, capability, or compare-and-swap condition that prevents acting on a replacement
    or stale state. Identify sibling callers that could bypass the same guard and the linearization
    point or equivalent ordering rule.
 
-4. **Define compatibility and failure boundaries.** Record supported old and new inputs, rollout
+5. **Define compatibility and failure boundaries.** Record supported old and new inputs, rollout
    and migration behavior, rollback or absence behavior, and what remains unchanged. List failure
    modes, forbidden traces, authority violations, ambiguous states, and safe containment behavior.
    Distinguish a known cause from a hypothesis; diagnosis or incident replay belongs to its
    corresponding skill when that is the actual request.
 
-5. **Make acceptance falsifiable.** Turn each important requirement into an observable case with
+6. **Make acceptance falsifiable.** Turn each important requirement into an observable case with
    setup, action, expected result, and a failure interpretation. Include the smallest useful
    positive, negative/non-activation, boundary, recovery, and compatibility cases. Choose the
    lowest verification altitude that can distinguish the claim (static, local behavior, a touched
    seam, lifecycle scenario, or an explicitly authorized live check). Do not call a case passed
    merely because a plan or configuration exists.
 
-6. **Handoff and stop.** Return a compact specification packet with explicit non-goals, risks,
+7. **Handoff and stop.** Return a compact specification packet with explicit non-goals, risks,
    assumptions, open decisions, evidence gaps, and the next safe action. State whether a later
    implementation request would have enough information, but do not edit implementation files or
    claim that implementation, tests, review, release, or delivery has happened. If a required
@@ -124,15 +146,20 @@ For `SPECIFIED`, return a packet containing, at minimum:
 
 1. **Intent and scope** - desired outcome, in-scope behavior, non-goals, actors, and affected
    seams.
-2. **Normative contract** - inputs, outputs, state transitions, invariants, success, rejection,
+2. **Necessity decision when material** - observable outcome and minimum invariant; outcome/proxy
+   separation; the ordered deletion, manual, embedding/ephemeral, platform-primitive, and new-
+   mechanism alternatives; an auditable complexity budget; the selected decision and falsifiable
+   rejections; and residual failure/non-claims. Omit this field for an already explicit small
+   contract rather than manufacturing a gate.
+3. **Normative contract** - inputs, outputs, state transitions, invariants, success, rejection,
    unsupported, retry, timeout, ordering, and partial-result semantics as applicable.
-3. **Ownership and compatibility** - authority/effect/delivery boundaries, identity or generation
+4. **Ownership and compatibility** - authority/effect/delivery boundaries, identity or generation
    rules, sibling-call protections, supported versions, migration, rollback, and absence behavior.
-4. **Risks and failure semantics** - forbidden behavior, unsafe or ambiguous states, containment,
+5. **Risks and failure semantics** - forbidden behavior, unsafe or ambiguous states, containment,
    assumptions, and residual uncertainty.
-5. **Falsifiable acceptance** - named cases with setup, action, expected observation, and the
+6. **Falsifiable acceptance** - named cases with setup, action, expected observation, and the
    lowest adequate verification altitude, including negative and recovery cases where relevant.
-6. **Handoff** - open questions and dependencies, evidence gaps, and the explicitly authorized
+7. **Handoff** - open questions and dependencies, evidence gaps, and the explicitly authorized
    next action (or a statement that implementation authorization is not present).
 
 For `NOT_APPLICABLE`, explain the direct bounded path in one or two sentences and do not manufacture
@@ -201,6 +228,15 @@ Select `engineering-specification` and return `SPECIFIED` or `BLOCKED` with the 
 seams, who may authorize refresh and revocation, old-client compatibility behavior, expiry and
 retry semantics, forbidden stale-token traces, and falsifiable positive, rejection, and restart
 cases. State that no implementation or delivery claim is made.
+
+**Request:** "Add a durable lease ledger even though one existing atomic host primitive can enforce
+the required single-writer outcome."
+
+Select `engineering-specification`, ask both necessity questions, distinguish the single-writer
+invariant from the ledger proxy, compare the ordered alternatives and their complexity, authority,
+recovery, and failure-state costs, and choose the platform primitive unless restart-surviving state
+is demonstrated as an observable requirement. Freeze RED cases against the invariant, not ledger
+existence.
 
 ### Do not activate
 

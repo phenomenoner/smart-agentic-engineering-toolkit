@@ -72,6 +72,7 @@ Scope and explicit authority:
 Repository / branch / commit / dirty summary:
 Current state:
 Decisions and rationale:
+Necessity decision when material (outcome/invariant; both questions; selected alternative; added state/authority/recovery/failure-state cost):
 Active blockers and stop conditions:
 Evidence pointers and hashes:
 Work in flight and exclusive owners:
@@ -82,6 +83,12 @@ Claims not yet proven:
 Prefer append-only dated entries when older states matter. Correct a factual mistake visibly; do not
 rewrite a frozen review or release record. When a new candidate invalidates old executable evidence,
 record that relation instead of silently reusing it.
+
+For a material mechanism decision recorded here, preserve the compact answers to `Do we really need
+this to make things happen?` and `Is there a simpler and more direct way?`, plus the selected
+deletion, manual, embedding/ephemeral, platform-primitive, or retained-mechanism outcome and its
+complexity, authority, recovery, and failure-state cost. Point to the canonical specification; the
+WAL is not a second design gate and remains optional for short work.
 
 ## Update boundaries
 

@@ -2,8 +2,14 @@
 
 This is a navigation guide, not an installable catch-all skill.
 
-1. **Specify when needed.** Resolve material behavior, ownership, compatibility, failure semantics,
-   and falsifiable acceptance. Skip this phase when the contract is already sufficient.
+1. **Frame and specify when needed.** State the outcome and minimum invariant. When a material
+   mechanism is proposed, ask `Do we really need this to make things happen?` and `Is there a
+   simpler and more direct way?`; run the conditional necessity/complexity gate owned by
+   `engineering-specification` before freezing the contract or RED cases. Compare deletion,
+   manual, embedded/ephemeral, platform-primitive, and retained-mechanism paths with their
+   complexity, authority, recovery, and failure-state cost. Skip this phase when the contract and
+   mechanism are already sufficient, and bind later acceptance to observable behavior rather than
+   a mechanism proxy.
 2. **Implement.** Make the smallest coherent authorized slice and run the lowest check that can
    falsify its claim.
 3. **Review.** Use a lightweight findings-first review for ordinary changes. Use a formal independent

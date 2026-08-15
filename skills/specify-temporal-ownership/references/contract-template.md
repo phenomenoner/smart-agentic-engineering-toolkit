@@ -3,6 +3,17 @@
 Use this template as a bounded engineering artifact. Omit genuinely irrelevant fields only with an
 explicit `N/A` rationale.
 
+## 0. Upstream necessity decision
+
+- `Do we really need this to make things happen?`:
+- `Is there a simpler and more direct way?`:
+- Observable outcome and minimum invariant:
+- Alternatives considered: deletion / manual / embedding or ephemeral state / existing platform
+  primitive / retained new mechanism:
+- Selected mechanism and falsifiable reason:
+- Added durable states/transitions, authority owners, recovery obligations, and failure states:
+- Residual failure and non-claims:
+
 ## 1. Scope and authority
 
 - Decision claim:
@@ -83,6 +94,7 @@ classes.
 
 ## Atomic closure checklist
 
+- [ ] The contract carries the upstream conditional necessity decision without duplicating it.
 - [ ] Every actor and authority boundary is named.
 - [ ] Every mutable resource has a full identity tuple.
 - [ ] Generation/epoch/lease/fence uniqueness and reuse assumptions are explicit.

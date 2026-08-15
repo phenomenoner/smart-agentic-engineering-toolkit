@@ -71,6 +71,13 @@ retirement requires a reason, successor, last-supported version, implicit-invoca
 migration path, and proof that active catalogs/installers no longer point to the old name before
 removal.
 
+Before adding a skill, protocol, durable state, lifecycle, or public artifact, ask `Do we really
+need this to make things happen?` and `Is there a simpler and more direct way?` Record the observable
+outcome/minimum invariant, why deletion, a manual action, embedding/ephemeral state, an existing
+platform primitive, or an existing canonical skill cannot own it, and an auditable complexity
+budget for added state, authority, recovery, and failure states. Prefer updating the existing owner;
+do not create a new catalog/profile surface merely to host the safeguard.
+
 Classify version impact:
 
 - major: rename/removal, authority boundary, incompatible I/O/evidence contract, mandatory

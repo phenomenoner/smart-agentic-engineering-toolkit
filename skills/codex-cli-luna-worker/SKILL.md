@@ -39,7 +39,10 @@ preference is not material.
 ## Preconditions
 
 1. Read and apply the active `baton-fanout-skill`.
-2. Establish the outcome, direct-work alternative, independence, exclusive ownership, and main-agent closure owner.
+2. Establish the outcome, direct-work alternative, independence, exclusive ownership, and
+   main-agent closure owner. Ask `Do we really need this to make things happen?` and `Is there a
+   simpler and more direct way?`; record why direct work or an existing platform route is
+   insufficient and count the added coordination, authority, recovery, and failure-state cost.
 3. Confirm the contract is stable and the work is bounded code generation. Keep architecture, authorization, security, release, review, and live-operation decisions with the main agent.
 4. Capture the repository status and hashes of the target surface. Preserve existing dirty work.
 5. Put no credentials, connection profiles, private receipts, or secrets in the worker prompt.

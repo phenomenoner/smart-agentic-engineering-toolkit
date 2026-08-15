@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-from scripts.install_toolkit import Installer
+from scripts.install_toolkit import Installer, validate_install_receipt
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMAS = ROOT / "schemas"
@@ -29,6 +30,10 @@ def test_catalog_and_profiles_match_their_public_schemas() -> None:
 
 
 def test_install_receipt_schema_accepts_exact_tree_evidence() -> None:
+    files: list[dict[str, object]] = []
+    digest = hashlib.sha256(
+        json.dumps(files, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
     receipt = {
         "schemaVersion": 1,
         "toolkitVersion": "0.1.0",
@@ -39,9 +44,9 @@ def test_install_receipt_schema_accepts_exact_tree_evidence() -> None:
         "skills": {
             "engineering-specification": {
                 "profile": "core",
-                "sourceTreeSha256": "a" * 64,
-                "installedTreeSha256": "a" * 64,
-                "files": [],
+                "sourceTreeSha256": digest,
+                "installedTreeSha256": digest,
+                "files": files,
             }
         },
         "transaction": {
@@ -54,6 +59,7 @@ def test_install_receipt_schema_accepts_exact_tree_evidence() -> None:
     }
 
     validator("install-receipt.schema.json").validate(receipt)
+    assert validate_install_receipt(receipt) == []
 
 
 def test_real_installer_receipt_matches_public_schema(tmp_path: Path) -> None:
@@ -80,6 +86,7 @@ def test_real_installer_receipt_matches_public_schema(tmp_path: Path) -> None:
 
     receipt = Installer(source, tmp_path / "target").install("core")
     validator("install-receipt.schema.json").validate(receipt)
+    assert validate_install_receipt(receipt) == []
 
 
 def test_improvement_proposal_schema_preserves_pr_authority_boundary() -> None:

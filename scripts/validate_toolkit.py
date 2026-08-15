@@ -8,6 +8,7 @@ import fnmatch
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -72,6 +73,84 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _git_read(root: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ["git", "-C", str(root), *arguments],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip()
+
+
+def _candidate_identity(root: Path) -> tuple[dict[str, str | None], bool]:
+    """Read a bounded, self-consistent identity for one tracked Git candidate."""
+
+    root = root.resolve()
+    identity: dict[str, str | None] = {
+        "commit": None,
+        "tree": None,
+        "catalogSha256": None,
+        "toolkitVersion": None,
+        "pluginVersion": None,
+    }
+    try:
+        top_level = Path(_git_read(root, "rev-parse", "--show-toplevel")).resolve()
+        first_commit = _git_read(root, "rev-parse", "--verify", "HEAD").lower()
+        first_tree = _git_read(root, "rev-parse", "--verify", "HEAD^{tree}").lower()
+        first_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=no")
+
+        catalog_path = root / "catalog" / "skills.json"
+        toolkit_path = root / "manifest" / "toolkit.json"
+        plugin_path = root / ".codex-plugin" / "plugin.json"
+        first_catalog = catalog_path.read_bytes()
+        first_toolkit = toolkit_path.read_bytes()
+        first_plugin = plugin_path.read_bytes()
+
+        second_catalog = catalog_path.read_bytes()
+        second_toolkit = toolkit_path.read_bytes()
+        second_plugin = plugin_path.read_bytes()
+        second_commit = _git_read(root, "rev-parse", "--verify", "HEAD").lower()
+        second_tree = _git_read(root, "rev-parse", "--verify", "HEAD^{tree}").lower()
+        second_status = _git_read(root, "status", "--porcelain=v1", "--untracked-files=no")
+
+        toolkit = json.loads(first_toolkit.decode("utf-8"))
+        plugin = json.loads(first_plugin.decode("utf-8"))
+        if not isinstance(toolkit, dict) or not isinstance(plugin, dict):
+            return identity, False
+        identity.update(
+            {
+                "commit": second_commit,
+                "tree": second_tree,
+                "catalogSha256": hashlib.sha256(first_catalog).hexdigest(),
+                "toolkitVersion": toolkit.get("toolkitVersion"),
+                "pluginVersion": plugin.get("version"),
+            }
+        )
+        stable = (
+            top_level == root
+            and re.fullmatch(r"[0-9a-f]{40}", first_commit) is not None
+            and re.fullmatch(r"[0-9a-f]{40}", first_tree) is not None
+            and (first_commit, first_tree) == (second_commit, second_tree)
+            and not first_status
+            and not second_status
+            and first_catalog == second_catalog
+            and first_toolkit == second_toolkit
+            and first_plugin == second_plugin
+            and isinstance(identity["toolkitVersion"], str)
+            and isinstance(identity["pluginVersion"], str)
+        )
+        return identity, stable
+    except (
+        FileNotFoundError,
+        OSError,
+        subprocess.CalledProcessError,
+        UnicodeDecodeError,
+        json.JSONDecodeError,
+    ):
+        return identity, False
+
+
 def validate_behavior_result(root: Path, result: object) -> list[dict[str, str]]:
     """Validate behavior-result semantics against the frozen acceptance corpus.
 
@@ -117,6 +196,39 @@ def validate_behavior_result(root: Path, result: object) -> list[dict[str, str]]
             "behavior result must be an object",
         )
         return errors
+
+    expected_candidate, candidate_verifiable = _candidate_identity(Path(root))
+    candidate = result.get("candidate")
+    if not candidate_verifiable:
+        _error(
+            errors,
+            "EVAL_RESULT_CANDIDATE_UNVERIFIABLE",
+            Path("candidate"),
+            "root does not identify one stable, tracked-clean Git candidate",
+        )
+    if isinstance(candidate, dict):
+        comparisons = (
+            ("commit", "EVAL_RESULT_CANDIDATE_COMMIT"),
+            ("tree", "EVAL_RESULT_CANDIDATE_TREE"),
+            ("catalogSha256", "EVAL_RESULT_CANDIDATE_CATALOG_HASH"),
+            ("pluginVersion", "EVAL_RESULT_PLUGIN_VERSION"),
+        )
+        for field, code in comparisons:
+            expected = expected_candidate.get(field)
+            if expected is not None and candidate.get(field) != expected:
+                _error(
+                    errors,
+                    code,
+                    Path(f"candidate.{field}"),
+                    f"result {field} does not match the exact root candidate",
+                )
+    if result.get("toolkitVersion") != expected_candidate.get("toolkitVersion"):
+        _error(
+            errors,
+            "EVAL_RESULT_TOOLKIT_VERSION",
+            Path("toolkitVersion"),
+            "result toolkitVersion does not match manifest/toolkit.json",
+        )
     if result.get("caseCorpusSha256") != expected_hash:
         _error(
             errors,
@@ -302,11 +414,11 @@ def parse_frontmatter(text: str) -> dict[str, Any]:
                 nested_line = lines[index].strip()
                 if nested_line and ":" in nested_line:
                     nested_key, nested_value = nested_line.split(":", 1)
-                    nested[nested_key.strip()] = nested_value.strip().strip('"\'')
+                    nested[nested_key.strip()] = nested_value.strip().strip("\"'")
                 index += 1
             result[key] = nested
             continue
-        result[key] = value.strip('"\'')
+        result[key] = value.strip("\"'")
         index += 1
     return result
 
@@ -593,7 +705,9 @@ def validate_toolkit(root: Path, *, release: bool = False) -> list[dict[str, str
             "catalog skill names must be present and unique",
         )
     skill_dirs = sorted(
-        path for path in (root / "skills").iterdir() if path.is_dir() and not path.name.startswith(".")
+        path
+        for path in (root / "skills").iterdir()
+        if path.is_dir() and not path.name.startswith(".")
     )
     dir_names = {path.name for path in skill_dirs}
     if set(catalog_by_name) != dir_names:
@@ -647,12 +761,12 @@ def validate_toolkit(root: Path, *, release: bool = False) -> list[dict[str, str
 
     cases = documents["evals"].get("cases", [])
     case_ids = [case.get("id") for case in cases]
-    if len(cases) != 61 or len(case_ids) != len(set(case_ids)) or None in case_ids:
+    if len(cases) != 63 or len(case_ids) != len(set(case_ids)) or None in case_ids:
         _error(
             errors,
             "EVAL_CASE_SET",
             required_json["evals"],
-            "the frozen 0.1.0 corpus must contain 61 uniquely identified cases",
+            "the frozen 0.1.0 corpus must contain 63 uniquely identified cases",
         )
     for name in sorted(dir_names):
         if not any(name in case.get("expectedSelected", []) for case in cases):
@@ -775,10 +889,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.write_lock:
         path = args.root / "manifest" / "public-lock.json"
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps(build_public_lock(args.root.resolve()), indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
+        with path.open("w", encoding="utf-8", newline="\n") as stream:
+            stream.write(
+                json.dumps(build_public_lock(args.root.resolve()), indent=2, ensure_ascii=False)
+                + "\n"
+            )
         args.release = True
     errors = validate_toolkit(args.root, release=args.release)
     payload = {

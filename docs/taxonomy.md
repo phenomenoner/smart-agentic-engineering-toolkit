@@ -21,6 +21,12 @@ The arrows are possible handoffs, not an automatic chain. For example, a known s
 directly to implementation; an ordinary review does not require formal release artifacts; and a
 short edit does not need a WAL.
 
+When a material plan introduces a mechanism, state the outcome/invariant and ask `Do we really need
+this to make things happen?` and `Is there a simpler and more direct way?` The conditional full gate
+belongs to `engineering-specification`; implementation, review, evidence, drill, continuity, and
+adapter surfaces carry only short handoff/challenge guards. No additional skill, status, schema,
+catalog row, or mandatory lifecycle is created.
+
 ## Distinctions that prevent overlap
 
 - `engineering-debugging` establishes cause. `incident-to-regression` packages an already observed,
