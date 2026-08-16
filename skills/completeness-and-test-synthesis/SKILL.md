@@ -3,6 +3,7 @@ name: completeness-and-test-synthesis
 description: Engineering completeness and test-evidence synthesis for explicit readiness judgments, recurring regressions, green-tests-but-broken-real-use failures, cross-component or lifecycle changes, and choosing the lowest verification altitude that can falsify a claim. Use when the user asks whether work is actually done or ready, when evidence coverage is disputed, or when logs and receipts should become regression tests. Do not trigger for every ordinary implementation or merely because a task ends.
 license: MIT
 metadata:
+  version: "0.1.1"
   toolkit-version: "0.1.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
@@ -104,6 +105,24 @@ For a local implementation, a short statement of behavior, command, result, and
 remaining gap is enough. Use a table only when several independent claims or an
 explicit readiness/release decision make it clearer.
 
+## Progress explicit releases incrementally
+
+When the claim spans a release, migration, cutover, installed pickup, fresh host, or external
+publication, read
+[references/incremental-release-progression.md](references/incremental-release-progression.md).
+Keep source correctness, artifact identity, formal review, installed instance, live host, and
+external publication as separate evidence gates.
+
+Classify the exact changed Git objects and their first executable seam before invalidating evidence.
+Reopen the affected cells and downstream claims; do not automatically discard runtime evidence for
+a WAL, documentation, receipt, locator, or reviewer-envelope change that cannot influence that
+runtime seam. Conversely, launcher, dependency, plugin, bundled-skill, MCP, or executable-semantic
+drift reopens every installed or live claim that depends on it. If high-risk equivalence cannot be
+proved, fail closed and reacquire the uncertain cells.
+
+This progression is conditional. A small ordinary change with no readiness, release, migration, or
+cutover decision stays on its direct focused-check path.
+
 ## Synthesize the smallest missing test
 
 When the check finds a material gap, create the smallest durable test that
@@ -147,9 +166,13 @@ These requirements do not apply to ordinary local test output.
 ## Keep review proportional
 
 Independent review is evidence for an explicit review, release, migration,
-cutover, or other high-risk gate - not a required blessing for each patch.
-Stabilize one coherent candidate before a formal review. If ordinary local
-checks close the requested claim, stop there.
+cutover, or other high-risk gate - not a required blessing for each patch. Stabilize executable
+candidate bytes and reviewed contracts before a formal review. Keep that gate separate from
+installed-runtime pickup: after actual `PASS`, install and transition the exact final artifact once,
+then perform the fresh native and actual drill required by the claim. A changed hash requires a
+newly bound whole-candidate verdict, but unchanged review-cell evidence may be reused when exact
+object-and-seam analysis proves it remains applicable. If ordinary local checks close the requested
+claim, stop there.
 
 ## Project adapter
 

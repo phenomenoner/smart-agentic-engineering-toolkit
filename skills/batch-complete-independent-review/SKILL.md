@@ -3,6 +3,7 @@ name: batch-complete-independent-review
 description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review. Use the formal hash-bound fixed-point gate only for an explicitly independent, final, release, migration, or pre-cutover review, a project-mandated gate, or recurring reviews that keep discovering sibling blockers one round at a time. Do not trigger merely because implementation work occurred.
 license: MIT
 metadata:
+  version: "0.1.1"
   toolkit-version: "0.1.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
@@ -37,6 +38,17 @@ Use the remaining hash-bound protocol only when the request or project contract
 needs an independent/final/release/migration/pre-cutover decision, or when a
 recurring sibling-blocker pattern makes fixed-point coverage materially useful.
 Do not use formal artifacts merely to make an ordinary review look rigorous.
+
+For a release or cutover, start formal review only after executable candidate bytes and reviewed
+contracts are stable. Complete the hash-bound review before final installed-runtime pickup; do not
+alternate whole formal review waves with install, restart, or fresh-host checks. The
+`completeness-and-test-synthesis` owner decides which downstream evidence cells a pickup result can
+reopen.
+
+An intake, binding, or review-tool defect does not become a candidate-behavior finding merely
+because it prevents a verdict. Report the formal gate as `INCOMPLETE`, repair and revalidate the
+affected envelope, locator, or tool seam, and preserve unrelated candidate-behavior evidence. Use
+`BLOCKED` only when supported evidence identifies an actual candidate contract violation.
 
 ## Challenge mechanism necessity when material
 
@@ -193,9 +205,15 @@ is already known to be blocked while the complete blocker batch or required
 evidence closure remains unfinished. It can never substitute for
 `BATCH_COMPLETE` in a lane or `AUDITED_BATCH_COMPLETE` in synthesis.
 
-After implementation changes, freeze the actual new bytes, reacquire the
-mapped evidence, and obtain the project-required fresh review. Historical
-findings remain useful; their verdict never transfers to new bytes.
+After any candidate-byte change, freeze and bind the actual new bytes; the previous
+whole-candidate verdict never transfers to the new hash. Record the exact changed Git objects and
+first affected executable seams, then reopen the mapped review cells and downstream claims. A new
+wave may reuse unchanged cell evidence only when its contract, subject bytes, dependencies,
+required tier, and reviewer access are proven unaffected. An executable semantic change invalidates
+every dependent review cell. A documentation, receipt, review-envelope, or locator repair still
+requires a new binding and affected-cell review, but it does not by itself require replaying
+candidate behavior. When equivalence is material and cannot be proved, fail closed and reopen the
+uncertain cells.
 
 Treat frozen evidence tooling as append-only. If a validator confuses an
 immutable executed artifact with a mutable build path, do not edit a self-bound

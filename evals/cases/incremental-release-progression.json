@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.1.0",
+  "status": "supplemental",
+  "scope": "incremental release evidence progression",
+  "cases": [
+    {
+      "id": "INCREMENTAL-RELEASE-DOCS-ONLY",
+      "class": "workflow",
+      "promptOrCondition": "Correct only public release wording after executable behavior and fresh-host evidence have passed; no runtime, launcher, dependency, plugin, bundled-skill, or MCP behavior changed.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Preserves executable and runtime evidence, reopens the affected documentation, public-hygiene, and review cells, adds artifact or publication identity only when final asset bytes changed, and still reads back the published bytes."
+    },
+    {
+      "id": "INCREMENTAL-RELEASE-REVIEW-ENVELOPE",
+      "class": "workflow",
+      "promptOrCondition": "Repair a formal-review envelope or candidate locator without changing candidate behavior or its executable seams.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Rebinds and revalidates the affected review intake, preserves candidate-behavior evidence, and reports an intake or tooling gap as INCOMPLETE rather than inventing a product blocker."
+    },
+    {
+      "id": "INCREMENTAL-RELEASE-RUNTIME-SEAM",
+      "class": "workflow",
+      "promptOrCondition": "The release candidate changes a launcher, plugin manifest, bundled skill, runtime dependency, or MCP behavior after earlier pickup evidence.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Reopens artifact and installed-instance identity plus the fresh-task native and actual drill cells; stale pickup evidence cannot authorize the changed runtime seam."
+    },
+    {
+      "id": "INCREMENTAL-RELEASE-SEMANTIC-CHANGE",
+      "class": "workflow",
+      "promptOrCondition": "Executable semantics change after a formal release review has passed.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "The old whole-candidate verdict does not transfer; a new hash-bound wave reopens every review and downstream evidence cell that depends on the changed semantics."
+    },
+    {
+      "id": "NON-INCREMENTAL-RELEASE-ORDINARY-CHANGE",
+      "class": "nonactivation",
+      "promptOrCondition": "Fix one ordinary README typo and run the focused link check; no readiness, release, migration, or cutover decision was requested.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "observablePass": "Uses the direct bounded implementation path without a formal review wave, install, restart, fresh-host drill, or publication machinery."
+    }
+  ]
+}

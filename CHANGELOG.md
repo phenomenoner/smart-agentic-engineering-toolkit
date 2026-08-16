@@ -4,6 +4,10 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Separate source correctness, artifact identity, formal review, installed instance, live host, and
+  external publication evidence; invalidate by exact changed objects and executable seams so
+  documentation or review-intake repairs reuse unaffected evidence while runtime drift and
+  executable semantic changes reopen the required pickup, drill, and review cells.
 - Clarify that `specify-temporal-ownership` requires a concrete temporal check-then-effect seam,
   and add a static cross-component ownership non-activation case that forbids temporal ceremony when
   runtime mutation, replacement, delete, retry, and concurrency are out of scope.
