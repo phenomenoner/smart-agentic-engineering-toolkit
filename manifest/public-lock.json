@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 1765,
-      "sha256": "eecbb282d34be635ff1bd0473453545687d6aab63f750c831f5187dec340662e"
+      "length": 2063,
+      "sha256": "eec2321fe8c29ba68ff686328ab0661257d665f1caa7e8d971427b0b012821e4"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -141,8 +141,8 @@
     },
     {
       "path": "evals/cases/acceptance.json",
-      "length": 25150,
-      "sha256": "4ac8a1c9d09e8d0d79abb6be0096343c8f9cf98f303faecb7e36700f41b94949"
+      "length": 25423,
+      "sha256": "d61577c993c53ad3d7b13118ecd8bd464a3d22d94a70583a70bbb018f301846c"
     },
     {
       "path": "manifest/provenance.json",
@@ -541,13 +541,13 @@
     },
     {
       "path": "skills/specify-temporal-ownership/SKILL.md",
-      "length": 8458,
-      "sha256": "c8d8aeb8f288484d04dee03195811bdb7a23fab5558f93b88f46cc1afebd08d4"
+      "length": 9024,
+      "sha256": "58884d0c9c0df6c85d92c604edbfe3074a8a9d12a93ee329cc659b66e2517db4"
     },
     {
       "path": "skills/specify-temporal-ownership/agents/openai.yaml",
-      "length": 317,
-      "sha256": "773167bc77caf347b580a729d530a356ae7e13cdc94acf43d601520674cef3b1"
+      "length": 319,
+      "sha256": "78f75ac91120801adbb806ec09dfcf951982fd24ade5e93520ac3d178c73278a"
     },
     {
       "path": "skills/specify-temporal-ownership/references/contract-template.md",
@@ -566,8 +566,8 @@
     },
     {
       "path": "tests/test_candidate_receipt_contracts.py",
-      "length": 18214,
-      "sha256": "3b948e9280578d78088ed24f60d11fbe624ed8c38604b292c8b5a87243b3fa55"
+      "length": 19175,
+      "sha256": "e32767ebc6538488f998eea9216b09c2de3255608ba14937db5601d976e4cac2"
     },
     {
       "path": "tests/test_first_principles_eval_contracts.py",

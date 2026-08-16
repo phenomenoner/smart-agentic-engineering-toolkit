@@ -1,6 +1,6 @@
 interface:
   display_name: "Specify Temporal Ownership"
-  short_description: "Design race-safe ownership and lifecycle contracts"
+  short_description: "Guard concrete temporal check-then-effect race seams"
   default_prompt: "Use $specify-temporal-ownership to design a race-safe lifecycle contract and falsifiable concurrency tests for this change."
 
 policy:

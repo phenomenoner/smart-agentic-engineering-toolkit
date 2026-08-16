@@ -1,9 +1,9 @@
 ---
 name: specify-temporal-ownership
-description: Specify, review, or test lifecycle and concurrent mutations where identity, ownership, authority, or current state is checked before delete, signal, overwrite, rollback, retry, reconcile, or another irreversible effect. Use for TOCTOU, ABA, PID or handle reuse, replacement cleanup, generations, leases, fences, indeterminate effects, and sibling callers that may bypass a guard. Do not use for pure reads, immutable transformations, or single-owner local state with no replacement or concurrency seam.
+description: Specify, review, or test a concrete temporal check-then-effect seam where identity, ownership, authority, or current state is observed before a destructive or irreversible mutation and can change before that mutation. Use for TOCTOU, ABA, PID or handle reuse, replacement cleanup, generations, leases, fences, indeterminate effects, and sibling callers that may bypass a guard. Do not select merely because a general specification mentions ownership, revocation, multiple components, or failure semantics; require an identified mutable resource, differing actor/generation/time, and post-observation destructive effect. Do not use for pure reads, immutable transformations, or single-owner local state with no replacement or concurrency seam.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
   toolkit-version: "0.1.0"
   toolkit-phase: "temporal-assurance"
   toolkit-contribution-protocol: "v1"
@@ -52,6 +52,11 @@ Use the full workflow only when all three are present:
 1. a mutable resource or externally visible effect;
 2. two actors, generations, attempts, callbacks, or times at which ownership can differ; and
 3. a destructive or irreversible mutation after an observation or authorization decision.
+
+General ownership, revocation, lifecycle, or cross-component language is not enough. If the task
+only asks for a broader contract and does not identify a mutable target, a time-separated authority
+change, and a later destructive effect, stay inactive and leave ownership and failure semantics to
+`engineering-specification`.
 
 Return `NOT_APPLICABLE` with a short rationale when this seam does not exist. Do not manufacture a
 formal model, matrix, or concurrency ceremony for a pure or single-owner transformation.

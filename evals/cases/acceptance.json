@@ -220,12 +220,14 @@
     {
       "id": "NON-TEMPORAL-01",
       "class": "nonactivation",
-      "promptOrCondition": "Convert an immutable parsed record to JSON with one actor and no side effect.",
-      "expectedSelected": [],
+      "promptOrCondition": "Define which of API, worker, and client owns refresh/revocation field documentation, compatibility docs, and deprecation approval; runtime mutation, retry, replacement, delete, and concurrency are explicitly out of scope.",
+      "expectedSelected": [
+        "engineering-specification"
+      ],
       "expectedNotSelected": [
         "specify-temporal-ownership"
       ],
-      "observablePass": "Returns NOT_APPLICABLE or stays inactive without concurrency ceremony."
+      "observablePass": "Produces only static ownership and documentation governance; no temporal model, generation/CAS, linearization point, interleaving test, or temporal verdict."
     },
     {
       "id": "ACT-EVOLVE-01",
