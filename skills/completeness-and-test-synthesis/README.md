@@ -6,6 +6,10 @@ support the exact readiness claim, and what is the smallest missing test?
 It is intentionally not a mandatory end-of-task gate. Ordinary local changes
 should use ordinary local checks.
 
+For an explicit release, migration, or cutover, it also owns the incremental evidence map: source
+correctness, artifact identity, formal review, installed instance, live host, and external
+publication remain separate gates, and only cells affected by changed bytes or seams are reopened.
+
 ## Core model
 
 Choose the lowest altitude where the relevant defect would actually fail:
@@ -46,11 +50,12 @@ completeness-and-test-synthesis/
 ├── README.md
 ├── SKILL.md
 └── references/
+    ├── incremental-release-progression.md
     └── receipt-to-replay.md
 ```
 
-The replay reference is loaded only when recorded evidence must become a
-deterministic fixture.
+The progression reference is loaded only for an explicit cross-stage release decision. The replay
+reference is loaded only when recorded evidence must become a deterministic fixture.
 
 ## Installation
 

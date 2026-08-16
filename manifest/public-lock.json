@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 2063,
-      "sha256": "eec2321fe8c29ba68ff686328ab0661257d665f1caa7e8d971427b0b012821e4"
+      "length": 2430,
+      "sha256": "6b991556427b333044e41a486680b12f229dccb16e910f4b8730f7ce01cc9c8c"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -136,13 +136,18 @@
     },
     {
       "path": "evals/README.md",
-      "length": 2198,
-      "sha256": "ead2d05fc5e6c9d9116e914c3717b8603040cef3bb77cb4a3b55449c5533910b"
+      "length": 2532,
+      "sha256": "cf48ffe83c3232f7c39aa93d7c8dea0195bc3d92a9ed85802e18c5369e5edd86"
     },
     {
       "path": "evals/cases/acceptance.json",
       "length": 25423,
       "sha256": "d61577c993c53ad3d7b13118ecd8bd464a3d22d94a70583a70bbb018f301846c"
+    },
+    {
+      "path": "evals/cases/incremental-release-progression.json",
+      "length": 3140,
+      "sha256": "6fe355c4ad6ec492a57a316ad0036ecd3e6371603dba2ca71aa14f95773f0f5a"
     },
     {
       "path": "manifest/provenance.json",
@@ -246,8 +251,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 16801,
-      "sha256": "6ad01cf16ed89590f193f2853f32d7f624109c9798f8e4c9a02f89d2e279ec51"
+      "length": 18151,
+      "sha256": "6f08b1725d0b838ca08d8fc49b4a0455d21621355f9a0e9cda5443d34dbcaaa2"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -391,18 +396,23 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/README.md",
-      "length": 2299,
-      "sha256": "6c4b41d1cd7fb6939d2207de8f74af800f1215feab0636d3668b044a273e4a36"
+      "length": 2724,
+      "sha256": "924a498cc1895a89f639b23ed31f860c5fb842cd3bbd133aee43e673ddc6ea28"
     },
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
-      "length": 9222,
-      "sha256": "df050f966ffa036153d44d9171e76bf0d3603561908ce5c3a2bebdf33225412f"
+      "length": 10749,
+      "sha256": "13f06e49ffcf72752f518f22eebcdb0cb9a2d297f48d8205ff071d110be6aced"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
       "length": 319,
       "sha256": "3e2c0cf7c8c6a2bdb963093778c7da0f548506a2c3773e9757208482f2005b7f"
+    },
+    {
+      "path": "skills/completeness-and-test-synthesis/references/incremental-release-progression.md",
+      "length": 8689,
+      "sha256": "787c756d3229750241c5e21abf510ca3a078a2091519c68e49c67b326bf6214a"
     },
     {
       "path": "skills/completeness-and-test-synthesis/references/receipt-to-replay.md",
@@ -421,8 +431,8 @@
     },
     {
       "path": "skills/engineering-implementation/SKILL.md",
-      "length": 6247,
-      "sha256": "1bd1791bb701163dbdeafc608e06955a7900708251937219f97e4c57f3cb7cf3"
+      "length": 6689,
+      "sha256": "90d010ff7b2263d5b8a63a1c6afb7d8f177fddd76f00926c7258f2fac55f9466"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -573,6 +583,11 @@
       "path": "tests/test_first_principles_eval_contracts.py",
       "length": 2108,
       "sha256": "8c61f88b027b1a6d5aad8ce9a1268e80d694620cb3486cd8b75110081226037b"
+    },
+    {
+      "path": "tests/test_incremental_release_progression.py",
+      "length": 3484,
+      "sha256": "507cde88c74580f5e44de0a9bf3c3c3fe753897e88b448bd12fcdd1918c9d296"
     },
     {
       "path": "tests/test_install_toolkit.py",

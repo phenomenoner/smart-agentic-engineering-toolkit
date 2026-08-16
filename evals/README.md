@@ -4,6 +4,11 @@
 catalog has positive and negative coverage. It does **not** prove that a host selected the expected
 skill or followed its authority boundary.
 
+`cases/incremental-release-progression.json` is a supplemental maintenance corpus. It distinguishes
+affected-slice evidence reuse from unsafe reuse across executable, review-intake, installed-runtime,
+and publication seams without changing the frozen 0.1.0 case count. It also preserves the direct
+path for an ordinary small change.
+
 The mechanism-necessity cases observe whether output asks `Do we really need this to make things
 happen?` and `Is there a simpler and more direct way?`, separates outcome from proxy, compares
 simpler alternatives, and preserves the direct path. They cannot prove a model's private reasoning;

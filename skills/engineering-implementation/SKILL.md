@@ -3,6 +3,7 @@ name: engineering-implementation
 description: Implement an authorized source, test, configuration, or documentation change when the behavioral contract is sufficiently clear. Use the smallest coherent slice, preserve unrelated work, add a discriminating regression for a safely reproducible existing defect when useful, and verify at the lowest altitude that can falsify the changed claim. Do not use for plan-only, diagnose-only, review-only, publication, live operation, or materially unresolved authority or requirements. It does not automatically authorize commits, pushes, worktrees, full suites, fan-out, or external effects.
 license: MIT
 metadata:
+  version: "0.1.1"
   toolkit-version: "0.1.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
@@ -100,11 +101,16 @@ explicit release gate requires it, preferably once after executable bytes stabil
 3. Inspect the diff for unrelated edits, generated/private state, stale public claims, and platform or
    lifecycle siblings.
 4. Run the focused discriminator and any credible negative, boundary, recovery, or concurrency case.
-5. Reacquire only evidence invalidated by changed executable bytes or environment. Documentation or
-   receipt-only edits do not automatically invalidate code results.
+5. Record the exact changed Git objects and first executable seam, then reacquire only evidence
+   invalidated by those bytes, their dependencies, or the required environment. Documentation or
+   receipt-only edits do not automatically invalidate code results. For an explicit release or
+   cutover, hand the change-to-evidence map to `completeness-and-test-synthesis`; implementation does
+   not start or repeatedly interleave formal review, installed pickup, or publication gates.
 
 ## Finish honestly
 
 Report changed files, exact meaningful checks and results, residual gaps, and whether a fresh host or
 separate release review is still required. Do not say shipped, deployed, production-ready, or
 marketplace-published without the corresponding authorized external evidence.
+An ordinary small change does not activate formal release machinery merely because implementation
+finished.
