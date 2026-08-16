@@ -500,3 +500,26 @@ def test_acceptance_corpus_has_mechanism_necessity_case() -> None:
     serialized = json.dumps(case, ensure_ascii=False).lower()
     for fragment in ("durable", "ledger", "compare", "state"):
         assert fragment in serialized
+
+
+def test_general_ownership_spec_does_not_select_temporal_assurance() -> None:
+    text = (
+        (ROOT / "skills" / "specify-temporal-ownership" / "SKILL.md")
+        .read_text(encoding="utf-8")
+        .lower()
+    )
+    for fragment in (
+        "do not select merely because",
+        "general specification mentions ownership",
+        "post-observation destructive effect",
+    ):
+        assert fragment in text
+
+    corpus = load_json(ROOT / "evals" / "cases" / "acceptance.json")
+    matches = [case for case in corpus["cases"] if case.get("id") == "NON-TEMPORAL-01"]
+    assert len(matches) == 1
+    assert "engineering-specification" in matches[0]["expectedSelected"]
+    assert "specify-temporal-ownership" in matches[0]["expectedNotSelected"]
+    serialized = json.dumps(matches[0], ensure_ascii=False).lower()
+    for fragment in ("documentation", "runtime mutation", "concurrency", "no temporal model"):
+        assert fragment in serialized

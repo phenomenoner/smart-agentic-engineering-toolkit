@@ -2,6 +2,12 @@
 
 All notable changes are documented here. Versions follow Semantic Versioning.
 
+## [Unreleased]
+
+- Clarify that `specify-temporal-ownership` requires a concrete temporal check-then-effect seam,
+  and add a static cross-component ownership non-activation case that forbids temporal ceremony when
+  runtime mutation, replacement, delete, retry, and concurrency are out of scope.
+
 ## [0.1.0] - 2026-08-16
 
 - Build the first public plugin with focused specification, diagnosis, implementation, continuity,
