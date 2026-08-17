@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 2430,
-      "sha256": "6b991556427b333044e41a486680b12f229dccb16e910f4b8730f7ce01cc9c8c"
+      "length": 2920,
+      "sha256": "e83399d2d225bdb13448059b24d89fbb4c6f4a398f6293c61527cd41c92a6aac"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,13 +56,13 @@
     },
     {
       "path": "README.en.md",
-      "length": 5136,
-      "sha256": "d5ce1387998aa4f676de2c3034b6a6c79f6409455850befb1d2966ffaac09989"
+      "length": 5595,
+      "sha256": "6d484ffcf39fafefdccf201862210fdf68da8f21c783eb02c71fff7c7fdcd12e"
     },
     {
       "path": "README.md",
-      "length": 4761,
-      "sha256": "f43221337b0d11d2fafad3096e5d720e4d37b14bb059cf9c224aac673e0eb83e"
+      "length": 5166,
+      "sha256": "fcc8ec96478f73edb018834fe9eb132627ab48164e06c923355e47df684a5987"
     },
     {
       "path": "SECURITY.md",
@@ -136,13 +136,18 @@
     },
     {
       "path": "evals/README.md",
-      "length": 2532,
-      "sha256": "cf48ffe83c3232f7c39aa93d7c8dea0195bc3d92a9ed85802e18c5369e5edd86"
+      "length": 3138,
+      "sha256": "28b6d6823e9779da605f4925885af04fd08430bbd09ddf7518c8529ae2b2bd87"
     },
     {
       "path": "evals/cases/acceptance.json",
       "length": 25423,
       "sha256": "d61577c993c53ad3d7b13118ecd8bd464a3d22d94a70583a70bbb018f301846c"
+    },
+    {
+      "path": "evals/cases/canon-orchestration.json",
+      "length": 6989,
+      "sha256": "6cd69c984c295404b3a525813bc1389ade155ed5766d9807cba9c6284f01c0d0"
     },
     {
       "path": "evals/cases/incremental-release-progression.json",
@@ -451,13 +456,23 @@
     },
     {
       "path": "skills/engineering-wal/SKILL.md",
-      "length": 5586,
-      "sha256": "729b7763a2c93eb45051a8a50663f2b16412c8346c43ae1da63063ab79b956b2"
+      "length": 7593,
+      "sha256": "01501431535bfa561ce4e730239c69f9b917cca4d7af6c565eeb0fbfd550224e"
     },
     {
       "path": "skills/engineering-wal/agents/openai.yaml",
       "length": 292,
       "sha256": "181bdefffd5c20708773318f0c92e13e29f941553563ccfdcaa94e2f70890a31"
+    },
+    {
+      "path": "skills/engineering-wal/references/canon-orchestration.md",
+      "length": 20169,
+      "sha256": "deb336ac8b7a5ee8e63fa5616c94f1557a1ba4c5076b9ecae3800c9e41993c7b"
+    },
+    {
+      "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
+      "length": 72001,
+      "sha256": "6e676f10686dcba6d1ffdb5d94232bcf4898f83663e1e3a89b0111fe4963e8ac"
     },
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
@@ -580,6 +595,11 @@
       "sha256": "e32767ebc6538488f998eea9216b09c2de3255608ba14937db5601d976e4cac2"
     },
     {
+      "path": "tests/test_canon_orchestration_contracts.py",
+      "length": 5728,
+      "sha256": "0b1b2d1e8ad9e22f68a47f270466384ca6e7eecbd881f02d565df767bf03eb6d"
+    },
+    {
       "path": "tests/test_first_principles_eval_contracts.py",
       "length": 2108,
       "sha256": "8c61f88b027b1a6d5aad8ce9a1268e80d694620cb3486cd8b75110081226037b"
@@ -605,14 +625,19 @@
       "sha256": "1ba45d1c7cca94a689bc3914200230cbf42be592ae480ee9fb3d4a53354d6c65"
     },
     {
+      "path": "tests/test_validate_orchestration_transition.py",
+      "length": 67807,
+      "sha256": "f466084fff4611215cafedb1aea153375a8f6a00b668a3225eb982a9c34e34de"
+    },
+    {
       "path": "tests/test_validate_toolkit.py",
       "length": 8232,
       "sha256": "d7f68a365aabaf03e819c27236372c2bc69b9a7dbe755feefcd699852e1b1f23"
     },
     {
       "path": "workflows/specify-implement-review-drill.md",
-      "length": 1708,
-      "sha256": "55e0d57a117b0d70217fc7899dfcdc68e09f1f3009ab63a01a6c1c85362063c4"
+      "length": 3066,
+      "sha256": "e362553cfa83854754eda61eaefdae5b964f559ad9f21ee81d170ef2b03dcd9d"
     }
   ]
 }

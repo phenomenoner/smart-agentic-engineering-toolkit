@@ -24,6 +24,10 @@ there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mec
   要求 forbidden trace、linearization point、stable capability/CAS 與精準 interleaving test。
 - 把 WAL 當最小可恢復地圖；Canvas、CodeGraph、AAR、knowledge graph 與模型 worker 都是
   可選增強，不是權威或品質證明。
+- 長任務可選用 [canon orchestration profile](workflows/specify-implement-review-drill.md)：
+  以無狀態 transition guard 鎖住產品承諾與目標終態，用五個邏輯責任視角、兩個有預算的
+  loop 與 shadow specification reopen 協作，並把 core、每個 host seam、per-target release
+  與 overall verdict 分開，避免中途里程碑或單一平台 PASS 冒充完成。
 - 每個 toolkit-owned skill 都內建 upstream improvement protocol：發現實質缺口時，整理
   public-safe evidence、精確 patch 與判別性 eval；有 GitHub 寫入授權才開 draft PR，否則
   提供 PR-ready packet 並明確詢問是否代為提交。

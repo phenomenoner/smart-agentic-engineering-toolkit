@@ -28,6 +28,11 @@ This is a conditional brake; an already clear small contract stays on the direct
   interleaving tests.
 - WAL as the minimum durable resume map. Canvas, CodeGraph, AAR, knowledge graphs, and model workers
   remain optional augmentations rather than proof or authority.
+- An optional [canon orchestration profile](workflows/specify-implement-review-drill.md) for long
+  tasks: freeze the product commitment and target terminal stage with a stateless transition guard,
+  coordinate five logical responsibility lenses through two budgeted loops and a shadow specification
+  reopen, and separate core, each host seam, per-target release, and overall readiness so a milestone
+  or one ready platform cannot masquerade as completion.
 - An upstream-improvement protocol in every owned skill: material learning becomes public-safe
   evidence, an exact canonical patch, and a discriminating eval. A draft PR is opened only when the
   active task authorizes GitHub writes; otherwise the agent returns a PR-ready packet and offers to
