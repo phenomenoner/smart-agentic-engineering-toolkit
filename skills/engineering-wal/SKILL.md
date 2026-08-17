@@ -1,9 +1,9 @@
 ---
 name: engineering-wal
-description: Maintain a compact durable work log for multi-session, multi-agent, compaction-prone, long-running, risky, interrupted, or deliberately blocked engineering work. Use it to preserve objective, scope and authority, repository identity and dirty state, decisions, blockers, evidence pointers, next safe action, and stop conditions. Do not use for a small single-turn task or as a substitute for executable proof, source, authorization, secrets storage, raw receipts, Context Canvas, or project planning documents.
+description: Maintain a compact durable work log for multi-session, multi-agent, compaction-prone, long-running, risky, interrupted, or deliberately blocked engineering work. Use it to preserve objective, commitment floor, target stage, scope and authority, repository identity and dirty state, decisions, blockers, core/seam verdicts, evidence pointers, next safe action, and stop conditions. Do not use for a small single-turn task or as a substitute for executable proof, source, authorization, secrets storage, raw receipts, Context Canvas, or project planning documents.
 license: MIT
 metadata:
-  toolkit-version: "0.1.0"
+  toolkit-version: "0.2.0"
   toolkit-phase: "continuity"
   toolkit-contribution-protocol: "v1"
 ---
@@ -44,6 +44,8 @@ Create or update one when at least one condition is material:
 - a risky or long-running action needs an exact resume/stop boundary;
 - the task is blocked and must preserve the next safe action;
 - decisions or evidence would be expensive or unsafe to reconstruct.
+- a long product task must preserve a target terminal stage across intermediate milestones;
+- core behavior and required host, platform, deployment, or adoption seams need separate verdicts.
 
 Skip it for a short self-contained edit, a disposable brainstorm, or a request that already has a
 sufficient durable project record. Do not create ceremony merely because software is involved.
@@ -68,12 +70,18 @@ Maintain only what a successor needs:
 
 ```text
 Objective:
+Commitment floor (requested outcome, target terminal stage, hard commitment/acceptance IDs, amendment/readiness authorities and amendments):
 Scope and explicit authority:
 Repository / branch / commit / dirty summary:
+Frozen specification and candidate generations:
+Transition snapshot generation, commitment-floor digest, and accepted input-file digest receipt:
 Current state:
-Decisions and rationale:
+Verdict vector (core; each required seam; release[target]; releaseOverall):
+Append-only positive decision receipts and rationale:
 Necessity decision when material (outcome/invariant; both questions; selected alternative; added state/authority/recovery/failure-state cost):
 Active blockers and stop conditions:
+Finding/reopen history (class, classification/disposition owners, affected cells, first unsafe operation, evidence):
+Specification/delivery loop budgets and append-only guard-derived semantic-delta signature history:
 Evidence pointers and hashes:
 Work in flight and exclusive owners:
 Next safe action:
@@ -91,6 +99,22 @@ complexity, authority, recovery, and failure-state cost. Point to the canonical 
 WAL is not a second design gate and remains optional for short work.
 The detailed canonical owner is `engineering-specification`; this continuity surface only records
 its decision and later evidence.
+
+## Apply the opt-in canon orchestration profile
+
+For material long tasks where product commitments have been reduced to intermediate milestones, or
+where core and several host/adoption seams need independent qualification, read
+[references/canon-orchestration.md](references/canon-orchestration.md). It composes the existing
+specification, implementation, review, completeness, and WAL owners into five logical roles, a
+specification loop, a delivery loop, and a bounded shadow specification reopen.
+
+The profile does not require five simultaneous subagents, a persistent state machine, or a universal
+stage taxonomy. Freeze the commitment floor and target stage, keep core/seam/per-target/overall
+verdicts separate, let the evidence-observing owner classify findings, and allow scope reduction only
+through an authorized append-only amendment. When silent downgrade is a material risk, use the
+stateless transition guard named by the reference before accepting the next snapshot or `DONE`; retain
+its exact input-file digests and read back the accepted current bytes.
+An achieved intermediate stage is progress, not completion of a higher frozen target.
 
 ## Update boundaries
 

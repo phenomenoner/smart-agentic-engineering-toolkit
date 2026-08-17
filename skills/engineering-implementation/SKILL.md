@@ -4,7 +4,7 @@ description: Implement an authorized source, test, configuration, or documentati
 license: MIT
 metadata:
   version: "0.1.1"
-  toolkit-version: "0.1.0"
+  toolkit-version: "0.2.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
 ---

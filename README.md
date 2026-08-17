@@ -24,6 +24,10 @@ there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mec
   要求 forbidden trace、linearization point、stable capability/CAS 與精準 interleaving test。
 - 把 WAL 當最小可恢復地圖；Canvas、CodeGraph、AAR、knowledge graph 與模型 worker 都是
   可選增強，不是權威或品質證明。
+- 長任務可選用 [canon orchestration profile](workflows/specify-implement-review-drill.md)：
+  以無狀態 transition guard 鎖住產品承諾與目標終態，用五個邏輯責任視角、兩個有預算的
+  loop 與 shadow specification reopen 協作，並把 core、每個 host seam、per-target release
+  與 overall verdict 分開，避免中途里程碑或單一平台 PASS 冒充完成。
 - 每個 toolkit-owned skill 都內建 upstream improvement protocol：發現實質缺口時，整理
   public-safe evidence、精確 patch 與判別性 eval；有 GitHub 寫入授權才開 draft PR，否則
   提供 PR-ready packet 並明確詢問是否代為提交。
@@ -55,7 +59,7 @@ task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐
 
 ## 外部整合
 
-`baton-fanout-skill` 在 0.1.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
+`baton-fanout-skill` 在 0.2.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
 Understand Anything 與 AAR 也維持各自 canonical owner。詳見
 [`docs/integrations.md`](docs/integrations.md)。Superpowers 僅是比較資料，不會重新啟用其
 mandatory bootstrap/TDD/worktree/fan-out chain。
@@ -76,9 +80,12 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.1.0 是第一個公開版本。其 release 主張只涵蓋 repository、plugin package、isolated install、
-fresh-task drill 與公開 GitHub bytes 在列出環境中的驗證；不表示 OpenAI 官方推薦、Plugin
-Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
+0.2.0 新增可選的 canon orchestration profile 與無狀態 transition guard，並加入
+incremental release progression 與 canon orchestration supplemental corpus。0.2.0 沿用 0.1.0
+的 63-case baseline，僅更新 release identity 與 current input bindings；canon orchestration 的
+fresh-agent behavior evaluation 仍標記為 `NOT_RUN`。本版主張只涵蓋已列出的 repository
+bytes、source tests、plugin/standalone install 與 host evidence；不表示 OpenAI 官方推薦、
+Plugin Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md)。

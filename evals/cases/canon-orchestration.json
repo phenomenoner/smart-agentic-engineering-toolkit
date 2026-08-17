@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.2.0",
+  "status": "supplemental",
+  "scope": "long-task canon orchestration",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "CANON-ORCHESTRATION-COMMITMENT-FLOOR",
+      "class": "workflow",
+      "promptOrCondition": "A multi-session product build targets qualified behavior across Linux, WSL, and Windows, but prior agents repeatedly declared an intermediate implementation milestone complete.",
+      "expectedSelected": [
+        "engineering-specification",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "The WAL freezes the outcome, target stage, hard requirement and acceptance IDs, required targets, amendment and readiness authorities, specification and candidate identities, loop budgets with signature history, append-only positive-decision receipts, and separate core, seam, per-target release, and releaseOverall verdicts; commitment keys equal exactly the frozen requirement and acceptance IDs while seam and release keys equal exactly the frozen required targets, so an unbound phantom claim or target cannot become progress, and an intermediate stage remains non-terminal."
+    },
+    {
+      "id": "CANON-ORCHESTRATION-UNAUTHORIZED-DOWNGRADE",
+      "class": "negative",
+      "promptOrCondition": "A PM changes the frozen target from qualified to implemented without an amendment from an identity authorized by the previous commitment floor, then marks the task DONE.",
+      "expectedSelected": [
+        "engineering-specification",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "The transition is rejected: a floor change needs exactly one append-only amendment bound to previous/new generations and digests, old/new target, authorized identity, reason, affected requirement, acceptance, and seam IDs, plus evidence from affected prior cells; positive verdicts reset before reevaluation and DONE cannot bypass the frozen target."
+    },
+    {
+      "id": "CANON-ORCHESTRATION-SPEC-GAP",
+      "class": "cross-skill",
+      "promptOrCondition": "QC proves that frozen acceptance omitted required restart behavior after the candidate passed its existing unit checks.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-specification"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "QC emits an evidence-bound OPEN SPEC_GAP whose affected cells belong to the active frozen commitment, seam, and release namespace, then stops the affected slice. A newly introduced finding cannot arrive already closed, cite an amendment-retired cell, or carry reclassification history; an existing receipt-bound finding may retain its retired cell through transition continuity without authorizing progress. Standalone/import validation remains active-only and an amendment object cannot manufacture historical namespace authority. The specification disposition owner accepts or rejects the finding in a later transition; the immutable classification owner alone appends any supported reclassification. Accepting it advances specification identity and resets affected claims; narrowing a hard acceptance requires a commitment-floor amendment."
+    },
+    {
+      "id": "CANON-ORCHESTRATION-OWNER-RECLASSIFICATION",
+      "class": "negative",
+      "promptOrCondition": "QC records an observed CORE_DEFECT, then the PM attempts to relabel it HARNESS_OR_ENV_BLOCKER to preserve core PASS without new owner evidence.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "The reclassification is rejected. The evidence-observing classification owner is immutable, disposition ownership is separate, and any class change requires its append-only record binding old/new class, old/new disposition owner, reason, affected cells, first unsafe operation, and new class-specific evidence. Reclassification leaves the finding OPEN; only a later transition may close it, and a CLOSED finding is semantically immutable."
+    },
+    {
+      "id": "CANON-ORCHESTRATION-HOST-SEAM",
+      "class": "cross-skill",
+      "promptOrCondition": "Core tests and the Linux target pass, while the required Windows check cannot start the host Git process because of a native toolchain failure.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Core and Linux evidence remain supported, Windows seam and release cells remain INCOMPLETE with an owner-bound HARNESS_OR_ENV_BLOCKER, releaseOverall remains INCOMPLETE, and no product repair or broad core rerun occurs without changed product dependencies."
+    },
+    {
+      "id": "CANON-ORCHESTRATION-LOOP-BUDGET",
+      "class": "negative",
+      "promptOrCondition": "Specification and QC repeatedly reopen the same finding signature while generations change but no discriminating evidence, affected cells, or repair property changes.",
+      "expectedSelected": [
+        "engineering-specification",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "long-run-supervisor"
+      ],
+      "observablePass": "The guard derives each signature from canonical identity, valid newly-open finding, current-positive owner-receipt, or bound-claim new-evidence deltas instead of caller aliases; receipt IDs/reasons, JSON map-key order, unknown extras, and unordered evidence lists cannot salt a semantic packet, phantom claims, verdict targets, finding cells, and non-positive receipt cells are rejected and excluded from progress, append-only history rejects immediate repeats and A-B-A oscillation, terminal loops cannot consume passes, and a changed applicable floor/specification/candidate dependency must reactivate the terminal loop in a separate transition before any new pass or reclosure. The declared budget stops BLOCKED or INCOMPLETE, and neither bookkeeping nor a lower commitment floor manufactures PASS."
+    },
+    {
+      "id": "NON-CANON-ORCHESTRATION-DIRECT",
+      "class": "nonactivation",
+      "promptOrCondition": "Fix one explicit documentation link and run its focused check in the current session.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-specification",
+        "engineering-wal"
+      ],
+      "observablePass": "Uses the direct bounded implementation path without a commitment snapshot, five-role orchestration, specification loop, formal review wave, or host-seam matrix."
+    }
+  ]
+}

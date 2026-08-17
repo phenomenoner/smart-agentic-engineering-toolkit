@@ -28,6 +28,11 @@ This is a conditional brake; an already clear small contract stays on the direct
   interleaving tests.
 - WAL as the minimum durable resume map. Canvas, CodeGraph, AAR, knowledge graphs, and model workers
   remain optional augmentations rather than proof or authority.
+- An optional [canon orchestration profile](workflows/specify-implement-review-drill.md) for long
+  tasks: freeze the product commitment and target terminal stage with a stateless transition guard,
+  coordinate five logical responsibility lenses through two budgeted loops and a shadow specification
+  reopen, and separate core, each host seam, per-target release, and overall readiness so a milestone
+  or one ready platform cannot masquerade as completion.
 - An upstream-improvement protocol in every owned skill: material learning becomes public-safe
   evidence, an exact canonical patch, and a discriminating eval. A draft PR is opened only when the
   active task authorizes GitHub writes; otherwise the agent returns a PR-ready packet and offers to
@@ -62,7 +67,7 @@ changes.
 
 ## External integrations
 
-In 0.1.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
+In 0.2.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
 integration. Context Canvas, Understand Anything, and AAR also retain their own canonical owners.
 See [`docs/integrations.md`](docs/integrations.md). Superpowers is comparative material only; its
 mandatory bootstrap, TDD, worktree, fan-out, and reviewer chain are not reactivated.
@@ -81,10 +86,13 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-The public 0.1.0 release claim is limited to repository, plugin-package, isolated-install,
-fresh-task-drill, and GitHub-byte verification in the listed environments. It does not claim OpenAI
-endorsement, Plugin Directory approval, or deployment/availability of AAR, Canvas, or an external
-model provider.
+Version 0.2.0 adds the optional canon orchestration profile and stateless transition guard, plus
+supplemental incremental-release and canon-orchestration corpora. Version 0.2.0 retains the 63-case
+baseline from 0.1.0 while rebinding release identity and current input hashes; fresh-agent behavior
+evaluation for canon orchestration remains `NOT_RUN`. This release claim is limited to the listed
+repository bytes, source tests, plugin and standalone installation, and host evidence. It does not
+claim OpenAI endorsement, Plugin Directory approval,
+or deployment or availability of AAR, Canvas, or an external model provider.
 
 License: MIT. See [`NOTICE`](NOTICE) and
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md) for external influences and

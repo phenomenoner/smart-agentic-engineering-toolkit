@@ -1,13 +1,21 @@
 # Behavior evaluation
 
-`cases/acceptance.json` is the frozen 0.1.0 case corpus. Static validation proves only that the
-catalog has positive and negative coverage. It does **not** prove that a host selected the expected
-skill or followed its authority boundary.
+`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.2.0 release updates its
+release identity and current catalog/specification bindings without adding cases. Static validation
+proves only that the catalog has positive and negative coverage. It does **not** prove that a host
+selected the expected skill or followed its authority boundary. The same static-versus-host boundary applies to every
+supplemental corpus; source tests are not fresh-task behavior evidence.
 
-`cases/incremental-release-progression.json` is a supplemental maintenance corpus. It distinguishes
+`cases/incremental-release-progression.json` is a 0.2.0 supplemental maintenance corpus. It distinguishes
 affected-slice evidence reuse from unsafe reuse across executable, review-intake, installed-runtime,
 and publication seams without changing the frozen 0.1.0 case count. It also preserves the direct
 path for an ordinary small change.
+
+`cases/canon-orchestration.json` is a 0.2.0 supplemental static-contract corpus. It records expected
+commitment-floor, owner-classification, shadow-reopen, core/host-seam/release aggregation, loop-budget,
+and direct-path behavior without changing the frozen 0.1.0 case count. Its `evidenceStatus` remains
+`NOT_RUN` until fresh isolated agent executions record observed selection, prohibited effects, output,
+and receipt or transcript evidence; source tests do not upgrade that status.
 
 The mechanism-necessity cases observe whether output asks `Do we really need this to make things
 happen?` and `Is there a simpler and more direct way?`, separates outcome from proxy, compares
