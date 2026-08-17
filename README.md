@@ -59,7 +59,7 @@ task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐
 
 ## 外部整合
 
-`baton-fanout-skill` 在 0.1.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
+`baton-fanout-skill` 在 0.2.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
 Understand Anything 與 AAR 也維持各自 canonical owner。詳見
 [`docs/integrations.md`](docs/integrations.md)。Superpowers 僅是比較資料，不會重新啟用其
 mandatory bootstrap/TDD/worktree/fan-out chain。
@@ -80,9 +80,12 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.1.0 是第一個公開版本。其 release 主張只涵蓋 repository、plugin package、isolated install、
-fresh-task drill 與公開 GitHub bytes 在列出環境中的驗證；不表示 OpenAI 官方推薦、Plugin
-Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
+0.2.0 新增可選的 canon orchestration profile 與無狀態 transition guard，並加入
+incremental release progression 與 canon orchestration supplemental corpus。0.2.0 沿用 0.1.0
+的 63-case baseline，僅更新 release identity 與 current input bindings；canon orchestration 的
+fresh-agent behavior evaluation 仍標記為 `NOT_RUN`。本版主張只涵蓋已列出的 repository
+bytes、source tests、plugin/standalone install 與 host evidence；不表示 OpenAI 官方推薦、
+Plugin Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md)。

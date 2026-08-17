@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.1.0",
+  "toolkitVersion": "0.2.0",
   "name": "context-canvas-checkpoint",
   "status": "pinned-external",
   "disposition": "pinned-external-plugin-integration",

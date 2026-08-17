@@ -1,6 +1,6 @@
-# Product specification 0.1.0
+# Product specification 0.2.0
 
-Status: release candidate
+Status: released
 
 ## Outcome
 
@@ -39,6 +39,10 @@ conditional guard and routes unresolved design back to it.
 9. Material design specifications record the simplest viable necessity decision and an auditable
    complexity, authority, recovery, and failure-state budget before acceptance is frozen. Already
    explicit small work bypasses this conditional gate.
+10. Material long tasks may opt into canon orchestration. Its stateless transition guard preserves
+    an append-only commitment floor, owner-bound findings, budgeted semantic loops, exact candidate
+    identity, and separate core, host-seam, per-target release, and overall readiness without
+    becoming a second specification, evidence, review, or release authority.
 
 ## Owned scope
 
@@ -63,4 +67,7 @@ The release must pass:
 - isolated plugin installation and a fresh Codex task performing a real bounded engineering drill;
 - one independent review of the exact candidate, CI, and GitHub commit/tag/release/hash readback.
 
-The machine-readable case corpus is `evals/cases/acceptance.json`.
+The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0.2.0 adds
+`evals/cases/incremental-release-progression.json` and `evals/cases/canon-orchestration.json` as
+supplemental static-contract corpora; they do not alter or upgrade the frozen baseline's behavior
+evidence.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.1.0",
+  "toolkitVersion": "0.2.0",
   "algorithm": "sha256",
   "excludesSelf": "manifest/public-lock.json",
   "files": [
@@ -12,7 +12,7 @@
     {
       "path": ".codex-plugin/plugin.json",
       "length": 1137,
-      "sha256": "0a0c981dfc7e0258c6382d8dd183df3d7268f052b3fbdd6e7d291657d1e44f4a"
+      "sha256": "1a3e6dec9a8a62f2b6ab041e9dbbfc8ca12a1e72e9f45413983aaf52834e6c2d"
     },
     {
       "path": ".gitattributes",
@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 2920,
-      "sha256": "e83399d2d225bdb13448059b24d89fbb4c6f4a398f6293c61527cd41c92a6aac"
+      "length": 2945,
+      "sha256": "535a5b87ed530eff500bb44a2f744b7413e4389fd34a09f005eee6c11b8c6e59"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,13 +56,13 @@
     },
     {
       "path": "README.en.md",
-      "length": 5595,
-      "sha256": "6d484ffcf39fafefdccf201862210fdf68da8f21c783eb02c71fff7c7fdcd12e"
+      "length": 5914,
+      "sha256": "120d90a5ee3505c3e8470ae38359913726c8789bedc5855176ceefe051b36cab"
     },
     {
       "path": "README.md",
-      "length": 5166,
-      "sha256": "fcc8ec96478f73edb018834fe9eb132627ab48164e06c923355e47df684a5987"
+      "length": 5449,
+      "sha256": "e59b2ba6982fa9ab4e4f69ad82f1ebcd96ff50e24307012e38a11f172c2ad791"
     },
     {
       "path": "SECURITY.md",
@@ -72,27 +72,27 @@
     {
       "path": "catalog/skills.json",
       "length": 9497,
-      "sha256": "93aacdd3425de44671eecbc89fc43f878f8eb413f2cd10da7f6e25a988ecbe79"
+      "sha256": "dbdb144819a48e097b469acfd2967c9d61816bbbd1abb115568bc834e3f16af2"
     },
     {
       "path": "dependencies/adaptive-agent-runtime.json",
       "length": 829,
-      "sha256": "db5494309b3ebac00605ba19f646cf0fc92c2ea680161e2809aed13f99315f4d"
+      "sha256": "9901bb849ca58ff36258a427f4f3c5ec78f4afbc987e30f2fd1d775a4c8b36c6"
     },
     {
       "path": "dependencies/baton-fanout-skill.json",
       "length": 973,
-      "sha256": "42362aa216fd9a8d2b81dc5d3d75f944a09acc761f91a9d56abe16f110316305"
+      "sha256": "6fdf216ef4a384578f07fdce14cb09263231563ee9e4b1b6fdcec80d4b898f20"
     },
     {
       "path": "dependencies/context-canvas.json",
       "length": 810,
-      "sha256": "24e6a16896231365b811786ef8e1a9f4cd0b3d6658981ea6c355c1af60ca5622"
+      "sha256": "f9847646d28c0ad905850bef986311d1f17c9f2d30cf9273d65f36da0a292624"
     },
     {
       "path": "dependencies/understand-anything.json",
       "length": 851,
-      "sha256": "92ad4dcc8a09668bd0e11acbeaea711088d0c87a8e601b29047269e8d8f1a0b7"
+      "sha256": "394be1735d824103d4c8e54d892eaea1bb617aaf8da1d0bbc239c0b8279a9ad7"
     },
     {
       "path": "docs/architecture.md",
@@ -126,8 +126,8 @@
     },
     {
       "path": "docs/product-specification.md",
-      "length": 3874,
-      "sha256": "cf73740f05861d7b543f6567e1cbb38d2b6c9d4ab3d9111bea1e85e99236b6d0"
+      "length": 4463,
+      "sha256": "90e5524e7a4885787db8f2efd75c129156d37ed0cee34de056076ff9cf5b4c2f"
     },
     {
       "path": "docs/taxonomy.md",
@@ -136,73 +136,73 @@
     },
     {
       "path": "evals/README.md",
-      "length": 3138,
-      "sha256": "28b6d6823e9779da605f4925885af04fd08430bbd09ddf7518c8529ae2b2bd87"
+      "length": 3274,
+      "sha256": "d66189e52c0dfd418203a9a6e88161cc46c9b7f24105656e5d93b6ec0b403254"
     },
     {
       "path": "evals/cases/acceptance.json",
       "length": 25423,
-      "sha256": "d61577c993c53ad3d7b13118ecd8bd464a3d22d94a70583a70bbb018f301846c"
+      "sha256": "5d992d0de43a35829ce67113ce5e5bfb5c2ea59cfd4d17f4be6ee440996190d4"
     },
     {
       "path": "evals/cases/canon-orchestration.json",
       "length": 6989,
-      "sha256": "6cd69c984c295404b3a525813bc1389ade155ed5766d9807cba9c6284f01c0d0"
+      "sha256": "3874abc0b40f241c80404b25f820356b70d79462f84c5ef5dcc3d274794a6e0f"
     },
     {
       "path": "evals/cases/incremental-release-progression.json",
       "length": 3140,
-      "sha256": "6fe355c4ad6ec492a57a316ad0036ecd3e6371603dba2ca71aa14f95773f0f5a"
+      "sha256": "9278e4e1dcf24b5abb80f1408061b9b630cf736b98ffaeffa468eb0c465a0b84"
     },
     {
       "path": "manifest/provenance.json",
       "length": 7086,
-      "sha256": "bc521ee89979b0d6f77ea6e692c8ff158ccc49350e31131abc0deca8f3e8a426"
+      "sha256": "ebb9a20f39b50ebab1ee7c8f09c6ea4fe26d9c3fbea7ce5c0789e2ac45e185c2"
     },
     {
       "path": "manifest/toolkit.json",
       "length": 1569,
-      "sha256": "1ecb3664b14cb32d8f8acc8186c7a465c52d23cf6584864fc398474817230f1e"
+      "sha256": "699d43e2992d1cbe2179c9507c3bbffc0af60262848263c5eb003aa12601ec35"
     },
     {
       "path": "profiles/assurance.json",
       "length": 407,
-      "sha256": "4bb3c44c8eb0f96f963ea3429b180e6b2844fab5cdbbf2342c592df9de50958f"
+      "sha256": "392ed6cdb8ade3e745c3b5000c103d0f278296318c5e594e1b90a3c7a93b58af"
     },
     {
       "path": "profiles/codex-adapters.json",
       "length": 416,
-      "sha256": "c6aa6ecac00eeccab2e3165150040b1ea66f56b1e6a7910a03b28248fc7fc0e3"
+      "sha256": "5845cb2cddfc77bf9314d6211f0e7e62327dd266e06eb880663c91fca37c30d5"
     },
     {
       "path": "profiles/codex-optimization.json",
       "length": 394,
-      "sha256": "c7513a7653c21a3aca26fc28aab82b3e65013aa290eb67b1ff0baeea0f3156e1"
+      "sha256": "46af7859a4dd0732b855655814a7b9ae2701e9b4fa3d64716662b579e14c4f4f"
     },
     {
       "path": "profiles/core.json",
       "length": 731,
-      "sha256": "02d3955cfefd4c30b2250729a3af4e56f0e56ed79f6df28f27e47281dfa02d9d"
+      "sha256": "63284e23824a7967b2609180c6d6e51d8b35c4f507d48daaef954b32b93a2745"
     },
     {
       "path": "profiles/navigation.json",
       "length": 406,
-      "sha256": "3586ccc242e490007edb6dbe39115245e7f5ab044221d1b1c0fd86552f8e7640"
+      "sha256": "fbe1c6dc3cdbea1dbb8615ce438ed9b7abf5effdf3dda3862f6a43c47cb34e1c"
     },
     {
       "path": "profiles/provider-adapters.json",
       "length": 427,
-      "sha256": "dc97d48ffce9c9735b3096078b6f83297d8ef88b4882b51207f4f10860fafbae"
+      "sha256": "60caa90728af23e231b0dd4dd355504c7ad4eb4333b559b7106c9fede06c0225"
     },
     {
       "path": "profiles/windows.json",
       "length": 400,
-      "sha256": "a18fe388424333cc77e642060f3dd166912061401ed8370e9ff518dcb9687be6"
+      "sha256": "c538288a4ea48916c392efe977b8d501120c808caae3a4ec2982c4b9803b17ba"
     },
     {
       "path": "pyproject.toml",
       "length": 711,
-      "sha256": "f80c1927af1405f998af9e29564abd2256082bfa1fc22f76bc748f0e76feaee0"
+      "sha256": "0ef77a6685d144c6547b5d2ee7540a891253c74bd1895b3b67e811e1858e9607"
     },
     {
       "path": "schemas/catalog.schema.json",
@@ -252,12 +252,12 @@
     {
       "path": "scripts/validate_toolkit.py",
       "length": 33905,
-      "sha256": "726f4a4a4144d7752ffa64ea1d46f3fdba59d0c0ea45ff43643fe4ac69168dd3"
+      "sha256": "27499846b88884f8d2d84d388f6127026fa0e6ff9a2b17186240df6237691db1"
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
       "length": 18151,
-      "sha256": "6f08b1725d0b838ca08d8fc49b4a0455d21621355f9a0e9cda5443d34dbcaaa2"
+      "sha256": "48a889779013b38b782d73c8c2a639d54ea619a848b0f1a2f64aad785cefc766"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -307,7 +307,7 @@
     {
       "path": "skills/canon-engineering-disciplines/SKILL.md",
       "length": 7914,
-      "sha256": "a9f053beed2f2085a8c4e4f07bed22c52500afca7477b6506e9ecf63c36c8f67"
+      "sha256": "c9c69d1ea9c92c6e708829b3323743ddd9d373c88c711d0c3928e7f9c4aefad5"
     },
     {
       "path": "skills/canon-engineering-disciplines/agents/openai.yaml",
@@ -342,7 +342,7 @@
     {
       "path": "skills/claude-independent-review/SKILL.md",
       "length": 9266,
-      "sha256": "b6b1b4fde6caf6f85820203845a09a90687f92e93aa532b8ac4282c9c73b1b6a"
+      "sha256": "8fa67439cafea0ae10283d8048b6be6c58be38fdd205056b1d9a5cf0519a98f8"
     },
     {
       "path": "skills/claude-independent-review/agents/openai.yaml",
@@ -357,7 +357,7 @@
     {
       "path": "skills/codegraph-first-navigation/SKILL.md",
       "length": 7149,
-      "sha256": "6e82d2e4ec74fe100f778d0172731b602fea49adfe599101f34bafbc1dab26fa"
+      "sha256": "9bbbc25585cf2b99afcbcb0a08b9fe26f682bf3ab2161767f56791229cdf2017"
     },
     {
       "path": "skills/codegraph-first-navigation/agents/openai.yaml",
@@ -367,7 +367,7 @@
     {
       "path": "skills/codex-app-mcp-update/SKILL.md",
       "length": 11229,
-      "sha256": "84cec03d60ceeef39494d3413eed8e9cfc1da2a7b5b9fd14575999140cc32272"
+      "sha256": "93aa6e1c91eabee7ffe9a1c9293a363f91d7fac1bcde3a28810508020edf4cd5"
     },
     {
       "path": "skills/codex-app-mcp-update/agents/openai.yaml",
@@ -382,7 +382,7 @@
     {
       "path": "skills/codex-cli-luna-worker/SKILL.md",
       "length": 10288,
-      "sha256": "d73be0c6078b1718d4f0849b2e6f43ea986872da8b87144a376f17865f522356"
+      "sha256": "1e1434ae7b683ff0ef5d241a44a6a636336e2112c4d603bd9c80433d4ff61851"
     },
     {
       "path": "skills/codex-cli-luna-worker/agents/openai.yaml",
@@ -407,7 +407,7 @@
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
       "length": 10749,
-      "sha256": "13f06e49ffcf72752f518f22eebcdb0cb9a2d297f48d8205ff071d110be6aced"
+      "sha256": "52e3fe4727d306e0824f9b1b9eefa3f57cee74d21414d251e9698082edbf0c9f"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
@@ -427,7 +427,7 @@
     {
       "path": "skills/engineering-debugging/SKILL.md",
       "length": 5380,
-      "sha256": "d1716e8880be3976c9cc265277b644c2d214c6de9b36aae3e97539abc2d0f3ec"
+      "sha256": "bdd7b4bbcea11880ecb533ed1dcd4e3e73928cd60abb4140714d39b2e8b1d883"
     },
     {
       "path": "skills/engineering-debugging/agents/openai.yaml",
@@ -437,7 +437,7 @@
     {
       "path": "skills/engineering-implementation/SKILL.md",
       "length": 6689,
-      "sha256": "90d010ff7b2263d5b8a63a1c6afb7d8f177fddd76f00926c7258f2fac55f9466"
+      "sha256": "c886a7432954763419a3069e361cec583aec7103467547d32fbddb7d8525cf17"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -447,7 +447,7 @@
     {
       "path": "skills/engineering-specification/SKILL.md",
       "length": 14979,
-      "sha256": "8a90a790953ad12275a399fd874801ebd29f0bbdaee763358f4c0ffda185dd3f"
+      "sha256": "14f67d237208874710317ba74d8681c74dca68876e78751e023465dae41eee9b"
     },
     {
       "path": "skills/engineering-specification/agents/openai.yaml",
@@ -457,7 +457,7 @@
     {
       "path": "skills/engineering-wal/SKILL.md",
       "length": 7593,
-      "sha256": "01501431535bfa561ce4e730239c69f9b917cca4d7af6c565eeb0fbfd550224e"
+      "sha256": "049c8ad608dc5b2a3451a47c463f0faa8fc97ddf04a323dc7f6107dc9b224040"
     },
     {
       "path": "skills/engineering-wal/agents/openai.yaml",
@@ -477,7 +477,7 @@
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
       "length": 5615,
-      "sha256": "ced5ba73c19b5b71fefcb8587a82980821eafee7d6f85c38581cdcc7201c268e"
+      "sha256": "f22af9e91f6b0a65e1452c5b0ea6c06c9a924c12c467946a4f0f238cb180f4a3"
     },
     {
       "path": "skills/evolve-engineering-toolkit/agents/openai.yaml",
@@ -487,7 +487,7 @@
     {
       "path": "skills/incident-to-regression/SKILL.md",
       "length": 8667,
-      "sha256": "92338efe7f3cbc3fccd8ca1aa5d1ef1e97576a452671f1d78eab6ead55c71b4d"
+      "sha256": "038139b0eb3472b62bb8ac736cc9bd4641e9abf3148acf787c35c34e4860b907"
     },
     {
       "path": "skills/incident-to-regression/agents/openai.yaml",
@@ -507,7 +507,7 @@
     {
       "path": "skills/long-run-supervisor/SKILL.md",
       "length": 25522,
-      "sha256": "97949e672b54ab6edd0ce31e5ef5b3bb62115e8521b144cca9470f3f880b255e"
+      "sha256": "a7d3414d1fd793711683c570cdb53dcf1f731b8fcc74cd76ce0cbe99c0bb0375"
     },
     {
       "path": "skills/long-run-supervisor/agents/openai.yaml",
@@ -557,7 +557,7 @@
     {
       "path": "skills/programmatic-tool-composition/SKILL.md",
       "length": 8201,
-      "sha256": "2c54d972a0eb5d3e3cf045bcacfeb28fa15c1f1c735d4489b3edb4b4ecc54b4f"
+      "sha256": "ad737699e61655bf477d73d42991a42aae07d6931a12eb49fae13ac7ce15a649"
     },
     {
       "path": "skills/programmatic-tool-composition/agents/openai.yaml",
@@ -567,7 +567,7 @@
     {
       "path": "skills/specify-temporal-ownership/SKILL.md",
       "length": 9024,
-      "sha256": "58884d0c9c0df6c85d92c604edbfe3074a8a9d12a93ee329cc659b66e2517db4"
+      "sha256": "9dd5c1375f5d5333c0e77b1d888776a506993ebcb72696d78c374b1fbe3798f1"
     },
     {
       "path": "skills/specify-temporal-ownership/agents/openai.yaml",
@@ -592,12 +592,12 @@
     {
       "path": "tests/test_candidate_receipt_contracts.py",
       "length": 19175,
-      "sha256": "e32767ebc6538488f998eea9216b09c2de3255608ba14937db5601d976e4cac2"
+      "sha256": "3cfb4aa196d1ac8aa6f1b6d925baf307b18ec34f22d7cd3b3c6ab7370dc666cb"
     },
     {
       "path": "tests/test_canon_orchestration_contracts.py",
       "length": 5728,
-      "sha256": "0b1b2d1e8ad9e22f68a47f270466384ca6e7eecbd881f02d565df767bf03eb6d"
+      "sha256": "435590167588b97341d32ddc9018ecd99e0f11024a81aadfbcd76dcafc7d0b7f"
     },
     {
       "path": "tests/test_first_principles_eval_contracts.py",
@@ -612,17 +612,17 @@
     {
       "path": "tests/test_install_toolkit.py",
       "length": 17344,
-      "sha256": "266c8f9636bb0745b07f1bbf4b2f1ef6f6e46ef8596f388daf1e3dd315445cc9"
+      "sha256": "ddd4305fbda3f822d7c82c3f7eca935e8369b5eb863734d61787c893ed28992a"
     },
     {
       "path": "tests/test_schemas.py",
       "length": 6476,
-      "sha256": "b78bc3362cb575e55e22f479e0cc5acb711cd723e7683d4b70651f45b46465ce"
+      "sha256": "fd796889928cef6173ee7381d376161f06f28741c2adb9007486120bd74c681b"
     },
     {
       "path": "tests/test_source_gate_blockers.py",
       "length": 22219,
-      "sha256": "1ba45d1c7cca94a689bc3914200230cbf42be592ae480ee9fb3d4a53354d6c65"
+      "sha256": "52e78f2d219c8f4ec7e6ae16ff45fed99a889cce0f9b5fa9ccc39a2eedc9fcc1"
     },
     {
       "path": "tests/test_validate_orchestration_transition.py",

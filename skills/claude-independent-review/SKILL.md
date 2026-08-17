@@ -3,7 +3,7 @@ name: claude-independent-review
 description: Run a local Claude Code CLI as an independent, read-only, hash-bound engineering review gate. Use when the user explicitly asks Codex to invoke Claude or `claude -p` for a final code, release, migration, or pre-cutover review, especially when a PASS/BLOCKED decision must be bound to a frozen candidate and verification evidence.
 license: MIT
 metadata:
-  toolkit-version: "0.1.0"
+  toolkit-version: "0.2.0"
   toolkit-phase: "provider-adapter"
   toolkit-contribution-protocol: "v1"
 ---

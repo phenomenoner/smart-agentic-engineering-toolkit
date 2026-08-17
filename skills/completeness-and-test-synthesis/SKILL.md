@@ -4,7 +4,7 @@ description: Engineering completeness and test-evidence synthesis for explicit r
 license: MIT
 metadata:
   version: "0.1.1"
-  toolkit-version: "0.1.0"
+  toolkit-version: "0.2.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
 ---

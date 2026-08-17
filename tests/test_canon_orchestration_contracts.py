@@ -35,7 +35,7 @@ def load_corpus() -> dict[str, Any]:
 def test_canon_orchestration_corpus_is_explicitly_static_and_not_run() -> None:
     corpus = load_corpus()
     assert corpus["schemaVersion"] == 1
-    assert corpus["toolkitVersion"] == "0.1.0"
+    assert corpus["toolkitVersion"] == "0.2.0"
     assert corpus["status"] == "supplemental"
     assert corpus["scope"] == "long-task canon orchestration"
     assert corpus["claimLevel"] == "static-contract-only"

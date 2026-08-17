@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.1.0",
+  "toolkitVersion": "0.2.0",
   "repositoryLicense": "MIT",
   "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
   "canonicalState": "the current repository is the canonical writable source for toolkit-owned skills; verified tags identify immutable releases and never create a second writable owner",

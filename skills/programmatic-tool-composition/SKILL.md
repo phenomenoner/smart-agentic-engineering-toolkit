@@ -3,7 +3,7 @@ name: programmatic-tool-composition
 description: Compose multiple independent read-only or pure tool operations inside Codex App's programmatic runner using bounded JavaScript, parallel calls, reduction, and output shaping while preserving tool-specific constraints and effect boundaries. Use when a task needs three or more similar reads, independent calls across sources, joins/filtering/ranking, or large-output reduction that would otherwise require repeated model round trips. Do not use for a single call, sequential dependencies, long-running supervision, subagent fan-out, user or thread messages, external writes, approval-sensitive action, or tools that forbid parallelism.
 license: MIT
 metadata:
-  toolkit-version: "0.1.0"
+  toolkit-version: "0.2.0"
   toolkit-phase: "codex-optimization"
   toolkit-contribution-protocol: "v1"
 ---

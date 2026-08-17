@@ -4,6 +4,8 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-17
+
 - Add an opt-in long-task canon orchestration profile that freezes the product commitment floor and
   target terminal stage with a stateless append-only transition guard, composes five logical
   responsibility lenses through budgeted specification, delivery, and shadow-reopen routing, binds
