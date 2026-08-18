@@ -44,6 +44,11 @@ gate. Other lifecycle and adapter skills ask `Do we really need this to make thi
 there a simpler and more direct way?` only at their own handoff boundary, then cross-reference that
 owner. This avoids a second checklist, schema, runtime protocol, or canonical source.
 
+The same ownership rule applies to material scope changes. `engineering-specification` owns the
+detailed finding classification and scope-change checkpoint; implementation, diagnosis, review, and
+evidence skills carry only local absorption/escalation guards. No reviewer, validator, orchestration
+profile, or release protocol can enlarge the authorized claim by its own presence.
+
 ## Release evidence
 
 `manifest/toolkit.json` is the allow-list, `manifest/provenance.json` records origins and

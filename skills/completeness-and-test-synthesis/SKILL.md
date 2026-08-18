@@ -3,8 +3,8 @@ name: completeness-and-test-synthesis
 description: Engineering completeness and test-evidence synthesis for explicit readiness judgments, recurring regressions, green-tests-but-broken-real-use failures, cross-component or lifecycle changes, and choosing the lowest verification altitude that can falsify a claim. Use when the user asks whether work is actually done or ready, when evidence coverage is disputed, or when logs and receipts should become regression tests. Do not trigger for every ordinary implementation or merely because a task ends.
 license: MIT
 metadata:
-  version: "0.1.1"
-  toolkit-version: "0.2.0"
+  version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
 ---
@@ -28,6 +28,20 @@ Before choosing tests, state:
 Use repository history, incident evidence, and call sites to identify blast
 radius. Do not infer risk from file count, the word `mutation`, or a workflow
 label alone.
+
+## Enforce the claim budget
+
+The authorized claim is the **claim budget** for evidence work. A missing test, severe finding,
+available harness, or stronger methodology does not authorize a larger claim. Select only evidence
+that can falsify the current claim; do not upgrade a local artifact, prototype, library, or bounded
+review into production, live, migration, security-certification, or release acceptance merely to
+justify higher verification altitude.
+
+If an evidence gap proves that the original deliverable cannot stand, classify the response as
+`IN_SCOPE` or the minimum `SCOPE_GUARD`. If closing the gap would instead change acceptance level,
+release rigor, system boundary, writable ownership, or external effects, report `ADJACENT_RISK` and
+route a scope-change checkpoint to `engineering-specification`. An evidence gap does not authorize a
+larger claim.
 
 Before adding a test artifact, replay, matrix, harness, or integration layer, ask `Do we really need
 this to make things happen?` and `Is there a simpler and more direct way?` State the invariant first,

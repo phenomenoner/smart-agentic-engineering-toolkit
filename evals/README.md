@@ -1,6 +1,6 @@
 # Behavior evaluation
 
-`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.2.0 release updates its
+`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.3.0 release updates its
 release identity and current catalog/specification bindings without adding cases. Static validation
 proves only that the catalog has positive and negative coverage. It does **not** prove that a host
 selected the expected skill or followed its authority boundary. The same static-versus-host boundary applies to every
@@ -23,6 +23,12 @@ simpler alternatives, and preserves the direct path. They cannot prove a model's
 fresh-task behavior evidence and independent source review remain separate claims.
 `engineering-specification` is the detailed canonical owner; the eval corpus observes selection and
 output behavior without copying the design procedure into every case.
+
+`cases/anti-scope-drift.json` is a 0.3.0 supplemental static-contract corpus. It distinguishes an
+in-scope defect and minimum scope guard from adjacent or unrelated work, rejects an unapproved
+claim/release escalation, and preserves both an explicitly authorized scope amendment and the direct
+path for a small in-scope defect. Its `evidenceStatus` remains `NOT_RUN` until fresh isolated agent
+executions bind observable behavior and prohibited effects.
 
 For a release evaluation:
 

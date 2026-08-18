@@ -14,12 +14,19 @@ there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mec
 優先考慮刪除、人工操作、內嵌/即時計算或既有平台 primitive；只有確有需要才增加新狀態。
 這是條件式煞車，已清楚的小型 contract 仍可直接實作。
 
+**新finding不自動等於新scope。** 行動前先依已授權deliverable與claim分類為`IN_SCOPE`、
+最小`SCOPE_GUARD`、`ADJACENT_RISK`或`OUT_OF_SCOPE`。若處置會提高claim、acceptance level、
+release rigor、system boundary、authority、writable surface或external effects，必須停在明示的
+scope-change checkpoint。嚴重finding仍應揭露，但severity本身不能修改任務授權。
+
 ## 這套工具解決什麼
 
 - 把「先想清楚」落成可觀察行為、non-goals、失敗語意與可證偽 acceptance，而不是只寫
   一份大計畫；實質機制還要先列出複雜度、authority、recovery 與 failure-state 成本。
 - 把 implementation、debugging、review、readiness judgment 與 incident regression 分開，
   避免一個 skill 偷渡另一個 skill 的權限或結論。
+- 用跨階段anti-scope-drift guard讓finding與驗證深度受已授權claim約束，同時保留owner明示
+  scope amendment後的直接路徑。
 - 對 TOCTOU、ABA、PID/handle reuse、replacement cleanup、rollback ownership 等時序問題，
   要求 forbidden trace、linearization point、stable capability/CAS 與精準 interleaving test。
 - 把 WAL 當最小可恢復地圖；Canvas、CodeGraph、AAR、knowledge graph 與模型 worker 都是
@@ -59,7 +66,7 @@ task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐
 
 ## 外部整合
 
-`baton-fanout-skill` 在 0.2.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
+`baton-fanout-skill` 在 0.3.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
 Understand Anything 與 AAR 也維持各自 canonical owner。詳見
 [`docs/integrations.md`](docs/integrations.md)。Superpowers 僅是比較資料，不會重新啟用其
 mandatory bootstrap/TDD/worktree/fan-out chain。
@@ -80,11 +87,11 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.2.0 新增可選的 canon orchestration profile 與無狀態 transition guard，並加入
-incremental release progression 與 canon orchestration supplemental corpus。0.2.0 沿用 0.1.0
-的 63-case baseline，僅更新 release identity 與 current input bindings；canon orchestration 的
-fresh-agent behavior evaluation 仍標記為 `NOT_RUN`。本版主張只涵蓋已列出的 repository
-bytes、source tests、plugin/standalone install 與 host evidence；不表示 OpenAI 官方推薦、
+0.3.0 新增跨階段anti-scope-drift guard及其supplemental static-contract corpus，不新增skill、
+profile、schema或mandatory lifecycle。本版沿用0.1.0的63-case baseline，只重綁release identity
+與current input hashes；supplemental fresh-agent behavior仍以實際保存的host evidence為界。
+本版主張只涵蓋已列出的repository bytes、source tests、plugin/standalone install與host
+evidence；不表示OpenAI官方推薦、
 Plugin Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與

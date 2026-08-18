@@ -3,7 +3,7 @@ name: canon-engineering-disciplines
 description: Identify, compare, and combine established engineering disciplines for system-level assurance problems without conflating what each method proves. Use when a user explicitly invokes this skill; asks what an emerging engineering method should be called; asks to compare or synthesize methods such as STPA, CAST, FRAM, FMEA, FTA, HAZOP, formal state methods, fault injection, assurance cases, supply-chain provenance, or SRE; or faces a cross-cutting assurance problem spanning control hazards, temporal recovery, fault exploration, evidence validity, artifact provenance, and operational learning. Do not trigger for routine bug fixes, ordinary testing, a single known method, or normal release work.
 license: MIT
 metadata:
-  toolkit-version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "assurance"
   toolkit-contribution-protocol: "v1"
 ---

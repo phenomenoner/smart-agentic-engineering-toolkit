@@ -1,6 +1,6 @@
 interface:
   display_name: "Completeness and Test Synthesis"
   short_description: "Judge readiness claims with falsifying evidence"
-  default_prompt: "Use $completeness-and-test-synthesis to assess this exact readiness claim and identify the smallest missing falsifying test."
+  default_prompt: "Use $completeness-and-test-synthesis to assess this exact readiness claim within its claim budget and identify the smallest missing falsifying test without raising the claim."
 policy:
   allow_implicit_invocation: true

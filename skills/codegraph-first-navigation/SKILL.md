@@ -3,7 +3,7 @@ name: codegraph-first-navigation
 description: Navigate indexed codebases with CodeGraph using one rich query, bounded caller/callee or impact follow-ups, and source/test confirmation. Use for repository-scoped architecture questions, cross-file control or data-flow tracing, implementation lookup, refactor planning, change-impact analysis, or affected-test selection when a current `.codegraph` index or callable CodeGraph surface is available. Do not use for prose/config/literal search, interactive knowledge-graph generation, or unindexed projects.
 license: MIT
 metadata:
-  toolkit-version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "navigation"
   toolkit-contribution-protocol: "v1"
 ---

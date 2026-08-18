@@ -95,7 +95,7 @@ def behavior_error_codes(result: dict[str, Any], root: Path = ROOT) -> set[str]:
     return {str(error.get("code")) if isinstance(error, dict) else str(error) for error in errors}
 
 
-def write_source(root: Path, contents: dict[str, str], *, version: str = "0.2.0") -> None:
+def write_source(root: Path, contents: dict[str, str], *, version: str = "0.3.0") -> None:
     for name, body in contents.items():
         skill = root / "skills" / name
         skill.mkdir(parents=True, exist_ok=True)
@@ -151,7 +151,7 @@ def _base_receipt() -> dict[str, Any]:
     digest = _manifest_digest(files)
     return {
         "schemaVersion": 1,
-        "toolkitVersion": "0.2.0",
+        "toolkitVersion": "0.3.0",
         "sourceCommit": None,
         "sourceRoot": "source",
         "targetRoot": "target",
@@ -454,7 +454,7 @@ def test_receipt_semantics_rejects_unknown_changed_skill_or_profile_mismatch(
     [
         ("sourceCommit", "a" * 40),
         ("sourceCommitVerified", True),
-        ("releaseTag", "v0.2.0"),
+        ("releaseTag", "v0.3.0"),
     ],
 )
 def test_receipt_rejects_non_null_or_unmodeled_release_authority(field: str, value: object) -> None:

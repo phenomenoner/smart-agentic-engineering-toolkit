@@ -1,4 +1,4 @@
-# Product specification 0.2.0
+# Product specification 0.3.0
 
 Status: released
 
@@ -43,6 +43,10 @@ conditional guard and routes unresolved design back to it.
     an append-only commitment floor, owner-bound findings, budgeted semantic loops, exact candidate
     identity, and separate core, host-seam, per-target release, and overall readiness without
     becoming a second specification, evidence, review, or release authority.
+11. Material findings receive scope classification before they create work. Only `IN_SCOPE` and the
+    minimum `SCOPE_GUARD` proceed without an amendment; a change to the authorized deliverable,
+    claim, acceptance level, release rigor, system boundary, authority, writable paths, or external
+    effects stops at an owner-approved scope-change checkpoint.
 
 ## Owned scope
 
@@ -59,6 +63,8 @@ The release must pass:
 - one direct activation and one explicit non-activation case per skill;
 - one material mechanism case that prefers a simpler existing primitive, plus one explicit small
   contract case that proves the direct path remains available;
+- supplemental anti-scope-drift cases that distinguish bounded findings, unauthorized claim
+  escalation, unrelated cleanup, an explicit scope amendment, and a direct in-scope defect;
 - overlap, external dependency, retirement, and unsupported-action cases;
 - contribution behavior with and without GitHub-write authority;
 - clean, exact, managed update, unmanaged conflict, local divergence, pre-publish failure,
@@ -67,7 +73,8 @@ The release must pass:
 - isolated plugin installation and a fresh Codex task performing a real bounded engineering drill;
 - one independent review of the exact candidate, CI, and GitHub commit/tag/release/hash readback.
 
-The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0.2.0 adds
-`evals/cases/incremental-release-progression.json` and `evals/cases/canon-orchestration.json` as
-supplemental static-contract corpora; they do not alter or upgrade the frozen baseline's behavior
-evidence.
+The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0.2.0 added
+`evals/cases/incremental-release-progression.json` and `evals/cases/canon-orchestration.json`;
+version 0.3.0 adds `evals/cases/anti-scope-drift.json`. These supplemental static-contract corpora do
+not alter or upgrade the frozen baseline's behavior evidence, and source tests do not turn their
+`NOT_RUN` host cases into behavioral proof.

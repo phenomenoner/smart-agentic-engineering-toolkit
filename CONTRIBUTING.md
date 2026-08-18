@@ -19,9 +19,12 @@ an installed skill directory or plugin cache and then treat that copy as source.
    auditable complexity, authority, recovery, and failure-state budget. Prefer updating an existing
    owner; `engineering-specification` owns the detailed decision, and a new catalog/profile row
    needs evidence that it cannot express the behavior.
-5. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
+5. Classify any newly discovered work against the authorized contribution. A severe or useful
+   finding does not authorize a broader product claim, release gate, dependency change, or live
+   effect; propose a scope amendment before crossing that boundary.
+6. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
    behavior and passes the proposed behavior.
-6. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
+7. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
    impact.
 
 Material changes affect activation, authority, safety, compatibility, observable workflow,

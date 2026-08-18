@@ -1,7 +1,7 @@
 interface:
   display_name: "Engineering Implementation"
   short_description: "Implement bounded changes with sufficient evidence"
-  default_prompt: "Use $engineering-implementation to make this authorized change as a small coherent slice and verify the changed contract at the lowest useful altitude."
+  default_prompt: "Use $engineering-implementation to make this authorized change as a small coherent slice, refuse unapproved scope expansion from new findings, and verify the changed contract at the lowest useful altitude."
 
 policy:
   allow_implicit_invocation: true

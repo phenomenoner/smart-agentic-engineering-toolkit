@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.2.0",
+  "toolkitVersion": "0.3.0",
   "repositoryLicense": "MIT",
   "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
   "canonicalState": "the current repository is the canonical writable source for toolkit-owned skills; verified tags identify immutable releases and never create a second writable owner",
@@ -9,19 +9,19 @@
       "name": "engineering-specification",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation plus the conditional first-principles necessity and complexity gate and behavior-eval integration"
+      "modifications": "initial implementation plus the conditional first-principles necessity and complexity gate, anti-scope-drift classification and checkpoint ownership, and behavior-eval integration"
     },
     {
       "name": "engineering-debugging",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation from the frozen public product contract"
+      "modifications": "initial implementation from the frozen public product contract plus a diagnosis-to-scope-change handoff guard"
     },
     {
       "name": "engineering-implementation",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation plus a necessity-decision handoff and reopen guard"
+      "modifications": "initial implementation plus necessity-decision and anti-scope-drift absorption/handoff guards"
     },
     {
       "name": "engineering-wal",
@@ -41,7 +41,7 @@
       "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
       "sourceSkillSha256": "83c4cae4b2708f2880c18ca1df4202c7d28164e87c92d7b9b88dbedd98ea95cc",
       "license": "MIT",
-      "modifications": "toolkit metadata, contribution protocol, behavior eval integration, and a conditional mechanism-necessity review challenge"
+      "modifications": "toolkit metadata, contribution protocol, behavior eval integration, a conditional mechanism-necessity review challenge, and bounded finding-scope dispositions"
     },
     {
       "name": "completeness-and-test-synthesis",
@@ -49,7 +49,7 @@
       "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
       "sourceSkillSha256": "e7149166dc4944bfb0c1076aa92d7af1df126e902d453087a30007261ec18641",
       "license": "MIT",
-      "modifications": "toolkit metadata, contribution protocol, explicit invocation policy, behavior eval integration, and a smallest-falsifier necessity guard"
+      "modifications": "toolkit metadata, contribution protocol, explicit invocation policy, behavior eval integration, a smallest-falsifier necessity guard, and an authorized claim budget"
     },
     {
       "name": "incident-to-regression",

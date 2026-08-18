@@ -3,8 +3,8 @@ name: batch-complete-independent-review
 description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review. Use the formal hash-bound fixed-point gate only for an explicitly independent, final, release, migration, or pre-cutover review, a project-mandated gate, or recurring reviews that keep discovering sibling blockers one round at a time. Do not trigger merely because implementation work occurred.
 license: MIT
 metadata:
-  version: "0.1.1"
-  toolkit-version: "0.2.0"
+  version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
 ---
@@ -49,6 +49,20 @@ An intake, binding, or review-tool defect does not become a candidate-behavior f
 because it prevents a verdict. Report the formal gate as `INCOMPLETE`, repair and revalidate the
 affected envelope, locator, or tool seam, and preserve unrelated candidate-behavior evidence. Use
 `BLOCKED` only when supported evidence identifies an actual candidate contract violation.
+
+## Keep findings inside authorized scope
+
+Finding severity does not grant scope. Report every supported finding that is material, but compare
+its requested disposition with the authorized deliverable, claim, and review mode. Classify proposed
+work as `IN_SCOPE`, minimum `SCOPE_GUARD`, `ADJACENT_RISK`, or `OUT_OF_SCOPE`. Only the first two can
+block the bounded candidate verdict without a scope amendment; adjacent risks remain visible but do
+not silently raise the product claim, acceptance level, release rigor, system boundary, or repair
+authority.
+
+When a finding would require new acceptance criteria, a broader writable surface, another system or
+repository, production or live evidence, or formal release machinery not present in the request,
+route a scope-change checkpoint to `engineering-specification`. Review may recommend the change; it
+cannot authorize implementation or enlarge its own gate.
 
 ## Challenge mechanism necessity when material
 

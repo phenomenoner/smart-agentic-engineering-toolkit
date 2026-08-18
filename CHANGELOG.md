@@ -4,6 +4,13 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-08-18
+
+- Add a cross-lifecycle anti-scope-drift safeguard: classify new findings against the authorized
+  deliverable and claim, permit only in-scope work and minimum scope guards without amendment, stop
+  claim or release-rigor escalation at an owner-approved checkpoint, and preserve explicit amended
+  and direct small-work paths through a public supplemental eval corpus.
+
 ## [0.2.0] - 2026-08-17
 
 - Add an opt-in long-task canon orchestration profile that freezes the product commitment floor and
