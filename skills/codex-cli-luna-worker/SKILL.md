@@ -3,7 +3,7 @@ name: codex-cli-luna-worker
 description: Generate a bounded implementation patch through PowerShell and Codex CLI with gpt-5.6-luna at max reasoning when the native collaboration tool does not expose Luna. Use only after baton-fanout-skill selects delegation for stable code-generation work with exact target paths; the Luna worker stays read-only and the main agent reviews, applies, and verifies the patch. Do not use for architecture, security or authority decisions, independent review, release or cutover judgment, live operations, or overlapping work.
 license: MIT
 metadata:
-  toolkit-version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "codex-model-adapter"
   toolkit-contribution-protocol: "v1"
 ---

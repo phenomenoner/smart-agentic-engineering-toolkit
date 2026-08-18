@@ -3,8 +3,8 @@ name: engineering-implementation
 description: Implement an authorized source, test, configuration, or documentation change when the behavioral contract is sufficiently clear. Use the smallest coherent slice, preserve unrelated work, add a discriminating regression for a safely reproducible existing defect when useful, and verify at the lowest altitude that can falsify the changed claim. Do not use for plan-only, diagnose-only, review-only, publication, live operation, or materially unresolved authority or requirements. It does not automatically authorize commits, pushes, worktrees, full suites, fan-out, or external effects.
 license: MIT
 metadata:
-  version: "0.1.1"
-  toolkit-version: "0.2.0"
+  version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
 ---
@@ -50,6 +50,16 @@ If behavior, ownership, compatibility, or acceptance is materially unresolved, u
 `engineering-specification` before implementation. If the cause of a failure is unknown, use
 `engineering-debugging`. Do not infer permission to publish, deploy, message, purchase, or operate a
 live service from permission to edit code.
+
+**A new finding is not new scope.** Before absorbing a review, test, security, or tooling finding
+into the patch, compare it with the authorized deliverable and claim. Implement `IN_SCOPE` work and
+only the minimum necessary `SCOPE_GUARD`; report `ADJACENT_RISK` and leave `OUT_OF_SCOPE` work
+untouched. An already authorized `IN_SCOPE` repair may change product behavior and write within the
+existing boundary without a checkpoint. Only when a proposed response is not already required by
+the authorized outcome and would raise the claim, acceptance level, release rigor, system boundary,
+authorized writable paths, or external effects, stop at a scope-change checkpoint and route the
+unresolved amendment to `engineering-specification`. Finding severity and available tooling do not
+authorize the expansion.
 
 When the frozen design or the patch introduces a mechanism, state, authority owner, or recovery
 path, read its necessity decision and ask: `Do we really need this to make things happen?` and `Is

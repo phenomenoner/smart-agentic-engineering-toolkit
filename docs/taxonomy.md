@@ -27,6 +27,12 @@ belongs to `engineering-specification`; implementation, review, evidence, drill,
 adapter surfaces carry only short handoff/challenge guards. No additional skill, status, schema,
 catalog row, or mandatory lifecycle is created.
 
+When a new finding appears, severity does not make it new scope. `engineering-specification` owns the
+detailed `IN_SCOPE` / `SCOPE_GUARD` / `ADJACENT_RISK` / `OUT_OF_SCOPE` decision and the material
+scope-change checkpoint. Implementation, diagnosis, review, and evidence skills carry only short
+guards at the point where they could absorb or escalate work. This does not create a seventeenth
+skill, universal finding registry, or mandatory checkpoint for an explicit in-scope change.
+
 ## Distinctions that prevent overlap
 
 - `engineering-debugging` establishes cause. `incident-to-regression` packages an already observed,

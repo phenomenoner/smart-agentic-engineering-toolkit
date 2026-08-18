@@ -10,6 +10,8 @@ mirrors are projections, never alternate source trees.
 - Specify first only when behavior, authority, ownership, compatibility, or acceptance is materially
   unresolved.
 - Use the lowest verification altitude that can falsify the changed claim.
+- A new finding is not new scope. Classify it against the authorized deliverable and claim before
+  acting; use `engineering-specification` for a material scope-change checkpoint.
 - Preserve unrelated and dirty work. Do not reset, clean, rebase, overwrite, publish, or perform a
   live effect without the applicable authority.
 - Use `baton-fanout-skill` before any subagent or CLI compatibility worker when Baton is installed;

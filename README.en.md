@@ -16,6 +16,12 @@ observable outcome/invariant from a mechanism proxy and checks deletion, manual 
 embedding or decision-time computation, and existing platform primitives before adding new state.
 This is a conditional brake; an already clear small contract stays on the direct path.
 
+**A new finding is not new scope.** Classify it against the authorized deliverable and claim before
+acting: `IN_SCOPE`, minimum `SCOPE_GUARD`, `ADJACENT_RISK`, or `OUT_OF_SCOPE`. Any response that
+raises the claim, acceptance level, release rigor, system boundary, authority, writable surface, or
+external effects stops at an explicit scope-change checkpoint. A severe finding remains visible, but
+severity alone cannot amend the task.
+
 ## What it adds
 
 - Behavioral specifications with observable acceptance, non-goals, failure semantics, and a
@@ -23,6 +29,8 @@ This is a conditional brake; an already clear small contract stays on the direct
   and failure-state cost of a retained material mechanism.
 - Separate skills for implementation, debugging, review, readiness judgment, and incident-derived
   regression so that one task class does not silently claim another's authority.
+- A cross-lifecycle anti-scope-drift guard that keeps findings and verification proportional to the
+  authorized claim while preserving explicit owner-approved amendments.
 - Temporal ownership design for TOCTOU, ABA, PID or handle reuse, replacement cleanup, and rollback,
   including forbidden traces, linearization points, stable capabilities or CAS, and exact
   interleaving tests.
@@ -67,7 +75,7 @@ changes.
 
 ## External integrations
 
-In 0.2.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
+In 0.3.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
 integration. Context Canvas, Understand Anything, and AAR also retain their own canonical owners.
 See [`docs/integrations.md`](docs/integrations.md). Superpowers is comparative material only; its
 mandatory bootstrap, TDD, worktree, fan-out, and reviewer chain are not reactivated.
@@ -86,12 +94,12 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-Version 0.2.0 adds the optional canon orchestration profile and stateless transition guard, plus
-supplemental incremental-release and canon-orchestration corpora. Version 0.2.0 retains the 63-case
-baseline from 0.1.0 while rebinding release identity and current input hashes; fresh-agent behavior
-evaluation for canon orchestration remains `NOT_RUN`. This release claim is limited to the listed
-repository bytes, source tests, plugin and standalone installation, and host evidence. It does not
-claim OpenAI endorsement, Plugin Directory approval,
+Version 0.3.0 adds the cross-lifecycle anti-scope-drift guard and its supplemental static-contract
+corpus without adding a skill, profile, schema, or mandatory lifecycle. It retains the 63-case
+baseline from 0.1.0 while rebinding release identity and current input hashes; supplemental
+fresh-agent behavior evaluation remains explicitly bounded by recorded host evidence. This release
+claim is limited to the listed repository bytes, source tests, plugin and standalone installation,
+and host evidence. It does not claim OpenAI endorsement, Plugin Directory approval,
 or deployment or availability of AAR, Canvas, or an external model provider.
 
 License: MIT. See [`NOTICE`](NOTICE) and

@@ -8,7 +8,7 @@ description: >-
   explicit small contract; this skill does not authorize implementation.
 license: MIT
 metadata:
-  toolkit-version: "0.2.0"
+  toolkit-version: "0.3.0"
   toolkit-phase: "specify"
   toolkit-contribution-protocol: "v1"
 ---
@@ -68,6 +68,42 @@ Use the smallest set of available inputs that can establish the contract:
 Do not invent facts to fill a gap. Label an assumption, unknown, or unverified observation, and
 make its effect on the contract explicit.
 
+## Control scope changes
+
+**A new finding is not new scope.** Compare every material finding or proposed gate against the
+authorized deliverable and authorized claim before allowing it to create implementation or
+verification work. Classify it as exactly one of:
+
+- `IN_SCOPE`: directly required by the authorized outcome or acceptance criteria;
+- `SCOPE_GUARD`: the smallest containment needed to keep the authorized deliverable valid or safe
+  to exercise, without claiming a broader product capability;
+- `ADJACENT_RISK`: credible and relevant, but not required to satisfy the current contract; or
+- `OUT_OF_SCOPE`: unrelated to the current outcome, claim, or necessary containment.
+
+Ask three questions in order:
+
+1. **If the finding is not addressed, does the authorized deliverable or claim fail?**
+2. Would the proposed response change product behavior, the acceptance level, release rigor, system
+   boundary, writable owner, schedule commitment, or external effects?
+3. **Can the original contract be preserved by a smaller containment or disclosure?**
+
+Proceed without a scope amendment only for `IN_SCOPE` work and the minimum `SCOPE_GUARD`.
+`ADJACENT_RISK` is reported with evidence and a proposed disposition; it does not authorize a new
+workstream. If continuing would cause immediate harm, stop or disable the unsafe path within existing
+authority, but do not silently perform the broader remediation. Record `OUT_OF_SCOPE` only when it is
+material enough to preserve; do not mutate it.
+
+Create a **scope-change checkpoint** before work that raises or changes the authorized deliverable,
+authorized claim, acceptance level, release rigor, system boundary, authority owner, writable paths,
+or external effects. The checkpoint records the original boundary, finding and classification,
+evidence, proposed delta and non-goals, newly required claim and checks, approval owner, and safest
+interim containment. Without explicit approval, return `BLOCKED` for the expansion while preserving
+any safe direct path for the original contract.
+
+Severity does not grant scope. A reviewer, validator, test, tool, protocol, or available capability
+may reveal a risk but cannot amend the contract. The checkpoint is a compact decision record, not a
+new service, registry, status machine, or mandatory artifact for ordinary in-scope work.
+
 ## Procedure
 
 1. **Frame the change.** State the user-visible outcome and the in-scope and out-of-scope
@@ -126,7 +162,9 @@ make its effect on the contract explicit.
    assumptions, open decisions, evidence gaps, and the next safe action. State whether a later
    implementation request would have enough information, but do not edit implementation files or
    claim that implementation, tests, review, release, or delivery has happened. If a required
-   decision or authority is missing, stop with `BLOCKED` and identify exactly what is needed.
+   decision or authority is missing, stop with `BLOCKED` and identify exactly what is needed. When a
+   finding would expand the contract, include the scope-change checkpoint instead of manufacturing
+   new acceptance criteria.
 
 Do not automatically create a WAL, invoke a reviewer, run a full suite, start a worker, use Canvas
 or CodeGraph, call AAR, or contact an external provider. Those capabilities may be selected by
