@@ -37,7 +37,7 @@ def test_install_receipt_schema_accepts_exact_tree_evidence() -> None:
     ).hexdigest()
     receipt = {
         "schemaVersion": 1,
-        "toolkitVersion": "0.3.0",
+        "toolkitVersion": "0.4.0",
         "sourceCommit": None,
         "sourceRoot": "source",
         "targetRoot": "target",
@@ -87,7 +87,7 @@ def test_install_receipt_semantics_reject_malformed_file_evidence(
     ).hexdigest()
     receipt = {
         "schemaVersion": 1,
-        "toolkitVersion": "0.3.0",
+        "toolkitVersion": "0.4.0",
         "sourceCommit": None,
         "sourceRoot": "source",
         "targetRoot": "target",
@@ -127,7 +127,7 @@ def test_real_installer_receipt_matches_public_schema(tmp_path: Path) -> None:
         json.dumps(
             {
                 "schemaVersion": 1,
-                "toolkitVersion": "0.3.0",
+                "toolkitVersion": "0.4.0",
                 "name": "core",
                 "skills": ["alpha-skill"],
             }
@@ -147,7 +147,7 @@ def test_improvement_proposal_schema_preserves_pr_authority_boundary() -> None:
         "baseCommit": "b" * 40,
         "skill": {
             "name": "engineering-specification",
-            "toolkitVersion": "0.3.0",
+            "toolkitVersion": "0.4.0",
             "sha256": "c" * 64,
         },
         "host": {"name": "Codex"},
@@ -171,11 +171,11 @@ def test_improvement_proposal_schema_preserves_pr_authority_boundary() -> None:
 def test_behavior_eval_schema_requires_explicit_execution_status() -> None:
     result = {
         "schemaVersion": 1,
-        "toolkitVersion": "0.3.0",
+        "toolkitVersion": "0.4.0",
         "candidate": {
             "commit": "d" * 40,
             "tree": "e" * 40,
-            "pluginVersion": "0.3.0",
+            "pluginVersion": "0.4.0",
             "catalogSha256": "f" * 64,
         },
         "environment": {

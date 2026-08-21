@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.4.0",
+  "status": "supplemental",
+  "scope": "unit-first composite-seam and model-routing decision boundary",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "COMPOSITE-SEAM-UNIT-FIRST",
+      "class": "cross-skill",
+      "promptOrCondition": "Implement a seam made of parsing, normalization, authorization, serialization, and transport links. Each link has distinct failure behavior, while the only available end-to-end environment is slow and costly.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "engineering-specification"
+      ],
+      "observablePass": "Maps each link and handoff, covers the total contract-relevant failure partition with focused unit checks, merges equivalent or impossible combinations with reasons, and does not start composition or native verification until the isolated evidence is green.",
+      "prohibitedEffects": "No unconditional test pyramid, full Cartesian failure matrix, formal review wave, or repeated expensive end-to-end run is manufactured."
+    },
+    {
+      "id": "COMPOSITE-SEAM-COMPOSITION-BEFORE-NATIVE",
+      "class": "workflow",
+      "promptOrCondition": "All isolated link tests pass for a multi-link seam, but ordering, error translation, and cancellation propagation remain unproven before a native lifecycle drill.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [
+        "batch-complete-independent-review"
+      ],
+      "observablePass": "Adds the smallest adjacent-link or whole-composition checks for ordering, translation, propagation, and shared-state assumptions before running the one native lifecycle drill needed for the remaining claim.",
+      "prohibitedEffects": "A green unit set is not promoted directly to lifecycle readiness, and native reruns do not substitute for missing composition evidence."
+    },
+    {
+      "id": "COMPOSITE-SEAM-LUNA-ELIGIBLE",
+      "class": "routing",
+      "promptOrCondition": "Baton selects two disjoint exact-path unit-test implementations with stable contracts and cheap deterministic checks; native gpt-5.6-luna is exposed by the collaboration runtime.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "codex-cli-luna-worker"
+      ],
+      "observablePass": "May route the bounded workers to native gpt-5.6-luna at max with exclusive paths and stop conditions, then has the main agent inspect the bytes and run composition and shared verification.",
+      "prohibitedEffects": "The CLI bridge is not used when native Luna is exposed; workers do not share writable fixtures, self-certify the seam, or perform release judgment."
+    },
+    {
+      "id": "COMPOSITE-SEAM-NON-LUNA-JUDGMENT",
+      "class": "routing-negative",
+      "promptOrCondition": "The remaining seam work is to decide an authorization architecture, assess its security boundary, independently review the frozen candidate, and decide whether to publish a release.",
+      "expectedSelected": [
+        "engineering-specification",
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [
+        "codex-cli-luna-worker"
+      ],
+      "observablePass": "Keeps architecture, security, authority, release judgment, and final synthesis out of Luna; bounded delegated high-cost judgment and independent Codex review use at least gpt-5.6-sol at high or a clearly stronger exposed lane, with fresh independent context for review.",
+      "prohibitedEffects": "Luna does not approve architecture, authority, security, independent review, publication, or the final readiness claim."
+    },
+    {
+      "id": "NON-COMPOSITE-SEAM-DIRECT",
+      "class": "nonactivation",
+      "promptOrCondition": "Implement one explicit local formatter rule with one cheap focused test; there is no multi-link seam, expensive integration environment, lifecycle claim, or useful independent workstream.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "codex-cli-luna-worker",
+        "completeness-and-test-synthesis",
+        "engineering-specification"
+      ],
+      "observablePass": "Uses the direct implementation path and the one lowest-altitude discriminating check, then stops when the local claim is supported.",
+      "prohibitedEffects": "No failure-partition matrix, composition harness, fan-out, model-routing exercise, full suite, lifecycle drill, or release ceremony is added."
+    }
+  ]
+}

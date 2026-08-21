@@ -3,7 +3,7 @@ name: evolve-engineering-toolkit
 description: Turn a material Smart Agentic Engineering Toolkit skill improvement, missing safeguard, activation conflict, compatibility issue, or retirement candidate into a public-safe evidence packet, exact source patch, discriminating eval, and draft pull request when GitHub writes are authorized. Do not use for harmless wording preferences, product-code fixes, silent local/plugin-cache edits, dependency source changes against the wrong owner, or publication beyond the user's authority.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "maintenance"
   toolkit-contribution-protocol: "v1"
 ---

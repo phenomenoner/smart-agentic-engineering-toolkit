@@ -4,7 +4,7 @@ description: Specify, review, or test a concrete temporal check-then-effect seam
 license: MIT
 metadata:
   version: "0.1.1"
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "temporal-assurance"
   toolkit-contribution-protocol: "v1"
 ---

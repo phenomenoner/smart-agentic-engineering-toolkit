@@ -15,7 +15,7 @@ from scripts.install_toolkit import (
 )
 
 
-def write_source(root: Path, contents: dict[str, str], version: str = "0.3.0") -> None:
+def write_source(root: Path, contents: dict[str, str], version: str = "0.4.0") -> None:
     for name, body in contents.items():
         skill = root / "skills" / name
         skill.mkdir(parents=True, exist_ok=True)
@@ -109,7 +109,7 @@ def test_generated_cache_members_are_not_installed_or_receipted(tmp_path: Path) 
     generated = {
         "__pycache__/helper.cpython-311.pyc": b"bytecode",
         ".pytest_cache/v/cache/nodeids": b"[]",
-        ".ruff_cache/0.3.0/cache": b"lint cache",
+        ".ruff_cache/0.4.0/cache": b"lint cache",
         "build/generated.txt": b"build output",
         "dist/archive.whl": b"wheel output",
         "helper.egg-info/PKG-INFO": b"metadata",
@@ -200,7 +200,7 @@ def test_diverged_managed_target_is_refused(tmp_path: Path) -> None:
 def test_exact_managed_upgrade_preserves_backup(tmp_path: Path) -> None:
     source = tmp_path / "source"
     target = tmp_path / "installed"
-    write_source(source, {"alpha-skill": "v1"}, version="0.3.0")
+    write_source(source, {"alpha-skill": "v1"}, version="0.4.0")
     Installer(source, target).install("core")
     write_source(source, {"alpha-skill": "v2"}, version="0.1.1")
 

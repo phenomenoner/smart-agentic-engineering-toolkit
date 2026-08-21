@@ -3,7 +3,7 @@ name: engineering-debugging
 description: Diagnose a failing test, build, runtime, or user-visible behavior when the root cause is not yet established. Use to reproduce safely, reduce the failure, rank and falsify hypotheses, identify the causal seam and blast radius, and report residual uncertainty. Do not use when the cause and requested patch are already explicit, when an established incident only needs a reusable regression package, for a generic explanation, or for code review. Diagnosis alone does not authorize a repair.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "diagnose"
   toolkit-contribution-protocol: "v1"
 ---

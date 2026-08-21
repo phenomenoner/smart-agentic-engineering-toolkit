@@ -1,6 +1,6 @@
 # Behavior evaluation
 
-`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.3.0 release updates its
+`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.4.0 release updates its
 release identity and current catalog/specification bindings without adding cases. Static validation
 proves only that the catalog has positive and negative coverage. It does **not** prove that a host
 selected the expected skill or followed its authority boundary. The same static-versus-host boundary applies to every
@@ -28,6 +28,13 @@ output behavior without copying the design procedure into every case.
 in-scope defect and minimum scope guard from adjacent or unrelated work, rejects an unapproved
 claim/release escalation, and preserves both an explicitly authorized scope amendment and the direct
 path for a small in-scope defect. Its `evidenceStatus` remains `NOT_RUN` until fresh isolated agent
+executions bind observable behavior and prohibited effects.
+
+`cases/unit-first-composite-seams.json` is a 0.4.0 supplemental static-contract corpus. It activates
+only for seams with multiple independently failing links or expensive/high-risk integration
+feedback, requires isolated link and contract-relevant failure-partition evidence before composition
+and native/lifecycle checks, records Baton and model-routing boundaries, and preserves the direct
+path for one cheap simple seam. Its `evidenceStatus` remains `NOT_RUN` until fresh isolated agent
 executions bind observable behavior and prohibited effects.
 
 For a release evaluation:

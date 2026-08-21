@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.3.0",
+  "toolkitVersion": "0.4.0",
   "name": "assurance",
   "class": "optional",
   "status": "owned",

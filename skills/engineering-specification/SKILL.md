@@ -8,7 +8,7 @@ description: >-
   explicit small contract; this skill does not authorize implementation.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "specify"
   toolkit-contribution-protocol: "v1"
 ---

@@ -3,7 +3,7 @@ name: engineering-wal
 description: Maintain a compact durable work log for multi-session, multi-agent, compaction-prone, long-running, risky, interrupted, or deliberately blocked engineering work. Use it to preserve objective, commitment floor, target stage, scope and authority, repository identity and dirty state, decisions, blockers, core/seam verdicts, evidence pointers, next safe action, and stop conditions. Do not use for a small single-turn task or as a substitute for executable proof, source, authorization, secrets storage, raw receipts, Context Canvas, or project planning documents.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "continuity"
   toolkit-contribution-protocol: "v1"
 ---

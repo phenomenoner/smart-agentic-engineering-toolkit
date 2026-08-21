@@ -31,6 +31,9 @@ severity alone cannot amend the task.
   regression so that one task class does not silently claim another's authority.
 - A cross-lifecycle anti-scope-drift guard that keeps findings and verification proportional to the
   authorized claim while preserving explicit owner-approved amendments.
+- A conditional unit-first ladder for costly composite seams: prove each independently failing link
+  and contract-relevant failure class, then composition boundaries, then only the native or
+  lifecycle behavior lower tiers cannot represent.
 - Temporal ownership design for TOCTOU, ABA, PID or handle reuse, replacement cleanup, and rollback,
   including forbidden traces, linearization points, stable capabilities or CAS, and exact
   interleaving tests.
@@ -75,7 +78,7 @@ changes.
 
 ## External integrations
 
-In 0.3.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
+In 0.4.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
 integration. Context Canvas, Understand Anything, and AAR also retain their own canonical owners.
 See [`docs/integrations.md`](docs/integrations.md). Superpowers is comparative material only; its
 mandatory bootstrap, TDD, worktree, fan-out, and reviewer chain are not reactivated.
@@ -94,12 +97,13 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-Version 0.3.0 adds the cross-lifecycle anti-scope-drift guard and its supplemental static-contract
-corpus without adding a skill, profile, schema, or mandatory lifecycle. It retains the 63-case
-baseline from 0.1.0 while rebinding release identity and current input hashes; supplemental
-fresh-agent behavior evaluation remains explicitly bounded by recorded host evidence. This release
-claim is limited to the listed repository bytes, source tests, plugin and standalone installation,
-and host evidence. It does not claim OpenAI endorsement, Plugin Directory approval,
+Version 0.4.0 adds the conditional unit-first composite-seam ladder, Baton-routed Luna/max eligibility
+for stable bounded workers, and a Sol/high floor for independent Codex review. It adds no skill,
+profile, schema, or mandatory lifecycle, and preserves the direct path for one cheap simple seam. It
+retains the 63-case baseline from 0.1.0 while rebinding release identity and current input hashes;
+supplemental fresh-agent behavior evaluation remains explicitly bounded by recorded host evidence.
+This release claim is limited to the listed repository bytes, source tests, plugin and standalone
+installation, and host evidence. It does not claim OpenAI endorsement, Plugin Directory approval,
 or deployment or availability of AAR, Canvas, or an external model provider.
 
 License: MIT. See [`NOTICE`](NOTICE) and

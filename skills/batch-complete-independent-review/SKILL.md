@@ -3,8 +3,8 @@ name: batch-complete-independent-review
 description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review. Use the formal hash-bound fixed-point gate only for an explicitly independent, final, release, migration, or pre-cutover review, a project-mandated gate, or recurring reviews that keep discovering sibling blockers one round at a time. Do not trigger merely because implementation work occurred.
 license: MIT
 metadata:
-  version: "0.2.0"
-  toolkit-version: "0.3.0"
+  version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
 ---
@@ -82,6 +82,10 @@ canonical owner; review only challenges the decision and its evidence.
   reviewer loop for every code change.
 - Invoke `baton-fanout-skill` before dispatching any subagent. Let Baton own
   worker count, model/effort routing, context minimization, and write ownership.
+- Never route independent review through Luna. In a Codex runtime exposing the GPT-5.6 family, use
+  at least `gpt-5.6-sol` at `high` effort, or a clearly stronger exposed reviewer lane. At the
+  runtime ceiling, use the same top lane with fresh independent or adversarial context. The live
+  runtime schema remains authoritative, and the main agent retains synthesis and release judgment.
 - Apply `completeness-and-test-synthesis` when its narrower readiness,
   recurring-regression, lifecycle, or evidence-gap triggers apply. Do not load
   it solely because an ordinary review is underway.

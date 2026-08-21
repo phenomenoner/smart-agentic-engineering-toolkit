@@ -10,12 +10,18 @@ mirrors are projections, never alternate source trees.
 - Specify first only when behavior, authority, ownership, compatibility, or acceptance is materially
   unresolved.
 - Use the lowest verification altitude that can falsify the changed claim.
+- When a seam has multiple independently failing links or costly high-altitude feedback, prove the
+  contract-relevant link failures first, then composition, then only the native or lifecycle claim
+  lower tiers cannot represent. Keep one simple seam on the direct path.
 - A new finding is not new scope. Classify it against the authorized deliverable and claim before
   acting; use `engineering-specification` for a material scope-change checkpoint.
 - Preserve unrelated and dirty work. Do not reset, clean, rebase, overwrite, publish, or perform a
   live effect without the applicable authority.
 - Use `baton-fanout-skill` before any subagent or CLI compatibility worker when Baton is installed;
   otherwise work directly. Delegation does not expand scope.
+- After Baton selects delegation, reserve Luna/max for stable bounded code generation or
+  low-judgment scouts with cheap falsifiers; never use Luna for architecture, security, authority,
+  independent review, or release judgment.
 - Keep final synthesis, shared verification, and publication judgment with the main agent.
 
 ## Canonical improvement path
