@@ -3,8 +3,8 @@ name: completeness-and-test-synthesis
 description: Engineering completeness and test-evidence synthesis for explicit readiness judgments, recurring regressions, green-tests-but-broken-real-use failures, cross-component or lifecycle changes, and choosing the lowest verification altitude that can falsify a claim. Use when the user asks whether work is actually done or ready, when evidence coverage is disputed, or when logs and receipts should become regression tests. Do not trigger for every ordinary implementation or merely because a task ends.
 license: MIT
 metadata:
-  version: "0.2.0"
-  toolkit-version: "0.3.0"
+  version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
 ---
@@ -75,6 +75,25 @@ Choose the lowest tier at which the relevant defect would actually fail.
 
 Higher tiers do not replace lower-tier logic tests, and repeated integration
 runs do not compensate for a non-discriminating assertion.
+
+## Require a unit-first ladder only for composite seams
+
+When one claim crosses multiple independently falsifiable links, or high-altitude feedback is
+materially expensive or risky, split the evidence before accepting an integration result:
+
+1. Map the links, primitives, handoffs, and the total contract-relevant failure partition. Require a
+   focused T1 check for each independently failing link and each credible failure class; merge
+   behaviorally equivalent classes and exclude impossible or out-of-claim combinations with a reason.
+2. Require the smallest T1/T2 composition checks for adjacent handoffs, ordering, translation,
+   propagation, and shared-state assumptions after the isolated checks pass.
+3. Use native, integration, lifecycle, or live evidence only for the remaining claim that lower tiers
+   cannot represent. A green high-altitude run does not fill a missing link partition, and repeated
+   end-to-end runs do not substitute for a reduced regression.
+
+This is a conditional evidence ladder, not a mandatory test pyramid. A single local seam or a cheap
+real-boundary check that directly falsifies the claim stays on the minimum-sufficient path. When
+independent link work is worth delegating, apply Baton before fan-out, keep ownership disjoint, and
+retain composed verification and readiness synthesis with the main agent.
 
 ## Use regression-first where it proves something
 

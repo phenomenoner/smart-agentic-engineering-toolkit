@@ -33,6 +33,13 @@ scope-change checkpoint. Implementation, diagnosis, review, and evidence skills 
 guards at the point where they could absorb or escalate work. This does not create a seventeenth
 skill, universal finding registry, or mandatory checkpoint for an explicit in-scope change.
 
+When one seam contains several independently failing links or makes integration feedback materially
+expensive, `engineering-implementation` owns the unit-first construction order and
+`completeness-and-test-synthesis` owns the evidence judgment: link and failure-partition checks,
+then composition boundaries, then only the native or lifecycle behavior lower tiers cannot
+represent. This is conditional; one cheap simple seam remains a direct implementation check. Baton
+gates any useful disjoint fan-out and the main agent retains composed verification and synthesis.
+
 ## Distinctions that prevent overlap
 
 - `engineering-debugging` establishes cause. `incident-to-regression` packages an already observed,

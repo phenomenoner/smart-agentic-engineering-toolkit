@@ -3,8 +3,8 @@ name: engineering-implementation
 description: Implement an authorized source, test, configuration, or documentation change when the behavioral contract is sufficiently clear. Use the smallest coherent slice, preserve unrelated work, add a discriminating regression for a safely reproducible existing defect when useful, and verify at the lowest altitude that can falsify the changed claim. Do not use for plan-only, diagnose-only, review-only, publication, live operation, or materially unresolved authority or requirements. It does not automatically authorize commits, pushes, worktrees, full suites, fan-out, or external effects.
 license: MIT
 metadata:
-  version: "0.2.0"
-  toolkit-version: "0.3.0"
+  version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
 ---
@@ -83,6 +83,36 @@ verification, and owns the claim.
 For concurrency, replacement, rollback, identity reuse, or check-then-mutate behavior, apply
 `specify-temporal-ownership` before choosing a patch. A stronger-looking final check is insufficient
 when another actor can replace state after it.
+
+## Decompose costly composite seams before climbing altitude
+
+Use a unit-first composition ladder when a claimed seam contains multiple links that can fail
+independently, or when native, integration, or lifecycle feedback is materially expensive, slow, or
+risky. Do not impose this ladder on one simple local seam when a direct focused check is cheaper and
+equally discriminating.
+
+1. Name each link or primitive, its controlled input/output contract, and the handoff it owns.
+   Partition success and every credible, contract-relevant failure class across the links and
+   handoffs. Cover the total contract-relevant failure partition, but do not manufacture the full
+   Cartesian product of equivalent, impossible, or out-of-claim combinations.
+2. Prove each link at T1 with controlled collaborators before relying on an expensive composed run.
+   Include the credible negative, boundary, timeout, cancellation, malformed, unavailable, or
+   downstream-failure class owned by that link.
+3. After the link checks pass, add the smallest adjacent-link or whole-composition test that can
+   falsify handoff translation, ordering, propagation, and shared-state assumptions at T1 or T2.
+4. Only then run the native, integration, lifecycle, or live check needed for behavior that lower
+   tiers cannot faithfully represent. When it fails, reduce the failure to the missing link or
+   composition regression before repeatedly paying the high-altitude feedback cost.
+
+After the contracts, dependency order, and shared fixtures are stable, Baton may assign disjoint
+link tests, exact-path code generation, or low-judgment scouting to workers with exclusive ownership.
+An exposed native `gpt-5.6-luna` lane at `max` is eligible only for stable, bounded work whose result
+is cheap to falsify; use the CLI Luna bridge only for its narrower exact-path code-generation
+fallback. Keep architecture, security, authority, release or cutover judgment, and independent
+review out of Luna; use an applicable Sol/high-or-stronger lane when such bounded high-cost judgment
+is independently delegated. Do not fan out an unresolved composition contract or a shared harness.
+The main agent owns dependency synthesis, the composed checks, shared verification, and the final
+claim.
 
 ## Establish a discriminating check
 

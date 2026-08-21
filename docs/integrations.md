@@ -4,10 +4,21 @@ External integrations are versioned relationships, not vendored writable copies.
 
 ## Baton fan-out
 
-`baton-fanout-skill` gates every subagent or CLI compatibility worker. During the 0.1 line, its
-existing public repository and Codex branch remain canonical while local/public divergence is
-reconciled. The toolkit records a pin and routing boundary but does not install or modify an editable
-copy. If Baton is unavailable, work directly.
+`baton-fanout-skill` gates every subagent or CLI compatibility worker. Its existing public repository
+and Codex branch remain canonical; the toolkit records a pin and routing boundary but does not
+install or modify an editable copy. If Baton is unavailable, work directly.
+
+After Baton's dispatch brake selects delegation, native `gpt-5.6-luna` at `max` is the first
+candidate only for stable, bounded code generation or low-judgment scouting with a cheap independent
+falsifier and exclusive ownership. The toolkit's CLI Luna bridge is a narrower fallback for
+exact-path code-generation proposals when native Luna is unavailable; it is not a scouting route.
+Never route architecture, security, authority, release or cutover judgment, credentials, live
+operations, or independent review through Luna. Keep final authority and release judgment with the
+main agent; when bounded architecture, security, or other high-cost judgment is independently
+delegated in Codex, use an applicable `gpt-5.6-sol` at `high` or stronger exposed lane. An independent
+reviewer uses at least that Sol/high floor; at the runtime ceiling, use the same top lane with fresh
+independent context. The live runtime schema wins, and the main agent keeps composition, shared
+verification, publication judgment, and user-facing truth claims.
 
 Canonical ownership may transfer in a future major release only through one reviewed cutover: merge
 and tag the reconciled upstream, import the exact tag, change every governance pointer, make the old

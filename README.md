@@ -27,6 +27,9 @@ scope-change checkpoint。嚴重finding仍應揭露，但severity本身不能修
   避免一個 skill 偷渡另一個 skill 的權限或結論。
 - 用跨階段anti-scope-drift guard讓finding與驗證深度受已授權claim約束，同時保留owner明示
   scope amendment後的直接路徑。
+- 對具有多個可獨立失敗環節、且integration回饋昂貴的composite seam，條件式採用unit-first：
+  先證明各link與contract-relevant failure class，再測composition boundary，最後才驗證低層
+  無法代表的native或lifecycle行為。
 - 對 TOCTOU、ABA、PID/handle reuse、replacement cleanup、rollback ownership 等時序問題，
   要求 forbidden trace、linearization point、stable capability/CAS 與精準 interleaving test。
 - 把 WAL 當最小可恢復地圖；Canvas、CodeGraph、AAR、knowledge graph 與模型 worker 都是
@@ -66,7 +69,7 @@ task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐
 
 ## 外部整合
 
-`baton-fanout-skill` 在 0.3.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
+`baton-fanout-skill` 在 0.4.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
 Understand Anything 與 AAR 也維持各自 canonical owner。詳見
 [`docs/integrations.md`](docs/integrations.md)。Superpowers 僅是比較資料，不會重新啟用其
 mandatory bootstrap/TDD/worktree/fan-out chain。
@@ -87,11 +90,12 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.3.0 新增跨階段anti-scope-drift guard及其supplemental static-contract corpus，不新增skill、
-profile、schema或mandatory lifecycle。本版沿用0.1.0的63-case baseline，只重綁release identity
-與current input hashes；supplemental fresh-agent behavior仍以實際保存的host evidence為界。
-本版主張只涵蓋已列出的repository bytes、source tests、plugin/standalone install與host
-evidence；不表示OpenAI官方推薦、
+0.4.0 新增條件式unit-first composite-seam ladder、由Baton治理的stable bounded Luna/max worker
+資格，以及Codex independent review的Sol/high最低路由。它不新增skill、profile、schema或
+mandatory lifecycle，並保留單一簡單seam的直接路徑。本版沿用0.1.0的63-case baseline，只重綁
+release identity與current input hashes；supplemental fresh-agent behavior仍以實際保存的host
+evidence為界。本版主張只涵蓋已列出的repository bytes、source tests、plugin/standalone
+install與host evidence；不表示OpenAI官方推薦、
 Plugin Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與

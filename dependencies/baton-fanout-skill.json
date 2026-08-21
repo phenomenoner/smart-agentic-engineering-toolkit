@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.3.0",
+  "toolkitVersion": "0.4.0",
   "name": "baton-fanout-skill",
   "status": "pinned-external",
   "disposition": "pinned-external-dependency",
@@ -9,8 +9,8 @@
     "type": "branch-pointer",
     "repository": "https://github.com/phenomenoner/baton-fanout-skill",
     "ref": "codex/add-model-effort-routing",
-    "resolvedCommit": "69b805df9df2252119b7a87886097f8cafd5e11a",
-    "observedAt": "2026-08-15"
+    "resolvedCommit": "ed12ef2330309b93963f9a61bc5ee7de53cf0956",
+    "observedAt": "2026-08-21"
   },
   "ownership": {
     "canonical": "external",

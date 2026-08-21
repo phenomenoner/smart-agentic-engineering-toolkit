@@ -3,7 +3,7 @@ name: codex-app-mcp-update
 description: Safely update an existing local Codex Desktop plugin whose MCP server comes from a package or tool environment, keeping package, marketplace source, installed plugin, live process, and task identities distinct. Use for local MCP upgrades, bundled-skill or tool-surface changes, cachebuster refreshes, Windows live-process locks or partial uv tool installs, restart/new-task decisions, and native post-update verification. Do not use for initial plugin scaffolding or official marketplace submission.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "codex-maintenance"
   toolkit-contribution-protocol: "v1"
 ---

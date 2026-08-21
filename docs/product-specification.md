@@ -1,4 +1,4 @@
-# Product specification 0.3.0
+# Product specification 0.4.0
 
 Status: released
 
@@ -47,6 +47,13 @@ conditional guard and routes unresolved design back to it.
     minimum `SCOPE_GUARD` proceed without an amendment; a change to the authorized deliverable,
     claim, acceptance level, release rigor, system boundary, authority, writable paths, or external
     effects stops at an owner-approved scope-change checkpoint.
+12. A composite seam with independently failing links or costly high-altitude feedback is proven
+    link by link across its contract-relevant failure partition, then at composition boundaries, and
+    only then at the native or lifecycle altitude the claim needs. A simple seam remains direct.
+13. Baton gates any fan-out. Stable bounded code generation and low-judgment scouts may use eligible
+    Luna/max routes, but architecture, security, authority, release judgment, and independent review
+    do not; independent Codex review uses at least Sol/high or a stronger exposed lane, while final
+    synthesis and publication judgment remain with the main agent.
 
 ## Owned scope
 
@@ -65,6 +72,8 @@ The release must pass:
   contract case that proves the direct path remains available;
 - supplemental anti-scope-drift cases that distinguish bounded findings, unauthorized claim
   escalation, unrelated cleanup, an explicit scope amendment, and a direct in-scope defect;
+- supplemental unit-first composite-seam cases that distinguish link partitions, composition before
+  native feedback, eligible Luna/max work, non-Luna judgment, and a direct simple-seam path;
 - overlap, external dependency, retirement, and unsupported-action cases;
 - contribution behavior with and without GitHub-write authority;
 - clean, exact, managed update, unmanaged conflict, local divergence, pre-publish failure,
@@ -76,5 +85,6 @@ The release must pass:
 The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0.2.0 added
 `evals/cases/incremental-release-progression.json` and `evals/cases/canon-orchestration.json`;
 version 0.3.0 adds `evals/cases/anti-scope-drift.json`. These supplemental static-contract corpora do
-not alter or upgrade the frozen baseline's behavior evidence, and source tests do not turn their
-`NOT_RUN` host cases into behavioral proof.
+not alter or upgrade the frozen baseline's behavior evidence. Version 0.4.0 adds
+`evals/cases/unit-first-composite-seams.json`; source tests do not turn any supplemental `NOT_RUN`
+host cases into behavioral proof.

@@ -494,8 +494,8 @@ def _validate_skill(
     if not isinstance(metadata, dict):
         _error(errors, "SKILL_METADATA", skill_md, "metadata mapping is required")
     else:
-        if metadata.get("toolkit-version") != "0.3.0":
-            _error(errors, "SKILL_METADATA", skill_md, "toolkit-version must be 0.3.0")
+        if metadata.get("toolkit-version") != "0.4.0":
+            _error(errors, "SKILL_METADATA", skill_md, "toolkit-version must be 0.4.0")
         if metadata.get("toolkit-contribution-protocol") != "v1":
             _error(errors, "SKILL_METADATA", skill_md, "contribution protocol must be v1")
         if expected_phase and metadata.get("toolkit-phase") != expected_phase:
@@ -633,7 +633,7 @@ def build_public_lock(root: Path) -> dict[str, Any]:
     files = _release_files(root)
     return {
         "schemaVersion": 1,
-        "toolkitVersion": "0.3.0",
+        "toolkitVersion": "0.4.0",
         "algorithm": "sha256",
         "excludesSelf": "manifest/public-lock.json",
         "files": [
@@ -687,7 +687,7 @@ def validate_toolkit(root: Path, *, release: bool = False) -> list[dict[str, str
     plugin = documents["plugin"]
     if (
         plugin.get("name") != "smart-agentic-engineering-toolkit"
-        or plugin.get("version") != "0.3.0"
+        or plugin.get("version") != "0.4.0"
         or plugin.get("skills") != "./skills/"
     ):
         _error(

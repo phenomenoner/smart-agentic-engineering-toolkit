@@ -3,7 +3,7 @@ name: long-run-supervisor
 description: Launch and supervise long-running PowerShell commands with a local heartbeat, private task state, deterministic polling, terminal-only output, and optional idle-only multi-task fan-in; also apply the same work-conserving blocking-wait discipline to already-dispatched native collaboration agents without wrapping them as processes. Use when a long command or delegated worker would otherwise consume repeated status turns. Treat Goal as optional intent retention and App exec notifications as deferred delivery, not a polling clock or durable thread-wake mechanism.
 license: MIT
 metadata:
-  toolkit-version: "0.3.0"
+  toolkit-version: "0.4.0"
   toolkit-phase: "windows-execution"
   toolkit-contribution-protocol: "v1"
 ---

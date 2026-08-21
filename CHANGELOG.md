@@ -4,6 +4,19 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-21
+
+- Add a conditional unit-first composition strategy for seams with multiple independently failing
+  links or expensive/high-risk integration feedback: cover the contract-relevant failure partition,
+  then composition boundaries, then only the native or lifecycle claim lower tiers cannot represent.
+- Bind composite-seam fan-out to Baton with exclusive ownership and main-agent synthesis; permit
+  eligible native Luna/max workers only for stable bounded code generation or low-judgment scouts,
+  exclude Luna from architecture, security, authority, release judgment, and independent review, and
+  set the Codex independent-review floor at Sol/high or a stronger exposed lane.
+- Refresh the pinned external Baton routing integration and add supplemental activation,
+  non-activation, composition-order, and model-route contracts without adding a new skill or
+  mandatory lifecycle.
+
 ## [0.3.0] - 2026-08-18
 
 - Add a cross-lifecycle anti-scope-drift safeguard: classify new findings against the authorized
