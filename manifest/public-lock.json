@@ -142,7 +142,7 @@
     {
       "path": "evals/cases/acceptance.json",
       "length": 25423,
-      "sha256": "795b2254ffb67aa62b67411f611d5c2152af9b60308a52f75ca462f0422b3bfd"
+      "sha256": "2b9b19f635fb96ab0850183c46d88716b4494586aea99be49bd4e9e4e7417be3"
     },
     {
       "path": "evals/cases/anti-scope-drift.json",
@@ -261,8 +261,8 @@
     },
     {
       "path": "scripts/validate_toolkit.py",
-      "length": 33915,
-      "sha256": "8b047e8e766b66ed69a4054686333c18cbd1be89c73923b5b49d51bb3ecd9f92"
+      "length": 34648,
+      "sha256": "2b61dfa74a61707c92432b54fc5759d61321f5a38a2a86ceb06298065e838bfd"
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
@@ -651,8 +651,8 @@
     },
     {
       "path": "tests/test_validate_toolkit.py",
-      "length": 8232,
-      "sha256": "d7f68a365aabaf03e819c27236372c2bc69b9a7dbe755feefcd699852e1b1f23"
+      "length": 8694,
+      "sha256": "bf762690978b238cad9c4c76f40b2b176b49fb113f22c4e998d7194f74ff3195"
     },
     {
       "path": "workflows/specify-implement-review-drill.md",

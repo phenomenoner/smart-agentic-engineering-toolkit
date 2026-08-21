@@ -88,6 +88,16 @@ def test_each_skill_needs_activation_and_nonactivation_cases(tmp_path: Path) -> 
     assert "EVAL_NONACTIVATION_COVERAGE" in codes(validate_toolkit(root))
 
 
+def test_legacy_source_hash_aliases_must_match_frozen_inputs(tmp_path: Path) -> None:
+    root = clone_repo(tmp_path)
+    eval_path = root / "evals" / "cases" / "acceptance.json"
+    document = json.loads(eval_path.read_text(encoding="utf-8"))
+    document["sourceHashes"]["productSpecification"] = "0" * 64
+    eval_path.write_text(json.dumps(document, indent=2) + "\n", encoding="utf-8")
+
+    assert "EVAL_SOURCE_HASH_ALIAS" in codes(validate_toolkit(root))
+
+
 def test_skill_reference_cannot_escape_its_directory(tmp_path: Path) -> None:
     root = clone_repo(tmp_path)
     path = root / "skills" / "engineering-wal" / "SKILL.md"

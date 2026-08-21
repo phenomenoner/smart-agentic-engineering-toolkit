@@ -871,6 +871,24 @@ def validate_toolkit(root: Path, *, release: bool = False) -> list[dict[str, str
             )
 
     frozen_inputs = documents["evals"].get("frozenInputs", [])
+    frozen_input_hashes = {
+        row.get("name"): row.get("sha256")
+        for row in frozen_inputs
+        if isinstance(row, dict)
+    }
+    source_hash_aliases = {
+        "productSpecification": "docs/product-specification.md",
+        "catalog": "catalog/skills.json",
+    }
+    source_hashes = documents["evals"].get("sourceHashes", {})
+    for alias, relative_path in source_hash_aliases.items():
+        if source_hashes.get(alias) != frozen_input_hashes.get(relative_path):
+            _error(
+                errors,
+                "EVAL_SOURCE_HASH_ALIAS",
+                root / "evals" / "cases" / "acceptance.json",
+                f"sourceHashes.{alias} must match frozenInputs[{relative_path!r}]",
+            )
     for row in frozen_inputs:
         path = root / row.get("name", "")
         expected_hash = row.get("sha256")
