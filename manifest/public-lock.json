@@ -126,8 +126,8 @@
     },
     {
       "path": "docs/product-specification.md",
-      "length": 6071,
-      "sha256": "339a6dcc02be963e6910078ce4c9b322d3148456a90f904af13ac7784a59cb68"
+      "length": 6436,
+      "sha256": "33053d49430ffcafaf636c2ce5012d6eaf162c90f14edf2dfe3370cc1630fee0"
     },
     {
       "path": "docs/taxonomy.md",
@@ -142,7 +142,7 @@
     {
       "path": "evals/cases/acceptance.json",
       "length": 25423,
-      "sha256": "c8e1bf269314d47b099ee7af16f63b095d5af54ba7e3541bccd22c5579c46162"
+      "sha256": "795b2254ffb67aa62b67411f611d5c2152af9b60308a52f75ca462f0422b3bfd"
     },
     {
       "path": "evals/cases/anti-scope-drift.json",
@@ -636,8 +636,8 @@
     },
     {
       "path": "tests/test_source_gate_blockers.py",
-      "length": 22219,
-      "sha256": "14464aab61e2d13e9abb3c65d4ee2ab830b2b32683e167409bc22ee13c546523"
+      "length": 22837,
+      "sha256": "c0afbcbf45503188ea51f66c8c8a75b792666e56b814744fb541266f9063c1c0"
     },
     {
       "path": "tests/test_unit_first_composite_seams.py",

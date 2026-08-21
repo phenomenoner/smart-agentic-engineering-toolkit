@@ -654,7 +654,7 @@
   "frozenInputs": [
     {
       "name": "docs/product-specification.md",
-      "sha256": "339a6dcc02be963e6910078ce4c9b322d3148456a90f904af13ac7784a59cb68"
+      "sha256": "33053d49430ffcafaf636c2ce5012d6eaf162c90f14edf2dfe3370cc1630fee0"
     },
     {
       "name": "catalog/skills.json",

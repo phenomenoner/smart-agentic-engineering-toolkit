@@ -1,6 +1,11 @@
 # Product specification 0.4.0
 
-Status: released
+Status: release candidate until the matching `v0.4.0` Git tag and GitHub Release pass remote
+readback.
+
+Machine-readable `released` status marks frozen versioned source and changelog identity; it does not
+prove external publication. Source checks, fresh-task behavior, CI, the Git tag, the GitHub Release,
+and remote readback remain separate, non-substitutable acceptance evidence.
 
 ## Outcome
 

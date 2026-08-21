@@ -593,6 +593,18 @@ def test_release_status_and_changelog_heading_are_consistent() -> None:
         assert re.search(
             rf"^## \[{re.escape(version)}\] - \d{{4}}-\d{{2}}-\d{{2}}$", changelog, re.MULTILINE
         )
+        product_specification = (ROOT / "docs" / "product-specification.md").read_text(
+            encoding="utf-8"
+        )
+        assert (
+            f"Status: release candidate until the matching `v{version}` Git tag and GitHub Release "
+            "pass remote\nreadback."
+        ) in product_specification
+        assert (
+            "Machine-readable `released` status marks frozen versioned source and changelog "
+            "identity; it does not\nprove external publication."
+        ) in product_specification
+        assert "separate, non-substitutable acceptance evidence" in product_specification
 
 
 def test_mechanism_gate_remains_conditional_not_global() -> None:
