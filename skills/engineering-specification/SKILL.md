@@ -8,7 +8,7 @@ description: >-
   explicit small contract; this skill does not authorize implementation.
 license: MIT
 metadata:
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "specify"
   toolkit-contribution-protocol: "v1"
 ---
@@ -104,6 +104,23 @@ Severity does not grant scope. A reviewer, validator, test, tool, protocol, or a
 may reveal a risk but cannot amend the contract. The checkpoint is a compact decision record, not a
 new service, registry, status machine, or mandatory artifact for ordinary in-scope work.
 
+## Keep risk local and proportional
+
+For every material finding, record its affected claim and affected effect boundary, **consequence ×
+estimated frequency**, reversibility or containment, and evidence confidence. `Risk-local` means the
+disposition, verification depth, invalidation, and review scope stay on the smallest dependent cells.
+
+- A high-consequence authority, security, privacy, irreversible mutation, cutover, rollback, or
+  delivery uncertainty fails closed before its first unsafe effect, even when estimated frequency is
+  low. It does not automatically reopen unrelated candidate cells.
+- A low-consequence, low-frequency, reversible condition defaults to **bounded fail-open**: preserve
+  evidence, expose the residual and repair trigger, and continue the unaffected claim without a new
+  workstream, formal matrix, or release-wide gate.
+- A low-consequence but frequent condition may justify a focused operability repair; frequency does
+  not inflate consequence or release rigor.
+- Uncertainty contains the affected effect while evidence is gathered. It does not promote the whole
+  candidate to the highest risk class.
+
 ## Procedure
 
 1. **Frame the change.** State the user-visible outcome and the in-scope and out-of-scope
@@ -130,6 +147,12 @@ new service, registry, status machine, or mandatory artifact for ordinary in-sco
    `DIRECT`, `MANUAL`, `EMBED`, `PLATFORM_PRIMITIVE`, or `RETAIN_NEW_MECHANISM`, with falsifiable
    reasons for rejected alternatives and residual failure/non-claims. An already explicit small
    contract bypasses this gate and keeps the direct path.
+
+   When a retained mechanism depends on an unfamiliar operating-system, provider, runtime, or
+   library primitive, require the smallest disposable compile/API **constructibility probe** before
+   freezing a detailed state protocol, broad failure matrix, or formal review wave. The probe has no
+   live effect and proves only that the primitive and minimum ownership shape can be constructed. A
+   failed probe rejects or revises the mechanism; it does not start another specification successor.
 
 3. **Write the behavioral contract.** Specify preconditions, inputs, outputs, state transitions,
    invariants, success behavior, rejection behavior, unsupported behavior, and error semantics.

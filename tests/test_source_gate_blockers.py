@@ -165,7 +165,7 @@ def proposal() -> dict[str, Any]:
         "baseCommit": "b" * 40,
         "skill": {
             "name": "engineering-specification",
-            "toolkitVersion": "0.4.0",
+            "toolkitVersion": "0.5.0",
             "sha256": "c" * 64,
         },
         "host": {"name": "Codex"},
@@ -344,7 +344,7 @@ def test_f001_behavior_result_rejects_pass_laundering(mutation: str, expected_co
 def test_f002_clean_add_receipt_uses_one_fenced_source_generation(tmp_path: Path) -> None:
     source = tmp_path / "source"
     target = tmp_path / "target"
-    write_source(source, "planned-v1", version="0.4.0")
+    write_source(source, "planned-v1", version="0.5.0")
 
     def mutate(phase: str, _name: str | None, _installer: Installer) -> None:
         if phase == "before_publish":
@@ -357,7 +357,7 @@ def test_f002_clean_add_receipt_uses_one_fenced_source_generation(tmp_path: Path
     else:
         installed = target / "alpha-skill"
         row = receipt["skills"]["alpha-skill"]
-        assert receipt["toolkitVersion"] == "0.4.0"
+        assert receipt["toolkitVersion"] == "0.5.0"
         assert row["sourceTreeSha256"] == tree_digest(installed)
         assert row["installedTreeSha256"] == tree_digest(installed)
         assert row["files"] == tree_files(installed)
@@ -368,7 +368,7 @@ def test_f002_managed_upgrade_receipt_uses_one_fenced_source_generation(
 ) -> None:
     source = tmp_path / "source"
     target = tmp_path / "target"
-    write_source(source, "installed-v1", version="0.4.0")
+    write_source(source, "installed-v1", version="0.5.0")
     Installer(source, target).install("core")
     old_hash = tree_digest(target / "alpha-skill")
     receipt_path = target / install_toolkit.RECEIPT_NAME
@@ -486,7 +486,7 @@ def test_f005_darwin_atomic_noreplace_branch_uses_renamex_np(
 def test_f006_receipt_schema_rejects_arbitrary_source_commit() -> None:
     receipt = {
         "schemaVersion": 1,
-        "toolkitVersion": "0.4.0",
+        "toolkitVersion": "0.5.0",
         "sourceCommit": "not-a-commit",
         "sourceRoot": "source",
         "targetRoot": "target",
@@ -507,7 +507,7 @@ def test_f006_receipt_schema_rejects_arbitrary_source_commit() -> None:
 
 def test_f006_archive_install_marks_source_commit_unavailable(tmp_path: Path) -> None:
     source = tmp_path / "source"
-    write_source(source, "archive", version="0.4.0")
+    write_source(source, "archive", version="0.5.0")
 
     receipt = Installer(source, tmp_path / "target").install("core")
 
@@ -539,7 +539,6 @@ def test_first_principles_gate_has_one_owner_and_all_loop_guards() -> None:
         "skills/specify-temporal-ownership/SKILL.md",
         "skills/canon-engineering-disciplines/SKILL.md",
         "skills/programmatic-tool-composition/SKILL.md",
-        "skills/codex-cli-luna-worker/SKILL.md",
         "skills/long-run-supervisor/SKILL.md",
         "skills/codex-app-mcp-update/SKILL.md",
         "skills/claude-independent-review/SKILL.md",
@@ -560,6 +559,33 @@ def test_first_principles_gate_has_one_owner_and_all_loop_guards() -> None:
         assert "Do we really need this to make things happen?" in text, relative
         assert "Is there a simpler and more direct way?" in text, relative
         assert "engineering-specification" in text, relative
+
+
+def test_retired_cli_model_bridge_is_not_exposed_by_active_surfaces() -> None:
+    retired = "codex-cli-luna-worker"
+    catalog_names = {
+        row["name"] for row in load_json(ROOT / "catalog" / "skills.json")["skills"]
+    }
+    manifest_names = set(load_json(ROOT / "manifest" / "toolkit.json")["ownedSkills"])
+    profile_names = {
+        skill
+        for profile in (ROOT / "profiles").glob("*.json")
+        for skill in load_json(profile)["skills"]
+    }
+
+    assert retired not in catalog_names
+    assert retired not in manifest_names
+    assert retired not in profile_names
+    assert not (ROOT / "skills" / retired).exists()
+    workflow_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in (ROOT / ".github" / "workflows").glob("*.yml")
+    )
+    assert retired not in workflow_text
+    retirement_record = (ROOT / "docs" / "retired-skills.md").read_text(
+        encoding="utf-8"
+    )
+    assert retired in retirement_record
 
 
 def test_public_paths_do_not_encode_private_wave_round_or_phase_shorthand() -> None:

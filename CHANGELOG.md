@@ -4,6 +4,36 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-08-24
+
+- Add risk-local `consequence × estimated frequency` disposition, effect-local fail-closed behavior for
+  high-consequence boundaries, and evidence-backed bounded fail-open for low-consequence,
+  low-frequency, reversible residuals without candidate-wide L3 contagion.
+- Require the smallest no-live-effect constructibility probe before broad formalization of an
+  unfamiliar OS, provider, or runtime primitive.
+- Give canon orchestration explicit default limits for specification passes, delivery passes,
+  same-cause retries, and full-review waves; stop unchanged third attempts and budget exhaustion as
+  `INCOMPLETE` instead of manufacturing another successor or reviewer cycle.
+- Pin toolkit version and canonical commit for long tasks; changed rules require an explicit rebind
+  checkpoint or a fresh task rather than silent mid-task policy mixing.
+- Retire unconditional finding-driven reopen language while preserving fail-closed custody, authority,
+  privacy, security, irreversible, cutover, rollback, and delivery boundaries.
+- Add a supplemental proportional-risk and bounded-loop eval corpus without adding a skill, profile,
+  transition schema, persistent registry, or mandatory lifecycle.
+- Document host-native installation and verification routes for Codex App plugins, Hermes Agent native
+  skills, and other Agent Skills-compatible harnesses.
+- Retire and remove the Codex CLI Luna compatibility bridge from installable skills and routing
+  evals; unavailable native model routes now fall back to direct work or another exposed native lane.
+- Enforce finite formal-review budgets in bind, report-validation, and synthesis paths; reject
+  unsupported legacy reviewer fields and topologies beyond the primary-reviewer or narrow-auditor
+  ceiling.
+- Permit a hash-bound current-state discriminator when a safe observed fail-first incident state is
+  unavailable, and require lifecycle or live test altitude only when the claim needs it.
+- Filter ignored paths before filesystem metadata probes in both Git and archive release walks, so a
+  broken ignored environment link cannot abort validation on Windows.
+- Verify Hermes skill pickup through a fresh chat slash-command invocation instead of the affected
+  `--skills ... -z` route that can run without injecting the named skill.
+
 ## [0.4.0] - 2026-08-21
 
 - Add a conditional unit-first composition strategy for seams with multiple independently failing

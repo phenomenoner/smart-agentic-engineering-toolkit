@@ -68,7 +68,7 @@
       "uniqueItems": true
     },
     "recommendation": {
-      "enum": ["READY_FOR_SYNTHESIS", "THIRD_REVIEW_REQUIRED", "INCOMPLETE"]
+      "enum": ["READY_FOR_SYNTHESIS", "INCOMPLETE"]
     },
     "recommendationRationale": {"type": "string", "minLength": 1}
   },

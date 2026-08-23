@@ -69,7 +69,7 @@ def test_unit_composition_and_native_order_is_explicit() -> None:
 def test_baton_model_routes_keep_judgment_and_synthesis_out_of_luna() -> None:
     cases = {case["id"]: case for case in load_corpus()["cases"]}
     eligible = cases["COMPOSITE-SEAM-LUNA-ELIGIBLE"]
-    assert eligible["expectedNotSelected"] == ["codex-cli-luna-worker"]
+    assert eligible["expectedNotSelected"] == []
     assert "native gpt-5.6-luna at max" in eligible["observablePass"]
     assert "main agent" in eligible["observablePass"]
 
@@ -79,7 +79,7 @@ def test_baton_model_routes_keep_judgment_and_synthesis_out_of_luna() -> None:
         "batch-complete-independent-review",
         "completeness-and-test-synthesis",
     ]
-    assert judgment["expectedNotSelected"] == ["codex-cli-luna-worker"]
+    assert judgment["expectedNotSelected"] == []
     assert "gpt-5.6-sol at high" in judgment["observablePass"]
     assert "Luna does not approve" in judgment["prohibitedEffects"]
 

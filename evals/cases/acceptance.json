@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.4.0",
+  "toolkitVersion": "0.5.0",
   "status": "released",
   "caseFields": [
     "id",
@@ -332,24 +332,26 @@
       "observablePass": "Applies the work-conserving wait discipline through native collaboration fan-in and does not wrap the subagent in a PowerShell process."
     },
     {
-      "id": "ACT-LUNA-01",
-      "class": "activation",
-      "promptOrCondition": "Baton selected a bounded exact-path codegen task; native Luna is unavailable; use Luna/max CLI to propose a patch only.",
+      "id": "NON-CLI-MODEL-BRIDGE-01",
+      "class": "routing",
+      "promptOrCondition": "Baton finds a bounded exact-path code-generation task eligible for delegation, but the requested native model route is unavailable.",
       "expectedSelected": [
-        "codex-cli-luna-worker"
+        "engineering-implementation"
       ],
       "expectedNotSelected": [],
-      "observablePass": "Read-only structured patch proposal; main agent reviews, applies, and verifies."
+      "observablePass": "Works directly or selects another eligible exposed native route; it does not manufacture the missing lane through a CLI child process."
     },
     {
-      "id": "NON-LUNA-01",
+      "id": "NON-DELEGATED-AUTHORITY-JUDGMENT-01",
       "class": "nonactivation",
-      "promptOrCondition": "Delegate an architecture and release-authority decision to Luna.",
-      "expectedSelected": [],
-      "expectedNotSelected": [
-        "codex-cli-luna-worker"
+      "promptOrCondition": "Delegate an architecture and release-authority decision to an implementation worker.",
+      "expectedSelected": [
+        "engineering-specification"
       ],
-      "observablePass": "Adapter refuses ineligible judgment work."
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Keeps architecture and release-authority judgment with the authorized owner instead of an implementation worker."
     },
     {
       "id": "ACT-CLAUDE-01",
@@ -639,7 +641,7 @@
     {
       "id": "RELEASE-01",
       "class": "release",
-      "promptOrCondition": "Publish toolkit 0.4.0.",
+      "promptOrCondition": "Publish toolkit 0.5.0.",
       "expectedSelected": [
         "batch-complete-independent-review"
       ],
@@ -648,17 +650,17 @@
     }
   ],
   "sourceHashes": {
-    "productSpecification": "33053d49430ffcafaf636c2ce5012d6eaf162c90f14edf2dfe3370cc1630fee0",
-    "catalog": "38eddb9558c726881429dfb1bcc2deb4c74bbfdc95bc48ec69c34e06bff8e433"
+    "productSpecification": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41",
+    "catalog": "80229ff75cf5e1c8ce2d73bd743b4cb4173182cf91be4320b9983d5216c5f793"
   },
   "frozenInputs": [
     {
       "name": "docs/product-specification.md",
-      "sha256": "33053d49430ffcafaf636c2ce5012d6eaf162c90f14edf2dfe3370cc1630fee0"
+      "sha256": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41"
     },
     {
       "name": "catalog/skills.json",
-      "sha256": "38eddb9558c726881429dfb1bcc2deb4c74bbfdc95bc48ec69c34e06bff8e433"
+      "sha256": "80229ff75cf5e1c8ce2d73bd743b4cb4173182cf91be4320b9983d5216c5f793"
     }
   ]
 }

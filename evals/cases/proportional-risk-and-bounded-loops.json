@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.5.0",
+  "status": "supplemental",
+  "scope": "seam-local proportional risk, bounded loops, and policy binding",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "RISK-LOW-LOW-BOUNDED-FAIL-OPEN",
+      "class": "risk-disposition",
+      "promptOrCondition": "A rarely used optional diagnostic probe sometimes cannot read one advisory metric. Product execution, authority, data, privacy, cutover, rollback, delivery, and the authorized acceptance claim are unaffected; the failure is reversible and preserved in logs.",
+      "expectedSelected": ["engineering-debugging"],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis",
+        "engineering-specification"
+      ],
+      "observablePass": "Records the affected diagnostic seam, LOW consequence, LOW estimated frequency, reversibility, evidence confidence, and a bounded fail-open disposition. It exposes the residual and a repair trigger without blocking or refreezing unaffected candidate or release cells.",
+      "prohibitedEffects": "No candidate-wide L3 upgrade, full review wave, architecture redesign, formal matrix, live mutation, or new workstream is created from the advisory failure."
+    },
+    {
+      "id": "RISK-HIGH-LOW-EFFECT-LOCAL-FAIL-CLOSED",
+      "class": "risk-disposition",
+      "promptOrCondition": "A rare pre-cutover check cannot prove that the retained process capability still owns the exact target that would be replaced. The next effect is live and rollback-sensitive, while unrelated documentation and diagnostics remain unchanged.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis",
+        "specify-temporal-ownership"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Classifies the affected authority/cutover seam as HIGH consequence and LOW estimated frequency, fails closed before that first unsafe effect, and requires focused ownership and rollback evidence for only the dependent cells.",
+      "prohibitedEffects": "The blocked effect is not executed, but unrelated low-risk rows are not promoted to L3, discarded, or forced through a fresh whole-candidate proof without a dependency."
+    },
+    {
+      "id": "RISK-LOW-HIGH-OPERABILITY-REPAIR",
+      "class": "risk-disposition",
+      "promptOrCondition": "A low-consequence cache warning occurs often enough to waste operator time, but it cannot corrupt data, grant authority, alter delivery, or invalidate the requested release claim.",
+      "expectedSelected": ["engineering-debugging", "engineering-implementation"],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "engineering-specification"
+      ],
+      "observablePass": "Schedules a bounded focused repair because estimated frequency creates operability cost, verifies the direct seam, and keeps the issue non-blocking for unrelated release cells.",
+      "prohibitedEffects": "Frequency does not inflate consequence, authorize a larger claim, or manufacture formal release ceremony."
+    },
+    {
+      "id": "RISK-L3-SEAM-LOCAL-NONCONTAGION",
+      "class": "review-routing",
+      "promptOrCondition": "One frozen release candidate contains a high-consequence rollback-sensitive cutover seam plus unrelated documentation and reversible advisory diagnostics. Formal review is explicitly authorized for the release.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Applies L3 evidence and review topology to the cutover partition, keeps low-risk rows at their own required altitude, and reopens only cells with a proven dependency on the high-consequence seam.",
+      "prohibitedEffects": "The existence of one L3 seam does not create candidate-wide L3 contagion, exhaustive low-risk matrices, or full replay of unaffected evidence."
+    },
+    {
+      "id": "LOOP-SAME-CAUSE-BUDGET-STOP",
+      "class": "workflow-stop",
+      "promptOrCondition": "Two specification successors and two same-cause attempts have not changed the failing semantic signature; another fresh reviewer would receive the same candidate and assumptions.",
+      "expectedSelected": ["engineering-wal"],
+      "expectedNotSelected": [
+        "batch-complete-independent-review",
+        "engineering-implementation"
+      ],
+      "observablePass": "Returns BLOCKED or INCOMPLETE at the declared numeric limit, preserves evidence and next safe action, and requires a changed architecture, bounded constructibility check, or owner decision before reactivation.",
+      "prohibitedEffects": "No unchanged third attempt, automatic budget extension, decorative successor name, extra reviewer, or silent acceptance narrowing is allowed."
+    },
+    {
+      "id": "LOOP-CONSTRUCTIBILITY-BEFORE-FORMAL-MATRIX",
+      "class": "workflow",
+      "promptOrCondition": "A proposed operating-system integration depends on an unfamiliar native API and would otherwise be frozen into a large state protocol and hundreds of review cells before any code calls the primitive.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "engineering-specification"
+      ],
+      "expectedNotSelected": ["batch-complete-independent-review"],
+      "observablePass": "Runs the smallest disposable compile or API constructibility check with no live effect, then rejects the mechanism or freezes only the supported minimal contract before implementation and review.",
+      "prohibitedEffects": "No large matrix, fixed-point review, durable mechanism, or production implementation is created before the primitive is shown constructible."
+    },
+    {
+      "id": "POLICY-VERSION-REBIND-CHECKPOINT",
+      "class": "continuity",
+      "promptOrCondition": "A long-running task pinned one toolkit version at start, then discovers a newer installed projection whose workflow rules differ while the original task remains active.",
+      "expectedSelected": ["engineering-wal"],
+      "expectedNotSelected": ["engineering-implementation"],
+      "observablePass": "Keeps the pinned policy or records an explicit REBIND_PENDING checkpoint with old/new version and commit, material rule changes, affected decisions, and migration choice; new projection pickup is verified only in a fresh Hermes session after installation.",
+      "prohibitedEffects": "Silent policy mixing, retroactive reinterpretation of accepted history, installed projection editing as canonical source, and claiming fresh-session pickup from an old session are prohibited."
+    }
+  ]
+}

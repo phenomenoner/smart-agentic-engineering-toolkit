@@ -1,18 +1,51 @@
 # Migration and local cutover
 
-## From loose Codex skills
+## Host-neutral conflict rule
 
-1. Inventory every scope and classify same-name targets before installation.
-2. Install the plugin while loose skills remain unchanged.
-3. Restart Codex Desktop and create a fresh task. Prove the plugin using a uniquely new skill; do not
-   accept config or catalog visibility alone.
-4. Preserve exact recoverable backups for same-name loose skills and their hashes/receipts.
-5. Move one proven duplicate out of the live skill root, restart, and run its direct and
-   non-activation cases. Stop on unmanaged or diverged bytes.
-6. Keep the prior complete generation through observed use. Do not delete a private overlay.
+A host-native plugin, managed profile, tap, loose skill directory, and manual copy are alternative projections of one canonical source. Do not expose the same toolkit-owned skill through more than one route.
 
-The standalone installer is intended for hosts that consume skill directories directly. It does not
-edit Codex plugin caches and a generic force switch cannot bypass divergence checks.
+Before changing a live host:
+
+1. Inventory every same-name and semantically overlapping skill.
+2. Run the toolkit installer in dry-run mode against the active skill root.
+3. Classify each row as absent, exact, managed upgrade, unmanaged, diverged, linked/reparse, or ambiguous.
+4. Apply only absent, exact, or receipt-backed managed rows. Stop on every other class.
+5. Preserve the prior complete managed generation and receipt until fresh-session verification succeeds.
+
+A duplicate name is not the only conflict. A host-global rule also conflicts when it universally requires a plan, specification, TDD, WAL, worktree, subagent, full suite, reviewer, or fail-closed disposition where this toolkit preserves a direct or risk-local path. Disable or narrow the broader rule in the host's native configuration; do not delete unknown source bytes merely to win precedence.
+
+## Codex App plugin migration
+
+1. Keep existing loose skills unchanged while installing the plugin from the exact gated checkout or release tag.
+2. Fully restart Codex Desktop and create a fresh task.
+3. Prove plugin loading with a uniquely identifiable toolkit behavior; configuration or catalog visibility alone is insufficient.
+4. Move one proven duplicate out of the live loose-skill root, restart, and run direct plus non-activation cases.
+5. Stop on unmanaged or diverged bytes. Do not use a generic force switch.
+6. Keep the prior complete loose generation until representative real use succeeds.
+
+## Hermes Agent native-skill migration
+
+1. Confirm the active profile and skill root; the normal user root is `~/.hermes/skills`.
+2. Run `./scripts/install.sh "$HOME/.hermes/skills" <profile>` without `--apply` and inspect every row.
+3. A receipt-backed `UPGRADE_MANAGED` is safe to apply only when current bytes still equal the prior receipt. Unmanaged or diverged rows remain blocked.
+4. Use `hermes skills config` or the equivalent profile configuration to disable semantically overlapping broad rules. Prefer disabling over deleting so rollback stays available.
+5. Apply the managed profile, repeat dry-run, and require every row to become exact.
+6. Confirm discovery with `hermes skills list --source local --enabled-only`, then start a fresh Hermes session and exercise one identifiable positive case plus one direct-path non-activation case.
+7. Keep source validation, install receipt, host discovery, fresh-session load, and real task behavior as separate claims.
+
+## Other Agent Skills-compatible harnesses
+
+Prefer the host's native skill manager when it preserves complete skill directories, supports enabled/disabled state, and has a reversible update path. Otherwise use the standalone profile installer against that harness's documented user skill root.
+
+When only manual projection is available:
+
+- copy one complete skill directory at a time;
+- record source release and tree digest outside the installed copy;
+- never edit the installed copy as canonical source;
+- verify the host's actual discovery and trigger behavior in a fresh context;
+- retain the prior generation until rollback is no longer needed.
+
+If the host cannot load Agent Skills-compatible directories or cannot establish precedence between duplicate skills, return `INCOMPLETE`; a copied directory is not an installation proof.
 
 ## From Chatgpt-Codex-App-Plus
 

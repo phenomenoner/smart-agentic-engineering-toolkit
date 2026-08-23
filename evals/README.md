@@ -1,7 +1,8 @@
 # Behavior evaluation
 
-`cases/acceptance.json` preserves the frozen 0.1.0 63-case baseline. The 0.4.0 release updates its
-release identity and current catalog/specification bindings without adding cases. Static validation
+`cases/acceptance.json` preserves the 63-case baseline size and coverage goals. The 0.5.0 release
+updates its release identity, current catalog/specification bindings, and retirement-sensitive
+routing cases without adding cases. Static validation
 proves only that the catalog has positive and negative coverage. It does **not** prove that a host
 selected the expected skill or followed its authority boundary. The same static-versus-host boundary applies to every
 supplemental corpus; source tests are not fresh-task behavior evidence.
@@ -36,6 +37,13 @@ feedback, requires isolated link and contract-relevant failure-partition evidenc
 and native/lifecycle checks, records Baton and model-routing boundaries, and preserves the direct
 path for one cheap simple seam. Its `evidenceStatus` remains `NOT_RUN` until fresh isolated agent
 executions bind observable behavior and prohibited effects.
+
+`cases/proportional-risk-and-bounded-loops.json` is a 0.5.0 supplemental static-contract corpus. It
+distinguishes risk-local consequence-frequency disposition, supported LOW × LOW bounded fail-open,
+effect-local high-consequence fail-closed behavior, low-consequence frequent operability repair,
+candidate-wide L3 non-contagion, constructibility before a broad matrix, loop-budget exhaustion, and
+explicit policy rebind. Its `evidenceStatus` remains `NOT_RUN` until fresh isolated agent executions
+bind observable behavior and prohibited effects.
 
 For a release evaluation:
 

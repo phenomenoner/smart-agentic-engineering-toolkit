@@ -4,15 +4,16 @@ description: Engineering completeness and test-evidence synthesis for explicit r
 license: MIT
 metadata:
   version: "0.3.0"
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
 ---
 
 # Completeness and Test Synthesis
 
-Decide whether the available evidence supports the exact claim, and manufacture
-one missing test when it does not. The workflow is not an end-of-task ceremony:
+Decide whether the available evidence supports the exact claim, and identify or, when test writes
+are authorized, create one missing test when it does not. A readiness, review, or status request
+alone grants no source, installation, or live-effect authority. The workflow is not an end-of-task ceremony:
 small, local changes should stay small.
 
 ## Start from the claim
@@ -42,6 +43,14 @@ If an evidence gap proves that the original deliverable cannot stand, classify t
 release rigor, system boundary, writable ownership, or external effects, report `ADJACENT_RISK` and
 route a scope-change checkpoint to `engineering-specification`. An evidence gap does not authorize a
 larger claim.
+
+Classify every material gap at its first affected effect boundary by **consequence × estimated
+frequency**, reversibility or containment, and evidence confidence. Keep evidence invalidation and
+readiness `risk-local`. High-consequence uncertainty fails closed before the unsafe effect and reopens
+only dependent cells. A low-consequence, low-frequency, reversible diagnostic or advisory gap may use
+**bounded fail-open** with preserved evidence, an explicit residual, and a repair trigger; it does not
+upgrade unrelated evidence to T3/T4 or block a claim it cannot falsify. Frequent low-consequence gaps
+may justify focused operability repair without becoming release-critical.
 
 Before adding a test artifact, replay, matrix, harness, or integration layer, ask `Do we really need
 this to make things happen?` and `Is there a simpler and more direct way?` State the invariant first,
@@ -158,8 +167,9 @@ cutover decision stays on its direct focused-check path.
 
 ## Synthesize the smallest missing test
 
-When the check finds a material gap, create the smallest durable test that
-closes it:
+When the check finds a material gap, identify the smallest durable test that would close it. Create
+that test only when the current task authorizes writes to its target; otherwise report the exact
+test seam and stop at the evidence judgment:
 
 - **Incident:** Reduce the observed failure to a sanitized deterministic
   fixture, then assert the violated invariant.
@@ -201,8 +211,9 @@ These requirements do not apply to ordinary local test output.
 Independent review is evidence for an explicit review, release, migration,
 cutover, or other high-risk gate - not a required blessing for each patch. Stabilize executable
 candidate bytes and reviewed contracts before a formal review. Keep that gate separate from
-installed-runtime pickup: after actual `PASS`, install and transition the exact final artifact once,
-then perform the fresh native and actual drill required by the claim. A changed hash requires a
+installed-runtime pickup: after actual `PASS` and only when separately authorized, install and
+transition the exact final artifact once, then perform the fresh native and actual drill required by
+the claim. A changed hash requires a
 newly bound whole-candidate verdict, but unchanged review-cell evidence may be reused when exact
 object-and-seam analysis proves it remains applicable. If ordinary local checks close the requested
 claim, stop there.

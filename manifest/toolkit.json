@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.4.0",
+  "toolkitVersion": "0.5.0",
   "status": "released",
   "pluginRoot": ".",
   "ownedSkills": [
@@ -9,7 +9,6 @@
     "claude-independent-review",
     "codegraph-first-navigation",
     "codex-app-mcp-update",
-    "codex-cli-luna-worker",
     "completeness-and-test-synthesis",
     "engineering-debugging",
     "engineering-implementation",

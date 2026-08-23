@@ -4,7 +4,7 @@ description: Review code and engineering changes without stopping at the first b
 license: MIT
 metadata:
   version: "0.3.0"
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
 ---
@@ -59,6 +59,13 @@ block the bounded candidate verdict without a scope amendment; adjacent risks re
 not silently raise the product claim, acceptance level, release rigor, system boundary, or repair
 authority.
 
+Also classify the affected effect boundary by **consequence × estimated frequency**, reversibility or
+containment, and evidence confidence. Review rigor is `risk-local`: L3 applies to the dependent
+authority, security, irreversible, cutover, rollback, or delivery partition, not by contagion to the
+whole candidate; `candidate-wide L3 contagion` is prohibited. A `LOW × LOW` reversible finding may be accepted as a
+**bounded fail-open** residual with evidence and a repair trigger when it cannot invalidate the
+authorized claim. It does not reopen unrelated cells, start another full wave, or block the candidate.
+
 When a finding would require new acceptance criteria, a broader writable surface, another system or
 repository, production or live evidence, or formal release machinery not present in the request,
 route a scope-change checkpoint to `engineering-specification`. Review may recommend the change; it
@@ -82,18 +89,22 @@ canonical owner; review only challenges the decision and its evidence.
   reviewer loop for every code change.
 - Invoke `baton-fanout-skill` before dispatching any subagent. Let Baton own
   worker count, model/effort routing, context minimization, and write ownership.
-- Never route independent review through Luna. In a Codex runtime exposing the GPT-5.6 family, use
-  at least `gpt-5.6-sol` at `high` effort, or a clearly stronger exposed reviewer lane. At the
-  runtime ceiling, use the same top lane with fresh independent or adversarial context. The live
-  runtime schema remains authoritative, and the main agent retains synthesis and release judgment.
+- Never route independent review through Luna. Use the lowest independent lane shown capable of the
+  decision. In a Codex runtime exposing the GPT-5.6 family, high-consequence authority, security,
+  privacy, irreversible release, rollback, delivery, or cutover judgment uses at least
+  `gpt-5.6-sol` at `high` effort, or a clearly stronger exposed lane. A lower-consequence explicit
+  review does not inherit that floor merely from the word `final`. The live runtime schema remains
+  authoritative, and the main agent retains synthesis and release judgment.
 - Apply `completeness-and-test-synthesis` when its narrower readiness,
   recurring-regression, lifecycle, or evidence-gap triggers apply. Do not load
   it solely because an ordinary review is underway.
 - Use `claude-independent-review` only when the user explicitly authorizes
   Claude. Treat Claude, Codex subagents, and local CLIs as execution adapters,
   not as this protocol's authority.
-- Obey stricter project privacy, freeze, release, live-operation, and cutover
-  rules. Review authority never authorizes implementation or live mutation.
+- Obey project privacy, freeze, release, live-operation, and cutover guards only when they preserve
+  higher-priority user authority and effect-local proportionality. A broader local rule is not
+  authoritative merely because it is stricter. Review authority never authorizes implementation or
+  live mutation.
 
 ## Choose the formal review shape
 
@@ -107,12 +118,22 @@ Start with one primary reviewer using the counterfactual fixed-point pass.
   independently dispatched coverage/assumption auditor. Upgrade to two sealed
   blind first passes with orthogonal lenses and reciprocal coverage audits when
   the gate combines authority/security with release or cutover, or when a
-  supposedly covered family recently escaped another HIGH/CRITICAL sibling.
-  Add a third full reviewer only for an unresolved supported disagreement, an
-  unowned matrix partition, hash/binding failure, or an incomplete lane.
+  supposedly covered family recently escaped another HIGH/CRITICAL sibling,
+  and only when the bound plan declares `maxPrimaryReviewers: 2` plus a concrete
+  `secondBlindReason`. A third full reviewer is prohibited. An unresolved supported
+  disagreement, unowned matrix partition, hash/binding failure, or incomplete
+  lane returns `INCOMPLETE` for owner action instead of summoning another wave.
 
 Never add a reviewer merely because a concurrency slot is free. One
 well-supported blocker blocks; do not use majority vote.
+
+Before binding, declare integer limits in the review plan. The direct defaults are
+`maxFullReviewWaves: 1`, `maxSameCauseAttempts: 2`, `maxPrimaryReviewers: 1`, and
+`maxNarrowAuditors: 0` or `1`. `maxPrimaryReviewers: 2` is valid only for L3 with a non-empty
+high-consequence `secondBlindReason`; `maxFullReviewWaves: 2` requires an
+`additionalWaveReason`. The plan binds `waveOrdinal` and `sameCauseAttemptOrdinal` within their
+ceilings; no field may authorize a third primary reviewer or unchanged third same-cause attempt.
+The binder rejects a formal plan with absent, non-numeric, or over-limit budgets.
 
 Read [references/protocol.md](references/protocol.md) for risk classification,
 the fixed-point algorithm, matrix construction, escalation, and invalidation.
@@ -129,7 +150,8 @@ identify:
    claims instance identity, recipe identity, reproducibility, or semantic
    equivalence. Never encode current liveness of a mutable Cargo/build output as
    continuity of an earlier execution.
-3. A neutral review plan with contracts, authority boundaries, and budgets.
+3. A neutral review plan with contracts, authority boundaries, risk class, and the numeric budgets
+   above.
 4. A required coverage matrix spanning entrypoints, lifecycle phases,
    mutations, recovery/cleanup paths, adversarial variants, and evidence tiers.
 
@@ -184,19 +206,25 @@ Require this loop:
 3. Define a narrow, falsifiable repair postcondition in the assumption ledger.
    Never assume an implementation or broadly assume that a subsystem is fixed.
 4. Continue under the accumulated postconditions.
-5. Reopen every previously closed cell that depends on a new or expanded
+5. Reopen each previously closed risk-local cell that depends on a new or expanded
    assumption.
-6. Repeat full matrix traversal until no blocker, assumption, or reopened-cell
-   status changes.
-7. Record explicit reopen obligations for each finding and assumption. A
-   finding's required regression cells must all receive a reviewed
-   disposition; an ID-only reference is insufficient.
+6. Repeat only while the declared **full-review wave limit** and **same-cause retry limit** have
+   budget, and only across the risk-local cells affected by a blocking finding or
+   acceptance-critical assumption. Budget exhaustion returns `INCOMPLETE` with the current evidence;
+   it never creates another successor name or weakens acceptance.
+7. Record explicit reopen obligations for each blocking finding and acceptance-critical assumption.
+   A finding's required regression cells must all receive a reviewed disposition; an ID-only
+   reference is insufficient. A supported low-consequence, low-frequency bounded fail-open residual
+   records its disposition without reopening unrelated cells.
 8. Attack the claimed closures across sibling call sites, lifecycle phases,
    unrecognized current-live third states, evidence altitude, and repair
    postcondition completeness.
-9. Repeat when any attack changes a finding, assumption, evidence tier, or cell
-   disposition. `stable: true` is valid only after all applicable attacks and
-   reopen obligations are closed.
+9. Reopen only the dependent cells when an attack changes a blocking finding,
+   acceptance-critical assumption, required evidence tier, or cell disposition and budget remains.
+   An unchanged third attempt is prohibited; the same-cause signature must change before reactivation.
+   Stop `BLOCKED` or `INCOMPLETE` and require a
+   changed architecture, bounded constructibility probe, or owner decision before reactivation.
+   `stable: true` is valid only after all required risk-local attacks and reopen obligations close.
 
 Finding a blocker changes the actual verdict to `BLOCKED`; it never ends the
 review. If hash, access, or scope failure prevents a trustworthy candidate
@@ -333,9 +361,11 @@ The main agent must:
 5. Set `AUDITED_BATCH_COMPLETE` only when the union has a concrete disposition
    for every required cell and challenge. A lane's self-declared
    `BATCH_COMPLETE` is insufficient.
-6. Trigger a third reviewer only when a supported blocker remains disputed, a
-   partition is unowned, a binding fails, or the union still has an unresolved
-   coverage challenge. Finding count or lane disagreement alone is not enough.
+6. When a supported blocker remains disputed, a partition is unowned, a
+   binding fails, or the union still has an unresolved coverage challenge,
+   return `INCOMPLETE`, seal the evidence, and identify the owner decision or
+   changed-candidate next action. Do not summon another reviewer inside the
+   exhausted wave.
 7. Repair only after the complete review wave finishes.
 8. Report actual verdict, counterfactual verdict, audited finding-set status,
    open coverage, and minimum coherent repair properties separately.

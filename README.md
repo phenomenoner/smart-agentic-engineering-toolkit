@@ -19,6 +19,12 @@ there a simpler and more direct way?」，把可觀察 outcome/invariant 與 mec
 release rigor、system boundary、authority、writable surface或external effects，必須停在明示的
 scope-change checkpoint。嚴重finding仍應揭露，但severity本身不能修改任務授權。
 
+**Assurance 必須依風險局部化並保持比例。** 每個實質finding都要在第一個受影響的effect
+boundary記錄 **consequence × estimated frequency**、可逆性／containment與證據信心。高後果的
+authority、security、privacy、irreversible、cutover、rollback或delivery effect在效果發生前
+fail closed；可證明為低後果、低頻率且可逆的residual則可採 **bounded fail-open**，保留證據與
+repair trigger，不污染整個candidate、不另開full review，也不提高原授權claim。
+
 ## 這套工具解決什麼
 
 - 把「先想清楚」落成可觀察行為、non-goals、失敗語意與可證偽 acceptance，而不是只寫
@@ -30,6 +36,11 @@ scope-change checkpoint。嚴重finding仍應揭露，但severity本身不能修
 - 對具有多個可獨立失敗環節、且integration回饋昂貴的composite seam，條件式採用unit-first：
   先證明各link與contract-relevant failure class，再測composition boundary，最後才驗證低層
   無法代表的native或lifecycle行為。
+- 對陌生OS/provider/runtime primitive先做最小、無live effect的constructibility probe，再
+  凍結廣泛protocol或formal matrix；specification、delivery、same-cause retry與full-review
+  wave都必須有numeric上限，第三次不變的same-cause attempt直接停止。
+- 長任務綁定toolkit version與canonical commit；規則變更只能明示rebind或重啟new task，禁止
+  session內silent policy mixing。
 - 對 TOCTOU、ABA、PID/handle reuse、replacement cleanup、rollback ownership 等時序問題，
   要求 forbidden trace、linearization point、stable capability/CAS 與精準 interleaving test。
 - 把 WAL 當最小可恢復地圖；Canvas、CodeGraph、AAR、knowledge graph 與模型 worker 都是
@@ -49,19 +60,19 @@ scope-change checkpoint。嚴重finding仍應揭露，但severity本身不能修
 | Core | `engineering-specification`, `engineering-debugging`, `engineering-implementation`, `engineering-wal`, `batch-complete-independent-review`, `completeness-and-test-synthesis`, `incident-to-regression`, `specify-temporal-ownership`, `evolve-engineering-toolkit` |
 | Assurance | `canon-engineering-disciplines` |
 | Navigation / composition | `codegraph-first-navigation`, `programmatic-tool-composition` |
-| Windows / Codex adapters | `long-run-supervisor`, `codex-cli-luna-worker`, `codex-app-mcp-update` |
+| Windows / Codex adapters | `long-run-supervisor`, `codex-app-mcp-update` |
 | Explicit provider adapter | `claude-independent-review` |
 
 完整 trigger、non-trigger、implicit policy 與 canonical owner 在
 [`catalog/skills.json`](catalog/skills.json) 與 [`docs/taxonomy.md`](docs/taxonomy.md)。
 
-## Codex plugin 安裝
+## Host-native 安裝
 
-本 repo 根目錄就是 plugin source。發布版本會提供 GitHub tag/release 與逐檔 hash lock。
-把已通過 gate 的精確 commit checkout（發布後也可使用對應 tag）註冊成 local marketplace、
-安裝 plugin、完整重啟 Codex Desktop，並在 **新的 task** 裡做 native behavior 驗證。設定檔、
-catalog 可見或 MCP health 不等於 skill/tool 真正可用；完整 plugin 與 standalone profile 指令見
-[`docs/installation.md`](docs/installation.md)。
+依 host 使用原生 distribution surface：Codex App 安裝 repo plugin；Hermes Agent 把 managed
+profile 安裝到 `~/.hermes/skills`，或用 `hermes skills install` 安裝單一獨立 skill；其他
+Agent Skills-compatible harness 優先用 native manager，否則才用 standalone profile installer。
+plugin cache 與 installed projection 都不是 source。完整指令、conflict migration、update identity
+與 fresh-context proof 見 [`docs/installation.md`](docs/installation.md)。
 
 若環境已有同名 loose skills，先保留它們，利用本 toolkit 的新 skill 驗證 plugin 已被新
 task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐項切換。不要用 `Force`
@@ -69,7 +80,7 @@ task 載入，再依 [`docs/migration.md`](docs/migration.md) 做可恢復的逐
 
 ## 外部整合
 
-`baton-fanout-skill` 在 0.4.0 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
+`baton-fanout-skill` 仍由原 repo 擁有，toolkit 只 pin integration；Context Canvas、
 Understand Anything 與 AAR 也維持各自 canonical owner。詳見
 [`docs/integrations.md`](docs/integrations.md)。Superpowers 僅是比較資料，不會重新啟用其
 mandatory bootstrap/TDD/worktree/fan-out chain。
@@ -90,13 +101,14 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.4.0 新增條件式unit-first composite-seam ladder、由Baton治理的stable bounded Luna/max worker
-資格，以及Codex independent review的Sol/high最低路由。它不新增skill、profile、schema或
-mandatory lifecycle，並保留單一簡單seam的直接路徑。本版沿用0.1.0的63-case baseline，只重綁
-release identity與current input hashes；supplemental fresh-agent behavior仍以實際保存的host
-evidence為界。本版主張只涵蓋已列出的repository bytes、source tests、plugin/standalone
-install與host evidence；不表示OpenAI官方推薦、
-Plugin Directory 審核通過、AAR/Canvas/外部 provider 已部署或可用。
+0.5.0 新增risk-local consequence-frequency disposition、受證據支持的LOW × LOW bounded
+fail-open、formalization前的constructibility probe、明確numeric loop budgets與toolkit policy
+binding；並刪除無上限finding-driven reopen語句。它補上Codex App、Hermes Agent及其他Agent
+Skills-compatible harness的host-native安裝分流，不新增skill、profile、transition schema、
+registry或mandatory lifecycle，並保留直接路徑。本版沿用0.1.0的63-case baseline，只重綁
+release identity與current input hashes；supplemental fresh-agent behavior仍以實際host evidence
+為界。本版主張只涵蓋已列出的repository bytes、source tests、installation contracts與host
+evidence；不表示OpenAI或Hermes官方推薦、directory審核通過、AAR/Canvas/外部provider已部署或可用。
 
 授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md)。

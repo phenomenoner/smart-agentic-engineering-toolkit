@@ -3,7 +3,7 @@ name: programmatic-tool-composition
 description: Compose multiple independent read-only or pure tool operations inside Codex App's programmatic runner using bounded JavaScript, parallel calls, reduction, and output shaping while preserving tool-specific constraints and effect boundaries. Use when a task needs three or more similar reads, independent calls across sources, joins/filtering/ranking, or large-output reduction that would otherwise require repeated model round trips. Do not use for a single call, sequential dependencies, long-running supervision, subagent fan-out, user or thread messages, external writes, approval-sensitive action, or tools that forbid parallelism.
 license: MIT
 metadata:
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "codex-optimization"
   toolkit-contribution-protocol: "v1"
 ---
@@ -40,7 +40,9 @@ When uncertain about a tool's effect class or parallel-safety, call it directly.
 - Do not hide `apply_patch`, mutating shell commands, or connector writes inside a composition program.
 - Do not compose tools that require a dedicated call boundary or explicitly forbid parallel calls. In particular, keep web access on its required standalone path.
 - Use `baton-fanout-skill` for subagents; this skill is single-agent tool orchestration, not delegation.
-- Use `long-run-supervisor` for commands expected to exceed five minutes; this skill is not a polling or waiting loop.
+- Consider `long-run-supervisor` only when a long command would otherwise cause repeated status
+  turns, lost output, or ambiguous recovery. A reliable deadline-bound blocking command stays on
+  the direct path even when it exceeds five minutes; this skill is not a polling or waiting loop.
 - Use the relevant product skill, such as `aar-operations`, for product-specific handles, grants, revisions, reconciliation, and delivery boundaries.
 - Use `aar-operations` and its `aar_program_workspace_*` tools when a callable AAR surface is
   available and persistent live Python objects, NumPy/pandas, helper functions, or multi-turn

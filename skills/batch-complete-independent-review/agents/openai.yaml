@@ -1,7 +1,7 @@
 interface:
   display_name: "Batch-Complete Review"
   short_description: "Review full finding batches at proportional rigor"
-  default_prompt: "Use $batch-complete-independent-review to review this change, choosing proportional rigor from the requested decision and keeping findings inside the authorized claim."
+  default_prompt: "Use $batch-complete-independent-review to review this change at risk-local proportional rigor, keep findings inside the authorized claim and affected effect boundary, accept supported reversible LOW × LOW residuals without candidate-wide L3 contagion, and stop when the declared full-review or same-cause retry budget is exhausted."
 
 policy:
   allow_implicit_invocation: true

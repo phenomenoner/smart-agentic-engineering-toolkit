@@ -1,7 +1,7 @@
 interface:
   display_name: "Engineering WAL"
   short_description: "Maintain a durable task resume map when needed"
-  default_prompt: "Use $engineering-wal to create or update the smallest durable map needed to resume this engineering task safely."
+  default_prompt: "Use $engineering-wal to create or update the smallest durable map needed to resume this engineering task safely, pin the toolkit version and canonical commit for long work, and record numeric loop budgets when canon orchestration is activated."
 
 policy:
   allow_implicit_invocation: false

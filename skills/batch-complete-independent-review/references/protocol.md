@@ -13,6 +13,12 @@
 
 ## 1. Risk classification
 
+Classify risk per claim and first affected effect boundary, not per repository or candidate label.
+Record consequence × estimated frequency, reversibility or containment, and evidence confidence.
+L2/L3 rigor is risk-local; `candidate-wide L3 contagion` is prohibited. A high-consequence seam can fail closed without promoting unrelated
+diagnostic, documentation, or reversible cells. A supported LOW × LOW residual may use bounded
+fail-open when it cannot falsify the authorized claim.
+
 ### L1: local
 
 Use for a leaf computation with no shared state, authority, identity, schema,
@@ -35,8 +41,35 @@ escaped HIGH/CRITICAL siblings. Normally use one fixed-point reviewer plus a
 narrow coverage/assumption auditor. Use two sealed blind reviewers with
 orthogonal lenses plus reciprocal audits when authority/security is coupled to
 release or cutover, or when a supposedly covered family recently escaped
-another HIGH/CRITICAL sibling. A third full reviewer remains escalation, not
-default.
+another HIGH/CRITICAL sibling, and only when the activation record explicitly
+sets `maxPrimaryReviewers: 2` and records a non-empty high-consequence
+`secondBlindReason`. A third full reviewer is prohibited.
+Unresolved disagreement, an unowned partition, hash or binding failure, or an
+incomplete lane returns `INCOMPLETE` for owner action.
+
+Every formal review plan declares these integer budgets before binding:
+
+```json
+{
+  "budgets": {
+    "maxFullReviewWaves": 1,
+    "maxSameCauseAttempts": 2,
+    "maxPrimaryReviewers": 1,
+    "maxNarrowAuditors": 1
+  },
+  "waveOrdinal": 1,
+  "sameCauseAttemptOrdinal": 1,
+  "additionalWaveReason": null,
+  "secondBlindReason": null
+}
+```
+
+`maxFullReviewWaves` is one or two, `maxSameCauseAttempts` is one or two,
+`maxPrimaryReviewers` is one or two, and `maxNarrowAuditors` is zero or one. Two primary reviewers
+require L3 and a non-empty high-consequence reason. A two-wave ceiling requires
+`additionalWaveReason`. `waveOrdinal` and `sameCauseAttemptOrdinal` must remain within their bound
+ceilings, so an exhausted plan cannot bind another unchanged attempt. These are ceilings, not
+targets.
 
 ## 2. Coverage matrix
 
@@ -112,19 +145,21 @@ or unvisited. Do not close a contract with broad prose.
 
 ## 3. Counterfactual fixed point
 
-Let `A0` be an empty assumption set. Traverse the full matrix against the actual
+Let `A0` be an empty assumption set. Traverse the required risk-local matrix partition against the actual
 candidate. For each new blocker `Bi`:
 
 1. Record `Bi` against actual source and evidence.
 2. Define minimal behavioral postcondition `Ai`; do not imagine patch details.
 3. Add `Ai` only if it is falsifiable and consistent with prior assumptions.
 4. Compute its affected callers, consumers, state phases, and matrix cells.
-5. Reopen every affected cell, including cells previously marked safe.
-6. Traverse all open and required cells under the accumulated assumption set.
+5. Reopen each dependent affected cell, including cells previously marked safe.
+6. Traverse all open and required risk-local cells under the accumulated assumption set.
 
-Converge only when a complete traversal adds no blocker, changes no assumption,
-and reopens no cell. Then perform an adversarial assumption audit. If that audit
-changes anything, iterate again.
+Converge only when a complete required traversal adds no blocker, changes no assumption,
+and reopens no cell. Then perform one adversarial assumption audit. If that audit
+changes a blocking finding or acceptance-critical assumption, repeat only when both the declared
+full-review wave limit and same-cause retry limit retain budget. Otherwise return `INCOMPLETE` with
+the current evidence. Never create another successor or reviewer name merely to continue the loop.
 
 This establishes counterfactual closure, not correctness of real bytes.
 
@@ -151,17 +186,20 @@ alone; its postcondition and affected cells must address the unsafe operation.
 
 ## 5. Closure support and fixed-point stability
 
-Every finding and assumption creates reopen obligations. Each obligation names
-the trigger, affected cells, required disposition, and supporting evidence.
+Every blocking finding and acceptance-critical assumption creates risk-local reopen obligations.
+Each obligation names the trigger, affected cells, required disposition, and supporting evidence.
+A supported low-consequence, low-frequency, reversible finding may instead record a bounded
+fail-open accepted residual and repair trigger; it creates no reopen obligation outside its dependent cells.
 Before a lane may claim `BATCH_COMPLETE`:
 
 1. every required cell is visited;
 2. every no-finding closure is supported at the required tier;
-3. every finding's required regression cells are covered by reviewed reopen
+3. every blocking finding's required regression cells are covered by reviewed reopen
    obligations;
-4. every assumption's reopened cells are reviewed under the accumulated
+4. every acceptance-critical assumption's reopened cells are reviewed under the accumulated
    assumption set;
-5. no reopen obligation or coverage challenge remains open;
+5. no blocking reopen obligation or required coverage challenge remains open; accepted bounded
+   residuals remain explicit and do not prevent closure outside their dependent cells;
 6. the reviewer has explicitly attacked all applicable dimensions:
    - sibling call sites;
    - lifecycle/state transitions;
@@ -179,8 +217,11 @@ an existing receipt does not close a cell when the receipt never executed the
 required production seam, recovery sibling, compatibility status path, or
 policy decision.
 
-If any attack adds or expands a finding, assumption, evidence gap, or affected
-cell, mark the fixed point unstable, reopen those cells, and iterate.
+If an attack adds or expands a blocking finding, acceptance-critical assumption, required evidence
+gap, or affected cell, mark the risk-local fixed point unstable and reopen those dependent cells only
+while the declared budgets remain. A non-blocking LOW × LOW residual does not destabilize unrelated
+cells. Repeated or oscillating same-cause signatures and budget exhaustion stop `BLOCKED` or
+`INCOMPLETE`; they do not authorize another unchanged wave.
 
 ## 6. Coverage audit, two-blind synthesis, and escalation
 
@@ -191,14 +232,18 @@ sealed primary report, and use a distinct auditor identity. This makes the
 single-lane topology explicit without pretending the auditor performed another
 blind full pass.
 
-Escalate to a second full blind reviewer only when:
+Escalate to a second full blind reviewer only when the bound plan grants two primary reviewers,
+records the high-consequence reason, and one of these conditions holds:
 
 - a supported HIGH/CRITICAL finding is disputed after the narrow audit;
-- a required matrix partition remains unowned or over budget;
+- a required matrix partition remains unowned;
 - the primary reviewer is incomplete, unavailable, unauthenticated, or
   hash-mismatched;
 - a prior supposedly covered cell has another sibling HIGH/CRITICAL escape;
 - genuinely independent critical contract families require distinct expertise.
+
+Budget exhaustion is not an escalation trigger. Return `INCOMPLETE` with the current sealed evidence
+and require an owner decision before any budget amendment.
 
 The second reviewer receives a neutral frozen context and does not see disputed
 verdicts until its bounded pass is sealed. Never use majority vote.
@@ -223,11 +268,12 @@ For the selected two-blind topology:
 8. let the main agent recompute closure from the union.
 
 Only the synthesis may claim `AUDITED_BATCH_COMPLETE`. A first-pass
-`BATCH_COMPLETE` is lane-local. Start a third reviewer only when the reciprocal
-union still has a supported disputed blocker, unowned partition, hash mismatch,
-or unresolved coverage challenge. When every challenge has a concrete union
-disposition, synthesize without a third reviewer even if the lanes found
-different or differently clustered issues.
+`BATCH_COMPLETE` is lane-local. When the reciprocal union still has a supported
+disputed blocker, unowned partition, hash mismatch, or unresolved coverage
+challenge, return `INCOMPLETE`, seal the evidence, and identify the owner
+decision or changed-candidate next action. Do not add a reviewer inside the
+exhausted wave. When every challenge has a concrete union disposition,
+synthesize even if the lanes found different or differently clustered issues.
 
 Every cross-audit finding must be actionable input to synthesis, not a prose
 aside. Record its contracts and matrix cells, preconditions, execution path,
@@ -267,5 +313,9 @@ Finish enumeration, synthesize one coherent batch, then change source.
 - Do not rerun broad tests merely to perform source review.
 - Declare budgets before review. Budget exhaustion returns `INCOMPLETE` with all
   unvisited cells.
+- In normalized form, budget exhaustion returns `INCOMPLETE`; it never changes the verdict contract.
+- Declare a numeric **full-review wave limit** and **same-cause retry limit**. Never launch an
+  unchanged third same-cause attempt; require a changed architecture, bounded constructibility probe,
+  or owner decision before reactivation.
 - Track late sibling escapes, challenged findings, coverage gaps, refreeze
   count, and unnecessary escalations. Do not reward finding count.

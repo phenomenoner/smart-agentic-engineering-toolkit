@@ -22,6 +22,13 @@ raises the claim, acceptance level, release rigor, system boundary, authority, w
 external effects stops at an explicit scope-change checkpoint. A severe finding remains visible, but
 severity alone cannot amend the task.
 
+**Assurance is risk-local and proportional.** Classify a material finding at its first affected
+effect boundary by **consequence × estimated frequency**, reversibility or containment, and evidence
+confidence. Fail closed before a high-consequence authority, security, privacy, irreversible,
+cutover, rollback, or delivery effect. A supported low-consequence, low-frequency, reversible
+residual may use **bounded fail-open** with evidence and a repair trigger; it does not contaminate the
+whole candidate, summon another full review, or raise the authorized claim.
+
 ## What it adds
 
 - Behavioral specifications with observable acceptance, non-goals, failure semantics, and a
@@ -34,6 +41,11 @@ severity alone cannot amend the task.
 - A conditional unit-first ladder for costly composite seams: prove each independently failing link
   and contract-relevant failure class, then composition boundaries, then only the native or
   lifecycle behavior lower tiers cannot represent.
+- A constructibility-before-formalization brake for unfamiliar OS/provider/runtime primitives, plus
+  numeric specification, delivery, same-cause retry, and full-review wave limits. An unchanged third
+  same-cause attempt stops instead of receiving another successor name or reviewer.
+- Policy binding for long tasks: pin the toolkit version and canonical commit; changed rules require
+  an explicit rebind checkpoint or a restarted new task, never silent mid-task mixing.
 - Temporal ownership design for TOCTOU, ABA, PID or handle reuse, replacement cleanup, and rollback,
   including forbidden traces, linearization points, stable capabilities or CAS, and exact
   interleaving tests.
@@ -56,19 +68,19 @@ severity alone cannot amend the task.
 | Core | `engineering-specification`, `engineering-debugging`, `engineering-implementation`, `engineering-wal`, `batch-complete-independent-review`, `completeness-and-test-synthesis`, `incident-to-regression`, `specify-temporal-ownership`, `evolve-engineering-toolkit` |
 | Assurance | `canon-engineering-disciplines` |
 | Navigation and composition | `codegraph-first-navigation`, `programmatic-tool-composition` |
-| Windows and Codex adapters | `long-run-supervisor`, `codex-cli-luna-worker`, `codex-app-mcp-update` |
+| Windows and Codex adapters | `long-run-supervisor`, `codex-app-mcp-update` |
 | Explicit provider adapter | `claude-independent-review` |
 
 See [`catalog/skills.json`](catalog/skills.json) and [`docs/taxonomy.md`](docs/taxonomy.md) for exact
 triggers, non-triggers, implicit-invocation policy, and canonical ownership.
 
-## Codex plugin installation
+## Host-native installation
 
-The repository root is the plugin source. Releases provide a Git tag, GitHub release, and a
-per-path hash lock. Register a checkout pinned to the exact gated commit (or its release tag once
-published) as a local marketplace, install the plugin, fully restart Codex Desktop, and prove
-behavior in a **new task**. Configuration, catalog visibility, or health alone is not behavior
-proof. Exact plugin and standalone profile commands are in
+Use the host's native distribution surface: Codex App installs the repository as a plugin; Hermes
+Agent installs a managed profile under `~/.hermes/skills` or one independent skill through
+`hermes skills install`; another Agent Skills-compatible harness should use its native manager or
+the standalone profile installer. Never treat a plugin cache or installed projection as source.
+Exact commands, conflict handling, update identity, and fresh-context proof are in
 [`docs/installation.md`](docs/installation.md).
 
 If loose skills with the same names already exist, first keep them in place and prove the plugin by
@@ -78,7 +90,7 @@ changes.
 
 ## External integrations
 
-In 0.4.0, `baton-fanout-skill` remains owned by its existing repository and is only pinned as an
+`baton-fanout-skill` remains owned by its existing repository and is only pinned as an
 integration. Context Canvas, Understand Anything, and AAR also retain their own canonical owners.
 See [`docs/integrations.md`](docs/integrations.md). Superpowers is comparative material only; its
 mandatory bootstrap, TDD, worktree, fan-out, and reviewer chain are not reactivated.
@@ -97,14 +109,16 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-Version 0.4.0 adds the conditional unit-first composite-seam ladder, Baton-routed Luna/max eligibility
-for stable bounded workers, and a Sol/high floor for independent Codex review. It adds no skill,
-profile, schema, or mandatory lifecycle, and preserves the direct path for one cheap simple seam. It
-retains the 63-case baseline from 0.1.0 while rebinding release identity and current input hashes;
-supplemental fresh-agent behavior evaluation remains explicitly bounded by recorded host evidence.
-This release claim is limited to the listed repository bytes, source tests, plugin and standalone
-installation, and host evidence. It does not claim OpenAI endorsement, Plugin Directory approval,
-or deployment or availability of AAR, Canvas, or an external model provider.
+Version 0.5.0 adds risk-local consequence-frequency disposition, bounded fail-open for supported
+LOW × LOW residuals, constructibility before broad formalization, explicit numeric loop budgets, and
+toolkit policy binding. It retires unbounded finding-driven reopen language and documents host-native
+installation for Codex App, Hermes Agent, and other Agent Skills-compatible harnesses. It adds no
+skill, profile, transition schema, registry, or mandatory lifecycle, and preserves the direct path.
+It retains the 63-case baseline from 0.1.0 while rebinding release identity and current input hashes;
+supplemental fresh-agent behavior evaluation remains bounded by recorded host evidence. This release
+claim is limited to the listed repository bytes, source tests, installation contracts, and host
+evidence. It does not claim OpenAI or Hermes endorsement, directory approval, or deployment or
+availability of AAR, Canvas, or an external model provider.
 
 License: MIT. See [`NOTICE`](NOTICE) and
 [`docs/influences-and-provenance.md`](docs/influences-and-provenance.md) for external influences and

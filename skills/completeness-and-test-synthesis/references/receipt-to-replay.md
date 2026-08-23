@@ -48,11 +48,14 @@ catalog. Generic examples (adapt to your domain):
 The anti-pattern to avoid: asserting that a field exists or that a config string
 is present. That passes whether or not the behavior is correct.
 
-### 5. Prove fail-first
-Run the new test against the **pre-fix** code (or with the fix reverted) and
-confirm it **fails**, then against the fixed code and confirm it **passes**. If
-you cannot make it fail, it is not exercising the regression — find the real
-trigger before continuing.
+### 5. Establish a discriminating basis
+
+When the pre-fix state is safe and available, run the new test against those bytes (or with the
+focused fix reverted), confirm it fails for the original reason, then confirm the fixed bytes pass.
+If safe pre-fix execution is unavailable, bind a current-state discriminator to exact bytes and
+evidence: state the regression condition, observed result, and limitation. Do not claim an observed
+fail-first result when none ran, and do not manufacture a risky historical state merely to satisfy
+the recipe.
 
 ### 6. Wire it in
 Place it where CI runs it (integration test dir, or a scenario module that forces

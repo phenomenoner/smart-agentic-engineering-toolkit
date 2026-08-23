@@ -33,6 +33,14 @@ scope-change checkpoint. Implementation, diagnosis, review, and evidence skills 
 guards at the point where they could absorb or escalate work. This does not create a seventeenth
 skill, universal finding registry, or mandatory checkpoint for an explicit in-scope change.
 
+Risk disposition is also cross-lifecycle and **does not create a new skill**. No new persistent risk registry
+is introduced. The observing owner records the
+first affected effect boundary, **consequence × estimated frequency**, reversibility/containment, and
+confidence. High-consequence effects fail closed locally. A supported low-consequence, low-frequency,
+reversible residual may use **bounded fail-open** and a repair trigger without reopening unrelated
+cells. `batch-complete-independent-review` owns risk-local review scope; `engineering-wal` owns numeric
+loop budgets and toolkit policy binding for long tasks.
+
 When one seam contains several independently failing links or makes integration feedback materially
 expensive, `engineering-implementation` owns the unit-first construction order and
 `completeness-and-test-synthesis` owns the evidence judgment: link and failure-partition checks,

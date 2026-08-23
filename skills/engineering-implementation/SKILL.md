@@ -4,7 +4,7 @@ description: Implement an authorized source, test, configuration, or documentati
 license: MIT
 metadata:
   version: "0.3.0"
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
 ---
@@ -61,6 +61,14 @@ authorized writable paths, or external effects, stop at a scope-change checkpoin
 unresolved amendment to `engineering-specification`. Finding severity and available tooling do not
 authorize the expansion.
 
+For each material implementation finding, record the affected claim and affected effect boundary,
+**consequence × estimated frequency**, reversibility or containment, and evidence confidence. Keep
+repairs and checks `risk-local`. Fail closed before a high-consequence unsafe effect, but do not
+invalidate unrelated cells. A low-consequence, low-frequency, reversible diagnostic or advisory
+condition defaults to **bounded fail-open** with evidence, residual risk, and a repair trigger. A
+frequent low-consequence issue may receive a focused operability repair; it does not justify a formal
+matrix, release-wide refreeze, or broader architecture.
+
 When the frozen design or the patch introduces a mechanism, state, authority owner, or recovery
 path, read its necessity decision and ask: `Do we really need this to make things happen?` and `Is
 there a simpler and more direct way?` Keep the slice and checks bound to the observable invariant,
@@ -83,6 +91,12 @@ verification, and owns the claim.
 For concurrency, replacement, rollback, identity reuse, or check-then-mutate behavior, apply
 `specify-temporal-ownership` before choosing a patch. A stronger-looking final check is insufficient
 when another actor can replace state after it.
+
+Before formalizing a novel operating-system, provider, runtime, or library seam, run the smallest
+disposable compile/API constructibility probe that has no live effect. Use it to prove only the
+primitive, call shape, and minimum ownership boundary. If that probe fails, return the evidence to
+`engineering-specification`; do not compensate with a larger state machine, hundreds of review cells,
+or another reviewer wave.
 
 ## Decompose costly composite seams before climbing altitude
 
@@ -107,10 +121,10 @@ equally discriminating.
 After the contracts, dependency order, and shared fixtures are stable, Baton may assign disjoint
 link tests, exact-path code generation, or low-judgment scouting to workers with exclusive ownership.
 An exposed native `gpt-5.6-luna` lane at `max` is eligible only for stable, bounded work whose result
-is cheap to falsify; use the CLI Luna bridge only for its narrower exact-path code-generation
-fallback. Keep architecture, security, authority, release or cutover judgment, and independent
-review out of Luna; use an applicable Sol/high-or-stronger lane when such bounded high-cost judgment
-is independently delegated. Do not fan out an unresolved composition contract or a shared harness.
+is cheap to falsify. Do not shell out to `codex exec` as a compatibility worker; the retired CLI
+Luna bridge is not an active fallback. Keep architecture, security, authority, release or cutover
+judgment, and independent review out of Luna; choose a proportionate capable native lane when such
+bounded high-cost judgment is independently delegated. Do not fan out an unresolved composition contract or a shared harness.
 The main agent owns dependency synthesis, the composed checks, shared verification, and the final
 claim.
 

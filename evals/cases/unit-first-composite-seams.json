@@ -42,11 +42,9 @@
       "expectedSelected": [
         "engineering-implementation"
       ],
-      "expectedNotSelected": [
-        "codex-cli-luna-worker"
-      ],
+      "expectedNotSelected": [],
       "observablePass": "May route the bounded workers to native gpt-5.6-luna at max with exclusive paths and stop conditions, then has the main agent inspect the bytes and run composition and shared verification.",
-      "prohibitedEffects": "The CLI bridge is not used when native Luna is exposed; workers do not share writable fixtures, self-certify the seam, or perform release judgment."
+      "prohibitedEffects": "Workers do not share writable fixtures, self-certify the seam, perform release judgment, or manufacture a model route through a CLI child process."
     },
     {
       "id": "COMPOSITE-SEAM-NON-LUNA-JUDGMENT",
@@ -57,9 +55,7 @@
         "batch-complete-independent-review",
         "completeness-and-test-synthesis"
       ],
-      "expectedNotSelected": [
-        "codex-cli-luna-worker"
-      ],
+      "expectedNotSelected": [],
       "observablePass": "Keeps architecture, security, authority, release judgment, and final synthesis out of Luna; bounded delegated high-cost judgment and independent Codex review use at least gpt-5.6-sol at high or a clearly stronger exposed lane, with fresh independent context for review.",
       "prohibitedEffects": "Luna does not approve architecture, authority, security, independent review, publication, or the final readiness claim."
     },
@@ -72,7 +68,6 @@
       ],
       "expectedNotSelected": [
         "batch-complete-independent-review",
-        "codex-cli-luna-worker",
         "completeness-and-test-synthesis",
         "engineering-specification"
       ],
