@@ -17,11 +17,39 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-
 PROTOCOL_VERSION = "batch-complete-independent-review/v1"
 WAVE_SCHEMA_VERSION = "batch-review-wave.v1"
 MATRIX_SCHEMA_VERSION = "batch-review-coverage-matrix.v1"
 REPORT_SCHEMA_VERSION = "batch-independent-review-report.v1"
+REPORT_FIELDS = {
+    "schemaVersion",
+    "binding",
+    "reviewer",
+    "actualCandidateVerdict",
+    "findingSetStatus",
+    "counterfactualVerdict",
+    "continuedAfterFirstBlocker",
+    "coverage",
+    "findings",
+    "assumptions",
+    "verificationGaps",
+    "fixedPoint",
+    "stopping",
+}
+SYNTHESIS_FIELDS = {
+    "schemaVersion",
+    "reviewWaveId",
+    "topology",
+    "laneReports",
+    "auditReports",
+    "matrixClosure",
+    "findingClusters",
+    "unresolvedChallengeIds",
+    "actualCandidateVerdict",
+    "findingSetStatus",
+    "counterfactualVerdict",
+    "rationale",
+}
 
 TIERS = {"T0", "T1", "T2", "T3", "T4"}
 TIER_ORDER = {"NONE": -1, "T0": 0, "T1": 1, "T2": 2, "T3": 3, "T4": 4}
@@ -61,6 +89,7 @@ COUNTERFACTUAL_VERDICTS = {
     "PASS_UNDER_ASSUMPTIONS",
     "UNRESOLVED",
 }
+AUDIT_RECOMMENDATIONS = {"READY_FOR_SYNTHESIS", "INCOMPLETE"}
 STOP_REASONS = {
     "COVERAGE_COMPLETE",
     "EVIDENCE_CLOSURE_INCOMPLETE",
@@ -70,6 +99,26 @@ STOP_REASONS = {
     "BUDGET_REACHED",
     "SAFETY_NOTIFICATION",
     "FINDING_OVERFLOW",
+}
+REVIEW_PLAN_SCHEMA_VERSION = "review-plan.v1"
+REVIEW_PLAN_RISKS = {"L1", "L2", "L3"}
+REVIEW_PLAN_FIELDS = {
+    "schemaVersion",
+    "risk",
+    "topology",
+    "contracts",
+    "authorityBoundary",
+    "budgets",
+    "waveOrdinal",
+    "sameCauseAttemptOrdinal",
+    "additionalWaveReason",
+    "secondBlindReason",
+}
+REVIEW_PLAN_BUDGET_LIMITS = {
+    "maxFullReviewWaves": (1, 2),
+    "maxSameCauseAttempts": (1, 2),
+    "maxPrimaryReviewers": (1, 2),
+    "maxNarrowAuditors": (0, 1),
 }
 
 
@@ -242,6 +291,99 @@ def _validate_matrix(matrix: Any) -> list[str]:
     return errors
 
 
+def _validate_review_plan(plan: Any) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(plan, dict):
+        return ["Review plan must be a JSON object."]
+    if plan.get("schemaVersion") != REVIEW_PLAN_SCHEMA_VERSION:
+        errors.append(
+            f"Review plan schemaVersion must be {REVIEW_PLAN_SCHEMA_VERSION!r}."
+        )
+
+    unsupported_fields = sorted(set(plan) - REVIEW_PLAN_FIELDS)
+    if unsupported_fields:
+        errors.append(
+            "Review plan contains unsupported top-level fields: "
+            + ", ".join(unsupported_fields)
+            + "."
+        )
+
+    risk = plan.get("risk")
+    if risk not in REVIEW_PLAN_RISKS:
+        errors.append(f"Review plan risk must be one of {sorted(REVIEW_PLAN_RISKS)}.")
+
+    budgets = plan.get("budgets")
+    if not isinstance(budgets, dict):
+        errors.append("Review plan budgets must be an object with finite integer limits.")
+        return errors
+
+    expected_budget_names = set(REVIEW_PLAN_BUDGET_LIMITS)
+    actual_budget_names = set(budgets)
+    missing = sorted(expected_budget_names - actual_budget_names)
+    unexpected = sorted(actual_budget_names - expected_budget_names)
+    if missing:
+        errors.append("Review plan budgets are missing: " + ", ".join(missing) + ".")
+    if unexpected:
+        errors.append(
+            "Review plan budgets contain unsupported fields: "
+            + ", ".join(unexpected)
+            + "."
+        )
+
+    validated: dict[str, int] = {}
+    for name, (minimum, maximum) in REVIEW_PLAN_BUDGET_LIMITS.items():
+        value = budgets.get(name)
+        if isinstance(value, bool) or not isinstance(value, int):
+            errors.append(f"Review plan budgets.{name} must be an integer.")
+            continue
+        if not minimum <= value <= maximum:
+            errors.append(
+                f"Review plan budgets.{name} must be between {minimum} and {maximum}."
+            )
+            continue
+        validated[name] = value
+
+    for ordinal_name, budget_name in (
+        ("waveOrdinal", "maxFullReviewWaves"),
+        ("sameCauseAttemptOrdinal", "maxSameCauseAttempts"),
+    ):
+        ordinal = plan.get(ordinal_name)
+        limit = validated.get(budget_name)
+        if isinstance(ordinal, bool) or not isinstance(ordinal, int):
+            errors.append(f"Review plan {ordinal_name} must be an integer.")
+        elif limit is not None and not 1 <= ordinal <= limit:
+            errors.append(
+                f"Review plan {ordinal_name} must be between 1 and {budget_name}."
+            )
+
+    additional_wave_reason = plan.get("additionalWaveReason")
+    wave_limit = validated.get("maxFullReviewWaves")
+    if wave_limit == 2:
+        if not _is_nonempty_string(additional_wave_reason):
+            errors.append(
+                "A two-wave budget requires a non-empty additionalWaveReason."
+            )
+    elif additional_wave_reason is not None:
+        errors.append(
+            "Review plan additionalWaveReason must be null unless maxFullReviewWaves is 2."
+        )
+
+    second_blind_reason = plan.get("secondBlindReason")
+    primary_limit = validated.get("maxPrimaryReviewers")
+    if primary_limit == 2:
+        if risk != "L3":
+            errors.append("Two primary reviewers require review plan risk L3.")
+        if not _is_nonempty_string(second_blind_reason):
+            errors.append(
+                "Two primary reviewers require a non-empty secondBlindReason."
+            )
+    elif second_blind_reason is not None:
+        errors.append(
+            "Review plan secondBlindReason must be null unless maxPrimaryReviewers is 2."
+        )
+    return errors
+
+
 def _bind(args: argparse.Namespace) -> int:
     inputs = {
         "candidateManifest": Path(args.candidate_manifest),
@@ -255,6 +397,10 @@ def _bind(args: argparse.Namespace) -> int:
     for name in ("candidateManifest", "evidenceIndex", "reviewPlan"):
         if not isinstance(parsed[name], dict):
             raise GateInputError(f"{name} must be a JSON object.")
+
+    plan_errors = _validate_review_plan(parsed["reviewPlan"])
+    if plan_errors:
+        raise GateInputError(" ".join(plan_errors))
 
     matrix_errors = _validate_matrix(parsed["coverageMatrix"])
     if matrix_errors:
@@ -396,6 +542,13 @@ def _validate_report_semantics(
     warnings: list[str] = []
     if not isinstance(report, dict):
         return ["Review report must be a JSON object."], warnings
+    unsupported_fields = sorted(set(report) - REPORT_FIELDS)
+    if unsupported_fields:
+        errors.append(
+            "Review report contains unsupported top-level fields: "
+            + ", ".join(unsupported_fields)
+            + "."
+        )
     if report.get("schemaVersion") != REPORT_SCHEMA_VERSION:
         errors.append(f"Report schemaVersion must be {REPORT_SCHEMA_VERSION!r}.")
     errors.extend(_validate_binding(report, wave))
@@ -1033,6 +1186,7 @@ def _validate_report(args: argparse.Namespace) -> int:
         errors.extend(_verify_bound_artifacts(wave))
 
     matrix: dict[str, Any] = {}
+    plan: dict[str, Any] = {}
     if isinstance(wave, dict) and not wave_shape_errors:
         matrix_artifact = wave.get("coverageMatrix")
         if isinstance(matrix_artifact, dict) and _is_nonempty_string(
@@ -1049,9 +1203,26 @@ def _validate_report(args: argparse.Namespace) -> int:
             except GateInputError as exc:
                 errors.append(str(exc))
 
+        plan_artifact = wave.get("reviewPlan")
+        if isinstance(plan_artifact, dict) and _is_nonempty_string(
+            plan_artifact.get("path")
+        ):
+            try:
+                loaded_plan = _load_json(
+                    Path(plan_artifact["path"]), "bound review plan"
+                )
+                plan_errors = _validate_review_plan(loaded_plan)
+                errors.extend(plan_errors)
+                if isinstance(loaded_plan, dict):
+                    plan = loaded_plan
+            except GateInputError as exc:
+                errors.append(str(exc))
+        else:
+            errors.append("Review wave reviewPlan artifact is invalid.")
+
     semantic_errors: list[str] = []
     warnings: list[str] = []
-    if isinstance(wave, dict) and not wave_shape_errors and matrix:
+    if isinstance(wave, dict) and not wave_shape_errors and matrix and plan:
         semantic_errors, warnings = _validate_report_semantics(report, matrix, wave)
         errors.extend(semantic_errors)
 
@@ -1076,12 +1247,13 @@ def _validate_report(args: argparse.Namespace) -> int:
 
 def _load_current_wave_and_matrix(
     wave_path: Path,
-) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], list[str]]:
     wave = _load_json(wave_path, "review wave")
     errors = _validate_wave_shape(wave)
     matrix: dict[str, Any] = {}
+    plan: dict[str, Any] = {}
     if not isinstance(wave, dict) or errors:
-        return wave if isinstance(wave, dict) else {}, matrix, errors
+        return wave if isinstance(wave, dict) else {}, matrix, plan, errors
     errors.extend(_verify_bound_artifacts(wave))
     matrix_artifact = wave.get("coverageMatrix")
     if isinstance(matrix_artifact, dict) and _is_nonempty_string(
@@ -1093,7 +1265,16 @@ def _load_current_wave_and_matrix(
             matrix = loaded
     else:
         errors.append("Review wave coverageMatrix artifact is invalid.")
-    return wave, matrix, errors
+
+    plan_artifact = wave.get("reviewPlan")
+    if isinstance(plan_artifact, dict) and _is_nonempty_string(plan_artifact.get("path")):
+        loaded = _load_json(Path(plan_artifact["path"]), "bound review plan")
+        errors.extend(_validate_review_plan(loaded))
+        if isinstance(loaded, dict):
+            plan = loaded
+    else:
+        errors.append("Review wave reviewPlan artifact is invalid.")
+    return wave, matrix, plan, errors
 
 
 def _validate_audit_evidence(value: Any, prefix: str, errors: list[str]) -> None:
@@ -1383,18 +1564,10 @@ def _validate_cross_audit_semantics(
             "disposition UNRESOLVED."
         )
     recommendation = audit.get("recommendation")
-    if recommendation not in {
-        "READY_FOR_SYNTHESIS",
-        "THIRD_REVIEW_REQUIRED",
-        "INCOMPLETE",
-    }:
+    if recommendation not in AUDIT_RECOMMENDATIONS:
         errors.append("Cross-audit recommendation is invalid.")
     if recommendation == "READY_FOR_SYNTHESIS" and unresolved:
         errors.append("READY_FOR_SYNTHESIS cannot retain unresolved challenges.")
-    if recommendation == "THIRD_REVIEW_REQUIRED" and not unresolved:
-        errors.append(
-            "THIRD_REVIEW_REQUIRED must name at least one unresolved challenge."
-        )
     if recommendation == "READY_FOR_SYNTHESIS" and audit.get(
         "peerContinuedAfterFirstBlocker"
     ) is not True and peer_has_blockers:
@@ -1408,7 +1581,7 @@ def _validate_cross_audit_semantics(
 
 
 def _validate_audit(args: argparse.Namespace) -> int:
-    wave, matrix, errors = _load_current_wave_and_matrix(Path(args.wave))
+    wave, matrix, _plan, errors = _load_current_wave_and_matrix(Path(args.wave))
     warnings: list[str] = []
     own_path = Path(args.own_report)
     peer_path = Path(args.peer_report)
@@ -1469,6 +1642,7 @@ def _validate_audit(args: argparse.Namespace) -> int:
                 "reviewWaveId": wave.get("reviewWaveId"),
                 "recommendation": audit.get("recommendation")
                 if isinstance(audit, dict)
+                and audit.get("recommendation") in AUDIT_RECOMMENDATIONS
                 else None,
                 "unresolvedChallengeIds": sorted(unresolved),
             },
@@ -1516,12 +1690,18 @@ def _load_synthesis_artifact(
 
 
 def _validate_synthesis(args: argparse.Namespace) -> int:
-    wave, matrix, errors = _load_current_wave_and_matrix(Path(args.wave))
+    wave, matrix, plan, errors = _load_current_wave_and_matrix(Path(args.wave))
     warnings: list[str] = []
     synthesis = _load_json(Path(args.synthesis), "review synthesis")
     if not isinstance(synthesis, dict):
         errors.append("Review synthesis must be a JSON object.")
         synthesis = {}
+    unexpected_fields = sorted(set(synthesis) - SYNTHESIS_FIELDS)
+    if unexpected_fields:
+        errors.append(
+            "Review synthesis contains unsupported fields: "
+            + ", ".join(unexpected_fields)
+        )
     if synthesis.get("schemaVersion") != "batch-review-synthesis.v1":
         errors.append(
             "Review synthesis schemaVersion must be 'batch-review-synthesis.v1'."
@@ -1538,6 +1718,24 @@ def _validate_synthesis(args: argparse.Namespace) -> int:
         "TWO_BLIND_RECIPROCAL",
     }:
         errors.append("Review synthesis topology is invalid.")
+
+    budgets = plan.get("budgets") if isinstance(plan, dict) else None
+    if not isinstance(budgets, dict):
+        budgets = {}
+    if (
+        topology == "SINGLE_PLUS_NARROW_AUDITOR"
+        and budgets.get("maxNarrowAuditors") != 1
+    ):
+        errors.append(
+            "SINGLE_PLUS_NARROW_AUDITOR exceeds the bound maxNarrowAuditors budget."
+        )
+    if (
+        topology == "TWO_BLIND_RECIPROCAL"
+        and budgets.get("maxPrimaryReviewers") != 2
+    ):
+        errors.append(
+            "TWO_BLIND_RECIPROCAL exceeds the bound maxPrimaryReviewers budget."
+        )
 
     lane_items = synthesis.get("laneReports")
     if not isinstance(lane_items, list):
@@ -2005,15 +2203,13 @@ def _validate_synthesis(args: argparse.Namespace) -> int:
     actual = synthesis.get("actualCandidateVerdict")
     finding_status = synthesis.get("findingSetStatus")
     counterfactual = synthesis.get("counterfactualVerdict")
-    third_required = synthesis.get("thirdReviewerRequired")
     if actual not in ACTUAL_VERDICTS:
         errors.append("Review synthesis actualCandidateVerdict is invalid.")
     if finding_status not in {"AUDITED_BATCH_COMPLETE", "INCOMPLETE"}:
         errors.append("Review synthesis findingSetStatus is invalid.")
     if counterfactual not in COUNTERFACTUAL_VERDICTS:
         errors.append("Review synthesis counterfactualVerdict is invalid.")
-    if not isinstance(third_required, bool):
-        errors.append("Review synthesis thirdReviewerRequired must be a boolean.")
+
     if not _is_nonempty_string(synthesis.get("rationale")):
         errors.append("Review synthesis rationale must be a non-empty string.")
 
@@ -2050,10 +2246,7 @@ def _validate_synthesis(args: argparse.Namespace) -> int:
                 "for synthesis: "
                 + ", ".join(sorted(nonready_audits))
             )
-        if third_required is not False:
-            errors.append(
-                "AUDITED_BATCH_COMPLETE requires thirdReviewerRequired false."
-            )
+
         if actual == "INCOMPLETE":
             errors.append(
                 "AUDITED_BATCH_COMPLETE cannot use actualCandidateVerdict INCOMPLETE."
@@ -2063,10 +2256,7 @@ def _validate_synthesis(args: argparse.Namespace) -> int:
             "An incomplete audited finding set requires actualCandidateVerdict "
             "INCOMPLETE."
         )
-    if unresolved_set and third_required is not True:
-        errors.append(
-            "Unresolved synthesis challenges require thirdReviewerRequired true."
-        )
+
     if actual == "PASS":
         if accepted_blockers:
             errors.append("Synthesis PASS cannot retain an accepted blocking cluster.")
@@ -2105,7 +2295,6 @@ def _validate_synthesis(args: argparse.Namespace) -> int:
                 "reviewWaveId": wave.get("reviewWaveId"),
                 "actualCandidateVerdict": actual,
                 "findingSetStatus": finding_status,
-                "thirdReviewerRequired": third_required,
             },
             ensure_ascii=False,
             sort_keys=True,

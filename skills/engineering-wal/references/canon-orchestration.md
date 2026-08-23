@@ -73,6 +73,34 @@ as independent.
    and synthesizes; it cannot unilaterally reclassify or close that finding.
 7. **Bound every loop.** Activation records pass/generation budgets. Repeated or oscillating finding
    signatures stop `BLOCKED` or `INCOMPLETE`; budget exhaustion never weakens the commitment floor.
+8. **Keep risk local.** Findings bind consequence × estimated frequency, reversibility/containment,
+   confidence, and first affected effect boundary. High-consequence uncertainty fails closed at that
+   boundary; a supported LOW × LOW reversible residual may use bounded fail-open without reopening
+   unrelated cells.
+9. **Pin workflow policy.** Activation binds the toolkit version and canonical commit. Silent policy
+   mixing is prohibited; adoption of changed rules requires an explicit rebind checkpoint or a new
+   task after host/plugin restart.
+
+The default activation budget is deliberately small and may be lowered. Raising it requires an
+owner-visible amendment with a changed strategy, not merely more time or another model:
+
+```text
+policyBinding:
+  toolkitVersion: 0.5.0
+  toolkitCommit: <exact-canonical-commit>
+  bindingState: PINNED
+
+loopBudgetDefaults:
+  specificationPasses: 2
+  deliveryPasses: 2
+  sameCauseRetries: 2
+  fullReviewWaves: 1
+```
+
+These are host/WAL activation fields, not additions to the `schemaVersion: 1` transition snapshot.
+The existing guard validates supplied max/used loop budgets but does not authenticate a Git commit.
+If these activation values are absent, use the direct workflow or stop `INCOMPLETE`; do not activate
+canon orchestration with implicit unlimited budgets.
 
 ## Minimal durable record and transition guard
 
@@ -101,6 +129,7 @@ verdicts:
 findings:
   id + class + classificationOwner + dispositionOwner + status + blocking
   affectedCells + firstUnsafeOperation + evidenceIds
+  consequence + estimatedFrequency + reversibilityOrContainment + evidenceConfidence
   append-only reclassifications + owner disposition
 
 commitments:
@@ -113,6 +142,8 @@ decisionReceipts:
 loopBudgets:
   specification max/used passes
   delivery max/used passes
+  same-cause retry max/used
+  full-review wave max/used
   last guard-derived semantic-delta signature + append-only signatureHistory
 
 completion:
@@ -202,6 +233,13 @@ append a migration record or pointer under the new version's documented procedur
 first new-version snapshot against that preserved boundary. The direct path does not create or migrate
 this envelope.
 
+The task WAL separately records `policyBinding`. Keep it `PINNED` for the task lifetime. If a newer
+toolkit or conflicting workflow rule appears, set `bindingState: REBIND_PENDING`, preserve the old
+version/commit and accepted decisions, summarize the material rule delta and affected decisions, and
+choose explicitly: defer to the next task, restart into a new task after installing the new plugin, or
+perform a documented migration; silent policy mixing is prohibited. Reading newer prose does not
+retroactively reinterpret accepted history, and an old task cannot prove fresh-task plugin pickup.
+
 ## Five logical roles
 
 ### PM / primary agent
@@ -271,7 +309,10 @@ A shadow reopen is routing back to the existing specification owner, not another
 requires a supported `SPEC_GAP` packet with the acceptance or missing behavior, spec/candidate identity,
 minimal reproducer or contradiction, affected cells, and evidence.
 
-Disposition is fail-closed:
+Packet history is append-only and disposition is risk-local. Fail closed before the first unsafe
+high-consequence effect. A supported low-consequence, low-frequency, reversible residual may be
+accepted by its canonical disposition owner with evidence and a repair trigger; it does not reopen
+unrelated cells. A genuine `SPEC_GAP` then takes exactly one of these dispositions:
 
 - **accept:** the specification disposition owner issues a new specification generation and invalidates
   dependency-mapped cells; changed identities reset positive verdicts before reevaluation;

@@ -50,7 +50,6 @@ jobs:
             'scripts/install.ps1',
             'skills/long-run-supervisor/scripts/long-run-supervisor.ps1',
             'skills/long-run-supervisor/scripts/run-supervised-blocking.ps1',
-            'skills/codex-cli-luna-worker/scripts/invoke_luna_worker.ps1',
             'skills/claude-independent-review/scripts/invoke-claude-readonly-review.ps1'
           )
           foreach ($script in $scripts) {

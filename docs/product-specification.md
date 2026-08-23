@@ -1,6 +1,6 @@
-# Product specification 0.4.0
+# Product specification 0.5.0
 
-Status: release candidate until the matching `v0.4.0` Git tag and GitHub Release pass remote
+Status: release candidate until the matching `v0.5.0` Git tag and GitHub Release pass remote
 readback.
 
 Machine-readable `released` status marks frozen versioned source and changelog identity; it does not
@@ -57,8 +57,18 @@ conditional guard and routes unresolved design back to it.
     only then at the native or lifecycle altitude the claim needs. A simple seam remains direct.
 13. Baton gates any fan-out. Stable bounded code generation and low-judgment scouts may use eligible
     Luna/max routes, but architecture, security, authority, release judgment, and independent review
-    do not; independent Codex review uses at least Sol/high or a stronger exposed lane, while final
-    synthesis and publication judgment remain with the main agent.
+    do not. Independent Codex review uses the lowest capable exposed lane; high-consequence authority,
+    security, privacy, irreversible release, rollback, delivery, or cutover judgment uses at least
+    Sol/high or a stronger exposed lane. Final synthesis and publication judgment remain with the
+    main agent.
+14. Material findings are risk-local. Their first affected effect boundary records consequence ×
+    estimated frequency, reversibility/containment, and evidence confidence. High-consequence effects
+    fail closed; supported low-consequence, low-frequency, reversible residuals may use bounded
+    fail-open without reopening unrelated cells or raising the claim.
+15. An unfamiliar OS/provider/runtime primitive receives the smallest no-live-effect constructibility
+    probe before a broad protocol or formal matrix is frozen. Long-task orchestration pins the toolkit
+    version/commit and declares numeric specification, delivery, same-cause retry, and full-review wave
+    limits; silent policy mixing and unchanged third attempts are prohibited.
 
 ## Owned scope
 
@@ -79,12 +89,16 @@ The release must pass:
   escalation, unrelated cleanup, an explicit scope amendment, and a direct in-scope defect;
 - supplemental unit-first composite-seam cases that distinguish link partitions, composition before
   native feedback, eligible Luna/max work, non-Luna judgment, and a direct simple-seam path;
+- supplemental proportional-risk cases that distinguish LOW × LOW bounded fail-open, effect-local
+  high-consequence fail-closed behavior, operability repair, L3 non-contagion, loop exhaustion,
+  constructibility-first formalization, and policy rebind;
 - overlap, external dependency, retirement, and unsupported-action cases;
 - contribution behavior with and without GitHub-write authority;
 - clean, exact, managed update, unmanaged conflict, local divergence, pre-publish failure,
   post-publish drift, and rollback installer cases;
 - skill-local script tests on supported platforms;
-- isolated plugin installation and a fresh Codex task performing a real bounded engineering drill;
+- isolated Codex plugin installation, managed Hermes/profile projection, generic Agent Skills profile
+  installation, and fresh-context behavior proof on each claimed host route;
 - one independent review of the exact candidate, CI, and GitHub commit/tag/release/hash readback.
 
 The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0.2.0 added
@@ -92,4 +106,6 @@ The frozen machine-readable baseline is `evals/cases/acceptance.json`. Version 0
 version 0.3.0 adds `evals/cases/anti-scope-drift.json`. These supplemental static-contract corpora do
 not alter or upgrade the frozen baseline's behavior evidence. Version 0.4.0 adds
 `evals/cases/unit-first-composite-seams.json`; source tests do not turn any supplemental `NOT_RUN`
-host cases into behavioral proof.
+host cases into behavioral proof. Version 0.5.0 adds
+`evals/cases/proportional-risk-and-bounded-loops.json`; it remains static-contract-only until fresh
+host executions bind observable outputs and prohibited effects.

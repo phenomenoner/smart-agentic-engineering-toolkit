@@ -6,7 +6,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = SKILL_ROOT / "scripts" / "review_gate.py"
 
@@ -25,7 +24,22 @@ class ReviewGateCliTests(unittest.TestCase):
         )
         self.plan = self._write_json(
             "review-plan.json",
-            {"schemaVersion": "review-plan.v1", "risk": "L2"},
+            {
+                "schemaVersion": "review-plan.v1",
+                "risk": "L3",
+                "budgets": {
+                    "maxFullReviewWaves": 1,
+                    "maxSameCauseAttempts": 2,
+                    "maxPrimaryReviewers": 2,
+                    "maxNarrowAuditors": 1,
+                },
+                "waveOrdinal": 1,
+                "sameCauseAttemptOrdinal": 1,
+                "additionalWaveReason": None,
+                "secondBlindReason": (
+                    "Authority and rollback are coupled in this high-consequence fixture."
+                ),
+            },
         )
         self.matrix = self._write_json(
             "coverage-matrix.json",
@@ -239,7 +253,6 @@ class ReviewGateCliTests(unittest.TestCase):
             "actualCandidateVerdict": "BLOCKED",
             "findingSetStatus": "AUDITED_BATCH_COMPLETE",
             "counterfactualVerdict": "PASS_UNDER_ASSUMPTIONS",
-            "thirdReviewerRequired": False,
             "rationale": "Both reciprocal lanes and audits reached union closure.",
         }
 
@@ -429,6 +442,125 @@ class ReviewGateCliTests(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("expectedBehavior", result.stdout)
+
+    def test_bind_rejects_review_plan_without_finite_budgets(self):
+        self.plan = self._write_json(
+            "review-plan-without-budgets.json",
+            {"schemaVersion": "review-plan.v1", "risk": "L2"},
+        )
+
+        result = self._run(
+            "bind",
+            "--candidate-manifest",
+            self.candidate,
+            "--evidence-index",
+            self.evidence,
+            "--review-plan",
+            self.plan,
+            "--coverage-matrix",
+            self.matrix,
+            "--output",
+            self.wave,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("finite integer limits", result.stdout)
+
+    def test_bind_rejects_second_primary_without_l3_risk(self):
+        plan = json.loads(self.plan.read_text(encoding="utf-8"))
+        plan["risk"] = "L2"
+        self.plan = self._write_json("review-plan-l2-two-primary.json", plan)
+
+        result = self._run(
+            "bind",
+            "--candidate-manifest",
+            self.candidate,
+            "--evidence-index",
+            self.evidence,
+            "--review-plan",
+            self.plan,
+            "--coverage-matrix",
+            self.matrix,
+            "--output",
+            self.wave,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("risk L3", result.stdout)
+
+    def test_bind_rejects_same_cause_attempt_above_bound_budget(self):
+        plan = json.loads(self.plan.read_text(encoding="utf-8"))
+        plan["sameCauseAttemptOrdinal"] = 3
+        self.plan = self._write_json("review-plan-third-attempt.json", plan)
+
+        result = self._run(
+            "bind",
+            "--candidate-manifest",
+            self.candidate,
+            "--evidence-index",
+            self.evidence,
+            "--review-plan",
+            self.plan,
+            "--coverage-matrix",
+            self.matrix,
+            "--output",
+            self.wave,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("sameCauseAttemptOrdinal", result.stdout)
+
+    def test_bind_rejects_legacy_third_reviewer_plan_field(self):
+        plan = json.loads(self.plan.read_text(encoding="utf-8"))
+        plan["thirdReviewerRequired"] = True
+        self.plan = self._write_json("review-plan-legacy-third-reviewer.json", plan)
+
+        result = self._run(
+            "bind",
+            "--candidate-manifest",
+            self.candidate,
+            "--evidence-index",
+            self.evidence,
+            "--review-plan",
+            self.plan,
+            "--coverage-matrix",
+            self.matrix,
+            "--output",
+            self.wave,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("thirdReviewerRequired", result.stdout)
+
+    def test_validate_report_rechecks_bound_plan_semantics(self):
+        wave = self._bind()
+        report = self._base_report(wave)
+        plan = json.loads(self.plan.read_text(encoding="utf-8"))
+        plan["thirdReviewerRequired"] = True
+        self.plan.write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
+
+        result = self._validate(report)
+
+        self.assertNotEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertTrue(
+            any("thirdReviewerRequired" in error for error in payload["errors"]),
+            payload["errors"],
+        )
+
+    def test_validate_report_rejects_legacy_third_reviewer_field(self):
+        wave = self._bind()
+        report = self._base_report(wave)
+        report["thirdReviewerRequired"] = True
+
+        result = self._validate(report)
+
+        self.assertNotEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertTrue(
+            any("thirdReviewerRequired" in error for error in payload["errors"]),
+            payload["errors"],
+        )
 
     def test_accepts_blocked_report_with_incomplete_evidence_closure(self):
         wave = self._bind()
@@ -663,6 +795,90 @@ class ReviewGateCliTests(unittest.TestCase):
             payload["errors"],
         )
 
+    def test_rejects_legacy_third_review_recommendation(self):
+        wave = self._bind()
+        artifacts = self._two_blind_artifacts(wave)
+        audit = artifacts["audit_a"]
+        audit["coverageChallenges"] = [
+            {
+                "id": "challenge-1",
+                "kind": "WRONG_TIER",
+                "cellIds": ["authority/rollback/windows"],
+                "challenge": "The claimed closure is below the required tier.",
+                "evidence": [self._evidence("Only source evidence exists.", "T1")],
+                "disposition": "UNRESOLVED",
+                "requiredSynthesisAction": "Leave the cell open for owner action.",
+            }
+        ]
+        audit["unresolvedChallengeIds"] = ["challenge-1"]
+        audit["recommendation"] = "THIRD_REVIEW_REQUIRED"
+        audit_path = self._write_json("audit-a-legacy-third-review.json", audit)
+        result = self._run(
+            "validate-audit",
+            "--wave",
+            self.wave,
+            "--own-report",
+            artifacts["report_a_path"],
+            "--peer-report",
+            artifacts["report_b_path"],
+            "--audit",
+            audit_path,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertTrue(
+            any("recommendation is invalid" in error for error in payload["errors"]),
+            payload["errors"],
+        )
+
+    def test_accepts_incomplete_synthesis_with_unresolved_challenge(self):
+        wave = self._bind()
+        artifacts = self._two_blind_artifacts(wave)
+        audit = artifacts["audit_a"]
+        audit["coverageChallenges"] = [
+            {
+                "id": "challenge-1",
+                "kind": "WRONG_TIER",
+                "cellIds": ["authority/rollback/windows"],
+                "challenge": "The claimed closure is below the required tier.",
+                "evidence": [self._evidence("Only source evidence exists.", "T1")],
+                "disposition": "UNRESOLVED",
+                "requiredSynthesisAction": "Leave the cell open for owner action.",
+            }
+        ]
+        audit["unresolvedChallengeIds"] = ["challenge-1"]
+        audit["recommendation"] = "INCOMPLETE"
+        audit["recommendationRationale"] = "Owner action is required before a new wave."
+        artifacts["audit_a_path"] = self._write_json("audit-a-incomplete.json", audit)
+
+        synthesis = self._two_blind_synthesis(wave, artifacts)
+        synthesis["matrixClosure"][1] = {
+            "cellId": "authority/rollback/windows",
+            "status": "OPEN",
+            "supportingReportIds": [],
+            "challengeIds": ["challenge-1"],
+        }
+        synthesis["unresolvedChallengeIds"] = ["challenge-1"]
+        synthesis["actualCandidateVerdict"] = "INCOMPLETE"
+        synthesis["findingSetStatus"] = "INCOMPLETE"
+        synthesis["counterfactualVerdict"] = "UNRESOLVED"
+        synthesis["rationale"] = "The unresolved challenge is sealed for owner action."
+        synthesis_path = self._write_json("synthesis-incomplete.json", synthesis)
+        result = self._run(
+            "validate-synthesis",
+            "--wave",
+            self.wave,
+            "--synthesis",
+            synthesis_path,
+        )
+
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["valid"])
+        self.assertEqual(payload["actualCandidateVerdict"], "INCOMPLETE")
+        self.assertEqual(payload["findingSetStatus"], "INCOMPLETE")
+
     def test_rejects_cross_audit_finding_without_actionable_shape(self):
         wave = self._bind()
         artifacts = self._two_blind_artifacts(wave)
@@ -718,6 +934,31 @@ class ReviewGateCliTests(unittest.TestCase):
         self.assertTrue(payload["valid"])
         self.assertEqual(payload["findingSetStatus"], "AUDITED_BATCH_COMPLETE")
 
+    def test_rejects_two_blind_synthesis_above_bound_primary_budget(self):
+        plan = json.loads(self.plan.read_text(encoding="utf-8"))
+        plan["budgets"]["maxPrimaryReviewers"] = 1
+        plan["secondBlindReason"] = None
+        self.plan = self._write_json("review-plan-one-primary.json", plan)
+        wave = self._bind()
+        artifacts = self._two_blind_artifacts(wave)
+        synthesis = self._two_blind_synthesis(wave, artifacts)
+        synthesis_path = self._write_json("synthesis-over-primary-budget.json", synthesis)
+
+        result = self._run(
+            "validate-synthesis",
+            "--wave",
+            self.wave,
+            "--synthesis",
+            synthesis_path,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertTrue(
+            any("maxPrimaryReviewers" in error for error in payload["errors"]),
+            payload["errors"],
+        )
+
     def test_accepts_single_lane_plus_independent_narrow_audit(self):
         wave = self._bind()
         report = self._base_report(wave)
@@ -769,7 +1010,6 @@ class ReviewGateCliTests(unittest.TestCase):
             "actualCandidateVerdict": "BLOCKED",
             "findingSetStatus": "AUDITED_BATCH_COMPLETE",
             "counterfactualVerdict": "PASS_UNDER_ASSUMPTIONS",
-            "thirdReviewerRequired": False,
             "rationale": "The primary lane and narrow audit reached closure.",
         }
         synthesis_path = self._write_json("narrow-synthesis.json", synthesis)
@@ -845,6 +1085,27 @@ class ReviewGateCliTests(unittest.TestCase):
         payload = json.loads(result.stdout)
         self.assertTrue(
             any("reciprocal" in error.lower() for error in payload["errors"]),
+            payload["errors"],
+        )
+
+    def test_rejects_legacy_third_reviewer_escalation_field(self):
+        wave = self._bind()
+        artifacts = self._two_blind_artifacts(wave)
+        synthesis = self._two_blind_synthesis(wave, artifacts)
+        synthesis["thirdReviewerRequired"] = True
+        synthesis_path = self._write_json("synthesis-legacy-escalation.json", synthesis)
+        result = self._run(
+            "validate-synthesis",
+            "--wave",
+            self.wave,
+            "--synthesis",
+            synthesis_path,
+        )
+
+        self.assertNotEqual(result.returncode, 0)
+        payload = json.loads(result.stdout)
+        self.assertTrue(
+            any("thirdReviewerRequired" in error for error in payload["errors"]),
             payload["errors"],
         )
 

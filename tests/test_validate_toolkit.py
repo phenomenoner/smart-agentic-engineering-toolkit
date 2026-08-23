@@ -38,6 +38,45 @@ def test_repository_candidate_is_valid() -> None:
     assert validate_toolkit(ROOT) == []
 
 
+def test_ignored_paths_are_not_statted(monkeypatch) -> None:
+    original_is_file = Path.is_file
+
+    def guarded_is_file(path: Path) -> bool:
+        try:
+            relative = path.relative_to(ROOT)
+        except ValueError:
+            return original_is_file(path)
+        if ".venv" in relative.parts:
+            raise AssertionError("ignored .venv path was statted")
+        return original_is_file(path)
+
+    monkeypatch.setattr(Path, "is_file", guarded_is_file)
+    assert isinstance(validate_toolkit(ROOT), list)
+
+
+def test_non_git_release_walk_filters_ignored_paths_before_stat(
+    tmp_path: Path, monkeypatch
+) -> None:
+    root = clone_repo(tmp_path)
+    ignored = root / ".venv" / "broken-link-placeholder"
+    ignored.parent.mkdir()
+    ignored.write_text("ignored", encoding="utf-8")
+    original_is_file = Path.is_file
+
+    def guarded_is_file(path: Path) -> bool:
+        try:
+            relative = path.relative_to(root)
+        except ValueError:
+            return original_is_file(path)
+        if ".venv" in relative.parts:
+            raise AssertionError("ignored archive path was statted")
+        return original_is_file(path)
+
+    monkeypatch.setattr(Path, "is_file", guarded_is_file)
+    lock = build_public_lock(root)
+    assert all(not row["path"].startswith(".venv/") for row in lock["files"])
+
+
 def test_missing_contribution_sentinel_is_rejected(tmp_path: Path) -> None:
     root = clone_repo(tmp_path)
     path = root / "skills" / "engineering-wal" / "SKILL.md"

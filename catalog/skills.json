@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.4.0",
+  "toolkitVersion": "0.5.0",
   "status": "released",
   "ownership": "toolkit-owned",
   "skills": [
@@ -240,25 +240,6 @@
         "sha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d"
       },
       "sourceSha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d"
-    },
-    {
-      "name": "codex-cli-luna-worker",
-      "class": "optional",
-      "classLabel": "optional / codex-model-adapter",
-      "phase": "codex-model-adapter",
-      "profile": "codex-adapters",
-      "policy": {
-        "allow_implicit_invocation": false,
-        "implicit_scope": "explicit-only"
-      },
-      "status": "owned",
-      "lifecycle": "installable",
-      "sourceMode": "reconcile-local-adapter",
-      "source": {
-        "mode": "reconcile-local-adapter",
-        "sha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e"
-      },
-      "sourceSha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e"
     },
     {
       "name": "codex-app-mcp-update",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.4.0",
+  "toolkitVersion": "0.5.0",
   "repositoryLicense": "MIT",
   "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
   "canonicalState": "the current repository is the canonical writable source for toolkit-owned skills; verified tags identify immutable releases and never create a second writable owner",
@@ -9,25 +9,25 @@
       "name": "engineering-specification",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation plus the conditional first-principles necessity and complexity gate, anti-scope-drift classification and checkpoint ownership, and behavior-eval integration"
+      "modifications": "initial implementation plus the conditional first-principles necessity and complexity gate, anti-scope-drift classification and checkpoint ownership, risk-local consequence-frequency disposition, constructibility-before-formalization, and behavior-eval integration"
     },
     {
       "name": "engineering-debugging",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation from the frozen public product contract plus a diagnosis-to-scope-change handoff guard"
+      "modifications": "initial implementation from the frozen public product contract plus diagnosis-to-scope-change and risk-local bounded-fail-open disposition guards"
     },
     {
       "name": "engineering-implementation",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation plus necessity-decision and anti-scope-drift absorption/handoff guards, and a conditional unit-first composite-seam implementation ladder"
+      "modifications": "initial implementation plus necessity-decision, anti-scope-drift, risk-local disposition, constructibility-first, and conditional unit-first composite-seam guards"
     },
     {
       "name": "engineering-wal",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation plus compact necessity-decision continuity fields"
+      "modifications": "initial implementation plus compact necessity-decision continuity fields, explicit toolkit policy binding, and numeric orchestration budgets"
     },
     {
       "name": "evolve-engineering-toolkit",
@@ -41,7 +41,7 @@
       "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
       "sourceSkillSha256": "83c4cae4b2708f2880c18ca1df4202c7d28164e87c92d7b9b88dbedd98ea95cc",
       "license": "MIT",
-      "modifications": "toolkit metadata, contribution protocol, behavior eval integration, a conditional mechanism-necessity review challenge, bounded finding-scope dispositions, and the Codex Sol/high independent-review routing floor"
+      "modifications": "toolkit metadata, contribution protocol, behavior eval integration, a conditional mechanism-necessity challenge, risk-local consequence-frequency dispositions, bounded fixed-point retries and reviewer waves, and a Codex Sol/high floor limited to high-consequence independent review"
     },
     {
       "name": "completeness-and-test-synthesis",
@@ -49,7 +49,7 @@
       "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
       "sourceSkillSha256": "e7149166dc4944bfb0c1076aa92d7af1df126e902d453087a30007261ec18641",
       "license": "MIT",
-      "modifications": "toolkit metadata, contribution protocol, explicit invocation policy, behavior eval integration, a smallest-falsifier necessity guard, an authorized claim budget, and a conditional unit-first composite-seam evidence ladder"
+      "modifications": "toolkit metadata, contribution protocol, explicit invocation policy, behavior eval integration, a smallest-falsifier necessity guard, risk-local consequence-frequency disposition, an authorized claim budget, and a conditional unit-first composite-seam evidence ladder"
     },
     {
       "name": "incident-to-regression",
@@ -94,14 +94,6 @@
       "sourceSkillSha256": "6b3e0204a8032426dd96d7aae9699d6a1708c91351e6a20670801e1b6e004d2d",
       "license": "MIT",
       "modifications": "source-only reconciliation, runtime-state exclusion, toolkit metadata, contribution protocol, public path normalization, deferred-delivery contract repair, and a watcher/fan-in necessity guard"
-    },
-    {
-      "name": "codex-cli-luna-worker",
-      "origin": "phenomenoner/Chatgpt-Codex-App-Plus plus newer project-authored routing guidance",
-      "observedSourceCommit": "706381e25f7b1f7177e16706e3fe31787c28c692",
-      "sourceSkillSha256": "a0841c8d629d45b2f0fc5269f9bce8e23febd283c3ffeda2049e1335be1b515e",
-      "license": "MIT",
-      "modifications": "toolkit metadata, contribution protocol, explicit-only policy, public example paths, and a delegation necessity-cost preflight"
     },
     {
       "name": "claude-independent-review",

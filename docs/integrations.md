@@ -4,20 +4,22 @@ External integrations are versioned relationships, not vendored writable copies.
 
 ## Baton fan-out
 
-`baton-fanout-skill` gates every subagent or CLI compatibility worker. Its existing public repository
+`baton-fanout-skill` gates every subagent. Its existing public repository
 and Codex branch remain canonical; the toolkit records a pin and routing boundary but does not
 install or modify an editable copy. If Baton is unavailable, work directly.
 
 After Baton's dispatch brake selects delegation, native `gpt-5.6-luna` at `max` is the first
 candidate only for stable, bounded code generation or low-judgment scouting with a cheap independent
-falsifier and exclusive ownership. The toolkit's CLI Luna bridge is a narrower fallback for
-exact-path code-generation proposals when native Luna is unavailable; it is not a scouting route.
+falsifier and exclusive ownership. The toolkit does not provide a CLI model-routing fallback: when
+an eligible native route is unavailable, work directly or select another exposed native route from
+evidence.
 Never route architecture, security, authority, release or cutover judgment, credentials, live
 operations, or independent review through Luna. Keep final authority and release judgment with the
-main agent; when bounded architecture, security, or other high-cost judgment is independently
-delegated in Codex, use an applicable `gpt-5.6-sol` at `high` or stronger exposed lane. An independent
-reviewer uses at least that Sol/high floor; at the runtime ceiling, use the same top lane with fresh
-independent context. The live runtime schema wins, and the main agent keeps composition, shared
+main agent; when bounded architecture, security, or other high-consequence judgment is independently
+delegated in Codex, use an applicable `gpt-5.6-sol` at `high` or stronger exposed lane. A
+high-consequence independent reviewer uses that floor; lower-consequence explicit reviews use the
+lowest capable exposed lane. At the runtime ceiling, use the same top lane with fresh independent
+context. The live runtime schema wins, and the main agent keeps composition, shared
 verification, publication judgment, and user-facing truth claims.
 
 Canonical ownership may transfer in a future major release only through one reviewed cutover: merge

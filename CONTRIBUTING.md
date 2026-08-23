@@ -22,9 +22,14 @@ an installed skill directory or plugin cache and then treat that copy as source.
 5. Classify any newly discovered work against the authorized contribution. A severe or useful
    finding does not authorize a broader product claim, release gate, dependency change, or live
    effect; propose a scope amendment before crossing that boundary.
-6. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
+6. Classify a material finding at its first affected effect boundary by consequence × estimated
+   frequency, reversibility/containment, and confidence. Preserve fail-closed behavior for actual
+   high-consequence effects, but do not let a supported low-consequence, low-frequency, reversible
+   residual become a candidate-wide gate. Declare numeric loop/review budgets and stop unchanged
+   third same-cause attempts.
+7. Prepare the smallest source patch and the smallest eval that fails or distinguishes the old
    behavior and passes the proposed behavior.
-7. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
+8. Record versioning, compatibility, migration, deprecation, license, provenance, and changelog
    impact.
 
 Material changes affect activation, authority, safety, compatibility, observable workflow,

@@ -1,9 +1,9 @@
 ---
 name: incident-to-regression
-description: Convert production, staging, CI, or local engineering incidents into redacted fail-first regression packages with normalized signatures, invariant and blast-radius analysis, reusable replay fixtures, verification-altitude requirements, and guarded rollout criteria. Use when Codex investigates a recurring pitfall, writes a post-incident engineering record, turns logs or receipts into a regression test, judges whether a repair is actually verified, or prepares incident-derived launch, cutover, and rollback gates.
+description: Convert production, staging, CI, or local engineering incidents into redacted, discriminating regression packages with normalized signatures, invariant and blast-radius analysis, reusable replay fixtures, verification-altitude requirements, and guarded rollout criteria. Prefer observed fail-first evidence, but preserve a documented current-state discriminator when safe pre-change reproduction is unavailable. Use when Codex investigates a recurring pitfall, writes a post-incident engineering record, turns logs or receipts into a regression test, judges whether a repair is actually verified, or prepares incident-derived launch, cutover, and rollback gates.
 license: MIT
 metadata:
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "drill"
   toolkit-contribution-protocol: "v1"
 ---
@@ -65,13 +65,14 @@ Perform these steps in order:
    normally `component` or `cross-cutting`, based on affected consumers.
    Reserve `live-external` for incidents or repairs whose claim includes an
    actual live-system mutation, provider request, or externally visible effect.
-3. **Capture fail-first evidence.** Create the smallest deterministic artifact
-   that fails for the original reason before the repair. Record the exact
-   sanitized command, expected failure, actual pre-repair result, and fixture
-   provenance. Bind an observed failure to a hashed evidence pointer. If
-   reproduction is unsafe or unavailable, leave it `not-run` or
-   `not-reproduced`, set unavailable command/result fields to `null`, and explain
-   the gap; do not invent a command or call the repair verified.
+3. **Capture a discriminating regression basis.** Prefer the smallest deterministic artifact that
+   fails for the original reason before repair. Record the sanitized command, expected failure,
+   actual pre-repair result, and fixture provenance; bind an observed failure to a hashed evidence
+   pointer. If safe pre-change reproduction is unavailable, set the fail-first state to
+   `not-reproduced`, record the concrete unavailability reason, and use a hash-bound current-state
+   discriminator that states its command, regression condition, observed result, evidence pointer,
+   and limitation. The current-state path may support `repair-verified` at the required tier, but it
+   never supports the separate `reproduced` status or erases the missing pre-change observation.
 4. **Describe the repair pattern.** Explain the reusable mechanism, why it
    restores the invariant, the affected surfaces, and how to roll it back. Avoid
    encoding a one-machine workaround as the general rule. When the pattern adds a
@@ -91,9 +92,10 @@ Perform these steps in order:
    - `T3`: end-to-end scenario or recorded replay through the affected path.
    - `T4`: guarded live observation, provider-visible proof, or bounded soak.
 
-   Use at least T3 for cross-cutting identity, routing, shared state, process
-   ownership, delivery, security, or supervisor changes. Use T4 only after lower
-   tiers pass when the claim includes live or external behavior.
+   Use T3 only when lifecycle ordering, multiple real components, recovery, or the user scenario
+   cannot be faithfully represented at T1/T2. Cross-cutting identity, routing, shared state,
+   process ownership, security, or supervisor labels do not automatically raise altitude. Use T4
+   only after lower tiers pass when the claim itself includes live or external behavior.
 6. **Define cutover guards.** List executable preconditions, stop conditions,
    rollback material, explicit external-effects constraints, and post-cutover
    readback. Require an independent reviewer for a live cutover claim.
@@ -121,7 +123,9 @@ Keep `status` at the strongest state actually proven:
 
 - `draft`: analysis may be incomplete.
 - `reproduced`: fail-first failure was observed.
-- `repair-verified`: the repaired path reached its required verification tier.
+- `repair-verified`: the repaired path reached its required verification tier using either observed
+  fail-first evidence or a documented hash-bound current-state discriminator when pre-change
+  reproduction was unavailable.
 - `cutover-ready`: verification passed, blocking gaps are empty, rollback is
   ready, and independent review passed.
 - `live-observed`: cutover-ready gates passed and T4 post-readback evidence was
@@ -142,10 +146,12 @@ release or live-operation decisions.
 
 Do not claim `repair-verified`, `cutover-ready`, or `live-observed` from:
 
-- an incident narrative without an observed fail-first artifact;
+- an incident narrative without either an observed fail-first artifact or the documented
+  unavailable-pre-change/current-state discriminator path;
 - source-text, AST, or line-order inspection presented as behavioral replay;
 - zero matched tests, stale output, or a validator applied to another report;
-- T0-T2 evidence for a change whose blast radius requires T3;
+- T0-T2 evidence for a claim whose lifecycle, multi-component, recovery, or user behavior cannot be
+  represented below T3;
 - passive health in place of provider-visible or live-behavior proof;
 - self-review alone when the action changes a live system;
 - a replay contaminated by state from another process generation;

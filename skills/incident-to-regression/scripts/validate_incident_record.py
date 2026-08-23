@@ -13,7 +13,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 TIERS = {"T0": 0, "T1": 1, "T2": 2, "T3": 3, "T4": 4}
 STATES = {
     "draft": 0,
@@ -60,6 +59,7 @@ def template() -> dict[str, Any]:
             "expectedFailure": "Exact semantic failure expected before repair.",
             "status": "not-run",
             "beforeRepairObserved": False,
+            "unavailabilityReason": None,
             "actualPreRepairResult": None,
             "evidenceId": None,
             "fixtureProvenance": {
@@ -77,6 +77,7 @@ def template() -> dict[str, Any]:
             "requiredTier": "T3",
             "achievedTier": "T0",
             "evidenceIds": [],
+            "currentStateDiscriminator": None,
             "independentReview": {
                 "status": "not-run",
                 "evidenceId": None,
@@ -216,6 +217,19 @@ def validate(document: Any) -> list[str]:
             errors.append("failFirstArtifact: observed status requires evidenceId")
         if not isinstance(fixture_digest, str) or not SHA256_RE.fullmatch(fixture_digest):
             errors.append("failFirstArtifact: observed status requires hash-bound fixture provenance")
+    unavailability_reason = fail_first.get("unavailabilityReason")
+    if unavailability_reason is not None and not nonempty_string(unavailability_reason):
+        errors.append("failFirstArtifact.unavailabilityReason: expected non-empty string or null")
+    if fail_first.get("status") == "not-reproduced" and not nonempty_string(
+        unavailability_reason
+    ):
+        errors.append(
+            "failFirstArtifact: not-reproduced status requires unavailabilityReason"
+        )
+    if fail_first.get("status") == "observed" and unavailability_reason is not None:
+        errors.append(
+            "failFirstArtifact: observed status requires unavailabilityReason=null"
+        )
 
     repair = require_object(document, "repairPattern", errors)
     require_nonempty(repair, "summary", "repairPattern", errors)
@@ -231,6 +245,28 @@ def validate(document: Any) -> list[str]:
     if achieved_tier not in TIERS:
         errors.append(f"verification.achievedTier: expected one of {sorted(TIERS)}")
     evidence_ids = require_string_list(verification, "evidenceIds", "verification", errors)
+    discriminator = verification.get("currentStateDiscriminator")
+    discriminator_evidence_id: str | None = None
+    discriminator_valid = False
+    if discriminator is not None:
+        if not isinstance(discriminator, dict):
+            errors.append("verification.currentStateDiscriminator: expected object or null")
+        else:
+            discriminator_valid = True
+            for key in (
+                "command",
+                "regressionCondition",
+                "observedResult",
+                "evidenceId",
+                "limitation",
+            ):
+                if not nonempty_string(discriminator.get(key)):
+                    errors.append(
+                        f"verification.currentStateDiscriminator.{key}: expected non-empty string"
+                    )
+                    discriminator_valid = False
+            if nonempty_string(discriminator.get("evidenceId")):
+                discriminator_evidence_id = discriminator["evidenceId"]
     review = require_object(verification, "independentReview", errors)
     if review.get("status") not in REVIEW_STATES:
         errors.append(f"verification.independentReview.status: expected one of {sorted(REVIEW_STATES)}")
@@ -314,6 +350,26 @@ def validate(document: Any) -> list[str]:
             )
             if matching_pointer is not None and not isinstance(matching_pointer.get("sha256"), str):
                 errors.append("failFirstArtifact.evidenceId: referenced evidence must include sha256")
+    if nonempty_string(discriminator_evidence_id):
+        matching_discriminator_pointer = next(
+            (
+                item
+                for item in pointers
+                if isinstance(item, dict) and item.get("id") == discriminator_evidence_id
+            ),
+            None,
+        )
+        if matching_discriminator_pointer is None:
+            errors.append(
+                "verification.currentStateDiscriminator.evidenceId: unknown evidence id "
+                f"{discriminator_evidence_id!r}"
+            )
+            discriminator_valid = False
+        elif not isinstance(matching_discriminator_pointer.get("sha256"), str):
+            errors.append(
+                "verification.currentStateDiscriminator.evidenceId: referenced evidence must include sha256"
+            )
+            discriminator_valid = False
 
     blocking_gaps = require_string_list(document, "blockingGaps", "root", errors)
     require_string_list(document, "limitations", "root", errors)
@@ -324,10 +380,23 @@ def validate(document: Any) -> list[str]:
     else:
         status_rank = STATES[status]
 
-    if status_rank >= STATES["reproduced"]:
-        if fail_first.get("status") != "observed" or fail_first.get("beforeRepairObserved") is not True:
-            errors.append(f"status={status}: requires an observed fail-first failure")
+    observed_fail_first = (
+        fail_first.get("status") == "observed"
+        and fail_first.get("beforeRepairObserved") is True
+    )
+    if status == "reproduced" and not observed_fail_first:
+        errors.append("status=reproduced: requires an observed fail-first failure")
     if status_rank >= STATES["repair-verified"]:
+        current_state_basis = (
+            fail_first.get("status") == "not-reproduced"
+            and nonempty_string(unavailability_reason)
+            and discriminator_valid
+        )
+        if not observed_fail_first and not current_state_basis:
+            errors.append(
+                f"status={status}: requires observed fail-first evidence or a documented "
+                "unavailable-pre-change current-state discriminator"
+            )
         if repair.get("applied") is not True:
             errors.append(f"status={status}: requires repairPattern.applied=true")
         if required_tier in TIERS and achieved_tier in TIERS and TIERS[achieved_tier] < TIERS[required_tier]:
@@ -349,8 +418,12 @@ def validate(document: Any) -> list[str]:
         if not any(isinstance(item, dict) and item.get("kind") == "post-readback" for item in pointers):
             errors.append("status=live-observed: requires a post-readback evidence pointer")
 
-    if blast.get("class") in {"cross-cutting", "live-external"} and required_tier in TIERS and TIERS[required_tier] < TIERS["T3"]:
-        errors.append("cross-cutting or live-external blast radius requires at least T3")
+    if (
+        blast.get("class") == "live-external"
+        and required_tier in TIERS
+        and TIERS[required_tier] < TIERS["T4"]
+    ):
+        errors.append("live-external claim requires T4")
 
     scan_sensitive_text(document, errors)
     return errors

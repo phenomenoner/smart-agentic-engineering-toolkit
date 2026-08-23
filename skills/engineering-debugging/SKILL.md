@@ -3,7 +3,7 @@ name: engineering-debugging
 description: Diagnose a failing test, build, runtime, or user-visible behavior when the root cause is not yet established. Use to reproduce safely, reduce the failure, rank and falsify hypotheses, identify the causal seam and blast radius, and report residual uncertainty. Do not use when the cause and requested patch are already explicit, when an established incident only needs a reusable regression package, for a generic explanation, or for code review. Diagnosis alone does not authorize a repair.
 license: MIT
 metadata:
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "diagnose"
   toolkit-contribution-protocol: "v1"
 ---
@@ -52,6 +52,14 @@ Finding severity does not grant scope. Diagnosis may uncover `IN_SCOPE`, `SCOPE_
 classification and evidence against the original deliverable and claim. If a proposed response would
 change acceptance, release rigor, the system boundary, writable ownership, or external effects,
 route a scope-change checkpoint to `engineering-specification` before implementation.
+
+Classify each material symptom at its affected effect boundary by **consequence × estimated
+frequency**, reversibility or containment, and evidence confidence. Keep the result `risk-local`.
+High-consequence uncertainty fails closed only before the unsafe effect. A low-consequence,
+low-frequency, reversible diagnostic or advisory failure may use **bounded fail-open** with preserved
+evidence, an explicit residual, and a repair trigger; it does not block unrelated claims or summon a
+formal review. A frequent low-consequence issue may deserve focused repair for operability without
+being promoted to release-critical severity.
 
 ## Build a discriminating observation
 

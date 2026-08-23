@@ -3,7 +3,7 @@ name: engineering-wal
 description: Maintain a compact durable work log for multi-session, multi-agent, compaction-prone, long-running, risky, interrupted, or deliberately blocked engineering work. Use it to preserve objective, commitment floor, target stage, scope and authority, repository identity and dirty state, decisions, blockers, core/seam verdicts, evidence pointers, next safe action, and stop conditions. Do not use for a small single-turn task or as a substitute for executable proof, source, authorization, secrets storage, raw receipts, Context Canvas, or project planning documents.
 license: MIT
 metadata:
-  toolkit-version: "0.4.0"
+  toolkit-version: "0.5.0"
   toolkit-phase: "continuity"
   toolkit-contribution-protocol: "v1"
 ---
@@ -81,7 +81,9 @@ Append-only positive decision receipts and rationale:
 Necessity decision when material (outcome/invariant; both questions; selected alternative; added state/authority/recovery/failure-state cost):
 Active blockers and stop conditions:
 Finding/reopen history (class, classification/disposition owners, affected cells, first unsafe operation, evidence):
-Specification/delivery loop budgets and append-only guard-derived semantic-delta signature history:
+Finding risk (affected effect; consequence × estimated frequency; reversibility/containment; confidence; bounded fail-open trigger):
+Policy binding (toolkit version; canonical commit; PINNED/REBIND_PENDING; migration decision):
+Numeric loop budgets (specification/delivery passes; same-cause retries; full-review waves) and append-only guard-derived semantic-delta signature history:
 Evidence pointers and hashes:
 Work in flight and exclusive owners:
 Next safe action:
@@ -107,6 +109,12 @@ where core and several host/adoption seams need independent qualification, read
 [references/canon-orchestration.md](references/canon-orchestration.md). It composes the existing
 specification, implementation, review, completeness, and WAL owners into five logical roles, a
 specification loop, a delivery loop, and a bounded shadow specification reopen.
+
+Activation must record the exact toolkit version/commit and numeric defaults from the reference.
+No canon profile is valid without numeric loop budgets.
+Silent policy mixing is prohibited. Budget exhaustion, a repeated/oscillating signature, or an
+unchanged third same-cause attempt stops `BLOCKED`/`INCOMPLETE`; it does not create another successor
+or reviewer wave. Risk remains local to the affected effect boundary.
 
 The profile does not require five simultaneous subagents, a persistent state machine, or a universal
 stage taxonomy. Freeze the commitment floor and target stage, keep core/seam/per-target/overall

@@ -15,7 +15,6 @@
     "actualCandidateVerdict",
     "findingSetStatus",
     "counterfactualVerdict",
-    "thirdReviewerRequired",
     "rationale"
   ],
   "properties": {
@@ -56,7 +55,6 @@
     "counterfactualVerdict": {
       "enum": ["NOT_NEEDED", "PASS_UNDER_ASSUMPTIONS", "UNRESOLVED"]
     },
-    "thirdReviewerRequired": {"type": "boolean"},
     "rationale": {"type": "string", "minLength": 1}
   },
   "$defs": {
