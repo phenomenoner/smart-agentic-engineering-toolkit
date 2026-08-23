@@ -55,7 +55,7 @@ hermes skills config
 hermes chat -q "/engineering-implementation Explain this skill's direct path and risk-local finding rule. Do not modify files."
 ```
 
-Use `hermes skills config` to disable a redundant or conflicting projection; do not delete an unknown local skill merely because its name or trigger overlaps. The `hermes chat -q` command follows the [upstream fresh-session skill test](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/guides/work-with-skills.md#4-test-it) and explicitly invokes the installed slash-command skill; run a nearby negative trigger separately. Do not use `hermes --skills <name> -z` as pickup evidence: [affected Hermes versions can run the prompt without injecting the named skill](https://github.com/NousResearch/hermes-agent/issues/71759). An existing long-lived session may still carry its old policy binding even though the filesystem changed.
+Use `hermes skills config` to disable a redundant or conflicting projection; do not delete an unknown local skill merely because its name or trigger overlaps. The `hermes chat -q` command starts a fresh Hermes session, follows the [upstream fresh-session skill test](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/guides/work-with-skills.md#4-test-it), and explicitly invokes the installed slash-command skill; run a nearby negative trigger separately. Do not use `hermes --skills <name> -z` as pickup evidence: [affected Hermes versions can run the prompt without injecting the named skill](https://github.com/NousResearch/hermes-agent/issues/71759). An existing long-lived session may still carry its old policy binding even though the filesystem changed.
 
 ## Other Agent Skills-compatible harnesses
 
