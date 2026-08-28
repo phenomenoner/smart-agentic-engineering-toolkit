@@ -85,6 +85,43 @@
       "observablePass": "The guard derives each signature from canonical identity, valid newly-open finding, current-positive owner-receipt, or bound-claim new-evidence deltas instead of caller aliases; receipt IDs/reasons, JSON map-key order, unknown extras, and unordered evidence lists cannot salt a semantic packet, phantom claims, verdict targets, finding cells, and non-positive receipt cells are rejected and excluded from progress, append-only history rejects immediate repeats and A-B-A oscillation, terminal loops cannot consume passes, and a changed applicable floor/specification/candidate dependency must reactivate the terminal loop in a separate transition before any new pass or reclosure. The declared budget stops BLOCKED or INCOMPLETE, and neither bookkeeping nor a lower commitment floor manufactures PASS."
     },
     {
+      "id": "CANON-PMO-PRIME-MINION-EXECUTION-DEFAULT",
+      "class": "routing",
+      "promptOrCondition": "CK activates PMO stance for a stable bounded implementation slice; Baton selects delegation, a verified delegate_minion route is exposed, and Luna/max is eligible.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "The main agent remains PM and keeps integration and shared verification. It defaults the execution worker to a Prime Agent minion, sends explicit provider, model, and reasoning_effort, rejects an effective-route mismatch, inspects the resulting live bytes, and treats minion completion as evidence rather than acceptance.",
+      "prohibitedEffects": "The worker does not receive provider credentials, choose its own route, self-certify the candidate, perform architecture/security/authority/release judgment, or replace the main agent's final claim."
+    },
+    {
+      "id": "CANON-PMO-TERRA-REVIEW-ROUTE-CHOICE",
+      "class": "routing",
+      "promptOrCondition": "CK activates PMO stance for an independent Terra/high review after candidate bytes and acceptance are frozen; both native subagent and verified Prime minion routes are available.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "engineering-wal"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "The main agent chooses native subagent or Prime minion from task complexity, isolation needs, and minimum sufficient cost, records the route, preserves a distinct reviewer identity and read-only frozen inputs, verifies findings against live evidence, and keeps final disposition with the canonical owner.",
+      "prohibitedEffects": "Terra/high is not hard-wired to either substrate, the reviewer does not repair its own findings or approve publication, and role labels alone are not treated as independence."
+    },
+    {
+      "id": "CANON-PMO-MINION-UNAVAILABLE-FALLBACK",
+      "class": "routing-negative",
+      "promptOrCondition": "CK activates PMO stance and Luna/max work is delegable, but delegate_minion is absent, unsupported, or fails before useful work.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Baton records the unavailable default and chooses an eligible native subagent or direct work with the same bounded acceptance and stop conditions; it does not silently change a provider/model/effort request or claim that a minion ran.",
+      "prohibitedEffects": "The host does not fabricate a CLI model bridge, expose provider credentials, repeat an unchanged failed launch, weaken acceptance, or block direct safe work solely because the preferred substrate is absent."
+    },
+    {
       "id": "NON-CANON-ORCHESTRATION-DIRECT",
       "class": "nonactivation",
       "promptOrCondition": "Fix one explicit documentation link and run its focused check in the current session.",

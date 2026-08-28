@@ -4,6 +4,11 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Add the CK PMO routing profile: the main agent retains coordination, integration, verification, and
+  final authority; verified Prime Agent minions become the default Luna/max execution pool with
+  explicit route readback, while Terra/high review may select a native subagent or minion according to
+  complexity and independence needs.
+
 ## [0.5.0] - 2026-08-24
 
 - Add risk-local `consequence × estimated frequency` disposition, effect-local fail-closed behavior for

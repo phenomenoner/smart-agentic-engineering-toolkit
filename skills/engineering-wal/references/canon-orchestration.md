@@ -50,6 +50,31 @@ check. Roles are responsibilities; they do not imply five simultaneous subagents
 Any external fan-out must pass Baton. If Baton is unavailable, do not bypass it: run bounded logical
 role passes sequentially in the main agent, or stop `INCOMPLETE` when independence is required.
 
+### CK PMO execution and review routing
+
+When CK activates PMO stance, the main agent remains the PM: it coordinates, integrates, runs shared
+verification, and owns the final claim. CK selects or changes the main-agent model. Model workers and
+reviewers are bounded execution substrates, not amendment, readiness, or publication authorities.
+
+After Baton selects delegation and the host exposes a verified `delegate_minion` route:
+
+- the `Luna/max` execution pool defaults to a Prime Agent minion for stable bounded implementation,
+  exact-path generation, or low-judgment scouting with cheap falsifiers;
+- every minion task declares `provider`, `model`, and `reasoning_effort`, and the main agent accepts the
+  result only when the returned effective route matches the request;
+- the `Terra/high` review pool may use either a native Hermes subagent or a Prime Agent minion according
+  to task complexity, context-isolation needs, and the cheapest route that preserves independent
+  review; and
+- the main agent reads the live bytes or target, resolves conflicts, and runs the shared verification.
+  Worker or reviewer completion is evidence, never acceptance by itself.
+
+The Prime minion default is conditional, not a mandatory dependency. If the verified route is absent,
+unsupported, or fails before useful work, Baton may choose an eligible native subagent or direct work
+and records the deviation; it never fabricates a CLI model bridge, silently changes the requested
+route, or exposes provider credentials to the minion. Luna remains excluded from architecture,
+security, authority, independent review, and release judgment. A Terra/high review remains read-only
+and independently bound whether it runs as a subagent or minion.
+
 Role separation alone is not independence. When the frozen target requires independent challenge or
 acceptance, use a distinct reviewer identity and isolated frozen inputs; self-review cannot be relabeled
 as independent.

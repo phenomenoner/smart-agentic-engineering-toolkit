@@ -43,6 +43,12 @@ mirrors are projections, never alternate source trees.
 - After Baton selects delegation, reserve Luna/max for stable bounded code generation or
   low-judgment scouts with cheap falsifiers; never use Luna for architecture, security, authority,
   independent review, or release judgment.
+- In CK PMO stance, the main agent coordinates, integrates, verifies, and owns the final claim while
+  CK selects the main model. When a verified `delegate_minion` route is exposed, the Luna/max
+  execution pool defaults to Prime Agent minions with explicit provider/model/effort and effective-
+  route readback. Terra/high reviewers may use a native subagent or Prime minion according to task
+  complexity while preserving read-only independence. If the minion route is unavailable, Baton may
+  select an eligible native subagent or direct work and must record the deviation.
 - Keep final synthesis, shared verification, and publication judgment with the main agent.
 
 ## Canonical improvement path
