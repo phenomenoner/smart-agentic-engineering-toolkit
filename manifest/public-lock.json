@@ -31,13 +31,13 @@
     },
     {
       "path": "AGENTS.md",
-      "length": 4472,
-      "sha256": "c02cc907f9af60c10935a7d369648ca5bb258220f187b763163165dab799d808"
+      "length": 5158,
+      "sha256": "d044ee446c8bd42f2063a8b3f4a07134f8cc912117b893f62c21268280f03a7b"
     },
     {
       "path": "CHANGELOG.md",
-      "length": 6572,
-      "sha256": "cb7c8cbf9eff8aebd59229f7ba7cddfbe4e1d4140ff9a5fbc2cb46d5ba80c221"
+      "length": 6911,
+      "sha256": "6812d01f06294be08b26fca87bf3d5f0d9567740cd2a3eaa58c92fa6eeeeb86d"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -156,8 +156,8 @@
     },
     {
       "path": "evals/cases/canon-orchestration.json",
-      "length": 6989,
-      "sha256": "3874abc0b40f241c80404b25f820356b70d79462f84c5ef5dcc3d274794a6e0f"
+      "length": 9874,
+      "sha256": "008d0c43b3c7e2b909c264926a6f8050a73a53bc2f821f47f36ccbfefc9c62be"
     },
     {
       "path": "evals/cases/incremental-release-progression.json",
@@ -466,8 +466,8 @@
     },
     {
       "path": "skills/engineering-wal/references/canon-orchestration.md",
-      "length": 22579,
-      "sha256": "731fb4155b412487903e49a143905479b360ec13cfcf61375a94758239e84304"
+      "length": 24496,
+      "sha256": "6cb41948671ac06b32576ce654710cb5670f01fb346e324019dc221031d73bfc"
     },
     {
       "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
@@ -601,8 +601,8 @@
     },
     {
       "path": "tests/test_canon_orchestration_contracts.py",
-      "length": 5728,
-      "sha256": "435590167588b97341d32ddc9018ecd99e0f11024a81aadfbcd76dcafc7d0b7f"
+      "length": 5864,
+      "sha256": "74fd635c577a020dbd1bb3ef922a95ca280679428ff2f9cf65a097e13a0fc88b"
     },
     {
       "path": "tests/test_first_principles_eval_contracts.py",
@@ -623,6 +623,11 @@
       "path": "tests/test_install_toolkit.py",
       "length": 17344,
       "sha256": "d4c470cb9b9a506b8c1ce6a27926b4bdc99cffe9a01e0e3b7d8078951d83e1d2"
+    },
+    {
+      "path": "tests/test_pmo_routing_contracts.py",
+      "length": 2698,
+      "sha256": "0454340f6ec1611fe10c3deca9950f24f2c5ed4f5b2239b92cd8363882e6f53c"
     },
     {
       "path": "tests/test_proportional_risk_and_bounded_loops.py",

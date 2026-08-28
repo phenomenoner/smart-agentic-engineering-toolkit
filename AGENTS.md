@@ -48,7 +48,8 @@ mirrors are projections, never alternate source trees.
   execution pool defaults to Prime Agent minions with explicit provider/model/effort and effective-
   route readback. Terra/high reviewers may use a native subagent or Prime minion according to task
   complexity while preserving read-only independence. If the minion route is unavailable, Baton may
-  select an eligible native subagent or direct work and must record the deviation.
+  select an eligible native subagent or direct work for execution and must record the deviation;
+  required independent review instead uses a distinct eligible reviewer or stops `INCOMPLETE`.
 - Keep final synthesis, shared verification, and publication judgment with the main agent.
 
 ## Canonical improvement path

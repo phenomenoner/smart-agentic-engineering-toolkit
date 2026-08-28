@@ -69,11 +69,13 @@ After Baton selects delegation and the host exposes a verified `delegate_minion`
   Worker or reviewer completion is evidence, never acceptance by itself.
 
 The Prime minion default is conditional, not a mandatory dependency. If the verified route is absent,
-unsupported, or fails before useful work, Baton may choose an eligible native subagent or direct work
-and records the deviation; it never fabricates a CLI model bridge, silently changes the requested
-route, or exposes provider credentials to the minion. Luna remains excluded from architecture,
-security, authority, independent review, and release judgment. A Terra/high review remains read-only
-and independently bound whether it runs as a subagent or minion.
+unsupported, or fails before useful execution work, Baton may choose an eligible native subagent or
+direct work and records the deviation. If the failed route was required independent review, use a
+distinct eligible reviewer or stop `INCOMPLETE`; a direct main-agent pass cannot satisfy independence.
+Neither fallback may fabricate a CLI model bridge, silently change the requested route, or expose
+provider credentials to the minion. Luna remains excluded from architecture, security, authority,
+independent review, and release judgment. A Terra/high review remains read-only and independently
+bound whether it runs as a subagent or minion.
 
 Role separation alone is not independence. When the frozen target requires independent challenge or
 acceptance, use a distinct reviewer identity and isolated frozen inputs; self-review cannot be relabeled

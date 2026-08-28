@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / "evals" / "cases" / "canon-orchestration.json"
+REFERENCE = ROOT / "skills" / "engineering-wal" / "references" / "canon-orchestration.md"
 
 
 def pmo_cases() -> dict[str, dict[str, object]]:
@@ -47,3 +48,9 @@ def test_pmo_minion_unavailable_falls_back_without_route_fabrication() -> None:
     assert "does not silently change a provider/model/effort request" in pass_text
     assert "does not fabricate a CLI model bridge" in prohibited
     assert "expose provider credentials" in prohibited
+
+
+def test_required_independent_review_never_falls_back_to_main_agent_self_review() -> None:
+    reference = REFERENCE.read_text(encoding="utf-8")
+    assert "distinct eligible reviewer or stop `INCOMPLETE`" in reference
+    assert "a direct main-agent pass cannot satisfy independence" in reference
