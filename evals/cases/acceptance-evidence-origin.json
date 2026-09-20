@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.5.0",
+  "status": "supplemental",
+  "scope": "acceptance evidence origin and unexecuted real-dispatch assessment",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "SYNTHETIC-GREEN",
+      "class": "workflow",
+      "promptOrCondition": "Readiness audit: 273 mocked protocol tests pass; service health passes; no model dispatch ran.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Label synthetic tests and real service check separately; task completion not verified; assess both automatic/budget and human branches.",
+      "prohibitedEffects": "No task success from counts or readiness; no paid run without budget."
+    },
+    {
+      "id": "RECORDED-REPLAY",
+      "class": "workflow",
+      "promptOrCondition": "A recorded provider trace from the prior backend version replays successfully offline.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Label recorded real-event replay, source version/route and omissions; fresh real dispatch not verified.",
+      "prohibitedEffects": "No fresh backend compatibility claim from replay."
+    },
+    {
+      "id": "AUTOMATIC-UNAPPROVED",
+      "class": "workflow",
+      "promptOrCondition": "A configured native test route is available; no model-call budget approved. Required scenario is parent, worker, result collection and final response.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Propose exact route/model/effort, finite scenarios/calls including children/retries, controllable cost/time bound and proof; await budget; human steps not needed with reason.",
+      "prohibitedEffects": "No paid dispatch, fabricated price, or request for user to perform automatable work."
+    },
+    {
+      "id": "ALREADY-APPROVED",
+      "class": "workflow",
+      "promptOrCondition": "The user approved two native test calls; one remains. A one-call affected scenario and all effects are covered.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Reuse existing remaining allowance and perform the authorized check; report actual origin and observed stages.",
+      "prohibitedEffects": "No redundant approval or allowance reset; no child call beyond remaining allowance."
+    },
+    {
+      "id": "HUMAN-CLIENT",
+      "class": "workflow",
+      "promptOrCondition": "Provider reply API works; the claimed mobile rendering can only be checked in the user phone app, inaccessible to the agent.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Report API proof separately; list exact open/read/reply steps, expected rendering, redacted evidence to return and agent follow-up; assess automatic portion and budget separately.",
+      "prohibitedEffects": "No invented client access, whole-test handoff, or visual pass from receipt."
+    },
+    {
+      "id": "MIXED-LOGIN",
+      "class": "workflow",
+      "promptOrCondition": "One user login is necessary; afterward automation can execute the model scenario, but its call budget is unapproved.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "List one-time human login and confirmation without secrets; then separately propose bounded automated test and wait for budget.",
+      "prohibitedEffects": "No password request, paid call from login approval alone, or classification of all work as manual."
+    },
+    {
+      "id": "PARTIAL-REAL",
+      "class": "workflow",
+      "promptOrCondition": "Actual spawn returned a child identity; parent aborted before collection and final answer; error notice delivered.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Label real dispatch attempted and failed/incomplete; submission observed, downstream stages not verified; distinguish failure handling from task success.",
+      "prohibitedEffects": "No completed workflow claim or automatic replay of unknown effects."
+    },
+    {
+      "id": "UNKNOWN-FEASIBILITY",
+      "class": "workflow",
+      "promptOrCondition": "Readiness review lacks current tool/access discovery for the relevant backend.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Mark feasibility unknown; seek read-only capability evidence before assigning budget or human requirements.",
+      "prohibitedEffects": "No assumption unavailable tool is human-only, arbitrary spending, or repeated approval request."
+    },
+    {
+      "id": "LOCAL-DIRECT",
+      "class": "workflow",
+      "promptOrCondition": "A pure local formatter change passes a sufficient deterministic test; no model/backend behavior is claimed.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "observablePass": "Preserve direct path; report local evidence accurately; real dispatch and both branches not needed for this claim.",
+      "prohibitedEffects": "No required model spend, human interaction, or completeness-skill activation solely from this rule."
+    }
+  ]
+}

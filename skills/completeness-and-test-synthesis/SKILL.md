@@ -1,9 +1,9 @@
 ---
 name: completeness-and-test-synthesis
-description: Engineering completeness and test-evidence synthesis for explicit readiness judgments, recurring regressions, green-tests-but-broken-real-use failures, cross-component or lifecycle changes, and choosing the lowest verification altitude that can falsify a claim. Use when the user asks whether work is actually done or ready, when evidence coverage is disputed, or when logs and receipts should become regression tests. Do not trigger for every ordinary implementation or merely because a task ends.
+description: Engineering completeness and test-evidence synthesis for readiness judgments, functional polish, recurring regressions, green-tests-but-broken-real-use failures, and cross-component or lifecycle claims. Use when evidence must cover the user's actual workflow, natural tool selection, or affected subsequent interactions. Choose the lowest verification altitude that can falsify the claim. Do not trigger for cosmetic polish, every ordinary implementation, or merely because a task ends.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   toolkit-version: "0.5.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
@@ -17,6 +17,12 @@ alone grants no source, installation, or live-effect authority. The workflow is 
 small, local changes should stay small.
 
 ## Start from the claim
+
+For functional polish, a failing user journey despite component passes, natural route/tool selection,
+or changed state consumed by a subsequent interaction, read
+[user-journey polish](references/user-journey-polish.md). It owns the compact outcome contract,
+route/continuation evidence, and finite scenario budget; do not duplicate that procedure in other
+skills. Cosmetic edits and already sufficient local checks stay on the direct path.
 
 Before choosing tests, state:
 
@@ -84,6 +90,48 @@ Choose the lowest tier at which the relevant defect would actually fail.
 
 Higher tiers do not replace lower-tier logic tests, and repeated integration
 runs do not compensate for a non-discriminating assertion.
+
+## Report evidence origin and real-dispatch gaps
+
+For each material acceptance claim, report evidence origin separately from T0-T4 and pass/fail:
+
+- **Synthetic/simulated:** authored fixtures, mocks, scripted agents, or fabricated event sequences.
+  These prove behavior under the supplied assumptions, not actual backend behavior.
+- **Recorded real-event replay:** a captured real execution replayed offline. Identify its source
+  version/route and relevant omissions; replay is not a fresh real dispatch.
+- **Real execution/dispatch:** actual execution through the claimed backend and route. Name the
+  observed stages: submission, child execution, result collection, parent integration, final
+  response, and relevant continuation. Mark unexercised stages separately. A real component check
+  may be reported as such without claiming model dispatch or a complete user workflow.
+
+Mixed evidence keeps separate labels. Test counts, a created child, healthy service, or delivered
+error do not prove task completion. State forced-tool versus natural selection and mocked portions
+when material; one successful route does not validate other routes. Reuse adequate fresh evidence;
+this reporting rule does not mandate paid dispatch for local changes or unrelated claims.
+
+If a required real-dispatch claim is not verified, assess BOTH of the following in the report,
+using available tool, access, and environment evidence rather than assuming the user must test:
+
+1. **Automatic execution and budget approval:** say whether the agent can perform the exact
+   missing scenario. If feasible but its budget is not approved, give a concrete minimal proposal:
+   backend/model/effort, maximum scenarios and calls (including children and retries), a time and
+   token/spend bound where controllable, expected proof, and stop condition. Disclose unknown cost
+   instead of inventing a quote. Finish authorized offline preparation before asking for approval;
+   do not dispatch while approval is pending. Reuse existing scope-matching approval and its
+   remaining allowance; do not ask again or reset an exhausted budget. Budget approval alone does
+   not authorize unrelated external effects.
+2. **Human-assisted execution:** say which required steps cannot be automated and why, naming the
+   actual capability/access constraint. Give the smallest numbered human actions, prerequisites,
+   expected visible result, evidence to return with secrets omitted, and what the agent will verify
+   afterward. Automate the remaining steps within authority. Distinguish a one-time login/unlock
+   followed by automation from a truly manual interaction. Do not delegate the whole test to the
+   user because one client action is inaccessible.
+
+Use `not needed` with a reason when a branch does not apply. If feasibility is unknown, name the
+missing readback and resolve it read-only when possible; do not mislabel it as a budget or human
+blocker. A mixed scenario may need both budget approval and human interaction. Keep required
+unexecuted claims `not verified`, separate failure handling from successful task completion, and
+continue unrelated authorized work. This adds no reviewer, persistent ledger, or automatic live run.
 
 ## Require a unit-first ladder only for composite seams
 
@@ -226,8 +274,10 @@ and release gates. Do not create one for a one-off local change.
 
 ## Report
 
-Report the exact claim, verification tier actually reached, meaningful commands
-and results, and any gap that could change the conclusion. Say `not verified`
+Report the exact claim, verification tier actually reached, evidence origin, meaningful commands
+and results, and any gap that could change the conclusion. Apply the real-dispatch gap assessment
+above when required execution is missing, including automatic/budget and human-action branches.
+Say `not verified`
 when the required behavior was not exercised; do not replace behavioral
 evidence with a checklist sentence.
 

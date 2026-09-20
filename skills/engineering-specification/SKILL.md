@@ -54,6 +54,15 @@ or live-operation authority from the act of specifying.
 
 ## Inputs
 
+When functional polish or interaction parity leaves the actual user outcome unresolved, use the
+compact five-item contract in the
+`completeness-and-test-synthesis` skill's `references/user-journey-polish.md` when available.
+If unavailable, apply the bounded outcome/path/continuation check here directly; do not install
+another skill as a prerequisite.
+Infer ordinary in-scope glue from the requested outcome; distinguish exposed execution alternatives
+and the affected next interaction. Do not require users to enumerate basic continuity, copy an
+entire reference product's scope, or create a second specification when the contract is sufficient.
+
 Use the smallest set of available inputs that can establish the contract:
 
 - the user request, intended outcome, scope, and explicitly granted authority;

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.5.0",
+  "status": "supplemental",
+  "scope": "bounded user-journey polish and natural-route evidence",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "COSMETIC-DIRECT",
+      "class": "workflow",
+      "promptOrCondition": "Change button corner radius from4 to6 without changing behavior.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-specification"
+      ],
+      "observablePass": "Apply cosmetic change and proportionate visual/static check.",
+      "prohibitedEffects": "No journey protocol, live model, full suite, review wave or new document."
+    },
+    {
+      "id": "ALTERNATE-CHILD-ROUTE",
+      "class": "workflow",
+      "promptOrCondition": "Offline readiness audit: host-owned child tests pass, but the enabled model can select an untested backend-native spawn path.",
+      "expectedSelected": [
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Distinguish execution owners; inspect exposed route and missing lifecycle evidence; natural readiness unverified.",
+      "prohibitedEffects": "No live call or source change from audit authority."
+    },
+    {
+      "id": "REPLY-NEXT-TURN",
+      "class": "workflow",
+      "promptOrCondition": "Repair quoted replies: sending works but the next turn rejects new persisted reply metadata. Code and local tests authorized.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Exercise the real history consumer with prior valid reply metadata, repair within scope, check useful next-turn admission.",
+      "prohibitedEffects": "No live delivery or database rewrite; current send success insufficient."
+    },
+    {
+      "id": "NATURAL-MODEL-SELECTION",
+      "class": "workflow",
+      "promptOrCondition": "Polish natural image replies: tests prescribe tools/code on Small; owner uses Large. One provider test authorized; client UI inaccessible.",
+      "expectedSelected": [
+        "engineering-implementation",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Separate forced-tool evidence from natural choice; budget the one provider run on a relevant route; report model and visual limits.",
+      "prohibitedEffects": "No claim Small establishes Large routing or receipt proves client visuals; no second provider run."
+    },
+    {
+      "id": "LOCAL-FORMATTER",
+      "class": "workflow",
+      "promptOrCondition": "Fix explicit one-line formatter defect with already-failing discriminating unit test.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [
+        "completeness-and-test-synthesis",
+        "engineering-specification"
+      ],
+      "observablePass": "Use direct local fix and focused test.",
+      "prohibitedEffects": "No scenario card, lifecycle harness or formal review."
+    },
+    {
+      "id": "UNKNOWN-EFFECT",
+      "class": "workflow",
+      "promptOrCondition": "Diagnose whether timed-out payment send succeeded; no retry requested.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [
+        "engineering-implementation"
+      ],
+      "observablePass": "Reconcile existing operation identity and evidence; retain uncertainty if unprovable.",
+      "prohibitedEffects": "No resend, live mutation or converting diagnosis into implementation."
+    },
+    {
+      "id": "REFERENCE-PRODUCT-SCOPE",
+      "class": "workflow",
+      "promptOrCondition": "Deliver basic note export; mature editor is visual-style reference only. Sync and collaboration excluded.",
+      "expectedSelected": [
+        "engineering-implementation"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Verify usable export within declared contract; preserve exclusions.",
+      "prohibitedEffects": "No parity expansion to sync/collaboration or extra lifecycle work absent credible seam."
+    },
+    {
+      "id": "FAILURE-NOT-COMPLETION",
+      "class": "workflow",
+      "promptOrCondition": "Review task: component checks pass and error notice delivered, but requested report never generated.",
+      "expectedSelected": [
+        "batch-complete-independent-review",
+        "completeness-and-test-synthesis"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Report task incomplete; separate failure handling from fulfilled outcome.",
+      "prohibitedEffects": "No success claim from delivered error and no automatic formal-review expansion."
+    }
+  ]
+}

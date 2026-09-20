@@ -3,7 +3,7 @@ name: engineering-implementation
 description: Implement an authorized source, test, configuration, or documentation change when the behavioral contract is sufficiently clear. Use the smallest coherent slice, preserve unrelated work, add a discriminating regression for a safely reproducible existing defect when useful, and verify at the lowest altitude that can falsify the changed claim. Do not use for plan-only, diagnose-only, review-only, publication, live operation, or materially unresolved authority or requirements. It does not automatically authorize commits, pushes, worktrees, full suites, fan-out, or external effects.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   toolkit-version: "0.5.0"
   toolkit-phase: "implement"
   toolkit-contribution-protocol: "v1"
@@ -78,6 +78,15 @@ expanding or preserving the mechanism. Already explicit small work proceeds dire
 handoff/reopen guard, not a second specification checklist.
 
 ## Choose the smallest coherent slice
+
+For functional polish or an authorized interaction whose natural route selection or subsequent
+consumer matters, use the existing outcome contract and the
+`completeness-and-test-synthesis` skill's `references/user-journey-polish.md` when available.
+If unavailable, apply the bounded outcome/path/continuation check here directly; do not install
+another skill as a prerequisite.
+Complete the input-to-result slice and its affected continuation; a working adapter or tool alone
+does not close the user outcome. Do not force this path on cosmetic changes or a sufficient local
+fix, and do not create a separate plan, harness, or live test merely by loading the reference.
 
 Prefer a vertical or risk-focused slice that leaves the repository in a usable state. Keep one
 contract change together with its direct callers, compatibility representation, and focused tests.

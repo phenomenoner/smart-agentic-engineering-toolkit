@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 6911,
-      "sha256": "6812d01f06294be08b26fca87bf3d5f0d9567740cd2a3eaa58c92fa6eeeeb86d"
+      "length": 7585,
+      "sha256": "8335da2ebe4e4135105c2c61a301d4c8636c685b4e231ab26b1561a809073247"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -141,8 +141,13 @@
     },
     {
       "path": "evals/README.md",
-      "length": 4877,
-      "sha256": "66af2c5d2358ffa51eccbf9123bbac0dfb0664d240805e39480533ee5a5f33f6"
+      "length": 5702,
+      "sha256": "d0f7f8b4f210d6042b6aa520df2c5c5cdd1a3a2d68ae15624a9276cbf59d9bd1"
+    },
+    {
+      "path": "evals/cases/acceptance-evidence-origin.json",
+      "length": 5597,
+      "sha256": "21e83d1d41dc62d3536a077b24d24d776811b87dc238ca9bec27f06b993069b2"
     },
     {
       "path": "evals/cases/acceptance.json",
@@ -173,6 +178,11 @@
       "path": "evals/cases/unit-first-composite-seams.json",
       "length": 4757,
       "sha256": "a01569bace26853d9c8c888e3fb8364c2914c6d841ab76e64c663eb7e15e302e"
+    },
+    {
+      "path": "evals/cases/user-journey-polish.json",
+      "length": 4993,
+      "sha256": "561fda3ec5aa6cbe5ae838e98793fbf19409b820f18f8d21d73cd6b6d8e73a17"
     },
     {
       "path": "manifest/provenance.json",
@@ -276,8 +286,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 22043,
-      "sha256": "f1349aeb4915d788ce9e47decfa6a4e4169a70e467b014f4ba1d960fafca6025"
+      "length": 22937,
+      "sha256": "e1e0f0d85322dceb6a1921142452e10697b5e2962c78defddab380d4199ab743"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -406,13 +416,13 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
-      "length": 13985,
-      "sha256": "1c67ce9a90f4288ac77579ba718eaca2341d481b58af24b5d2de6b934ad3f70d"
+      "length": 17777,
+      "sha256": "c58f172f0d5485fad741d0e595e8a762ca1f9c78801d11d36710f71ab442f303"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
-      "length": 505,
-      "sha256": "8f0fae7dce1b0914eaaa884379f9ec5badcc48fb71922854338ced1038a10304"
+      "length": 598,
+      "sha256": "9222c08c1a6e647fcf47adbc12770e88ce1565afe43f2a4a7fad8fb60e79840b"
     },
     {
       "path": "skills/completeness-and-test-synthesis/references/incremental-release-progression.md",
@@ -423,6 +433,11 @@
       "path": "skills/completeness-and-test-synthesis/references/receipt-to-replay.md",
       "length": 4499,
       "sha256": "daf5f03543b3e4d443e39329a6efae68773336dde5d7eb25851778d42c27c6ca"
+    },
+    {
+      "path": "skills/completeness-and-test-synthesis/references/user-journey-polish.md",
+      "length": 7743,
+      "sha256": "933a40abe4610a475b67f3415084d56f8a072b1cd0ef31b2cd17c0cb0de3cae7"
     },
     {
       "path": "skills/engineering-debugging/SKILL.md",
@@ -436,8 +451,8 @@
     },
     {
       "path": "skills/engineering-implementation/SKILL.md",
-      "length": 10858,
-      "sha256": "38657f50ca4d99b536b300167b9e6ef61c96d7bb72051259d37acb3ef8483303"
+      "length": 11707,
+      "sha256": "3ff59e6b347379919cfdfb5b1b04a2132631dfd816133127264fed558db2734b"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -446,8 +461,8 @@
     },
     {
       "path": "skills/engineering-specification/SKILL.md",
-      "length": 19091,
-      "sha256": "2f99bd7184fd0fd5b3beca371030b49b623e17b19cfaea6d186a0e925c7ea2a2"
+      "length": 20064,
+      "sha256": "5124bcc1ad316075522986af2af4ce1fa61f2c768b32e9ff5b68fdcb0f1ddfa0"
     },
     {
       "path": "skills/engineering-specification/agents/openai.yaml",

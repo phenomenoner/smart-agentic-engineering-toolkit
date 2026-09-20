@@ -1,5 +1,10 @@
 # Behavior evaluation
 
+`cases/acceptance-evidence-origin.json` covers evidence-origin reporting, partial real dispatch,
+automatic testing awaiting budget, existing approval reuse, human-only steps, mixed workflows,
+unknown feasibility, and the direct path for local changes. These are authored scenarios with
+`evidenceStatus: NOT_RUN`; corpus validation does not prove fresh-agent compliance.
+
 `cases/acceptance.json` preserves the 63-case baseline size and coverage goals. The 0.5.0 release
 updates its release identity, current catalog/specification bindings, and retirement-sensitive
 routing cases without adding cases. Static validation
@@ -65,3 +70,8 @@ For a release evaluation:
 
 The main agent owns synthesis. A model reporting that it used a skill is useful execution evidence,
 not provider-signed attestation.
+
+`cases/user-journey-polish.json` defines eight supplemental cases for natural route selection,
+subsequent consumers, outcome-versus-error delivery, authority limits and cosmetic/local non-triggers.
+Static expectations do not certify runtime selection; keep independently observed forward-test
+results and fresh installed-host pickup separate. No new skill or profile is introduced.

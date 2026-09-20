@@ -4,6 +4,15 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Require acceptance reports to distinguish synthetic tests, recorded real-event replay, and actual
+  backend execution. Unverified real-dispatch claims include separate automation/budget and precise
+  human-assistance assessments, preserving existing approvals and bounded execution.
+
+- Consolidate functional-polish and user-journey evidence in the existing completeness skill,
+  with narrow specification, implementation, and review entry points. Distinguish natural tool
+  selection, alternate execution owners, useful final outcomes, and affected subsequent interactions
+  from isolated component passes. Keep cosmetic/local changes direct and scenario loops bounded.
+
 - Add the CK PMO routing profile: the main agent retains coordination, integration, verification, and
   final authority; verified Prime Agent minions become the default Luna/max execution pool with
   explicit route readback, while Terra/high review may select a native subagent or minion according to

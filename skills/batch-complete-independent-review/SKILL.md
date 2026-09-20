@@ -3,7 +3,7 @@ name: batch-complete-independent-review
 description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review. Use the formal hash-bound fixed-point gate only for an explicitly independent, final, release, migration, or pre-cutover review, a project-mandated gate, or recurring reviews that keep discovering sibling blockers one round at a time. Do not trigger merely because implementation work occurred.
 license: MIT
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
   toolkit-version: "0.5.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
@@ -15,6 +15,12 @@ Find the complete actionable blocker batch before repair instead of stopping at
 the first issue. Scale the review machinery to the decision being made.
 
 ## Select the mode first
+
+If the reviewed claim includes functional polish or an end-to-end interaction, challenge the most
+plausible ordinary user path or next action that the evidence omits. In particular, distinguish
+forced-tool checks from natural selection, and tool completion from useful task completion. Use
+the existing `completeness-and-test-synthesis` skill's `references/user-journey-polish.md` when available
+for that boundary; do not select a formal gate, expand scope, or add a reviewer just for polish.
 
 ### Ordinary finding review
 
