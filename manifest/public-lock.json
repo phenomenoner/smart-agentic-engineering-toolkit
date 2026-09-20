@@ -141,8 +141,8 @@
     },
     {
       "path": "evals/README.md",
-      "length": 5702,
-      "sha256": "d0f7f8b4f210d6042b6aa520df2c5c5cdd1a3a2d68ae15624a9276cbf59d9bd1"
+      "length": 5631,
+      "sha256": "86c35c1ed9b45520d7465e1242499ebdfc5721538d68f652adce280107bba15e"
     },
     {
       "path": "evals/cases/acceptance-evidence-origin.json",
@@ -181,8 +181,8 @@
     },
     {
       "path": "evals/cases/user-journey-polish.json",
-      "length": 4993,
-      "sha256": "561fda3ec5aa6cbe5ae838e98793fbf19409b820f18f8d21d73cd6b6d8e73a17"
+      "length": 4882,
+      "sha256": "3d3856d4ff8d0429183abb4700f1202fe6f3fa2df814eb7e536ab01592fe9442"
     },
     {
       "path": "manifest/provenance.json",
@@ -286,8 +286,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 22937,
-      "sha256": "e1e0f0d85322dceb6a1921142452e10697b5e2962c78defddab380d4199ab743"
+      "length": 22537,
+      "sha256": "273ad2351a45db43248efd7aacb4359f2a3ebef0f402726bed596357e5b76f67"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -421,8 +421,8 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
-      "length": 598,
-      "sha256": "9222c08c1a6e647fcf47adbc12770e88ce1565afe43f2a4a7fad8fb60e79840b"
+      "length": 592,
+      "sha256": "d5d26c3c1649ddb42e6fa4d3394ebbf1e33d2c131ffe92a79790bca23987ba6f"
     },
     {
       "path": "skills/completeness-and-test-synthesis/references/incremental-release-progression.md",
@@ -451,8 +451,8 @@
     },
     {
       "path": "skills/engineering-implementation/SKILL.md",
-      "length": 11707,
-      "sha256": "3ff59e6b347379919cfdfb5b1b04a2132631dfd816133127264fed558db2734b"
+      "length": 11528,
+      "sha256": "e173241952dba922befba5c153867ecbbef4100cfae54df39269183d64a746e7"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -461,8 +461,8 @@
     },
     {
       "path": "skills/engineering-specification/SKILL.md",
-      "length": 20064,
-      "sha256": "5124bcc1ad316075522986af2af4ce1fa61f2c768b32e9ff5b68fdcb0f1ddfa0"
+      "length": 19740,
+      "sha256": "42b0f392048568b79a5f97b1938f4ad328de12ee832b9228f679b97f3793a97a"
     },
     {
       "path": "skills/engineering-specification/agents/openai.yaml",
