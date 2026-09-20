@@ -36,8 +36,8 @@
         "completeness-and-test-synthesis"
       ],
       "expectedNotSelected": [],
-      "observablePass": "Propose exact route/model/effort, finite scenarios/calls including children/retries, controllable cost/time bound and proof; await budget; human steps not needed with reason.",
-      "prohibitedEffects": "No paid dispatch, fabricated price, or request for user to perform automatable work."
+      "observablePass": "Propose exact route/model/effort or read back missing configuration; distinguish one scenario from parent/child launches, model turns and provider requests; name enforceable limits versus unknown usage, proof and stop; await budget; human steps not needed with reason.",
+      "prohibitedEffects": "No paid dispatch, fabricated price, counting parent plus child as one total model call, or request for user to perform automatable work."
     },
     {
       "id": "ALREADY-APPROVED",

@@ -116,7 +116,13 @@ using available tool, access, and environment evidence rather than assuming the 
    missing scenario. If feasible but its budget is not approved, give a concrete minimal proposal:
    backend/model/effort, maximum scenarios and calls (including children and retries), a time and
    token/spend bound where controllable, expected proof, and stop condition. Disclose unknown cost
-   instead of inventing a quote. Finish authorized offline preparation before asking for approval;
+   instead of inventing a quote. Define the counting unit: a scenario, parent/child launch, model
+   turn, and provider request are different units. For example, one scenario with one parent and
+   one child has two agent launches and may use several model turns/provider requests; never call
+   it one total model call. Name enforceable caps separately from estimates or unbounded backend
+   usage. If route/model/effort or accounting is unknown, resolve available readbacks first and
+   explicitly retain any unresolved budget field instead of making up a concrete plan.
+   Finish authorized offline preparation before asking for approval;
    do not dispatch while approval is pending. Reuse existing scope-matching approval and its
    remaining allowance; do not ask again or reset an exhausted budget. Budget approval alone does
    not authorize unrelated external effects.

@@ -146,8 +146,8 @@
     },
     {
       "path": "evals/cases/acceptance-evidence-origin.json",
-      "length": 5597,
-      "sha256": "21e83d1d41dc62d3536a077b24d24d776811b87dc238ca9bec27f06b993069b2"
+      "length": 5743,
+      "sha256": "7703b314cc41b0e7ed533b25e9f312c979e739e7a8d75ed4f918c55fd0d789b9"
     },
     {
       "path": "evals/cases/acceptance.json",
@@ -416,8 +416,8 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
-      "length": 17777,
-      "sha256": "c58f172f0d5485fad741d0e595e8a762ca1f9c78801d11d36710f71ab442f303"
+      "length": 18320,
+      "sha256": "d899d7fcb3ad7bd49695695ec06e3140d4f5b21e877ad2fe502775d87f576aa6"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
