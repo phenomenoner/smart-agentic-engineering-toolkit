@@ -576,8 +576,8 @@
     },
     {
       "path": "skills/long-run-supervisor/tests/wake-only-transport-contract.ps1",
-      "length": 2825,
-      "sha256": "c06a586731642205047e1561d37e4d8a77aee8132b6a1c8f84cb20ed0ac887bb"
+      "length": 2989,
+      "sha256": "73b0cdba9639cfad6c4f3d4d56edc2c27fadd9dbff7af1988c8e9de50e7d7f60"
     },
     {
       "path": "skills/programmatic-tool-composition/SKILL.md",
