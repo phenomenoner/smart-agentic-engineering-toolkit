@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 8473,
-      "sha256": "593a1ec815af77a663cbd59856de739c99473a9f34ba32e5555964a84dd6866c"
+      "length": 8945,
+      "sha256": "25820b1cac54513270127663a5f6f07b6e1e9cf603368763f15f4c1458394038"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -181,8 +181,8 @@
     },
     {
       "path": "evals/cases/proportional-workflow.json",
-      "length": 5985,
-      "sha256": "61118c0701bdb67551d6138fd29acac9b70c408960037a574d5cc56d0a447082"
+      "length": 8011,
+      "sha256": "68d02709496f3c389b5ff3474cea6b22e15c69e3469b0ff76a0b00f82c1a9d2c"
     },
     {
       "path": "evals/cases/unit-first-composite-seams.json",
@@ -296,8 +296,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 22689,
-      "sha256": "675e48318b1a0a870d18da534f9234600f72e34d5461f2c852a2e481cc07697e"
+      "length": 23170,
+      "sha256": "35ff3cdeceef951d789f08d56d14265336150c987a0c97ebf2ccb6473b6583c3"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -491,8 +491,8 @@
     },
     {
       "path": "skills/engineering-wal/references/canon-orchestration.md",
-      "length": 24926,
-      "sha256": "39e922291480aa2e353f94ae03b8234df5b369d38aae1ad09ded1b9356d5d08d"
+      "length": 25310,
+      "sha256": "3707136ad47072153c6ecbb6fa0695b4ef68c1fd44013e0c7b96f278751851cc"
     },
     {
       "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
@@ -641,8 +641,8 @@
     },
     {
       "path": "tests/test_incremental_release_progression.py",
-      "length": 3484,
-      "sha256": "507cde88c74580f5e44de0a9bf3c3c3fe753897e88b448bd12fcdd1918c9d296"
+      "length": 3797,
+      "sha256": "5db30132f1e7f59ec466ae4728868cbbe3251e5b45c9015b1d66676286696a7c"
     },
     {
       "path": "tests/test_install_toolkit.py",

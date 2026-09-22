@@ -4,6 +4,12 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Clarify that the optional Hermes reviewer route must actually isolate Terra/high rather than
+  reusing a globally Luna-pinned worker or toggling shared config. Separate configured routing
+  from unavailable per-request telemetry; reject observed mismatches without inventing readback.
+- Preserve narrow-review evidence in its original form while adapting non-native reports to the
+  existing validator envelope. No new reviewer, schema or mandatory gate is introduced.
+
 - Keep already authorized implementation moving after specification and diagnosis; preserve
   specification-only and diagnosis-only stops. Narrow temporal-ownership activation to concrete
   mutable check-before-destructive-effect races and make ordinary test/diff evidence sufficient
