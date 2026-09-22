@@ -61,10 +61,12 @@ When CK activates PMO stance, the main agent remains the PM: it coordinates, int
 verification, and owns the final claim. CK selects or changes the main-agent model. Model workers and
 reviewers are bounded execution substrates, not amendment, readiness, or publication authorities.
 
-When assessing delegation benefit, include total token cost as well as latency: parent context
-saved versus worker input/output, duplicate reads, coordination and verification overhead. Net token
-savings can justify bounded delegation without a speed gain; preserve quality and authority, and do
-not present an estimated saving as measured billing evidence.
+When assessing delegation benefit, compare estimated monetary cost as well as latency. Use
+model-specific input/output/cached-token prices across the parent, worker, duplicate reads,
+coordination and verification; more total tokens can still cost less with a cheaper authorized
+worker. Financial savings can justify bounded delegation without a speed gain. Use current available
+pricing, disclose missing rates, preserve quality and model/effort authority, and never present an
+estimated saving as measured billing evidence. Raw token count alone is not the financial cost.
 
 After Baton selects delegation and the host exposes a verified `delegate_minion` route:
 

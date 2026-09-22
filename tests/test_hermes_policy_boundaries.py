@@ -25,9 +25,11 @@ def test_narrow_audit_preserves_original_and_uses_existing_schema():
     assert 'validate it through `validate-synthesis`' in text
 
 
-def test_token_savings_are_a_benefit_without_latency_gain():
+def test_financial_savings_do_not_require_fewer_tokens_or_latency_gain():
     text = (ROOT / 'skills/engineering-wal/references/canon-orchestration.md').read_text()
-    assert 'total token cost as well as latency' in text
-    assert 'savings can justify bounded delegation without a speed gain' in text
-    assert 'duplicate reads, coordination and verification overhead' in text
-    assert 'estimated saving as measured billing evidence' in text
+    normalized = ' '.join(text.split())
+    assert 'estimated monetary cost as well as latency' in normalized
+    assert 'model-specific input/output/cached-token prices' in normalized
+    assert 'more total tokens can still cost less' in normalized
+    assert 'Financial savings can justify bounded delegation without a speed gain' in normalized
+    assert 'estimated saving as measured billing evidence' in normalized

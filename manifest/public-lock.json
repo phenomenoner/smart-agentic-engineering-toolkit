@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 9344,
-      "sha256": "dc4b7dd34e56010e5852249077e46076580d96f9b4d2eea5ac7c4a45e6062378"
+      "length": 9426,
+      "sha256": "d90afc9050c74e9458acc3db07d1b0acecbfa8160d0c1f8f8324aa9115fe4d69"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -131,8 +131,8 @@
     },
     {
       "path": "docs/proportional-workflow-audit.md",
-      "length": 4192,
-      "sha256": "ec8f50b5c5b8dc2f1c920a6efcbec763246245fe2718f63f58a864c732cb9e30"
+      "length": 4188,
+      "sha256": "7eb77ac3149201758dbbf14b251518e123fb7566b651d5f3d205f72db29e177a"
     },
     {
       "path": "docs/retired-skills.md",
@@ -181,8 +181,8 @@
     },
     {
       "path": "evals/cases/proportional-workflow.json",
-      "length": 8706,
-      "sha256": "b44b044fef4b11fbdfbb1f3675e722ea17eb3861c425c3f0d6d22915d4a496cf"
+      "length": 8859,
+      "sha256": "295b638e9a5147d7ad85bb08b0a904495f2d08ab9f7f93d8daefdda7e6f77b0d"
     },
     {
       "path": "evals/cases/unit-first-composite-seams.json",
@@ -491,8 +491,8 @@
     },
     {
       "path": "skills/engineering-wal/references/canon-orchestration.md",
-      "length": 25669,
-      "sha256": "88ee93e56b4b8b7242272e30763805f2f6f9bdc11d9ba5166a9fbee8e8e4772c"
+      "length": 25885,
+      "sha256": "a1b511819bb881f5a15e9f9498f690fbe8b692476ef2a21d7b7db90e9b2ae480"
     },
     {
       "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
@@ -636,8 +636,8 @@
     },
     {
       "path": "tests/test_hermes_policy_boundaries.py",
-      "length": 1660,
-      "sha256": "a8b972800b7b268cea9a61a9fee42b6e387786895cd1dfefb9754cadd6d0a011"
+      "length": 1811,
+      "sha256": "d0ff2be6ca6044a4a449808050b21750c76b2d7b5b47965ac7272fe64150d7df"
     },
     {
       "path": "tests/test_incident_to_regression_principles.py",
