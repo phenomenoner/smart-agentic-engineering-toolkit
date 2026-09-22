@@ -58,9 +58,10 @@ only dependent cells. A low-consequence, low-frequency, reversible diagnostic or
 upgrade unrelated evidence to T3/T4 or block a claim it cannot falsify. Frequent low-consequence gaps
 may justify focused operability repair without becoming release-critical.
 
-Before adding a test artifact, replay, matrix, harness, or integration layer, ask `Do we really need
-this to make things happen?` and `Is there a simpler and more direct way?` State the invariant first,
-separate evidence outcome from mechanism proxy, and prefer the smallest direct falsifier. Add
+Choose the smallest test that falsifies the invariant. An ordinary regression in an existing test
+file needs no separate necessity record. Before adding a new harness, durable evidence layer, or
+recovery mechanism, ask `Do we really need this to make things happen?` and `Is there a simpler and
+more direct way?` Separate the evidence outcome from the mechanism proxy. Add
 lifecycle/recovery machinery only when the claim requires it, after comparing deletion, manual,
 embedded/ephemeral, and existing-platform options and their complexity, authority, recovery, and
 failure-state cost. This skill judges evidence adequacy; it does not approve a production design.

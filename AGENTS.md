@@ -43,13 +43,10 @@ mirrors are projections, never alternate source trees.
 - After Baton selects delegation, reserve Luna/max for stable bounded code generation or
   low-judgment scouts with cheap falsifiers; never use Luna for architecture, security, authority,
   independent review, or release judgment.
-- In CK PMO stance, the main agent coordinates, integrates, verifies, and owns the final claim while
-  CK selects the main model. When a verified `delegate_minion` route is exposed, the Luna/max
-  execution pool defaults to Prime Agent minions with explicit provider/model/effort and effective-
-  route readback. Terra/high reviewers may use a native subagent or Prime minion according to task
-  complexity while preserving read-only independence. If the minion route is unavailable, Baton may
-  select an eligible native subagent or direct work for execution and must record the deviation;
-  required independent review instead uses a distinct eligible reviewer or stops `INCOMPLETE`.
+- PMO stance means the main agent owns scope, integration, verification, and the final claim. It
+  does not activate delegation, a WAL, a formal gate, or a model/provider change. Host-specific
+  routing applies only when selected by the owner; the optional CK / Hermes adapter lives in
+  `skills/engineering-wal/references/canon-orchestration.md` and is not a Codex default.
 - Keep final synthesis, shared verification, and publication judgment with the main agent.
 
 ## Canonical improvement path
@@ -57,8 +54,9 @@ mirrors are projections, never alternate source trees.
 Every owned skill carries `TOOLKIT-CONTRIBUTION-PROTOCOL:v1`. When a material improvement,
 conflict, missing safeguard, or retirement candidate is found, do not patch an installed copy.
 Prepare public-safe evidence, an exact canonical diff, and a discriminating eval. Open a draft PR
-only when GitHub writes are authorized; otherwise return a PR-ready packet and explicitly offer to
-open it.
+only when publication is requested and GitHub writes are authorized. An authorized local
+commit/install may close with Git history and a concise change/evidence record; it needs neither a
+separate PR packet nor a publication-permission question.
 
 External dependency behavior changes go to their actual upstream. A toolkit PR may update a pin,
 integration boundary, conflict rule, or retirement state. Never create two writable canonical

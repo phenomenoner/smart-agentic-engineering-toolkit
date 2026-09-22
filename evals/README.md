@@ -1,5 +1,10 @@
 # Behavior evaluation
 
+`cases/proportional-workflow.json` covers authorized phase continuation, diagnosis-only and
+destructive-policy stops, PMO routing boundaries, ordinary final looks, temporal-ownership triggers,
+local installation, and host-limited transport continuation. It is a static contract corpus;
+validation and read-only scenario reasoning do not establish installed workflow execution.
+
 `cases/acceptance-evidence-origin.json` covers evidence-origin reporting, partial real dispatch,
 automatic testing awaiting budget, existing approval reuse, human-only steps, mixed workflows,
 unknown feasibility, and the direct path for local changes. These are authored scenarios with

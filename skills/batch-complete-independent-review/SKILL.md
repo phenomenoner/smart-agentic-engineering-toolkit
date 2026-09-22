@@ -1,6 +1,6 @@
 ---
 name: batch-complete-independent-review
-description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review. Use the formal hash-bound fixed-point gate only for an explicitly independent, final, release, migration, or pre-cutover review, a project-mandated gate, or recurring reviews that keep discovering sibling blockers one round at a time. Do not trigger merely because implementation work occurred.
+description: Review code and engineering changes without stopping at the first blocker. Use lightweight finding-oriented mode for an ordinary code, diff, patch, or pull-request review, including a final look. Use the formal hash-bound gate for an explicitly independent review, release/migration/pre-cutover acceptance, a project-mandated gate, or recurring sibling blockers. Do not trigger merely because implementation work occurred or the user said final.
 license: MIT
 metadata:
   version: "0.4.0"
@@ -41,9 +41,11 @@ release or cutover authorization.
 ### Formal independent gate
 
 Use the remaining hash-bound protocol only when the request or project contract
-needs an independent/final/release/migration/pre-cutover decision, or when a
+needs an explicitly independent review or release/migration/pre-cutover acceptance, or when a
 recurring sibling-blocker pattern makes fixed-point coverage materially useful.
 Do not use formal artifacts merely to make an ordinary review look rigorous.
+An ordinary request to "take a final look" stays in finding-review mode unless the requested
+decision actually requires independence or release acceptance.
 
 For a release or cutover, start formal review only after executable candidate bytes and reviewed
 contracts are stable. Complete the hash-bound review before final installed-runtime pickup; do not

@@ -4,6 +4,17 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Keep already authorized implementation moving after specification and diagnosis; preserve
+  specification-only and diagnosis-only stops. Narrow temporal-ownership activation to concrete
+  mutable check-before-destructive-effect races and make ordinary test/diff evidence sufficient
+  without separate necessity or object-hash records.
+- Separate PMO responsibilities from the optional CK / Hermes routing adapter, use compact WALs
+  by default, and reserve formal transition guards for a demonstrated continuity problem. An
+  ordinary final look remains finding review. Refresh graphs only for further navigation.
+- Make long-command guidance obey active host communication limits and reuse native sessions.
+  Distinguish a validated local plugin installation from release publication and fresh-host
+  activation; local delivery does not require a PR, remote CI, or repeated approval.
+
 - Require acceptance reports to distinguish synthetic tests, recorded real-event replay, and actual
   backend execution. Unverified real-dispatch claims include separate automation/budget and precise
   human-assistance assessments, preserving existing approvals and bounded execution.

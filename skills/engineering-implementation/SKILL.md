@@ -97,9 +97,11 @@ When delegated work would be useful, run the external `baton-fanout-skill` gate 
 not evidence of quality, and the main agent still reviews the bytes, resolves conflicts, runs shared
 verification, and owns the claim.
 
-For concurrency, replacement, rollback, identity reuse, or check-then-mutate behavior, apply
-`specify-temporal-ownership` before choosing a patch. A stronger-looking final check is insufficient
-when another actor can replace state after it.
+Apply `specify-temporal-ownership` only for a concrete mutable resource whose identity, ownership,
+authority, or state is observed before a destructive or irreversible effect and can change through
+another actor or generation before that effect. Ordinary local mutation, concurrency vocabulary,
+pure reads, and single-owner state do not activate it. A final check alone cannot close an actual
+replacement race.
 
 Before formalizing a novel operating-system, provider, runtime, or library seam, run the smallest
 disposable compile/API constructibility probe that has no live effect. Use it to prove only the
@@ -164,8 +166,10 @@ explicit release gate requires it, preferably once after executable bytes stabil
 3. Inspect the diff for unrelated edits, generated/private state, stale public claims, and platform or
    lifecycle siblings.
 4. Run the focused discriminator and any credible negative, boundary, recovery, or concurrency case.
-5. Record the exact changed Git objects and first executable seam, then reacquire only evidence
-   invalidated by those bytes, their dependencies, or the required environment. Documentation or
+5. Use the diff and exact meaningful checks as the ordinary change record. Bind Git objects and
+   artifact hashes only when a release, handoff, concurrent candidate, or executed-instance claim
+   needs that identity. Reacquire only evidence invalidated by changed bytes, dependencies, or the
+   required environment. Documentation or
    receipt-only edits do not automatically invalidate code results. For an explicit release or
    cutover, hand the change-to-evidence map to `completeness-and-test-synthesis`; implementation does
    not start or repeatedly interleave formal review, installed pickup, or publication gates.

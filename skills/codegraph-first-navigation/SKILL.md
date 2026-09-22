@@ -47,7 +47,8 @@ Use the graph to navigate and form hypotheses. Use current source and tests or r
 4. Trace representative important paths. Use callers, callees, node, or impact only when the first result leaves a concrete question unanswered.
 5. Read source surgically to confirm conditions, transformations, error behavior, side effects, registrations, and environment-dependent behavior.
 6. Before editing a shared or public node, inspect direct callers, indirect dependents, implementations or overrides, routes or handlers, related tests, and dynamic-boundary uncertainty.
-7. After executable edits, allow or request the authorized graph refresh, check status, and re-query the affected area. Invalidate pre-edit graph results.
+7. Invalidate graph results affected by edits. Refresh and re-query only if further graph navigation
+   is needed; a final focused test or diff review does not require maintaining an otherwise unused index.
 8. Choose focused tests from the observed impact. Add runtime or integration evidence when static analysis cannot represent an important path.
 
 ## Check dynamic boundaries explicitly

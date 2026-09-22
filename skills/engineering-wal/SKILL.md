@@ -66,7 +66,20 @@ identity. AAR and knowledge graphs are also optional navigation/compute layers, 
 
 ## Minimal record
 
-Maintain only what a successor needs:
+For ordinary continuity, maintain only what a successor needs:
+
+```text
+Objective and remaining acceptance:
+Authorized scope and forbidden effects:
+Checkout / dirty state / work in flight:
+Decisions and material evidence pointers:
+Blocker or next safe action:
+```
+
+Reuse an existing adequate project record. Add exact hashes, policy identity, or budgets when the
+claim needs them. PMO stance, compaction, or more than one session does not by itself activate the
+formal transition guard. Use the expanded block below only after explicitly selecting the optional
+canon orchestration profile for a concrete commitment or evidence-continuity problem:
 
 ```text
 Objective:

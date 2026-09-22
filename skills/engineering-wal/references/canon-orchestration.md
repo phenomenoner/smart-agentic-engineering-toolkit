@@ -36,10 +36,11 @@ The guard does not schedule agents, run tests, decide product stages, or grant a
 
 ## Activate proportionately
 
-Use this profile when at least one condition is material:
+Select this profile explicitly when one of these problems needs its machine-checked transition
+guard. Session length, PMO stance, compaction, or a handoff alone needs only the compact WAL:
 
 - a requested target has repeatedly been reduced to an intermediate milestone;
-- work crosses sessions, compaction, handoffs, or several independently owned slices;
+- commitment or evidence ownership is being lost across sessions or independently owned slices;
 - specification and implementation require distinct challenge passes;
 - core behavior and one or more host, platform, deployment, or adoption targets need separate claims;
 - a failed gate would otherwise cause broad repeated testing without identifying what changed.
@@ -50,7 +51,11 @@ check. Roles are responsibilities; they do not imply five simultaneous subagents
 Any external fan-out must pass Baton. If Baton is unavailable, do not bypass it: run bounded logical
 role passes sequentially in the main agent, or stop `INCOMPLETE` when independence is required.
 
-### CK PMO execution and review routing
+### Optional CK / Hermes routing adapter
+
+This adapter applies only when the owner selects the CK / Hermes Prime-minion arrangement.
+The words "PMO stance" alone do not select it in Codex or another host. Otherwise use the active
+host's authorized routing and direct work when sufficient; no minion availability probe is needed.
 
 When CK activates PMO stance, the main agent remains the PM: it coordinates, integrates, runs shared
 verification, and owns the final claim. CK selects or changes the main-agent model. Model workers and

@@ -17,7 +17,11 @@ Do not project the same toolkit-owned skill through multiple routes in one host.
 
 ## Codex App plugin
 
-Check out the exact commit that passed the source/release gate and remote CI, then register that checkout as a non-default local marketplace and install the plugin it exposes. After a release is published, its tag must resolve to those same bytes and may be used instead:
+For a published release, use the exact commit that passed its source/release gate and remote CI;
+its tag must resolve to the same bytes. For an authorized local development install, use the locally
+validated canonical commit and a single cachebuster suffix. Remote publication, remote CI, and a
+formal release review are not prerequisites for that narrower claim. Register the selected checkout
+or exact staged projection as a non-default local marketplace and install the plugin it exposes:
 
 ```powershell
 codex plugin marketplace add <repository-root>
@@ -94,7 +98,8 @@ The public receipt schema validates closed vocabulary and local shape. Machine a
 
 If the host already has loose skills with the same names, run the managed installer without `--apply` first. Do not overwrite or delete conflicts during initial proof. Prove one uniquely changed toolkit behavior in a fresh context, then follow the recoverable, one-skill-at-a-time procedure in [`migration.md`](migration.md).
 
-For every host, an update is complete only when all four identities agree:
+Report installation and activation separately. A local installation is verified when the first
+three identities agree; claim fresh-host activation only after the fourth is observed:
 
 1. canonical source commit or immutable release tag;
 2. package/profile version and exact installed bytes;
