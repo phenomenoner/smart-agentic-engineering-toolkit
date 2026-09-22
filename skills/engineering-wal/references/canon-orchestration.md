@@ -61,15 +61,25 @@ When CK activates PMO stance, the main agent remains the PM: it coordinates, int
 verification, and owns the final claim. CK selects or changes the main-agent model. Model workers and
 reviewers are bounded execution substrates, not amendment, readiness, or publication authorities.
 
+When assessing delegation benefit, compare estimated monetary cost as well as latency. Use
+model-specific input/output/cached-token prices across the parent, worker, duplicate reads,
+coordination and verification; more total tokens can still cost less with a cheaper authorized
+worker. Financial savings can justify bounded delegation without a speed gain. Use current available
+pricing, disclose missing rates, preserve quality and model/effort authority, and never present an
+estimated saving as measured billing evidence. Raw token count alone is not the financial cost.
+
 After Baton selects delegation and the host exposes a verified `delegate_minion` route:
 
 - the `Luna/max` execution pool defaults to a Prime Agent minion for stable bounded implementation,
   exact-path generation, or low-judgment scouting with cheap falsifiers;
-- every minion task declares `provider`, `model`, and `reasoning_effort`, and the main agent accepts the
-  result only when the returned effective route matches the request;
-- the `Terra/high` review pool may use either a native Hermes subagent or a Prime Agent minion according
-  to task complexity, context-isolation needs, and the cheapest route that preserves independent
-  review; and
+- every minion task declares `provider`, `model`, and `reasoning_effort`. Verify the explicit route
+  configuration and reject an observed effective-route mismatch. Distinguish invocation evidence
+  from per-request telemetry; if the host does not expose that telemetry, state the limit instead of
+  claiming an effective-route readback or treating its absence as a mismatch;
+- the `Terra/high` review pool uses an exposed route that can explicitly bind that model and effort.
+  A native Hermes subagent is eligible only when its actual isolated routing supports Terra/high;
+  a globally Luna-pinned `delegate_task` is not a reviewer override. Do not toggle shared config to
+  dispatch a reviewer. Use an eligible explicit minion or isolated host-native reviewer route; and
 - the main agent reads the live bytes or target, resolves conflicts, and runs the shared verification.
   Worker or reviewer completion is evidence, never acceptance by itself.
 

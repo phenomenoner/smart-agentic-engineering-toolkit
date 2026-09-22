@@ -314,6 +314,12 @@ to the single sealed primary report, and requires an auditor identity distinct
 from that primary reviewer. Do not silently treat a narrow audit as a second
 blind lane.
 
+Require formal narrow reviewers to emit the validator-native `batch-review-cross-audit.v1`
+envelope. An ad-hoc `batch-narrow-audit.v1` report is not validator-compatible. Preserve a useful
+non-native report unchanged as raw evidence; create a separate hash-bound native adapter citing
+that report and validate it through `validate-synthesis`. Do not rewrite the original report to
+make its schema appear native. This is an intake compatibility rule, not another reviewer or wave.
+
 ## Validate the report
 
 Require `references/review-report.schema.json`. Then run:

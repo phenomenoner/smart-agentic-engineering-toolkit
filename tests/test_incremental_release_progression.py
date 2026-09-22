@@ -86,7 +86,11 @@ def test_release_progression_contract_is_owned_and_incremental() -> None:
 
     assert "intake, binding, or review-tool defect" in batch_review.lower()
     assert "does not become a candidate-behavior finding" in batch_review.lower()
-    assert "first executable seam" in implementation.lower()
+    # Ordinary edits use their diff; exact identity is conditional on the claim.
+    normalized = " ".join(implementation.lower().split())
+    assert "use the diff and exact meaningful checks as the ordinary change record" in normalized
+    assert "bind git objects and artifact hashes only when" in normalized
+    assert "reacquire only evidence invalidated" in normalized
     assert "does not activate formal release machinery" in implementation.lower()
 
 

@@ -14,7 +14,10 @@ foreach ($requiredText in @(
     'tools.write_stdin',
     'await functions.wait',
     'Never fire-and-forget this continuation',
-    'Do not use the default short continuation window',
+    # Historical fixed-window wording was retired in favor of the active host contract.
+    'within the active host''s communication',
+    'not a universal host requirement',
+    'Honor required progress communication',
     'If the turn emits `final`, the cell is not a wake',
     '## Native collaboration fan-in',
     'Never build a short `wait_agent` loop',

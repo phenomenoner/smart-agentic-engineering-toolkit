@@ -93,7 +93,10 @@ Classify version impact:
 ## Validate and submit
 
 Run the repository validator, the affected direct and non-activation cases, relevant conflict cases,
-and public hygiene/provenance checks. Do not claim improvement from prose alone when the failure was
+and public hygiene/provenance checks. If a public lock inventories Git-tracked files, stage only the
+intended new paths before generating the lock; otherwise a pre-commit pass can omit new files and
+fail immediately after commit. Validate the lock again against the committed tree before installing
+or claiming an exact candidate. Do not claim improvement from prose alone when the failure was
 behavioral.
 
 Use only the effects authorized by the active request. Local commit authority is not GitHub write

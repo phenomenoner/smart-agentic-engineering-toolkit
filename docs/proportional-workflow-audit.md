@@ -23,7 +23,7 @@ authorization remain runtime-specific; this document is an applicability note, n
 
 Source validation, one six-scenario read-only routing exercise, and local package readback support
 the maintenance claim. They do not establish end-to-end Astra workflow performance or a complete
-fresh-task behavior evaluation; the ten authored scenarios remain `NOT_RUN`.
+fresh-task behavior evaluation; the authored scenarios remain `NOT_RUN`.
 
 ## Changes
 

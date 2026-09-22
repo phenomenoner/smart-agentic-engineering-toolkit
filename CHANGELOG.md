@@ -4,6 +4,19 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Count net financial savings as a delegation benefit even with more tokens and no latency gain.
+  Use model-specific input/output/cached-token prices across parent, workers and coordination;
+  preserve authorized routes and distinguish estimated savings from measured billing.
+
+- Require tracked-file public locks to include newly staged intended paths and pass post-commit
+  validation before exact-candidate installation claims; pre-commit validation alone can miss new files.
+
+- Clarify that the optional Hermes reviewer route must actually isolate Terra/high rather than
+  reusing a globally Luna-pinned worker or toggling shared config. Separate configured routing
+  from unavailable per-request telemetry; reject observed mismatches without inventing readback.
+- Preserve narrow-review evidence in its original form while adapting non-native reports to the
+  existing validator envelope. No new reviewer, schema or mandatory gate is introduced.
+
 - Keep already authorized implementation moving after specification and diagnosis; preserve
   specification-only and diagnosis-only stops. Narrow temporal-ownership activation to concrete
   mutable check-before-destructive-effect races and make ordinary test/diff evidence sufficient
