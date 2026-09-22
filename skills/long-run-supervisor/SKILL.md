@@ -12,6 +12,12 @@ metadata:
 
 Keep the goal or main agent responsible for intent and judgment. Delegate only process observation to `scripts/long-run-supervisor.ps1`; `Wait` and the optional `WaitMany` stay silent while their configured condition is unmet.
 
+Use direct execution when the host already preserves output and supplies a bounded session wait.
+Do not add a supervisor just because a command is long. Active runtime communication and wait limits
+take precedence over the historical host timings below. Resume the same process/session or cell
+within its declared deadline; a required transport continuation does not restart the command or
+create another supervisor watcher. Native collaboration needs only its native wait.
+
 <!-- TOOLKIT-CONTRIBUTION-PROTOCOL:v1 -->
 ## Improve this skill upstream
 
@@ -86,7 +92,7 @@ while (result.session_id !== undefined) {
   result = await tools.write_stdin({
     session_id: result.session_id,
     chars: "",
-    yield_time_ms: 300000,
+    yield_time_ms: 60000,
     max_output_tokens: 10000
   });
 }
@@ -118,14 +124,14 @@ strategy.
 
 The continuation call itself must be synchronously awaited by the active agent
 turn. In a runtime that exposes `functions.wait`, call it directly with the
-exact returned `cell_id`, a long `yield_time_ms` (use the longest host-supported
-window; `120000` ms is the baseline for this runtime), and a sufficient output
-budget. Do not use the default short continuation window for a long task:
+exact returned `cell_id`, a `yield_time_ms` within the active host's communication
+limit, and a sufficient output budget. Choose the longest permitted interval
+within the task deadline; the following 60-second example is not a universal host requirement:
 
 ```javascript
 await functions.wait({
   cell_id: "<exact running cell id>",
-  yield_time_ms: 120000,
+  yield_time_ms: 60000,
   max_tokens: 10000
 });
 ```
@@ -136,9 +142,8 @@ the same cell. Those shapes allow the agent turn to regain control before the
 continuation window or terminal event and therefore destroy the intended
 substantive blocking behavior. If the long continuation window expires while
 the exact cell is still running, the next execution action is another awaited
-long `functions.wait` for that same `cell_id`; do not interleave commentary,
-diagnostics, or unrelated tools unless a newly steered user message requires an
-immediate response.
+`functions.wait` for that same `cell_id` within the deadline. Honor required progress communication
+and new user steering; do not turn those boundaries into command restarts or supervisor-state polls.
 
 This is synchronous continuation, not post-turn wake. It is appropriate only
 when the caller deliberately accepts that steering/status messages may wait

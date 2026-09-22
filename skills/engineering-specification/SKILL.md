@@ -22,7 +22,8 @@ metadata:
 Turn an underspecified material engineering request into a compact, reviewable, falsifiable
 specification. Capture what must happen, what must not happen, who owns each decision or effect,
 which compatibility and failure boundaries matter, and how the claim can be checked. Stop at the
-specification boundary: a specification is not an implementation plan with implied authorization.
+specification boundary when the user requested specification only. A specification does not grant
+new authority, but it does not revoke implementation already authorized by the active request.
 
 This skill is narrow and optional. A task may proceed directly when its contract is already
 sufficient, and specifying does not impose a universal implement-review-test workflow.
@@ -190,13 +191,12 @@ disposition, verification depth, invalidation, and review scope stay on the smal
    seam, lifecycle scenario, or an explicitly authorized live check). Do not call a case passed
    merely because a plan or configuration exists.
 
-7. **Handoff and stop.** Return a compact specification packet with explicit non-goals, risks,
-   assumptions, open decisions, evidence gaps, and the next safe action. State whether a later
-   implementation request would have enough information, but do not edit implementation files or
-   claim that implementation, tests, review, release, or delivery has happened. If a required
-   decision or authority is missing, stop with `BLOCKED` and identify exactly what is needed. When a
-   finding would expand the contract, include the scope-change checkpoint instead of manufacturing
-   new acceptance criteria.
+7. **Handoff within the active request.** Record the compact contract, material open decisions,
+   evidence gaps, and next action. If the user already requested implementation and the contract is
+   now sufficient, continue to implementation without a second permission question or ending the
+   turn. Stop at the specification for a specification-only request, a missing material owner
+   decision, or an unauthorized effect. A scope expansion still requires the scope-change
+   checkpoint; a phase change within existing authority does not.
 
 Do not automatically create a WAL, invoke a reviewer, run a full suite, start a worker, use Canvas
 or CodeGraph, call AAR, or contact an external provider. Those capabilities may be selected by
@@ -246,8 +246,8 @@ Stop and report instead of guessing when:
   stable ownership condition is defined;
 - the requested proof requires an external or live operation that is not authorized;
 - the evidence is too ambiguous to distinguish a hypothesis from an observed fact; or
-- the specification is complete and the next phase would be implementation, review, publication,
-  or live operation.
+- the next phase is outside the user's existing authority, including implementation after a
+  specification-only request or an unapproved publication or live operation.
 
 Do not silently edit installed projections, plugin caches, third-party sources, or generated
 artifacts while specifying. Do not widen scope to resolve an open question, and do not turn an

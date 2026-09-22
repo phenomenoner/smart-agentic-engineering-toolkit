@@ -31,13 +31,13 @@
     },
     {
       "path": "AGENTS.md",
-      "length": 5158,
-      "sha256": "d044ee446c8bd42f2063a8b3f4a07134f8cc912117b893f62c21268280f03a7b"
+      "length": 4985,
+      "sha256": "38b495e59b3ed039bbc288ff3c5d82c8e0ad2ff8ff02d0485fca07f91fcbf100"
     },
     {
       "path": "CHANGELOG.md",
-      "length": 7585,
-      "sha256": "8335da2ebe4e4135105c2c61a301d4c8636c685b4e231ab26b1561a809073247"
+      "length": 8473,
+      "sha256": "593a1ec815af77a663cbd59856de739c99473a9f34ba32e5555964a84dd6866c"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -111,8 +111,8 @@
     },
     {
       "path": "docs/installation.md",
-      "length": 8053,
-      "sha256": "7db6b5a1c40b6bff84d477ac0eb0cbdc0819fb2a17e223b65ad284e644e37145"
+      "length": 8380,
+      "sha256": "dcbf3373c96229e001073e17310a45ee84ab07ea584346dd27c4194dc25a20ce"
     },
     {
       "path": "docs/integrations.md",
@@ -130,6 +130,11 @@
       "sha256": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41"
     },
     {
+      "path": "docs/proportional-workflow-audit.md",
+      "length": 2793,
+      "sha256": "9376e057e2c4e240ea193cc607900b18f05dee29019313fa122ad195f06b6e6a"
+    },
+    {
       "path": "docs/retired-skills.md",
       "length": 670,
       "sha256": "0134fae41c9f4be165508a6ad4651668696bf5835fbb8ddec644fd1ff8aa14d9"
@@ -141,8 +146,8 @@
     },
     {
       "path": "evals/README.md",
-      "length": 5631,
-      "sha256": "86c35c1ed9b45520d7465e1242499ebdfc5721538d68f652adce280107bba15e"
+      "length": 6009,
+      "sha256": "f42d5883002f7bcc83a7aab941e5475332d2144b6325225c3f65288b4f91f4ba"
     },
     {
       "path": "evals/cases/acceptance-evidence-origin.json",
@@ -161,8 +166,8 @@
     },
     {
       "path": "evals/cases/canon-orchestration.json",
-      "length": 9874,
-      "sha256": "008d0c43b3c7e2b909c264926a6f8050a73a53bc2f821f47f36ccbfefc9c62be"
+      "length": 9964,
+      "sha256": "af2928fc9f14973b8cad02a8e085bb60fa85337415edf6d537841be22a051eb2"
     },
     {
       "path": "evals/cases/incremental-release-progression.json",
@@ -173,6 +178,11 @@
       "path": "evals/cases/proportional-risk-and-bounded-loops.json",
       "length": 6754,
       "sha256": "afb09c75d70c09b0850c5595098777b0401375a63fd075f55f5090ee382af52a"
+    },
+    {
+      "path": "evals/cases/proportional-workflow.json",
+      "length": 5985,
+      "sha256": "61118c0701bdb67551d6138fd29acac9b70c408960037a574d5cc56d0a447082"
     },
     {
       "path": "evals/cases/unit-first-composite-seams.json",
@@ -286,8 +296,8 @@
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
-      "length": 22537,
-      "sha256": "273ad2351a45db43248efd7aacb4359f2a3ebef0f402726bed596357e5b76f67"
+      "length": 22689,
+      "sha256": "675e48318b1a0a870d18da534f9234600f72e34d5461f2c852a2e481cc07697e"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -386,8 +396,8 @@
     },
     {
       "path": "skills/codegraph-first-navigation/SKILL.md",
-      "length": 7149,
-      "sha256": "e7d897489fca51b45f1463860b6ae969dc634edb31fa8189a62623a0fd90f116"
+      "length": 7201,
+      "sha256": "2ca37ad71b9c01a5ae3d2540f2e54115206a1b6cc395a5ecc49059695346f802"
     },
     {
       "path": "skills/codegraph-first-navigation/agents/openai.yaml",
@@ -416,8 +426,8 @@
     },
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
-      "length": 18320,
-      "sha256": "d899d7fcb3ad7bd49695695ec06e3140d4f5b21e877ad2fe502775d87f576aa6"
+      "length": 18396,
+      "sha256": "20fb1aced41d7c29814a35ea82d01344d2a2d57cc73834f5217cbfdd7419ddc8"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
@@ -441,8 +451,8 @@
     },
     {
       "path": "skills/engineering-debugging/SKILL.md",
-      "length": 6473,
-      "sha256": "62c886184f18e1125b4e796c30d42c3df283eb92506d49fe4e46999087fcbbd5"
+      "length": 7038,
+      "sha256": "ad65ff69a1fae6940993545d97a7f338b01b880ccca0c99c2c3efeef49120300"
     },
     {
       "path": "skills/engineering-debugging/agents/openai.yaml",
@@ -451,8 +461,8 @@
     },
     {
       "path": "skills/engineering-implementation/SKILL.md",
-      "length": 11528,
-      "sha256": "e173241952dba922befba5c153867ecbbef4100cfae54df39269183d64a746e7"
+      "length": 11840,
+      "sha256": "c6ca7dc993538582b01877c0bf43cde373d09b37f0e20ffd40d3cb5c2ad26489"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -461,8 +471,8 @@
     },
     {
       "path": "skills/engineering-specification/SKILL.md",
-      "length": 19740,
-      "sha256": "42b0f392048568b79a5f97b1938f4ad328de12ee832b9228f679b97f3793a97a"
+      "length": 19820,
+      "sha256": "4119ed39659dcf91a3b1a2f783981f42dd8eb0d62978999757359c99f1ec827c"
     },
     {
       "path": "skills/engineering-specification/agents/openai.yaml",
@@ -471,8 +481,8 @@
     },
     {
       "path": "skills/engineering-wal/SKILL.md",
-      "length": 8299,
-      "sha256": "5454182d2532a76954dd9e1c435bd316e982fac5a1dc83e8ff8f3726913c5163"
+      "length": 8908,
+      "sha256": "84cc62a8a430aaf7b86b72ba5accb4007769d3f526ad347011ea2a8204f29aed"
     },
     {
       "path": "skills/engineering-wal/agents/openai.yaml",
@@ -481,8 +491,8 @@
     },
     {
       "path": "skills/engineering-wal/references/canon-orchestration.md",
-      "length": 24496,
-      "sha256": "6cb41948671ac06b32576ce654710cb5670f01fb346e324019dc221031d73bfc"
+      "length": 24926,
+      "sha256": "39e922291480aa2e353f94ae03b8234df5b369d38aae1ad09ded1b9356d5d08d"
     },
     {
       "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
@@ -491,8 +501,8 @@
     },
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
-      "length": 5615,
-      "sha256": "4900d06e9896fde62f820e8d40dcb6d0487429fd58fc5e75ca788a5a313fce86"
+      "length": 6163,
+      "sha256": "addec26d4c9ef3f2dd2314beb722cfbd969f58f52ac9a2ea7ca757724797fd88"
     },
     {
       "path": "skills/evolve-engineering-toolkit/agents/openai.yaml",
@@ -521,8 +531,8 @@
     },
     {
       "path": "skills/long-run-supervisor/SKILL.md",
-      "length": 25522,
-      "sha256": "c950b00fede7e856317d0a0e4f764c5310a0fd16af6b05199ff4947b5336a319"
+      "length": 26040,
+      "sha256": "2bc901f96d9c859aa76967165f202815cad7a7aec87f20ddb189e70bed7913a6"
     },
     {
       "path": "skills/long-run-supervisor/agents/openai.yaml",

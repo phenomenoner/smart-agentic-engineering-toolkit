@@ -11,7 +11,10 @@ metadata:
 # Evolve Engineering Toolkit
 
 Make useful learning flow back to the single canonical source without turning every local preference
-into a pull request or silently forking installed behavior.
+into a pull request or silently forking installed behavior. A user-authorized local edit, commit,
+and installation may finish locally. Git history, a concise change note, and the relevant eval are
+sufficient for that claim; do not create a separate PR packet or request publication permission
+merely to close local work.
 
 <!-- TOOLKIT-CONTRIBUTION-PROTOCOL:v1 -->
 ## Improve this skill upstream
@@ -93,8 +96,11 @@ Run the repository validator, the affected direct and non-activation cases, rele
 and public hygiene/provenance checks. Do not claim improvement from prose alone when the failure was
 behavioral.
 
-If GitHub writes are authorized, create a focused branch, commit only intended bytes, push, open a
-**draft** PR, and read back the remote base/head and PR URL. Otherwise provide:
+Use only the effects authorized by the active request. Local commit authority is not GitHub write
+authority; neither a draft PR nor a remote CI run is a prerequisite for an authorized local install.
+If publication is requested and GitHub writes are authorized, create a focused branch, commit only
+intended bytes, push, open a **draft** PR, and read back the remote base/head and PR URL. For a proposal
+or upstream handoff without local delivery authority, provide:
 
 ```text
 Canonical base:

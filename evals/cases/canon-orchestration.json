@@ -87,7 +87,7 @@
     {
       "id": "CANON-PMO-PRIME-MINION-EXECUTION-DEFAULT",
       "class": "routing",
-      "promptOrCondition": "CK activates PMO stance for a stable bounded implementation slice; Baton selects delegation, a verified delegate_minion route is exposed, and Luna/max is eligible.",
+      "promptOrCondition": "The owner selects the CK / Hermes PMO routing adapter for a stable bounded implementation slice; Baton selects delegation, a verified delegate_minion route is exposed, and Luna/max is eligible.",
       "expectedSelected": [
         "engineering-implementation",
         "engineering-wal"
@@ -99,7 +99,7 @@
     {
       "id": "CANON-PMO-TERRA-REVIEW-ROUTE-CHOICE",
       "class": "routing",
-      "promptOrCondition": "CK activates PMO stance for an independent Terra/high review after candidate bytes and acceptance are frozen; both native subagent and verified Prime minion routes are available.",
+      "promptOrCondition": "The owner selects the CK / Hermes PMO routing adapter for an independent Terra/high review after candidate bytes and acceptance are frozen; both native subagent and verified Prime minion routes are available.",
       "expectedSelected": [
         "batch-complete-independent-review",
         "engineering-wal"
@@ -113,7 +113,7 @@
     {
       "id": "CANON-PMO-MINION-UNAVAILABLE-FALLBACK",
       "class": "routing-negative",
-      "promptOrCondition": "CK activates PMO stance and Luna/max work is delegable, but delegate_minion is absent, unsupported, or fails before useful work.",
+      "promptOrCondition": "The owner selects the CK / Hermes PMO routing adapter and Luna/max work is delegable, but delegate_minion is absent, unsupported, or fails before useful work.",
       "expectedSelected": [
         "engineering-implementation"
       ],

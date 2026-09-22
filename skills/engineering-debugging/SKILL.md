@@ -48,7 +48,9 @@ Do not mutate production, user data, credentials, remote state, or unrelated rep
 a reproducer. If diagnosis-only was requested, stop before editing even after finding the cause.
 
 Finding severity does not grant scope. Diagnosis may uncover `IN_SCOPE`, `SCOPE_GUARD`,
-`ADJACENT_RISK`, or `OUT_OF_SCOPE` work, but it does not authorize any repair. Report the
+`ADJACENT_RISK`, or `OUT_OF_SCOPE` work, but it does not itself authorize repair. A request to fix the
+failure already authorizes its in-scope diagnosis, repair, and focused verification; continue when
+the cause is established without asking the user to authorize that same repair again. Report the
 classification and evidence against the original deliverable and claim. If a proposed response would
 change acceptance, release rigor, the system boundary, writable ownership, or external effects,
 route a scope-change checkpoint to `engineering-specification` before implementation.
@@ -75,7 +77,7 @@ being promoted to release-critical severity.
 
 ## Maintain and falsify hypotheses
 
-Keep a short table with:
+For competing hypotheses that benefit from comparison, keep a short table with:
 
 - hypothesis;
 - evidence it explains;
@@ -83,12 +85,16 @@ Keep a short table with:
 - result;
 - remaining uncertainty.
 
+For one simple, directly falsifiable hypothesis, the observation and result are sufficient; do not
+create a hypothesis ledger or a separate report merely to enter the implementation phase.
+
 Test the cheapest high-information hypothesis first. Do not promote correlation, timing proximity,
 or a green retry to root cause. When a change makes the symptom disappear, test the causal boundary
 or a nearby counterexample before concluding.
 
-For concurrency, ownership, retry, rollback, cleanup, or identity-reuse seams, use
-`specify-temporal-ownership` to make the forbidden trace and linearization requirement explicit.
+Use `specify-temporal-ownership` when a mutable resource's identity, ownership, authority, or state
+is checked before a destructive or irreversible effect and another actor or generation can change
+it in between. Pure reads, ordinary retries, and single-owner local state do not trigger it.
 For a stable incident that should become a reusable replay, hand off to `incident-to-regression`
 after diagnosis rather than mixing incident packaging into root-cause search.
 
