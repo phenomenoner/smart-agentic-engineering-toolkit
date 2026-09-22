@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 8945,
-      "sha256": "25820b1cac54513270127663a5f6f07b6e1e9cf603368763f15f4c1458394038"
+      "length": 9147,
+      "sha256": "68edf1911a6f68963d0e33a168a987c677e3b177edd8dd5f6bca160673744f51"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -501,8 +501,8 @@
     },
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
-      "length": 6163,
-      "sha256": "addec26d4c9ef3f2dd2314beb722cfbd969f58f52ac9a2ea7ca757724797fd88"
+      "length": 6456,
+      "sha256": "a9e928470123fb616be38beee703dcb9990b8699b7c1f42bb7587333bf1f78ff"
     },
     {
       "path": "skills/evolve-engineering-toolkit/agents/openai.yaml",
@@ -633,6 +633,11 @@
       "path": "tests/test_first_principles_eval_contracts.py",
       "length": 2108,
       "sha256": "8c61f88b027b1a6d5aad8ce9a1268e80d694620cb3486cd8b75110081226037b"
+    },
+    {
+      "path": "tests/test_hermes_policy_boundaries.py",
+      "length": 1224,
+      "sha256": "110e4c0e70a98270ffbd6a180b8b84213d91cb73c38a63fcb76133a49088585b"
     },
     {
       "path": "tests/test_incident_to_regression_principles.py",

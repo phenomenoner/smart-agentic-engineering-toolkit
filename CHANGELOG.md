@@ -4,6 +4,9 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+- Require tracked-file public locks to include newly staged intended paths and pass post-commit
+  validation before exact-candidate installation claims; pre-commit validation alone can miss new files.
+
 - Clarify that the optional Hermes reviewer route must actually isolate Terra/high rather than
   reusing a globally Luna-pinned worker or toggling shared config. Separate configured routing
   from unavailable per-request telemetry; reject observed mismatches without inventing readback.
