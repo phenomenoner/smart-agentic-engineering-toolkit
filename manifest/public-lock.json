@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 9147,
-      "sha256": "68edf1911a6f68963d0e33a168a987c677e3b177edd8dd5f6bca160673744f51"
+      "length": 9344,
+      "sha256": "dc4b7dd34e56010e5852249077e46076580d96f9b4d2eea5ac7c4a45e6062378"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -181,8 +181,8 @@
     },
     {
       "path": "evals/cases/proportional-workflow.json",
-      "length": 8011,
-      "sha256": "68d02709496f3c389b5ff3474cea6b22e15c69e3469b0ff76a0b00f82c1a9d2c"
+      "length": 8706,
+      "sha256": "b44b044fef4b11fbdfbb1f3675e722ea17eb3861c425c3f0d6d22915d4a496cf"
     },
     {
       "path": "evals/cases/unit-first-composite-seams.json",
@@ -491,8 +491,8 @@
     },
     {
       "path": "skills/engineering-wal/references/canon-orchestration.md",
-      "length": 25310,
-      "sha256": "3707136ad47072153c6ecbb6fa0695b4ef68c1fd44013e0c7b96f278751851cc"
+      "length": 25669,
+      "sha256": "88ee93e56b4b8b7242272e30763805f2f6f9bdc11d9ba5166a9fbee8e8e4772c"
     },
     {
       "path": "skills/engineering-wal/scripts/validate_orchestration_transition.py",
@@ -636,8 +636,8 @@
     },
     {
       "path": "tests/test_hermes_policy_boundaries.py",
-      "length": 1224,
-      "sha256": "110e4c0e70a98270ffbd6a180b8b84213d91cb73c38a63fcb76133a49088585b"
+      "length": 1660,
+      "sha256": "a8b972800b7b268cea9a61a9fee42b6e387786895cd1dfefb9754cadd6d0a011"
     },
     {
       "path": "tests/test_incident_to_regression_principles.py",

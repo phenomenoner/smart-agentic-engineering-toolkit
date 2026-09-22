@@ -23,3 +23,11 @@ def test_narrow_audit_preserves_original_and_uses_existing_schema():
     assert '`batch-narrow-audit.v1` report is not validator-compatible' in text
     assert 'non-native report unchanged as raw evidence' in text
     assert 'validate it through `validate-synthesis`' in text
+
+
+def test_token_savings_are_a_benefit_without_latency_gain():
+    text = (ROOT / 'skills/engineering-wal/references/canon-orchestration.md').read_text()
+    assert 'total token cost as well as latency' in text
+    assert 'savings can justify bounded delegation without a speed gain' in text
+    assert 'duplicate reads, coordination and verification overhead' in text
+    assert 'estimated saving as measured billing evidence' in text

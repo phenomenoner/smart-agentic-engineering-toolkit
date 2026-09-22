@@ -167,6 +167,15 @@
       "expectedNotSelected": [],
       "observablePass": "Preserve original bytes; validate a separately bound batch-review-cross-audit.v1 adapter through validate-synthesis.",
       "prohibitedEffects": "No rewriting the raw report or launching another reviewer merely for envelope compatibility."
+    },
+    {
+      "id": "DELEGATION-NET-TOKEN-SAVINGS",
+      "class": "workflow",
+      "promptOrCondition": "A bounded independently verifiable worker task saves parent context and implementation tokens. Including worker context, duplicate reads, coordination and verification, estimated total token cost is lower but elapsed time is unchanged.",
+      "expectedSelected": [],
+      "expectedNotSelected": [],
+      "observablePass": "Treat net token savings as a valid delegation benefit while retaining route policy, quality, scope and bounded execution.",
+      "prohibitedEffects": "No requirement for a latency gain, fabricated billing measurement, model exception or wasteful fan-out."
     }
   ]
 }

@@ -61,6 +61,11 @@ When CK activates PMO stance, the main agent remains the PM: it coordinates, int
 verification, and owns the final claim. CK selects or changes the main-agent model. Model workers and
 reviewers are bounded execution substrates, not amendment, readiness, or publication authorities.
 
+When assessing delegation benefit, include total token cost as well as latency: parent context
+saved versus worker input/output, duplicate reads, coordination and verification overhead. Net token
+savings can justify bounded delegation without a speed gain; preserve quality and authority, and do
+not present an estimated saving as measured billing evidence.
+
 After Baton selects delegation and the host exposes a verified `delegate_minion` route:
 
 - the `Luna/max` execution pool defaults to a Prime Agent minion for stable bounded implementation,
