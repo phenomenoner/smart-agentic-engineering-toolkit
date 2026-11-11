@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.5.0",
+  "toolkitVersion": "0.6.0",
   "status": "released",
   "caseFields": [
     "id",
@@ -641,7 +641,7 @@
     {
       "id": "RELEASE-01",
       "class": "release",
-      "promptOrCondition": "Publish toolkit 0.5.0.",
+      "promptOrCondition": "Publish toolkit 0.6.0.",
       "expectedSelected": [
         "batch-complete-independent-review"
       ],
@@ -650,17 +650,17 @@
     }
   ],
   "sourceHashes": {
-    "productSpecification": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41",
-    "catalog": "80229ff75cf5e1c8ce2d73bd743b4cb4173182cf91be4320b9983d5216c5f793"
+    "productSpecification": "c5b19c33f479cece6e65d34b503d6fe521ff2bdc8ab6667148a04f36896ff3e4",
+    "catalog": "4db0f1fd12791971a0edd84183bc2fb6d588af0c8adb42d8af66730a4c0f5f24"
   },
   "frozenInputs": [
     {
       "name": "docs/product-specification.md",
-      "sha256": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41"
+      "sha256": "c5b19c33f479cece6e65d34b503d6fe521ff2bdc8ab6667148a04f36896ff3e4"
     },
     {
       "name": "catalog/skills.json",
-      "sha256": "80229ff75cf5e1c8ce2d73bd743b4cb4173182cf91be4320b9983d5216c5f793"
+      "sha256": "4db0f1fd12791971a0edd84183bc2fb6d588af0c8adb42d8af66730a4c0f5f24"
     }
   ]
 }

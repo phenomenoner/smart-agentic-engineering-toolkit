@@ -4,6 +4,18 @@ All notable changes are documented here. Versions follow Semantic Versioning.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-11
+
+- Add explicit and implicit state-machine investigation and optimization to `engineering-debugging`,
+  with the portable `@state-audit` prompt hook and a detailed optional reference.
+- Trace state owners, flags, quantities, timing, recovery, effect guards and user-visible projections.
+  Evaluate changes by functional outcomes, correctness, performance and diagnosability, and support
+  an evidence-backed decision to keep the existing design.
+- Preserve inventory-only authority and carry authorized optimization through implementation and
+  focused verification. Add supplemental activation, non-activation and workflow contract cases.
+- Align plugin, profile and release metadata with version 0.6.0 while retaining the historical
+  evaluation corpora and distinguishing source-contract checks from fresh-host behavior evidence.
+
 - Require acceptance reports to distinguish synthetic tests, recorded real-event replay, and actual
   backend execution. Unverified real-dispatch claims include separate automation/budget and precise
   human-assistance assessments, preserving existing approvals and bounded execution.

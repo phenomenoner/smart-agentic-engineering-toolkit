@@ -1,11 +1,17 @@
 # Behavior evaluation
 
+`cases/state-machine-audit.json` adds 13 supplemental 0.6.0 contracts for the optional `@state-audit`
+prompt hook, proactive explicit and implicit state inventories, authority, justified no-change
+decisions, late results, scope isolation, performance equivalence, missing graphs and actual behavior
+reporting. Quoted markers and cosmetic edits are negative cases. `evidenceStatus` remains `NOT_RUN`
+until fresh host executions provide behavioral evidence. Source tests validate these contracts.
+
 `cases/acceptance-evidence-origin.json` covers evidence-origin reporting, partial real dispatch,
 automatic testing awaiting budget, existing approval reuse, human-only steps, mixed workflows,
 unknown feasibility, and the direct path for local changes. These are authored scenarios with
 `evidenceStatus: NOT_RUN`; corpus validation does not prove fresh-agent compliance.
 
-`cases/acceptance.json` preserves the 63-case baseline size and coverage goals. The 0.5.0 release
+`cases/acceptance.json` preserves the 63-case baseline size and coverage goals. The 0.6.0 release
 updates its release identity, current catalog/specification bindings, and retirement-sensitive
 routing cases without adding cases. Static validation
 proves only that the catalog has positive and negative coverage. It does **not** prove that a host

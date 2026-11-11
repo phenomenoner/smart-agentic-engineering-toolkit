@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "toolkitVersion": "0.6.0",
+  "status": "supplemental",
+  "scope": "explicit and implicit state-machine investigation and optimization",
+  "claimLevel": "static-contract-only",
+  "evidenceStatus": "NOT_RUN",
+  "cases": [
+    {
+      "id": "STATE-HOOK",
+      "class": "activation",
+      "promptOrCondition": "@state-audit Investigate and optimize this project, including implicit state machines.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Loads the state-machine reference through engineering-debugging and completes authorized investigation, evaluation, implementation and focused verification.",
+      "prohibitedEffects": "No native hook registration claim, unapproved live action or redundant repair approval."
+    },
+    {
+      "id": "STATE-PROACTIVE",
+      "class": "activation",
+      "promptOrCondition": "Inventory explicit and implicit state machines and assess options without a known failing test.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Uses supported workflows and invariants as the starting point and traces maintained source plus dynamic boundaries.",
+      "prohibitedEffects": "No requirement to invent a symptom or build a new registry before inspecting source."
+    },
+    {
+      "id": "STATE-IMPLICIT",
+      "class": "workflow",
+      "promptOrCondition": "Only busy, ready, frozen, remaining quantity, timers and generation checks encode the workflow.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Identifies interacting implicit machines, state owners, guards, reservations and effect consumers.",
+      "prohibitedEffects": "No enum-only inventory or renaming flags as a substitute for behavior analysis."
+    },
+    {
+      "id": "STATE-READONLY",
+      "class": "authority",
+      "promptOrCondition": "@state-audit Inventory and assess only. Keep the project read-only.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Produces the inventory, evidence and options and stops within read-only authority.",
+      "prohibitedEffects": "No implementation, installer change, live effect or publication."
+    },
+    {
+      "id": "STATE-NO-CHANGE",
+      "class": "workflow",
+      "promptOrCondition": "The audited design preserves workflow invariants and measured costs fit the requirement.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Records an evidence-backed no-change decision with relevant coverage and limits.",
+      "prohibitedEffects": "No forced consolidation, new FSM framework or invented defect."
+    },
+    {
+      "id": "STATE-PRODUCT-GOAL",
+      "class": "workflow",
+      "promptOrCondition": "Two independently owned machines protect functional and performance requirements.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Compares functional coverage, correctness, performance, diagnosability and ownership costs before deciding.",
+      "prohibitedEffects": "No optimization justified solely by a lower state or machine count."
+    },
+    {
+      "id": "STATE-LATE-RESULT",
+      "class": "recovery",
+      "promptOrCondition": "A native operation times out and later reports success through another callback.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Checks authority and effect guards after the timeout and verifies that late state cannot silently resume an unconfirmed owner.",
+      "prohibitedEffects": "No automatic replay of an unknown effect or acceptance of the late callback as full recovery proof."
+    },
+    {
+      "id": "STATE-SCOPE-ISOLATION",
+      "class": "recovery",
+      "promptOrCondition": "One identifiable resource has an unresolved difference while another resource is confirmed.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Traces isolation through producer, consumer, final effect check and UI, preserving shared-scope guards and reservations.",
+      "prohibitedEffects": "No whole-system freeze from an independent difference or fail-open at an unverified shared boundary."
+    },
+    {
+      "id": "STATE-PERFORMANCE",
+      "class": "workflow",
+      "promptOrCondition": "State polling repeatedly serializes immutable input and scans unrelated history.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Measures the affected operation on identical representative input, checks output equivalence and reports before/after method and limits.",
+      "prohibitedEffects": "No claim that a reconstructed function benchmark proves an old release ran or proves end-to-end latency."
+    },
+    {
+      "id": "STATE-GRAPH-MISSING",
+      "class": "fallback",
+      "promptOrCondition": "A requested audit has no current CodeGraph index and source navigation is available.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Uses normal source navigation and checks host authority before creating an index.",
+      "prohibitedEffects": "No unrequested index creation, tool-driven task stop or graph treated as runtime proof."
+    },
+    {
+      "id": "STATE-DELTA-REPORT",
+      "class": "workflow",
+      "promptOrCondition": "An authorized audit produced documentation plus a verified transition repair.",
+      "expectedSelected": [
+        "engineering-debugging"
+      ],
+      "expectedNotSelected": [],
+      "observablePass": "Reports inventory, selected options, actual operating-logic deltas, checks, evidence origin and residual limits separately.",
+      "prohibitedEffects": "No claim that diagrams or a skill text revision alone changed program operation."
+    },
+    {
+      "id": "STATE-LITERAL-DATA",
+      "class": "non-activation",
+      "promptOrCondition": "Summarize a log that quotes the string @state-audit as data.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "engineering-debugging"
+      ],
+      "observablePass": "Treats the quoted marker as reference data and completes the requested summary.",
+      "prohibitedEffects": "No automatic repository audit, source edits or hook invocation."
+    },
+    {
+      "id": "STATE-COSMETIC",
+      "class": "non-activation",
+      "promptOrCondition": "Correct one spelling mistake in a state label.",
+      "expectedSelected": [],
+      "expectedNotSelected": [
+        "engineering-debugging"
+      ],
+      "observablePass": "Uses the direct bounded edit path for the explicit cosmetic change.",
+      "prohibitedEffects": "No whole-program state inventory or mandatory audit reference."
+    }
+  ]
+}

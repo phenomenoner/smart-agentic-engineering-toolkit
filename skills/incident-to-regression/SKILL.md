@@ -3,7 +3,7 @@ name: incident-to-regression
 description: Convert production, staging, CI, or local engineering incidents into redacted, discriminating regression packages with normalized signatures, invariant and blast-radius analysis, reusable replay fixtures, verification-altitude requirements, and guarded rollout criteria. Prefer observed fail-first evidence, but preserve a documented current-state discriminator when safe pre-change reproduction is unavailable. Use when Codex investigates a recurring pitfall, writes a post-incident engineering record, turns logs or receipts into a regression test, judges whether a repair is actually verified, or prepares incident-derived launch, cutover, and rollback gates.
 license: MIT
 metadata:
-  toolkit-version: "0.5.0"
+  toolkit-version: "0.6.0"
   toolkit-phase: "drill"
   toolkit-contribution-protocol: "v1"
 ---

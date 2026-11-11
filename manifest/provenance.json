@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.5.0",
+  "toolkitVersion": "0.6.0",
   "repositoryLicense": "MIT",
   "canonicalOwner": "phenomenoner/smart-agentic-engineering-toolkit",
   "canonicalState": "the current repository is the canonical writable source for toolkit-owned skills; verified tags identify immutable releases and never create a second writable owner",
@@ -15,7 +15,7 @@
       "name": "engineering-debugging",
       "origin": "project-authored for this toolkit",
       "license": "MIT",
-      "modifications": "initial implementation from the frozen public product contract plus diagnosis-to-scope-change and risk-local bounded-fail-open disposition guards"
+      "modifications": "initial implementation from the frozen public product contract plus diagnosis-to-scope-change and risk-local bounded-fail-open disposition guards; optional explicit and implicit state-machine investigation, optimization and portable @state-audit prompt hook"
     },
     {
       "name": "engineering-implementation",

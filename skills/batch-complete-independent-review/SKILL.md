@@ -4,7 +4,7 @@ description: Review code and engineering changes without stopping at the first b
 license: MIT
 metadata:
   version: "0.4.0"
-  toolkit-version: "0.5.0"
+  toolkit-version: "0.6.0"
   toolkit-phase: "review"
   toolkit-contribution-protocol: "v1"
 ---

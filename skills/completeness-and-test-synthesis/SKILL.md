@@ -4,7 +4,7 @@ description: Engineering completeness and test-evidence synthesis for readiness 
 license: MIT
 metadata:
   version: "0.4.0"
-  toolkit-version: "0.5.0"
+  toolkit-version: "0.6.0"
   toolkit-phase: "evidence"
   toolkit-contribution-protocol: "v1"
 ---

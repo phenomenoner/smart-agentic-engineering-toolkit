@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "toolkitVersion": "0.5.0",
+  "toolkitVersion": "0.6.0",
   "algorithm": "sha256",
   "excludesSelf": "manifest/public-lock.json",
   "files": [
@@ -11,8 +11,8 @@
     },
     {
       "path": ".codex-plugin/plugin.json",
-      "length": 1329,
-      "sha256": "3c361e9ba50a1acb7d76724c0a81e684855bcfb5262a328c7d30ed6de9c564af"
+      "length": 1493,
+      "sha256": "f05e48fd6e677b695c25fee460a1aeb60e86ec943deb6e39bd40ea644bbee856"
     },
     {
       "path": ".gitattributes",
@@ -36,8 +36,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "length": 7585,
-      "sha256": "8335da2ebe4e4135105c2c61a301d4c8636c685b4e231ab26b1561a809073247"
+      "length": 8443,
+      "sha256": "75c78d15bfe63b7a229cc99430814c0d6e549a63a4e99f87e9ceee5d4630839d"
     },
     {
       "path": "CONTRIBUTING.md",
@@ -56,13 +56,13 @@
     },
     {
       "path": "README.en.md",
-      "length": 8126,
-      "sha256": "2351f487b6269ea8dae6ec33fdbade07dd3316acd4cc1901218e41f752a44b8a"
+      "length": 8172,
+      "sha256": "e3f3fe842493f65c1f86483e71c87f2ceee2184d8abe9928db5b9a4bd293ee23"
     },
     {
       "path": "README.md",
-      "length": 7486,
-      "sha256": "f89b2656413aa342be2c3a8f75ea1c5b25a800df58989af3b630e9404ba42833"
+      "length": 7748,
+      "sha256": "febfd3da895244617d6513272b41f0952eddfe96937ffcea7199f3e9353afbbe"
     },
     {
       "path": "SECURITY.md",
@@ -72,27 +72,27 @@
     {
       "path": "catalog/skills.json",
       "length": 8828,
-      "sha256": "80229ff75cf5e1c8ce2d73bd743b4cb4173182cf91be4320b9983d5216c5f793"
+      "sha256": "4db0f1fd12791971a0edd84183bc2fb6d588af0c8adb42d8af66730a4c0f5f24"
     },
     {
       "path": "dependencies/adaptive-agent-runtime.json",
       "length": 829,
-      "sha256": "bfae430cc234608f5e97ce1342ec6da20b2755b5a0757d9436f31a0dc4d309a6"
+      "sha256": "3ad2dd1e8589b78f3ac58d48e401d93ba99d057d3bba9a9ccaf1e26348ec673c"
     },
     {
       "path": "dependencies/baton-fanout-skill.json",
       "length": 973,
-      "sha256": "5a09afc5eb7a20f6172e7bfcb87b5874bf0878f5ee343514fb0ebd083ba61a4a"
+      "sha256": "bd31e3fe7a4da8fd95f79a40b544caf6f3a8076fd3f0c774d436ae11a308f687"
     },
     {
       "path": "dependencies/context-canvas.json",
       "length": 810,
-      "sha256": "d7ce4c8a13f93f841e0d04b037a8b0e600c7160f1dd082778db2b2662ce32a3a"
+      "sha256": "ac518c954f0494703326f649fe00ffab4027e8c5151e4855dd7f900c42044f54"
     },
     {
       "path": "dependencies/understand-anything.json",
       "length": 851,
-      "sha256": "4f6e3ba706d605d7fb0ca73a73e805384e07dd6660163a3930292ee0fa3aaa06"
+      "sha256": "9f004ae823feebb116d7675bbdeb364ffdd101e719bc4acfce21c4fe890c4cfd"
     },
     {
       "path": "docs/architecture.md",
@@ -126,8 +126,8 @@
     },
     {
       "path": "docs/product-specification.md",
-      "length": 7855,
-      "sha256": "5bb966d9580283cfeff7a491af93ec8297eae637fe66b18f03b9311dea8fca41"
+      "length": 8393,
+      "sha256": "c5b19c33f479cece6e65d34b503d6fe521ff2bdc8ab6667148a04f36896ff3e4"
     },
     {
       "path": "docs/retired-skills.md",
@@ -136,13 +136,13 @@
     },
     {
       "path": "docs/taxonomy.md",
-      "length": 4410,
-      "sha256": "2653d0fefe0b467073723ec7c7aaa0f2832bc4c8f887197de57e09cf693d184c"
+      "length": 4955,
+      "sha256": "da45b85c31fec8a0be104a19d4da8fa62eecacd041877ec9e7bb220d767f525b"
     },
     {
       "path": "evals/README.md",
-      "length": 5631,
-      "sha256": "86c35c1ed9b45520d7465e1242499ebdfc5721538d68f652adce280107bba15e"
+      "length": 6127,
+      "sha256": "04a2be20af17bcf88d8965b0bf1f7a42562172912baf9fa024d7f81a19dd6ed1"
     },
     {
       "path": "evals/cases/acceptance-evidence-origin.json",
@@ -152,7 +152,7 @@
     {
       "path": "evals/cases/acceptance.json",
       "length": 25667,
-      "sha256": "966e43df1ec802159ae41d69e443f7a80a698c55f045caec42986dee64f424d6"
+      "sha256": "45412c0f624c00f6eb9af7f331dee4a3ea03a445b5c71bcbce50679a5eecdf37"
     },
     {
       "path": "evals/cases/anti-scope-drift.json",
@@ -175,6 +175,11 @@
       "sha256": "afb09c75d70c09b0850c5595098777b0401375a63fd075f55f5090ee382af52a"
     },
     {
+      "path": "evals/cases/state-machine-audit.json",
+      "length": 7127,
+      "sha256": "5bb398cbb80787d503935b685a760b1c8962c54cf333feac460338c712be98bd"
+    },
+    {
       "path": "evals/cases/unit-first-composite-seams.json",
       "length": 4757,
       "sha256": "a01569bace26853d9c8c888e3fb8364c2914c6d841ab76e64c663eb7e15e302e"
@@ -186,53 +191,53 @@
     },
     {
       "path": "manifest/provenance.json",
-      "length": 7263,
-      "sha256": "dcfedcc5f3717cbcb7ca9ce8804a1652490a695cde5fbb85c9f6f668be275cb1"
+      "length": 7375,
+      "sha256": "218dbf9c15e50f643f50ecc17e7719e056a9471bb75bc3da4e8bdb2b09c7f3b2"
     },
     {
       "path": "manifest/toolkit.json",
       "length": 1540,
-      "sha256": "c4aad126211ecb9c4b53506e0d464f32c111affa3e4df9939cd5736e2538a3ec"
+      "sha256": "03f25a570b0305724fad25eacc12eb2849305727a0cca02b57ca81b8e55c17d1"
     },
     {
       "path": "profiles/assurance.json",
       "length": 407,
-      "sha256": "af611210c29df4c138dbf4322333f94786cb12b3e365817f2ea1bd973451933e"
+      "sha256": "b2c15289ef7baa175ae63706e5ea568975f24fd6b8c2f85a1f6389bed53c5bac"
     },
     {
       "path": "profiles/codex-adapters.json",
       "length": 377,
-      "sha256": "611a4107138258761a0059d087c24060918bb1d08458efef11a84dd2fce68c77"
+      "sha256": "7a39a44c0dfc00c0e8e0c40eabdc1a3c0fd0768dc6d93a22ae9fe8ab1fa5c85d"
     },
     {
       "path": "profiles/codex-optimization.json",
       "length": 394,
-      "sha256": "ccd876f7da21b10e42b76ecb66f260c75d2a3c2e659be1aaa0e6e05b154262b8"
+      "sha256": "bbc01f8cd0aa5111c2fa899f66f71b38ae5c8570a10ab99d486cbf1c10ec8c70"
     },
     {
       "path": "profiles/core.json",
       "length": 731,
-      "sha256": "768cfa779627a4e41aafee8b7625c0107fbcdb46f686184fde8af5d4cad5deed"
+      "sha256": "114c5bed8bfe92f5436f40fb12ca1cfeb3075951b592565a151fe34f865012e4"
     },
     {
       "path": "profiles/navigation.json",
       "length": 406,
-      "sha256": "78f4e3d66ec3523726b47b53f1cba1c7feb08d7c1237911114cf3c00cac8a978"
+      "sha256": "86d3f612e9e83e60ede286ec480226adb364c17f829ad600a63776dbb4624c1f"
     },
     {
       "path": "profiles/provider-adapters.json",
       "length": 427,
-      "sha256": "dbeaa8a76158593918910e17548c43cd65049a9e4ae6ac759278072fec4c56a0"
+      "sha256": "d87b5180ac71e788cc15afdf04df8ffaf6fe52d790abe896bfb68a7d43488fc7"
     },
     {
       "path": "profiles/windows.json",
       "length": 400,
-      "sha256": "929d6d7bf83e8c89191ae18d9e48c6ba0740a4ee4aacc8cf70d90e46687f4f21"
+      "sha256": "46c2c7749f6d350f827b8d8e64878d44fc223d6cf3492017fa54852e4bee4464"
     },
     {
       "path": "pyproject.toml",
       "length": 711,
-      "sha256": "c4fa9b5adf73e208e7f12209f82c1ec0449f27dc17985a8ecf6dcb1b987a9155"
+      "sha256": "97f333823e570a135f5262a53053caac17a97c1a27f7e761b89508c1857ff968"
     },
     {
       "path": "schemas/catalog.schema.json",
@@ -282,12 +287,12 @@
     {
       "path": "scripts/validate_toolkit.py",
       "length": 34838,
-      "sha256": "e747a31c7c872434603ea7faed48f38456ea982d96eff1a5c534eb55963acd7a"
+      "sha256": "d4ee6d59dc506f4d239882f1f8bc956cd07671f4f0cbdf1051871a344bd95644"
     },
     {
       "path": "skills/batch-complete-independent-review/SKILL.md",
       "length": 22537,
-      "sha256": "273ad2351a45db43248efd7aacb4359f2a3ebef0f402726bed596357e5b76f67"
+      "sha256": "82f9837ce97c922403260c4100d5724b0176c78ae45c9aa0276c089d04040e44"
     },
     {
       "path": "skills/batch-complete-independent-review/agents/openai.yaml",
@@ -337,7 +342,7 @@
     {
       "path": "skills/canon-engineering-disciplines/SKILL.md",
       "length": 7914,
-      "sha256": "4a7b3af7535adbc8a90cd74af564fd7bc7f9cc57c740248af70f24b88e36b3f8"
+      "sha256": "ed241b0e4d87a954bbd908472d4071d8a19cdd6fc7a20742ec50e4be93efb832"
     },
     {
       "path": "skills/canon-engineering-disciplines/agents/openai.yaml",
@@ -372,7 +377,7 @@
     {
       "path": "skills/claude-independent-review/SKILL.md",
       "length": 9266,
-      "sha256": "1b7b1d5db3d480718089983bab33aa3ef70f76df1368c08f518bcc04829a5689"
+      "sha256": "f80aaec164ade3b439e0e946932801cd6dd2fa79d6c0135e63cd025c411ed570"
     },
     {
       "path": "skills/claude-independent-review/agents/openai.yaml",
@@ -387,7 +392,7 @@
     {
       "path": "skills/codegraph-first-navigation/SKILL.md",
       "length": 7149,
-      "sha256": "e7d897489fca51b45f1463860b6ae969dc634edb31fa8189a62623a0fd90f116"
+      "sha256": "77bc454f07b0ac083c10ca11fa4ddb29d73d03bf6dab6351b8c6e20a2d068bb3"
     },
     {
       "path": "skills/codegraph-first-navigation/agents/openai.yaml",
@@ -397,7 +402,7 @@
     {
       "path": "skills/codex-app-mcp-update/SKILL.md",
       "length": 11229,
-      "sha256": "cb5cf4c700479462413c1e9a9f73c698db3e50f5f65deaa7e10c2826e64a5478"
+      "sha256": "6707de120ffd4a3097604248d8065a45a47b470b5fd62a2c8b673f482f622f1e"
     },
     {
       "path": "skills/codex-app-mcp-update/agents/openai.yaml",
@@ -417,7 +422,7 @@
     {
       "path": "skills/completeness-and-test-synthesis/SKILL.md",
       "length": 18320,
-      "sha256": "d899d7fcb3ad7bd49695695ec06e3140d4f5b21e877ad2fe502775d87f576aa6"
+      "sha256": "73518179c0308d51ae27807ba40b17be4e0ce509c466dfdb46cc5a2d5c0d29b5"
     },
     {
       "path": "skills/completeness-and-test-synthesis/agents/openai.yaml",
@@ -441,18 +446,23 @@
     },
     {
       "path": "skills/engineering-debugging/SKILL.md",
-      "length": 6473,
-      "sha256": "62c886184f18e1125b4e796c30d42c3df283eb92506d49fe4e46999087fcbbd5"
+      "length": 7257,
+      "sha256": "212055a522c3b3677352eb41c063707fc93055eb45a24438b67615bc72937ef8"
     },
     {
       "path": "skills/engineering-debugging/agents/openai.yaml",
-      "length": 515,
-      "sha256": "2309fcad43860ba8c8b05b0961b9ab48ff1b5f1ef2996e3446712e80990758ac"
+      "length": 643,
+      "sha256": "68175d31ce106255d897ad10e331604bcef4cf5b62eac0a47d2462c3ea4af344"
+    },
+    {
+      "path": "skills/engineering-debugging/references/state-machine-audit.md",
+      "length": 9440,
+      "sha256": "7590bfcbdca69780beaa6ff446c41bd158132e700807324323971e5e51d3fbee"
     },
     {
       "path": "skills/engineering-implementation/SKILL.md",
       "length": 11528,
-      "sha256": "e173241952dba922befba5c153867ecbbef4100cfae54df39269183d64a746e7"
+      "sha256": "99ee35b4afab013ba799bfe7316dd65185a89954393283c19bd6a4ae8d191e40"
     },
     {
       "path": "skills/engineering-implementation/agents/openai.yaml",
@@ -462,7 +472,7 @@
     {
       "path": "skills/engineering-specification/SKILL.md",
       "length": 19740,
-      "sha256": "42b0f392048568b79a5f97b1938f4ad328de12ee832b9228f679b97f3793a97a"
+      "sha256": "49cbffb853da310cd70dfcf0b7b7fdd70bae54d4330bd4b08285e416c76325af"
     },
     {
       "path": "skills/engineering-specification/agents/openai.yaml",
@@ -472,7 +482,7 @@
     {
       "path": "skills/engineering-wal/SKILL.md",
       "length": 8299,
-      "sha256": "5454182d2532a76954dd9e1c435bd316e982fac5a1dc83e8ff8f3726913c5163"
+      "sha256": "b1d8e931b712da54d9948a0059864a0d226c22f2ab0460e0f42c146a9becf206"
     },
     {
       "path": "skills/engineering-wal/agents/openai.yaml",
@@ -492,7 +502,7 @@
     {
       "path": "skills/evolve-engineering-toolkit/SKILL.md",
       "length": 5615,
-      "sha256": "4900d06e9896fde62f820e8d40dcb6d0487429fd58fc5e75ca788a5a313fce86"
+      "sha256": "ac6d3dfad97252f6fa135a8931004c1ca5653a9142b492d2f76e0c12446676fb"
     },
     {
       "path": "skills/evolve-engineering-toolkit/agents/openai.yaml",
@@ -502,7 +512,7 @@
     {
       "path": "skills/incident-to-regression/SKILL.md",
       "length": 9518,
-      "sha256": "180833e08a5839be1f73788b0ec610685856b792638651c67d1134018a5f776d"
+      "sha256": "4ecf38eed71882579d428251896d1768054f8552875bc8bd19ab1e0abaa72c6c"
     },
     {
       "path": "skills/incident-to-regression/agents/openai.yaml",
@@ -522,7 +532,7 @@
     {
       "path": "skills/long-run-supervisor/SKILL.md",
       "length": 25522,
-      "sha256": "c950b00fede7e856317d0a0e4f764c5310a0fd16af6b05199ff4947b5336a319"
+      "sha256": "77b608a37049c8d02d887d1b92883ff5bc924bab4ab8c4cc929ea4da33f3bd82"
     },
     {
       "path": "skills/long-run-supervisor/agents/openai.yaml",
@@ -572,7 +582,7 @@
     {
       "path": "skills/programmatic-tool-composition/SKILL.md",
       "length": 8373,
-      "sha256": "d995d097751ee0a48578cd0cbeb1a74003cac9319b46d4eafcea63af4490d8fc"
+      "sha256": "f0c7d19c66a3462186899284e54fdb61ff6680d1fe27a7972a8b2255ad25575b"
     },
     {
       "path": "skills/programmatic-tool-composition/agents/openai.yaml",
@@ -582,7 +592,7 @@
     {
       "path": "skills/specify-temporal-ownership/SKILL.md",
       "length": 9024,
-      "sha256": "d3e8f36edd40bae888f81c8fb37ae29058286d22b6c7708b3cd9b7bced89f1c8"
+      "sha256": "b0b1a38cca1f1ae41245f4f9ffd7fb3a6ccbb0b6b4cd62d10135ad5ce5f38ed3"
     },
     {
       "path": "skills/specify-temporal-ownership/agents/openai.yaml",
@@ -658,6 +668,11 @@
       "path": "tests/test_source_gate_blockers.py",
       "length": 23760,
       "sha256": "be01c6d022fac9b0e81125522d52f7235f4d735d126fe6ed4a124e9a979665e4"
+    },
+    {
+      "path": "tests/test_state_machine_audit.py",
+      "length": 3911,
+      "sha256": "35db24a2409fe5f4a1766c74c8bd61f07f1477822dcdfcc8961945ed33eeaa92"
     },
     {
       "path": "tests/test_unit_first_composite_seams.py",

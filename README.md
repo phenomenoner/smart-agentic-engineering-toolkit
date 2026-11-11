@@ -66,6 +66,21 @@ repair trigger，不污染整個candidate、不另開full review，也不提高�
 完整 trigger、non-trigger、implicit policy 與 canonical owner 在
 [`catalog/skills.json`](catalog/skills.json) 與 [`docs/taxonomy.md`](docs/taxonomy.md)。
 
+## 狀態機排查與優化
+
+載入本版 `engineering-debugging` 後，可用提示詞 hook `@state-audit` 啟動顯性及隱性狀態機
+排查。流程追蹤狀態 owner、旗標、數量、時序、恢復、送單或其他副作用與 UI 投影，依功能、
+正確性、效能及排錯價值評估方案。維持現有設計也可以是有證據支持的結果。
+
+```text
+@state-audit 找出這個專案的顯性及隱性狀態機，評估優化方案，實作有依據的本機調整，
+驗證受影響流程，最後整理實際改變的運作邏輯。
+```
+
+若只需要盤點，可在請求中寫明「只盤點與評估」。也可使用 `$engineering-debugging` 加上
+同一請求。這個入口屬於 skill 的提示詞約定，host 需先發現本版 skill。詳細流程見
+[狀態機排查與優化](skills/engineering-debugging/references/state-machine-audit.md)。
+
 ## Host-native 安裝
 
 依 host 使用原生 distribution surface：Codex App 安裝 repo plugin；Hermes Agent 把 managed
@@ -101,14 +116,4 @@ non-activation 或 workflow eval。
 
 ## 狀態與限制
 
-0.5.0 新增risk-local consequence-frequency disposition、受證據支持的LOW × LOW bounded
-fail-open、formalization前的constructibility probe、明確numeric loop budgets與toolkit policy
-binding；並刪除無上限finding-driven reopen語句。它補上Codex App、Hermes Agent及其他Agent
-Skills-compatible harness的host-native安裝分流，不新增skill、profile、transition schema、
-registry或mandatory lifecycle，並保留直接路徑。本版沿用0.1.0的63-case baseline，只重綁
-release identity與current input hashes；supplemental fresh-agent behavior仍以實際host evidence
-為界。本版主張只涵蓋已列出的repository bytes、source tests、installation contracts與host
-evidence；不表示OpenAI或Hermes官方推薦、directory審核通過、AAR/Canvas/外部provider已部署或可用。
-
-授權：MIT。外部參考與 provenance 見 [`NOTICE`](NOTICE) 與
-[`docs/influences-and-provenance.md`](docs/influences-and-provenance.md)。
+0.6.0 新增 @state-audit 提示詞 hook，沿用 engineering-debugging 提供顯性及隱性狀態機的排查、方案評估、已授權優化及運作邏輯報告。既有 63-case baseline 保留，新增 13 個 supplemental 靜態契約案例。source tests、安裝契約與 fresh-host 行為證據分別揭露，使用時由 host 先發現本版 skill。

@@ -1,5 +1,19 @@
 # Smart Agentic Engineering Toolkit
 
+Version 0.6.0 adds the optional `@state-audit` prompt hook under `engineering-debugging` for
+investigating and optimizing explicit and implicit state machines. Evaluate functional outcomes,
+correctness, performance and diagnosability, then carry through authorized changes. An
+evidence-backed no-change decision is valid. The host must first discover this skill version.
+
+```text
+@state-audit Investigate this project's explicit and implicit state machines, assess options,
+implement justified local optimizations and report the verified operational changes.
+```
+
+For inventory only, say so in the request. Hosts can also use `$engineering-debugging` with the
+same request. This is a portable prompt convention. The maintained procedure is in
+[state-machine investigation and optimization](skills/engineering-debugging/references/state-machine-audit.md).
+
 [繁體中文](README.md)
 
 A public collection of focused, testable, and evolvable software-engineering skills. It captures a
@@ -109,17 +123,4 @@ that distinguishes the repair.
 
 ## Claim boundary
 
-Version 0.5.0 adds risk-local consequence-frequency disposition, bounded fail-open for supported
-LOW × LOW residuals, constructibility before broad formalization, explicit numeric loop budgets, and
-toolkit policy binding. It retires unbounded finding-driven reopen language and documents host-native
-installation for Codex App, Hermes Agent, and other Agent Skills-compatible harnesses. It adds no
-skill, profile, transition schema, registry, or mandatory lifecycle, and preserves the direct path.
-It retains the 63-case baseline from 0.1.0 while rebinding release identity and current input hashes;
-supplemental fresh-agent behavior evaluation remains bounded by recorded host evidence. This release
-claim is limited to the listed repository bytes, source tests, installation contracts, and host
-evidence. It does not claim OpenAI or Hermes endorsement, directory approval, or deployment or
-availability of AAR, Canvas, or an external model provider.
-
-License: MIT. See [`NOTICE`](NOTICE) and
-[`docs/influences-and-provenance.md`](docs/influences-and-provenance.md) for external influences and
-provenance.
+Version 0.6.0 adds the optional state-machine investigation and optimization route under engineering-debugging. The existing 63-case baseline is retained and 13 supplemental static contracts are added. Source checks, installation contracts and fresh-host behavior evidence are reported separately.

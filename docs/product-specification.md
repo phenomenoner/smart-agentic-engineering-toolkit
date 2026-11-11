@@ -1,6 +1,13 @@
-# Product specification 0.5.0
+# Product specification 0.6.0
 
-Status: release candidate until the matching `v0.5.0` Git tag and GitHub Release pass remote
+The optional `@state-audit` prompt hook routes explicit and implicit state-machine investigation
+through `engineering-debugging`. It supports proactive inventories without a known failure, assesses
+functional outcomes, correctness, performance and diagnosability, and completes justified local
+changes when implementation is authorized. Inventory-only requests retain their read-only boundary.
+An evidence-backed no-change decision is valid. The hook is a skill-level prompt convention for a
+host that has discovered this skill version.
+
+Status: release candidate until the matching `v0.6.0` Git tag and GitHub Release pass remote
 readback.
 
 Machine-readable `released` status marks frozen versioned source and changelog identity; it does not

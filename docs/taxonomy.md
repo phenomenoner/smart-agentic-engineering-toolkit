@@ -8,6 +8,7 @@ stop condition match the request.
 ```text
 unresolved behavior -> engineering-specification
 unknown failure cause -> engineering-debugging
+explicit/implicit state-machine investigation or @state-audit -> engineering-debugging
 authorized clear change -> engineering-implementation
 ordinary or formal review -> batch-complete-independent-review
 readiness/evidence gap -> completeness-and-test-synthesis
@@ -20,6 +21,12 @@ material skill learning -> evolve-engineering-toolkit
 The arrows are possible handoffs, not an automatic chain. For example, a known small defect may go
 directly to implementation; an ordinary review does not require formal release artifacts; and a
 short edit does not need a WAL.
+
+`@state-audit` is an optional prompt hook owned by `engineering-debugging`. It covers proactive
+state-machine inventories as well as observed failures, and follows the user's inventory-only or
+optimization authority. Its detailed procedure lives in that skill's
+`references/state-machine-audit.md`. Functional outcomes, correctness, performance and diagnosability
+determine whether a change is useful. Keeping the current design can be the accepted result.
 
 When a material plan introduces a mechanism, state the outcome/invariant and ask `Do we really need
 this to make things happen?` and `Is there a simpler and more direct way?` The conditional full gate
